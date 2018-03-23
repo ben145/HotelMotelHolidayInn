@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReserveRoomTest {
     class Room{
 
-        public boolean available;
-        public int roomID;
-        public List<String> amenities;
+        private boolean available;
+        private int roomID;
+        private List<String> amenities = new ArrayList<>();
 
-        public void setRoomData(){
-            int testAv = (int)Math.random()*1;
+        private void setRoomData(){
+            int testAv = (int)Math.round(Math.random());
+            System.out.println(testAv);
             if(testAv == 0){
                 available = false;
             }else{
@@ -23,24 +24,28 @@ public class ReserveRoomTest {
             }
 
             if(available){
-                roomID = 100+(int)Math.random()*11;
-                if(roomID%2==0) {
+                roomID = (int)(Math.random()*11)+100;
+                if(roomID%2==0&&amenities.isEmpty()) {
                     amenities.add("mini-bar");
                     amenities.add("room Service");
                     amenities.add("beach view");
                     amenities.add("mini Fridge");
                     amenities.add("king bed");
                 }
-                if(roomID%3==0){
+                if(roomID%3==0&&amenities.isEmpty()){
                     amenities.add("beach view");
                     amenities.add("mini Fridge");
                     amenities.add("double Bed");
                 }
-                if(roomID%5==0){
+                if(roomID%2==1&&amenities.isEmpty()){
                     amenities.add("hot-tub");
                     amenities.add("sleeping bag");
                 }
             }
+        }
+        @Override
+        public String toString(){
+            return getClass().getSimpleName()+"Is Avail: "+available+"\n"+"Room Number: "+roomID+"\n"+"Amenities: "+amenities;
         }
     }
     @Test
@@ -56,4 +61,6 @@ public class ReserveRoomTest {
 
        // assertEquals(true, "Room is available");
     }
+
+
 }
