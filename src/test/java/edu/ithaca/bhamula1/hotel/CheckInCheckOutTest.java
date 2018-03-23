@@ -2,7 +2,7 @@ package edu.ithaca.bhamula1.hotel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class checkInOutTest {
+class CheckInOutTest {
 
     @org.junit.jupiter.api.Test
     void checkInTest(){
