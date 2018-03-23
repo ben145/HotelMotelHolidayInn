@@ -13,6 +13,12 @@ public class ReserveRoomTest {
         private boolean available;
         private int roomID;
         private List<String> amenities = new ArrayList<>();
+        public Room (boolean a, int rID){
+            available = a;
+            roomID = rID;
+            amenities.add("hot-tub");
+            amenities.add("sleeping bag");
+        }
 
         private void setRoomData(){
             int testAv = (int)Math.round(Math.random());
@@ -49,17 +55,44 @@ public class ReserveRoomTest {
         }
     }
     @Test
-    void availableRoomTest() {
+    void emptyRoomLIstTest() {
 
         List<Room> testRoomList = new ArrayList<Room>();
-        for(int r = 0; r< 3; r++){
-            Room test = new Room();
-            test.setRoomData();
-            System.out.println(test);
+
+//        for(int r = 0; r< 3; r++){
+//            Room test = new Room();
+//            test.setRoomData();
+//            System.out.println(test);
+//        }
+
+        boolean testList = testRoomList.isEmpty();
+
+       assertEquals(true, testList,"There are no rooms in room list");
+    }
+
+    @Test
+    void availableRoomsTest(){
+        List<Room> testRoomList = new ArrayList<Room>();
+        Room rm1 = new Room(true, 110 );
+        Room rm2 = new Room(false, 120 );
+
+
+        testRoomList.add(rm1);
+        testRoomList.add(rm2);
+        String testAvail = ""+testRoomList.get(0);
+        String testRmResult="";
+
+
+        for (int s = 0; s < testRoomList.size(); s++) {
+            if (testRoomList.get(s).available) {
+                testRmResult += testRoomList.get(s);
+           //     System.out.println(testRoomList.get(s));
+            }
         }
+        System.out.println(testRmResult);
+        assertEquals(""+testRoomList.get(0), testAvail,"Returned room is not available"+Thread.currentThread().getStackTrace()[0].getLineNumber());
 
 
-       // assertEquals(true, "Room is available");
     }
 
 
