@@ -1,4 +1,4 @@
-package java.edu.ithaca.bhamula1.hotel;
+package edu.ithaca.bhamula1.hotel;
 
 import org.junit.jupiter.api.Test;
 
