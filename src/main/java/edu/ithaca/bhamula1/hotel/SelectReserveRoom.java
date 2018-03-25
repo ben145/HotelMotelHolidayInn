@@ -1,5 +1,10 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  */
@@ -132,8 +137,34 @@ public class SelectReserveRoom {
      */
     public void selectRoom(){
 
-        guest.roomNum = room.rmNum;
-        room.gID = guest.guestID;
+        System.out.print("Please enter room number to select room to reserve: ");
+        StringBuffer s = new StringBuffer();
+        Scanner scan = new Scanner(System.in);
+        s.append(scan.next());
+        System.out.println(s);
+        // print room
+        System.out.print("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
+
+        if(room.rmNum == s.toString()){
+            s.setLength(0);
+            s.append(scan.nextLine());
+        }
+        if(s.toString() == "Y" || s.toString() == "y"){
+            room.gID = guest.guestID;
+            guest.roomNum = room.rmNum;
+            guest.gReserveID += createReservationID();
+        }else if(s.toString() == "N" || s.toString() == "n"){
+            System.out.print("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
+            s.setLength(0);
+            s.append(scan.nextLine());
+            if(s.toString() == "Y" || s.toString() == "y") {
+                selectRoom();
+            }
+        }else{
+            System.out.println("Invalid input, you entered "+s.toString()+". Please try again.");
+            selectRoom();
+        }
+
     }
 
     /**
@@ -153,11 +184,29 @@ public class SelectReserveRoom {
 
     public String reserveRoom(){
 
-        String reservationID = "";
+        return "";
 
-        return reservationID;
     }
 
+    /**
+     *
+     * @return String reservation ID
+     */
+    public String createReservationID(){
+
+        String reservationID = guest.guestID+"-";
+        String randomGen = "ABCDEGH0123456789";
+        SimpleDateFormat sd = new SimpleDateFormat("Mddyyy");
+        String date = sd.format(new Date());
+        int num = randomGen.length();
+        Random r = new Random();
+
+        for(int i = 0; i < 4; i++){
+            reservationID += randomGen.charAt(r.nextInt(num));
+        }
+        reservationID += "-"+date;
+        return reservationID;
+    }
 
     /**
      *
@@ -165,10 +214,18 @@ public class SelectReserveRoom {
      */
     public void cancelReserve(String reservationID){
 
+
+
         // loop to check guest list for reserveID
 
     }
 
+    public String getResId(){
+        return room.rReserveID;
+    }
+    public void setResID(String resID){
+        room.rReserveID = resID;
+    }
 
 
 }

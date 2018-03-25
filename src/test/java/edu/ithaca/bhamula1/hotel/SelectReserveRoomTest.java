@@ -40,7 +40,8 @@ class SelectReserveRoomTest {
 
 
     @Test
-    void selectRoomTest3() {
+    void selectRoomTest() {
+        select.selectRoom();
     }
     @Test
     void selectRoomTest4() {
@@ -56,6 +57,14 @@ class SelectReserveRoomTest {
 
     @Test
     void reserveRoom() {
+
+    }
+
+    @Test
+    void createReservationIDTest(){
+
+    assertEquals(false,select.createReservationID().isEmpty(), "No reservation ID");
+
     }
 
     @Test
