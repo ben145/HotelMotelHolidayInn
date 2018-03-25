@@ -19,13 +19,13 @@ public class SelectReserveRoom {
     class Guest{
         String guestID;
         String roomNum;
-        private String gReserveID;
+        String gReserveID;
 
         //String roomNum;
         private Guest(){
-            guestID = null;
-            roomNum= null;
-            gReserveID = null;
+//            guestID = null;
+//            roomNum= null;
+//            gReserveID = null;
         }
 
         public Guest (String gID, String rmNum, String rmResID){
@@ -37,13 +37,13 @@ public class SelectReserveRoom {
     class Room{
         String rmNum;
         String gID;
-        private String rReserveID;
-        private boolean available = false;
+        String rReserveID;
+        boolean available = false;
         //String roomNum;
         private Room(){
-            rmNum = null;
-            gID = null;
-            rReserveID = null;
+//            rmNum = null;
+//            gID = null;
+//            rReserveID = null;
         }
 
         public Room (String rNum, String guID, String rmResID){
@@ -137,24 +137,22 @@ public class SelectReserveRoom {
      */
     public void selectRoom(){
 
-        System.out.print("Please enter room number to select room to reserve: ");
+        System.out.println("Please enter room number to select room to reserve: ");
         StringBuffer s = new StringBuffer();
         Scanner scan = new Scanner(System.in);
         s.append(scan.next());
         System.out.println(s);
         // print room
-        System.out.print("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
+        System.out.println("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
 
         if(room.rmNum == s.toString()){
             s.setLength(0);
             s.append(scan.nextLine());
         }
         if(s.toString() == "Y" || s.toString() == "y"){
-            room.gID = guest.guestID;
-            guest.roomNum = room.rmNum;
-            guest.gReserveID += createReservationID();
+            System.out.println("Your Reservation ID is "+ reserveRoom()+ " for Room "+room.rmNum);
         }else if(s.toString() == "N" || s.toString() == "n"){
-            System.out.print("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
+            System.out.println("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
             s.setLength(0);
             s.append(scan.nextLine());
             if(s.toString() == "Y" || s.toString() == "y") {
@@ -164,14 +162,12 @@ public class SelectReserveRoom {
             System.out.println("Invalid input, you entered "+s.toString()+". Please try again.");
             selectRoom();
         }
-
     }
 
     /**
      *
      */
     public void cancelRoom(){
-
         guest.roomNum = null;
         room.gID = null;
 
@@ -179,13 +175,18 @@ public class SelectReserveRoom {
 
     /**
      *
-     * @return
+     * @return String reservation ID
      */
 
     public String reserveRoom(){
 
-        return "";
-
+        room.gID = guest.guestID;
+        guest.roomNum = room.rmNum;
+        String reserveID = createReservationID();
+        guest.gReserveID = reserveID;
+        room.rReserveID = reserveID;
+        room.available = false;
+        return guest.gReserveID;
     }
 
     /**
@@ -213,9 +214,6 @@ public class SelectReserveRoom {
      * @param reservationID
      */
     public void cancelReserve(String reservationID){
-
-
-
         // loop to check guest list for reserveID
 
     }
