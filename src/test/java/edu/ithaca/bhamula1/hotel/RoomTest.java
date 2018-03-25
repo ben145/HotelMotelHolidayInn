@@ -1,27 +1,23 @@
 package edu.ithaca.bhamula1.hotel;
 
-/**
- * Created by Mia on 3/22/2018.
- */
-
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 
 public class RoomTest {
-
 
     @Test
     void roomNumberTest(){
         assertEquals(true,false);
 
-
     }
 
 
-    @org.junit.jupiter.api.Test
-    void roomDetailsTest(){
-
-    }
 
 
 
