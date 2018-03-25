@@ -4,16 +4,73 @@ package edu.ithaca.bhamula1.hotel;
  *
  */
 public class SelectReserveRoom {
-    private Guest guest;
-    private Room room;
+    public Guest guest;
+    public Room room;
 
+    /**
+     * Below are two mock classses for room and guest - customer to run tests
+     */
 
     class Guest{
         String guestID;
         String roomNum;
+        private String gReserveID;
 
+        //String roomNum;
+        private Guest(){
+            guestID = null;
+            roomNum= null;
+            gReserveID = null;
+        }
+
+        public Guest (String gID, String rmNum, String rmResID){
+            this.guestID = gID;
+            this.roomNum = rmNum;
+            this.gReserveID = rmResID;
+        }
+    }
+    class Room{
+        String rmNum;
+        String gID;
+        private String rReserveID;
+        private boolean available;
+        //String roomNum;
+        private Room(){
+            rmNum = null;
+            gID = null;
+            rReserveID = null;
+        }
+
+        public Room (String rNum, String guID, String rmResID){
+            this.rmNum =rNum;
+            this.gID = guID;
+            this.rReserveID = rmResID;
+            if(guID!=null){
+                this.available = false;
+            }else{
+                this.available = true;
+            }
+        }
     }
 
+    /**
+     * SEt some room/Guest data for tests
+     *
+     */
+
+    public void setGuestAndRoom(){
+        Room testRoom;
+        Guest testGuest;
+
+        testGuest = new Guest("Guest1",null,null);
+
+
+        testRoom = new Room("18A",null,null);
+    }
+
+    public SelectReserveRoom(){
+        setGuestAndRoom();
+    }
 
     /**
      *
@@ -27,16 +84,47 @@ public class SelectReserveRoom {
     }
 
     /**
+     * Checks for valid guest ID
+     */
+    public void checkGuestID(){
+
+    }
+    /**
+     * Checks for valid room number
+     */
+    public void checkRoomNum(){
+
+    }
+
+    /**
+     * Checks for room available
+     */
+    public void checkAvailable(){
+
+    }
+
+
+
+    /**
+     * When guest chooses to select a room
+     * SelectReserveRoom  is instantiated with guest and room
+     *
+     * Room number will be added to guest and guest ID will be added to room for period
      *
      */
     public void selectRoom(){
 
+        guest.roomNum = room.rmNum;
+        room.gID = guest.guestID;
     }
 
     /**
      *
      */
     public void cancelRoom(){
+
+        guest.roomNum = null;
+        room.gID = null;
 
     }
 
@@ -58,6 +146,8 @@ public class SelectReserveRoom {
      * @param reservationID
      */
     public void cancelReserve(String reservationID){
+
+        // loop to check guest list for reserveID
 
     }
 
