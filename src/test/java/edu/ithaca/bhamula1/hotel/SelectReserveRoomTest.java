@@ -21,29 +21,21 @@ class SelectReserveRoomTest {
      * Testing for non null Guest/customer ID
      */
     @Test
-    void selectRoomTest1() {
-
-        boolean has_GID;
-        if(select.guest.guestID !=null){
-            has_GID = true;
-        }else{
-            has_GID = false;
-        }
-        assertEquals(true, has_GID, "No Guest/Customer ID- cannot select room to reserve without c/g-ID");
+    void checkGuestIDTest() {
+        assertEquals(true, select.checkGuestID(), "No Guest/Customer ID- cannot select room to reserve without c/g-ID");
     }
 
     /**
      * Testing for non null room number
      */
     @Test
-    void selectRoomTest2() {
-        boolean has_RNUM;
-        if(select.room.rmNum !=null){
-            has_RNUM= true;
-        }else{
-            has_RNUM = false;
-        }
-        assertEquals(true, has_RNUM, "No Room number- cannot select room with no room number");
+    void checkRoomNumTest() {
+        assertEquals(true,select.checkRoomNum(), "No Room number- cannot select room with no room number");
+    }
+
+    @Test
+    void checkRoomAvailableTest(){
+        assertEquals(true, select.checkRoomAvailable(), "Error - Room is not available to reserve");
     }
 
 

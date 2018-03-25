@@ -33,7 +33,7 @@ public class SelectReserveRoom {
         String rmNum;
         String gID;
         private String rReserveID;
-        private boolean available;
+        private boolean available = false;
         //String roomNum;
         private Room(){
             rmNum = null;
@@ -45,10 +45,10 @@ public class SelectReserveRoom {
             this.rmNum =rNum;
             this.gID = guID;
             this.rReserveID = rmResID;
-            if(guID!=null){
-                this.available = false;
-            }else{
+            if(guID==null){
                 this.available = true;
+            }else{
+                this.available = false;
             }
         }
     }
@@ -61,12 +61,12 @@ public class SelectReserveRoom {
     public void setGuestAndRoom(){
         Room testRoom;
         Guest testGuest;
-
         testGuest = new Guest("Guest1",null,null);
-
-
         testRoom = new Room("18A",null,null);
+        room = testRoom;
+        guest = testGuest;
     }
+
 
     public SelectReserveRoom(){
         setGuestAndRoom();
@@ -86,21 +86,39 @@ public class SelectReserveRoom {
     /**
      * Checks for valid guest ID
      */
-    public void checkGuestID(){
-
+    public boolean checkGuestID(){
+        boolean has_GID;
+        if(guest.guestID !=null){
+            has_GID = true;
+        }else{
+            has_GID = false;
+        }
+        return has_GID;
     }
     /**
      * Checks for valid room number
      */
-    public void checkRoomNum(){
-
+    public boolean checkRoomNum(){
+        boolean has_RNUM;
+        if(room.rmNum != null){
+            has_RNUM= true;
+        }else{
+            has_RNUM = false;
+        }
+        return has_RNUM;
     }
 
     /**
      * Checks for room available
      */
-    public void checkAvailable(){
-
+    public boolean checkRoomAvailable(){
+        boolean isAvailable;
+        if(room.available){
+            isAvailable = true;
+        }else{
+            isAvailable = false;
+        }
+        return isAvailable;
     }
 
 
