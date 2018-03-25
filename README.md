@@ -15,4 +15,5 @@ Create a navigable interface that shows rooms available and commands to select/m
 <b>DevTeam Sprint goal #1</b>:
 Develop the frame for the hotel based on first sprint backlog.
 
-Current Class Diagram: https://i.snag.gy/fgFAkK.jpg</blockquote>
+Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
+<br>State Diagram: https://i.snag.gy/etT3dV.jpg</blockquote>
