@@ -19,9 +19,19 @@ public class RoomTest {
 
 
     @Test
-    void setAndGetRoomTest() {
+    void setAndGetandEmptyConstructorRoomTest() {
         //available, room number,price, type of bed,  extras
         Room exampleRoom = new Room();
+
+        Assert.assertEquals(false, exampleRoom.getIfAvailable());
+        Assert.assertEquals(0, exampleRoom.getRoomNumber());
+        Assert.assertEquals(0, exampleRoom.getBedCount());
+        Assert.assertEquals(0, exampleRoom.getRoomPrice(), range);
+        Assert.assertEquals("", exampleRoom.getBedType());
+        Assert.assertEquals("", exampleRoom.getAmenities());
+
+
+
         exampleRoom.setIfAvailable(true);
         exampleRoom.setRoomNumber(12);
         exampleRoom.setRoomPrice(500);
