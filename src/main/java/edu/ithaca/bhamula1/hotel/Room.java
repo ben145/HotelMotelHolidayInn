@@ -27,4 +27,18 @@ public class Room {
     public String getLastNameReserved() {
         return lastNameReserved;
     }
+
+    public boolean checkIn(Customer customer){
+        if(customer.getLastName().equals(this.lastNameReserved)){
+            this.checkedIn=true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean checkOut(Customer customer){
+        return true;
+    }
 }
