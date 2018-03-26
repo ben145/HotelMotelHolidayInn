@@ -10,5 +10,8 @@ public interface customer {
     public String getName();
     public String getId();
     public void login();
-
+    public boolean isCheckedIn();
+    public boolean checkIn(int roomNumber);
+    public boolean checkOut(int roomNumber);
+    public void setRoom(int room);
 }

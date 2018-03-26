@@ -12,6 +12,8 @@ public class customerImpl implements customer {
     private String id;
     private String fName;
     private String lName;
+    private int room;
+    private boolean checkedIn;
 
     customerImpl(String nameIn, String idIn) {
         name = nameIn;
@@ -78,5 +80,59 @@ public class customerImpl implements customer {
     public static void main(String[] args) {
         customerImpl c = new customerImpl();
         c.login();
+    }
+
+    public boolean isCheckedIn() {
+        return checkedIn;
+    }
+
+    @Override
+    public boolean checkIn(int roomNumber) {
+        if(this.room>0){
+            if(!this.checkedIn){
+                if(roomNumber==this.room){
+                    System.out.println("Welcome. Enjoy your stay.");
+                    this.checkedIn=true;
+                    return true;
+                }
+                else{
+                    System.out.println("You have not reserved this room.");
+                    return false;
+                }
+            }
+            else{
+                System.out.println("You are already checked in.");
+                return false;
+            }
+        }
+        else {
+            System.out.println("You have not reserved a room. Please reserve a room to check in.");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkOut(int roomNumber) {
+        if(roomNumber==room){
+            if(checkedIn){
+                System.out.println("Thank you. We hope you enjoyed your stay.");
+                this.checkedIn=false;
+                this.room = -1;
+                return true;
+            }
+            else{
+                System.out.println("You are not checked in. You must be checked in to check out.");
+                return false;
+            }
+        }
+        else {
+            System.out.println("Incorrect Room.");
+            return false;
+        }
+    }
+
+    @Override
+    public void setRoom(int room) {
+        this.room = room;
     }
 }
