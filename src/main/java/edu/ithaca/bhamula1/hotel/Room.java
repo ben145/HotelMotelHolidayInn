@@ -13,4 +13,8 @@ public class Room {
         isReserved = false;
         checkedIn = false;
     }
+
+    public boolean getIsReserved(){
+        return this.isReserved;
+    }
 }

@@ -10,9 +10,9 @@ class CustomerTest {
     void checkIn() {
         Customer brad = new Customer("Brad", "Keith");
         brad.fakeReserveRoom(1);
-        brad.checkIn(2);
+        assertEquals(false,brad.checkIn(2));
         assertEquals(false,brad.getCheckedIn());
-        brad.checkIn(1);
+        assertEquals(true,brad.checkIn(1));
         assertEquals(true,brad.getCheckedIn());
     }
 
@@ -21,9 +21,9 @@ class CustomerTest {
         Customer brad = new Customer("Brad", "Keith");
         brad.fakeReserveRoom(1);
         brad.checkIn(1);
-        brad.checkOut(2);
+        assertEquals(false,brad.checkOut(2));
         assertEquals(true,brad.getCheckedIn());
-        brad.checkOut(1);
+        assertEquals(true,brad.checkOut(1));
         assertEquals(false,brad.getCheckedIn());
     }
 }
