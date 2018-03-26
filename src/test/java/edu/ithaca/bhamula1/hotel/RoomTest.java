@@ -12,51 +12,67 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RoomTest {
+    //available, room number,price, number of beds,  type of bed,  extras
 
+    //to test doubles
+    double range = 0.01;
 
-
-    //available, room number,price, number of beds,  type of bed,  extras, view
 
     @Test
-    void setRoomTest() {
-        //available, room number,price, type of bed,  extras, view
+    void setAndGetRoomTest() {
+        //available, room number,price, type of bed,  extras
         Room exampleRoom = new Room();
         exampleRoom.setIfAvailable(true);
         exampleRoom.setRoomNumber(12);
         exampleRoom.setRoomPrice(500);
         exampleRoom.setBedCount(1);
-        exampleRoom.setBedType("Queen");
+        exampleRoom.setBedType("queen");
         exampleRoom.addAmenities("mini bar");
-        exampleRoom.setIfView(true);
-    }
+        exampleRoom.addAmenities("view");
+        exampleRoom.addAmenities("tv");
 
 
-    @Test
-    void getRoomTest() {
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar", true);
         Assert.assertEquals(true, exampleRoom.getIfAvailable());
         Assert.assertEquals(12, exampleRoom.getRoomNumber());
-        Assert.assertEquals(1, exampleRoom.getBedCount);
-        Assert.assertEquals(500, exampleRoom.getRoomPrice());
-        Assert.assertEquals("", exampleRoom.getBedType());
-        Assert.assertEquals(true, exampleRoom.getIfView());
-        Assert.assertEquals("", exampleRoom.getAmenities());
+        Assert.assertEquals(1, exampleRoom.getBedCount());
+        Assert.assertEquals(500, exampleRoom.getRoomPrice(), range);
+        Assert.assertEquals("queen", exampleRoom.getBedType());
+        Assert.assertEquals("mini bar, view, tv", exampleRoom.getAmenities());
     }
+
+
+//    @Test
+//    void getRoomTest() {
+//        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+//        Assert.assertEquals(true, exampleRoom.getIfAvailable());
+//        Assert.assertEquals(212, exampleRoom.getRoomNumber());
+//        Assert.assertEquals(1, exampleRoom.getBedCount());
+//        Assert.assertEquals(500, exampleRoom.getRoomPrice(), range);
+//        Assert.assertEquals("queen", exampleRoom.getBedType());
+//        Assert.assertEquals("mini bar", exampleRoom.getAmenities());
+//    }
 
 
 
     @Test
-    void RoomConstructorTest() {
+    void roomConstructorTest() {
         //available, room number,price, number of beds,  type of bed,  extras, view
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar", true);
+        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
         Assert.assertEquals(true, exampleRoom.getIfAvailable());
-        Assert.assertEquals(12, exampleRoom.getRoomNumber());
-        Assert.assertEquals(1, exampleRoom.getBedCount);
-        Assert.assertEquals(500, exampleRoom.getRoomPrice());
-        Assert.assertEquals("", exampleRoom.getBedType());
-        Assert.assertEquals("", exampleRoom.getAmenities());
-        Assert.assertEquals(true, exampleRoom.getIfView());
+        Assert.assertEquals(212, exampleRoom.getRoomNumber());
+        Assert.assertEquals(1, exampleRoom.getBedCount());
+        Assert.assertEquals(500, exampleRoom.getRoomPrice(), range);
+        Assert.assertEquals("queen", exampleRoom.getBedType());
+        Assert.assertEquals("mini bar", exampleRoom.getAmenities());
     }
 
+
+    @Test
+    void toStringTest(){
+        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar, view");
+
+        Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0 Available: true", exampleRoom.toString());
+
+    }
 
 }

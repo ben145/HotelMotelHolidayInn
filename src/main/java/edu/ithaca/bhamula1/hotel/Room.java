@@ -5,7 +5,94 @@ package edu.ithaca.bhamula1.hotel;
  */
 public class Room {
 
+    boolean available;
+    int roomNumber;
+    double price;
+    int bedNum;
+    String bedType;
+    String amenities; // such as view?
+
+    public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities){
+        this.available = avail;
+        this.roomNumber = roomNum;
+        this.price = price;
+        this.bedNum = bedNum;
+        this.bedType = bedType;
+        this.amenities = amenities;
+    }
+
+    public Room(){
+        //if the room doesn't have data, it shouldn't be allowed to reserve
+        this.available = false;
+        this.roomNumber = 0;
+        this.price = 0;
+        this.bedNum = 0;
+        this.bedType = "";
+        this.amenities = "";
+    }
 
 
+    public void setIfAvailable(boolean avail){
+        this.available = avail;
+    }
+
+    public void setRoomNumber(int num){
+        this.roomNumber = num;
+
+    }
+
+    public void setRoomPrice(double price){
+        this.price = price;
+
+    }
+
+    public void setBedCount(int num){
+        this.bedNum = num;
+    }
+
+    public void setBedType(String type){
+        this.bedType = type;
+    }
+
+    public void addAmenities(String amenities){
+
+        if(this.amenities.length()> 0){
+            this.amenities = this.amenities + ", " + amenities;
+
+        }else{
+            this.amenities = amenities;
+        }
+    }
+
+
+    public boolean getIfAvailable(){
+        return this.available;
+    }
+
+    public int getRoomNumber(){
+        return this.roomNumber;
+    }
+
+    public int getBedCount(){
+        return this.bedNum;
+    }
+
+    public double getRoomPrice(){
+        return this.price;
+    }
+
+    public String getBedType (){
+        return this.bedType;
+    }
+
+    public String getAmenities(){
+        return this.amenities;
+    }
+
+
+    public String toString(){
+        return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " + this.amenities +
+                " Price: $"+ this.price + " Available: " + this.available;
+    }
 
 }
