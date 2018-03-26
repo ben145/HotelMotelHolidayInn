@@ -8,4 +8,8 @@ public class User {
         nameFirst = firstname;
         nameLast = lastname;
     }
+
+    public String getLastName(){
+        return this.nameLast;
+    }
 }

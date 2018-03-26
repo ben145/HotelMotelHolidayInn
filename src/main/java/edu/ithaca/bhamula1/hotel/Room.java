@@ -7,6 +7,7 @@ public class Room {
     private boolean isReserved;
     private boolean checkedIn;
     private int number;
+    private String lastNameReserved;
 
     public Room(int num){
         number = num;
@@ -16,5 +17,14 @@ public class Room {
 
     public boolean getIsReserved(){
         return this.isReserved;
+    }
+
+    public void fakeReserveRoom(String lastName){
+        this.isReserved = true;
+        lastNameReserved = lastName;
+    }
+
+    public String getLastNameReserved() {
+        return lastNameReserved;
     }
 }
