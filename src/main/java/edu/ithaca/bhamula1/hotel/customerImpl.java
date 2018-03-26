@@ -45,7 +45,12 @@ public class customerImpl implements customer {
         String flName = fName.substring(0,1) + lName.substring(0,1);
         Random rand = new Random();
         double num = rand.nextInt(100000);
-        int diff = 0; diff; i++)
+        int diff = 0;
+        String numStr = Double.toString(num);
+        String extraZeroes = "";
+        if (numStr.length() < 5) {
+            diff = 5 - numStr.length();
+            for (int i = 0; i < diff; i++)
                 extraZeroes = extraZeroes + "0";
         }
         return (flName + extraZeroes + numStr);
