@@ -59,10 +59,15 @@ public class SelectReserveRoom {
     }
 
     /**
-     * SEt some room/Guest data for tests
+     * Default constructor
+     */
+    public SelectReserveRoom(){
+
+    }
+    /**
+     * Set some room/Guest objects and data for tests
      *
      */
-
     public void setGuestAndRoom(){
         Room testRoom;
         Guest testGuest;
@@ -73,14 +78,12 @@ public class SelectReserveRoom {
     }
 
 
-    public SelectReserveRoom(){
-        setGuestAndRoom();
-    }
-
     /**
-     *
-     * @param g
-     * @param r
+     * Constructor for SelectReserveRoom object
+     * Passing in pointers to customer/guest object and room object so that room and guest data
+     * can be updated with reservation data
+     * @param g guest/customer object
+     * @param r room object -
      */
     public SelectReserveRoom(Guest g, Room r){
         guest = g;
@@ -89,7 +92,9 @@ public class SelectReserveRoom {
     }
 
     /**
-     * Checks for valid guest ID
+     * Checks for valid guest/customer ID
+     * verifies a guest id is attached to selection
+     * @return boolean
      */
     public boolean checkGuestID(){
         boolean has_GID;
@@ -102,6 +107,8 @@ public class SelectReserveRoom {
     }
     /**
      * Checks for valid room number
+     * verifies a room number is attached to room object passed in
+     * @return boolean
      */
     public boolean checkRoomNum(){
         boolean has_RNUM;
@@ -115,6 +122,8 @@ public class SelectReserveRoom {
 
     /**
      * Checks for room available
+     * verifies room object is available to reserve
+     * @return boolean
      */
     public boolean checkRoomAvailable(){
         boolean isAvailable;
@@ -132,7 +141,6 @@ public class SelectReserveRoom {
      * When guest chooses to select a room
      * SelectReserveRoom  is instantiated with guest and room
      *
-     * Room number will be added to guest and guest ID will be added to room for period
      *
      */
     public void selectRoom(){
@@ -174,10 +182,14 @@ public class SelectReserveRoom {
     }
 
     /**
-     *
+     * Sets values in each appropriate object
+     * Room number will be added to guest/customer
+     * Guest/Customer ID will be added to room
+     * Reservation ID will be added to both room and customer/guest objects
+     * Room available will be updated to false
+     * returning reservation ID to display for reservation confirmation
      * @return String reservation ID
      */
-
     public String reserveRoom(){
 
         room.gID = guest.guestID;
@@ -190,7 +202,10 @@ public class SelectReserveRoom {
     }
 
     /**
-     *
+     * Creates reservation ID based on customer/guest ID
+     * + 4 random characters selected from A-H and 0-9
+     * + date in format Mddyyyy
+     * returns the concatenation in string form
      * @return String reservation ID
      */
     public String createReservationID(){
@@ -210,7 +225,7 @@ public class SelectReserveRoom {
     }
 
     /**
-     *
+     * To be built to cancel reservation
      * @param reservationID
      */
     public void cancelReserve(String reservationID){
@@ -218,12 +233,21 @@ public class SelectReserveRoom {
 
     }
 
+
+    /**
+     * Getter to get reservation ID - may not use
+     * @return
+     */
     public String getResId(){
         return room.rReserveID;
     }
+
+    /**
+     * Setter to set reservation ID - May not use
+     * @param resID
+     *
+     */
     public void setResID(String resID){
         room.rReserveID = resID;
     }
-
-
 }
