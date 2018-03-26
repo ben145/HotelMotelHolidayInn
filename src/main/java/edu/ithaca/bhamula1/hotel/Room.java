@@ -39,6 +39,13 @@ public class Room {
     }
 
     public boolean checkOut(Customer customer){
-        return true;
+        if(customer.getLastName().equals(this.lastNameReserved)&&this.checkedIn){
+            this.checkedIn=false;
+            this.lastNameReserved=null;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

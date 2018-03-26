@@ -37,7 +37,7 @@ public class Hotel {
         Room current = getRoom(roomNumber);
         //check room is reserved
         if(current.getIsReserved()){
-            if(customer.getLastName()==current.getLastNameReserved()){
+            if(customer.getLastName().equals(current.getLastNameReserved())){
                 boolean c = customer.checkIn(roomNumber);
                 boolean r = current.checkIn(customer);
                 return c&r;
