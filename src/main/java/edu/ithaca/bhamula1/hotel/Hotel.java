@@ -55,4 +55,24 @@ public class Hotel {
         //set customer as checked in
         //set room to be checked in
     }
+
+    public boolean checkOut(int roomNumber, Customer customer){
+        //find room
+        Room current = getRoom(roomNumber);
+        if(current.getIsCheckedIn()){
+            if(customer.getLastName().equals(current.getLastNameReserved())){
+                boolean c = customer.checkOut(roomNumber);
+                boolean r = current.checkOut(customer);
+                return c&r;
+            }
+            else{
+                System.out.println("You are not checked into this room. You must be checked in to checkout.");
+                return false;
+            }
+        }
+        else {
+            System.out.println("This room is not checked into.");
+            return false;
+        }
+    }
 }

@@ -19,6 +19,10 @@ public class Room {
         return this.isReserved;
     }
 
+    public boolean getIsCheckedIn() {
+        return checkedIn;
+    }
+
     public void fakeReserveRoom(String lastName){
         this.isReserved = true;
         lastNameReserved = lastName;
