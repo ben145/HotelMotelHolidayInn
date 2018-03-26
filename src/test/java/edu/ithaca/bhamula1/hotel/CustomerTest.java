@@ -6,92 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    @Test
+    /*@Test
     void checkIn() {
         Customer brad = new Customer("Brad", "Keith");
         brad.fakeReserveRoom(1);
@@ -111,4 +26,5 @@ class CustomerTest {
         assertEquals(true,brad.checkOut(1));
         assertEquals(false,brad.getCheckedIn());
     }
+    */
 }

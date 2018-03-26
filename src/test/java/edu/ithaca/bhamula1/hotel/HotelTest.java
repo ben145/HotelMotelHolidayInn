@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  */
 public class HotelTest {
 
-    @Test
+    /*@Test
     void checkIn() {
         Hotel myHotel = new Hotel();
         myHotel.setupTestHotel();
@@ -36,4 +36,5 @@ public class HotelTest {
         assertEquals(false,myHotel.checkOut(1,customer2));
         assertEquals(true,myHotel.checkOut(1,customer1));
     }
+    */
 }
