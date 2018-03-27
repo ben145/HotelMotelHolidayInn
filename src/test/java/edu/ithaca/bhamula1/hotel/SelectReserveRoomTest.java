@@ -4,6 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * @author Denise FUullerton
+ * Created: 3/24/18
+ */
 
 class SelectReserveRoomTest {
 

@@ -6,7 +6,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
+ * @author Denise FUullerton
+ * Created: 3/24/18
  */
 public class SelectReserveRoom {
     public Guest guest;
