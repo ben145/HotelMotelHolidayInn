@@ -11,6 +11,8 @@ public class Room {
     int bedNum;
     String bedType;
     String amenities; // such as view?
+    boolean checkedIn;
+    String reservationName;
 
     public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities){
         this.available = avail;
@@ -19,6 +21,7 @@ public class Room {
         this.bedNum = bedNum;
         this.bedType = bedType;
         this.amenities = amenities;
+        this.checkedIn = false;
     }
 
     public Room(){
@@ -29,6 +32,7 @@ public class Room {
         this.bedNum = 0;
         this.bedType = "";
         this.amenities = "";
+        this.checkedIn = false;
     }
 
 
@@ -95,8 +99,8 @@ public class Room {
                 " Price: $"+ this.price + " Available: " + this.available;
     }
 
-    public boolean checkIn(Customer customer){
-        if(customer.getLastName().equals(this.lastNameReserved)){
+    public boolean checkIn(customer customer){
+        if(customer.getName().equals(this.reservationName)){
             this.checkedIn=true;
             return true;
         }
@@ -105,10 +109,11 @@ public class Room {
         }
     }
 
-    public boolean checkOut(Customer customer){
-        if(customer.getLastName().equals(this.lastNameReserved)&&this.checkedIn){
+    public boolean checkOut(customer customer){
+        if(customer.getName().equals(this.reservationName)&&this.checkedIn){
             this.checkedIn=false;
-            this.lastNameReserved=null;
+            this.available = true;
+            this.reservationName=null;
             return true;
         }
         else {
@@ -116,4 +121,15 @@ public class Room {
         }
     }
 
+    public void setReservationName(String name){
+        this.reservationName = name;
+    }
+
+    public String getReservationName() {
+        return reservationName;
+    }
+
+    public boolean getCheckedIn(){
+        return this.checkedIn;
+    }
 }

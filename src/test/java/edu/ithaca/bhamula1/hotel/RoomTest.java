@@ -15,25 +15,28 @@ class RoomTest {
 
     @Test
     void checkIn() {
-        Room one = new Room(1);
-        one.fakeReserveRoom("Keith");
-        Customer customer1 = new Customer("Brad","Keith");
-        Customer customer2 = new Customer("John","Doe");
+        Room one = new Room(false,1,100.00,2,"Full","Mini bar");
+        customer customer1 = new customerImpl("Brad Keith","1234");
+        customer customer2 = new customerImpl("John Doe","4321");
+        one.setReservationName(customer1.getName());
         assertEquals(false, one.checkIn(customer2));
         assertEquals(true,one.checkIn(customer1));
+        assertEquals(true,one.getCheckedIn());
+        assertEquals(customer1.getName(),one.reservationName);
     }
 
     @Test
     void checkOut() {
-        Room one = new Room(1);
-        one.fakeReserveRoom("Keith");
-        Customer customer1 = new Customer("Brad","Keith");
-        Customer customer2 = new Customer("John","Doe");
+        Room one = new Room(false,1,100.00,2,"Full","Mini bar");
+        customer customer1 = new customerImpl("Brad Keith","1234");
+        customer customer2 = new customerImpl("John Doe","4321");
+        one.setReservationName(customer1.getName());
         assertEquals(false,one.checkOut(customer1));
         one.checkIn(customer1);
         assertEquals(false,one.checkOut(customer2));
         assertEquals(true,one.checkOut(customer1));
         assertEquals(false,one.checkIn(customer1));
+        assertEquals(null,one.getReservationName());
     }
 
 
