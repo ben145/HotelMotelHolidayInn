@@ -36,6 +36,7 @@ class RoomTest {
         assertEquals(false,one.checkOut(customer2));
         assertEquals(true,one.checkOut(customer1));
         assertEquals(false,one.checkIn(customer1));
+        assertEquals(null,one.getReservationName());
     }
 
 
