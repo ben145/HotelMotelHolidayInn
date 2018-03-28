@@ -2,12 +2,7 @@ package edu.ithaca.bhamula1.hotel;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class RoomTest {
@@ -16,8 +11,8 @@ class RoomTest {
     @Test
     void checkIn() {
         Room one = new Room(false,1,100.00,2,"Full","Mini bar");
-        customer customer1 = new customerImpl("Brad Keith","1234");
-        customer customer2 = new customerImpl("John Doe","4321");
+        Customer customer1 = new Customer("Brad Keith","1234");
+        Customer customer2 = new Customer("John Doe","4321");
         one.setReservationName(customer1.getName());
         assertEquals(false, one.checkIn(customer2));
         assertEquals(true,one.checkIn(customer1));
@@ -28,8 +23,8 @@ class RoomTest {
     @Test
     void checkOut() {
         Room one = new Room(false,1,100.00,2,"Full","Mini bar");
-        customer customer1 = new customerImpl("Brad Keith","1234");
-        customer customer2 = new customerImpl("John Doe","4321");
+        Customer customer1 = new Customer("Brad Keith","1234");
+        Customer customer2 = new Customer("John Doe","4321");
         one.setReservationName(customer1.getName());
         assertEquals(false,one.checkOut(customer1));
         one.checkIn(customer1);

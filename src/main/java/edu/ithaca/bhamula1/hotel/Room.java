@@ -99,7 +99,7 @@ public class Room {
                 " Price: $"+ this.price + " Available: " + this.available;
     }
 
-    public boolean checkIn(customer customer){
+    public boolean checkIn(Customer customer){
         if(customer.getName().equals(this.reservationName)){
             this.checkedIn=true;
             return true;
@@ -109,7 +109,7 @@ public class Room {
         }
     }
 
-    public boolean checkOut(customer customer){
+    public boolean checkOut(Customer customer){
         if(customer.getName().equals(this.reservationName)&&this.checkedIn){
             this.checkedIn=false;
             this.available = true;
