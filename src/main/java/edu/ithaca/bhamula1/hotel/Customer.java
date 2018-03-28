@@ -13,16 +13,21 @@ public class Customer {
     private String fName;
     private String lName;
     private int room;
+    private boolean loggedIn;
     private boolean checkedIn;
 
     Customer(String nameIn, String idIn) {
         name = nameIn;
         id = idIn;
+        loggedIn = false;
+        checkedIn = false;
     }
 
     Customer(){
         name = makeName();
         id = makeID();
+        loggedIn = false;
+        checkedIn = false;
     }
 
     public String makeName() {
@@ -64,14 +69,21 @@ public class Customer {
         return id;
     }
 
+    public boolean getLoggedIn() {
+        return loggedIn;
+    }
+
     public void login() {
         Scanner k = new Scanner(System.in);
         String idIn;
         System.out.println("Please enter your ID");
         idIn = k.next();
-        String custID = "abc123";
-        if (idIn.equals(custID))
+        if (idIn.equals(getId())) {
             System.out.println("Log in successful");
+            loggedIn = true;
+        }
+        else
+            System.out.println("Incorrect ID entered");
     }
 
     public static void main(String[] args) {
