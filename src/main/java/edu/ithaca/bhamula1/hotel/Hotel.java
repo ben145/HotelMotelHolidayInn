@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Hotel {
     private Map<Integer,Room> rooms;
-    private List<customer> customers;
+    private List<customerImpl> customers;
 
     public Hotel(){
         rooms = new HashMap<>();

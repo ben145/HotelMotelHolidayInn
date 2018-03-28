@@ -27,8 +27,8 @@ public class SelectReserveRoom {
     public void setGuestAndRoom(){
         Room testRoom;
         customerImpl testGuest;
-        testGuest = new customerImpl("Guest1",null,null);
-        testRoom = new Room("18A",null,null);
+        testGuest = new customerImpl("BobFrog" , "stuft-Shirt");
+        testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
         room = testRoom;
         customer = testGuest;
     }
@@ -109,7 +109,7 @@ public class SelectReserveRoom {
         System.out.println(input);
         // print room
         System.out.println("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
-
+/*
         if(room.roomNumber == s.toString()){
             s.setLength(0);
             s.append(scan.nextLine());
@@ -127,6 +127,7 @@ public class SelectReserveRoom {
             System.out.println("Invalid input, you entered "+s.toString()+". Please try again.");
             selectRoom();
         }
+        */
     }
 
     /**
