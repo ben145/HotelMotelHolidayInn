@@ -57,6 +57,7 @@ public class Hotel {
             if(customer.getName().equals(current.getReservationName())){
                 boolean c = customer.checkOut(roomNumber);
                 boolean r = current.checkOut(customer);
+                System.out.println("Thank You For Visiting ");
                 return c&r;
             }
             else{

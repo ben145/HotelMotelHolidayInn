@@ -54,7 +54,6 @@ public class Main {
                 int rmNum = scan.nextInt();
 
                 hotel.checkOut(rmNum, customer);
-                System.out.println("Thank You For Visiting ");
 
             } else if (option == 3) {
                 System.out.println("Review Rooms");
@@ -138,7 +137,7 @@ public class Main {
                 else {
                     hotel.logIn(firstName, id);
                     if (hotel.getCustomer(id).getLoggedIn()) {
-                        onceLoggedIn(hotel.getCustomer(id), hotel);
+                        firstOption=onceLoggedIn(hotel.getCustomer(id), hotel);
                     }
                 }
 
@@ -166,7 +165,7 @@ public class Main {
                 String id = hotel.getCustomer(firstName, lastName).getId();
                 System.out.println("Your ID is " + id);
 
-                onceLoggedIn(hotel.getCustomer(firstName, lastName), hotel);
+                firstOption=onceLoggedIn(hotel.getCustomer(firstName, lastName), hotel);
 
 
             } else if (firstOption == 3) {
