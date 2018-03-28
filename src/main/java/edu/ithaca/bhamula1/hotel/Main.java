@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
 
-    public static void onceLoggedIn(Customer customer, Hotel hotel){
+    public static int onceLoggedIn(Customer customer, Hotel hotel){
         Scanner scan = new Scanner(System.in);
 
         int option =0;
@@ -14,58 +14,63 @@ public class Main {
 
         //maybe if reserved print a check in
 
-        System.out.println("Would you like to \n" +
-                "1)check in \n" +
-                "2) check out \n" +
-                "3) review rooms \n" +
-                "4) reserve room \n");
+        //loop until quit
+        while(option!=5) {
 
-        option = scan.nextInt();
-
-        while(option<1 || option> 4){
-            System.out.println("1)check in\n" +
-            "2) check out\n" +
-            "3) review rooms\n" +
-            "4) reserve room\n");
+            System.out.println("Would you like to \n" +
+                    "1)check in \n" +
+                    "2) check out \n" +
+                    "3) review rooms \n" +
+                    "4) reserve room \n" +
+                    "5) quit\n");
 
             option = scan.nextInt();
+
+            while (option < 1 || option > 5) {
+                System.out.println("1)check in\n" +
+                        "2) check out\n" +
+                        "3) review rooms\n" +
+                        "4) reserve room\n" +
+                        "5) quit\n");
+
+                option = scan.nextInt();
+            }
+
+
+            if (option == 1) {
+                System.out.println("Check In");
+                //scan.next();
+
+                System.out.println("What room number: ");
+                int rmNum = scan.nextInt();
+
+                hotel.checkIn(rmNum, customer);
+
+
+            } else if (option == 2) {
+                System.out.println("Check Out");
+
+                System.out.println("What room number: ");
+                int rmNum = scan.nextInt();
+
+                hotel.checkOut(rmNum, customer);
+                System.out.println("Thank You For Visiting ");
+
+            } else if (option == 3) {
+                System.out.println("Review Rooms");
+                System.out.println("View Rooms ");
+                System.out.println(hotel.viewOrderedAvailableRooms());
+
+            } else if (option == 4) {
+                System.out.println("Reserve Room");
+
+
+                //Denise! This is your spot!
+            } else if (option == 5) {
+                return 4;
+            }
         }
-
-
-        if(option==1){
-            System.out.println("Check In");
-            scan.next();
-
-            System.out.println("What room number: ");
-            int rmNum = scan.nextInt();
-
-            hotel.checkIn(rmNum, customer);
-
-
-        }else if(option ==2){
-            System.out.println("Check Out");
-
-            System.out.println("What room number: ");
-            int rmNum = scan.nextInt();
-
-            hotel.checkOut(rmNum, customer);
-            System.out.println("Thank You For Visiting ");
-
-        }else if(option ==3){
-            System.out.println("Review Rooms");
-            System.out.println("View Rooms ");
-            System.out.println(hotel.viewOrderedAvailableRooms());
-
-        }else if(option ==4){
-            System.out.println("Reserve Room");
-
-
-
-            //Denise! This is your spot!
-        }
-
-
-
+        return 4;
     }
 
 
@@ -167,6 +172,7 @@ public class Main {
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");
                 System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println();
             }
 
             else if (firstOption == 4){
