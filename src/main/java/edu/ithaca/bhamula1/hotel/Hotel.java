@@ -10,7 +10,8 @@ import java.util.Map;
  */
 public class Hotel {
     private Map<Integer,Room> rooms;
-    private List<customerImpl> customers;
+
+    private List<Customer> customers;
 
     public Hotel(){
         rooms = new HashMap<>();
@@ -22,7 +23,7 @@ public class Hotel {
         return rooms.get(roomNumber);
     }
 
-    public boolean checkIn(int roomNumber, customer customer){
+    public boolean checkIn(int roomNumber, Customer customer){
         //find room
         Room current = getRoom(roomNumber);
         //check room is reserved
@@ -46,7 +47,7 @@ public class Hotel {
         //set room to be checked in
     }
 
-    public boolean checkOut(int roomNumber, customer customer){
+    public boolean checkOut(int roomNumber, Customer customer){
         //find room
         Room current = getRoom(roomNumber);
         if(current.getCheckedIn()){

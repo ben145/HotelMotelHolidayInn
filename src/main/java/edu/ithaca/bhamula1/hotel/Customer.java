@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by Ben on 3/25/2018.
  */
-public class customerImpl implements customer {
+public class Customer {
 
     private String name;
     private String id;
@@ -18,17 +18,16 @@ public class customerImpl implements customer {
     //adding reservation to cust class
     private String reservation;
 
-    customerImpl(String nameIn, String idIn) {
+    Customer(String nameIn, String idIn) {
         name = nameIn;
         id = idIn;
     }
 
-    customerImpl(){
+    Customer(){
         name = makeName();
         id = makeID();
     }
 
-    @Override
     public String makeName() {
         String firstName, lastName;
         Scanner scan = new Scanner(System.in);
@@ -40,12 +39,11 @@ public class customerImpl implements customer {
         // getting last name and storing in lastName
         System.out.println("Please enter your last name");
         lastName = scan.next();
-        // reformatting so lastName has capital first letter, lowercase otherwise
+        // reformatting so lastName has capital first letter, otherwise lowercase
         lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length());
         return (fName +" "+ lName);
     }
 
-    @Override
     public String makeID() {
         String flName = fName.substring(0,1) + lName.substring(0,1);
         Random rand = new Random();
@@ -87,7 +85,7 @@ public class customerImpl implements customer {
      */
     public void setReservation(String r){ reservation = r;}
 
-    @Override
+
     public void login() {
         Scanner k = new Scanner(System.in);
         String idIn;
@@ -99,7 +97,7 @@ public class customerImpl implements customer {
     }
 
     public static void main(String[] args) {
-        customerImpl c = new customerImpl();
+        Customer c = new Customer();
         c.login();
     }
 
@@ -107,7 +105,6 @@ public class customerImpl implements customer {
         return checkedIn;
     }
 
-    @Override
     public boolean checkIn(int roomNumber) {
         if(this.room>0){
             if(!this.checkedIn){
@@ -132,7 +129,6 @@ public class customerImpl implements customer {
         }
     }
 
-    @Override
     public boolean checkOut(int roomNumber) {
         if(roomNumber==room){
             if(checkedIn){
@@ -152,7 +148,6 @@ public class customerImpl implements customer {
         }
     }
 
-    @Override
     public void setRoom(int room) {
         this.room = room;
     }

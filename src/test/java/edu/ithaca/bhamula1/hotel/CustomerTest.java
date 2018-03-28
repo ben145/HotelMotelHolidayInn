@@ -2,13 +2,13 @@ package edu.ithaca.bhamula1.hotel;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
 
     @Test
     void checkIn() {
-        customer brad = new customerImpl("Brad Keith", "1234");
+        Customer brad = new Customer("Brad Keith", "1234");
         assertEquals(false,brad.checkIn(2));
         brad.setRoom(1);
         assertEquals(false,brad.checkIn(2));
@@ -20,7 +20,7 @@ class CustomerTest {
 
     @Test
     void checkOut() {
-        customer brad = new customerImpl("Brad Keith", "1234");
+        Customer brad = new Customer("Brad Keith", "1234");
         brad.setRoom(1);
         assertEquals(false,brad.checkOut(2));
         brad.checkIn(1);
