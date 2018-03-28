@@ -1,19 +1,23 @@
 package edu.ithaca.bhamula1.hotel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Ben on 3/22/2018.
  */
 public class Hotel {
-    private Map<Integer,Room> rooms;
+    //have to set this!
+    int numberOfRooms =0;
+    private ArrayList<Room> rooms;
     private List<Customer> customers;
 
     public Hotel(){
-        rooms = new HashMap<>();
+        //this was a hash map. Changed to a array list
+        //the index is the room number
+//        rooms = new HashMap<>();
+        rooms = new ArrayList<Room>();
+
+        //should this is a linked list instead? better memory
         customers = new ArrayList<>();
     }
 
@@ -67,6 +71,56 @@ public class Hotel {
     }
 
     public void addTestRoom(int roomNumber){
-        this.rooms.put(roomNumber,new Room(false,1,100.00,2,"Full","Mini bar"));
+        this.rooms.set(roomNumber,new Room(false,roomNumber,100.00,2,"Full","Mini bar"));
     }
+
+
+    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites){
+        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites));
+    }
+
+
+    /**
+     * initializes  the array list so we can put the room in the proper index
+     * @param numberOfRooms
+     * @author Mia
+     */
+    public void setNumberOfRooms(int numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+
+        while(rooms.size() <numberOfRooms){
+            rooms.add(new Room());
+        }
+    }
+
+
+
+    public ArrayList<Room> getRooms(){
+        return rooms;
+    }
+
+    /**
+     * @Author Mia
+     * @return
+     */
+    public String viewOrderedAvailableRooms(){
+
+        String str="";
+        for (Room rm: rooms) {
+            if(rm.getRoomNumber()!=0 && rm.getIfAvailable()) {
+
+                if (str.equals("")) {
+                    str +=  rm.toString();
+                } else {
+                    str += "\n" + rm.toString();
+                }
+
+
+            }
+
+        }
+        return str;
+    }
+
+
 }
