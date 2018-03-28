@@ -124,8 +124,8 @@ public class Hotel {
 
 
     public void logIn (String name, String id){
-        Customer customer = new Customer(name, id);
-        logIn(name, id);
+        Customer customer = getCustomer(id);
+        customer.login(id);
     }
 
     public Customer getCustomer(String first, String last){
@@ -136,7 +136,7 @@ public class Hotel {
             }
 
         }
-        return new Customer();
+        return null;
     }
 
     public Customer getCustomer(String ID){
@@ -147,7 +147,7 @@ public class Hotel {
             }
 
         }
-        return new Customer();
+        return null;
     }
 
     public void createAccount (String fname, String lastName){

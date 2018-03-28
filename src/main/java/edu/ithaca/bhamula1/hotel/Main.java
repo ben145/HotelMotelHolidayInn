@@ -78,8 +78,8 @@ public class Main {
         hotel.addRoom(4, true, 100,2, "double", "mini bar");
         hotel.addRoom(3, false, 100,2, "double", "mini bar");
 
-        //hotel.createAccount("Brad","Keith");
-        //System.out.println(hotel.getCustomer("Brad", "Keith").getId());
+        hotel.createAccount("Brad","Keith");
+        System.out.println(hotel.getCustomer("Brad", "Keith").getId());
 
         return hotel;
     }
@@ -92,71 +92,86 @@ public class Main {
 
         System.out.println("Welcome to {insert hotel name here}");
 
-        System.out.println("Would you like to\n" +
-                "1) sign in\n" +
-                "2) sign up\n" +
-                "3) view rooms \n");
-
-        firstOption = scan.nextInt();
-
-        while(firstOption<1 || firstOption> 3){
-            System.out.println("1) sign in\n" +
+        //login or room view loop
+        while(firstOption!=4) {
+            System.out.println("Would you like to\n" +
+                    "1) sign in\n" +
                     "2) sign up\n" +
-                    "3) view rooms\n ");
+                    "3) view rooms \n"+
+                    "4) quit");
 
             firstOption = scan.nextInt();
-        }
 
-        if(firstOption ==1){
+            while (firstOption < 1 || firstOption > 4) {
+                System.out.println("1) sign in\n" +
+                        "2) sign up\n" +
+                        "3) view rooms\n "+
+                        "4) quit");
 
-            System.out.println("Sign In");
+                firstOption = scan.nextInt();
+            }
 
+            if (firstOption == 1) {
 
-            System.out.println("Type Your First Name: ");
-            scan.next();
-
-            String firstName = scan.nextLine();
-            System.out.println(firstName);
-
-            System.out.println("Type Your User ID: ");
-            scan.next();
-
-            String id = scan.nextLine();
-            System.out.println(id);
-            hotel.logIn(firstName, id);
-
-            onceLoggedIn(hotel.getCustomer(id), hotel);
+                System.out.println("Sign In");
 
 
-        }else if(firstOption == 2){
-            System.out.println("Sign Up");
+                System.out.println("Type Your First Name: ");
+                scan.next();
 
-            System.out.println("Type Your First Name: ");
-            //scan.next();
+                String firstName = scan.nextLine();
+                System.out.println(firstName);
 
-            String firstName = scan.next();
-            //System.out.println(firstName);
+                System.out.println("Type Your User ID: ");
+                //scan.next();
 
-
-            System.out.println("Type Your Last Name: ");
-            //scan.next();
-
-            String lastName = scan.next();
-            //System.out.println(lastName);
-
-
-            hotel.createAccount(firstName, lastName);
-
-            String id = hotel.getCustomer(firstName, lastName).getId();
-            System.out.println("Your ID is "+id );
-
-            onceLoggedIn(hotel.getCustomer(firstName, lastName), hotel);
+                String id = scan.next();
+                System.out.println(id);
+                if(hotel.getCustomer(id)==null){
+                    System.out.println("Incorrect account information");
+                }
+                else {
+                    hotel.logIn(firstName, id);
+                    if (hotel.getCustomer(id).getLoggedIn()) {
+                        onceLoggedIn(hotel.getCustomer(id), hotel);
+                    }
+                }
 
 
 
-        }else if(firstOption ==3){
-            System.out.println("View Rooms ");
-            System.out.println(hotel.viewOrderedAvailableRooms());
+            } else if (firstOption == 2) {
+                System.out.println("Sign Up");
+
+                System.out.println("Type Your First Name: ");
+                //scan.next();
+
+                String firstName = scan.next();
+                //System.out.println(firstName);
+
+
+                System.out.println("Type Your Last Name: ");
+                //scan.next();
+
+                String lastName = scan.next();
+                //System.out.println(lastName);
+
+
+                hotel.createAccount(firstName, lastName);
+
+                String id = hotel.getCustomer(firstName, lastName).getId();
+                System.out.println("Your ID is " + id);
+
+                onceLoggedIn(hotel.getCustomer(firstName, lastName), hotel);
+
+
+            } else if (firstOption == 3) {
+                System.out.println("View Rooms ");
+                System.out.println(hotel.viewOrderedAvailableRooms());
+            }
+
+            else if (firstOption == 4){
+                System.out.println("Thank you");
+            }
         }
 
 

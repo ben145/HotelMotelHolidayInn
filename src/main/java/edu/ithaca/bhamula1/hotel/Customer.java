@@ -93,9 +93,12 @@ public class Customer {
 //        String idIn;
 //        System.out.println("Please enter your ID");
 //        idIn = k.next();
-        String custID = "abc123";
-        if (idIn.equals(custID)){
+//        String custID = "abc123";
+        if (idIn.equals(this.id)){
             loggedIn = true;
+        }
+        else{
+            System.out.println("Incorrect Password.");
         }
 
     }
@@ -158,5 +161,9 @@ public class Customer {
 
     public void setRoom(int room) {
         this.room = room;
+    }
+
+    public boolean getLoggedIn(){
+        return this.loggedIn;
     }
 }
