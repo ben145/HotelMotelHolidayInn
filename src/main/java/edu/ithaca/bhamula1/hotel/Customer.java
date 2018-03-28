@@ -41,7 +41,7 @@ public class Customer {
         // getting last name and storing in lastName
         System.out.println("Please enter your last name");
         lastName = scan.next();
-        // reformatting so lastName has capital first letter, lowercase otherwise
+        // reformatting so lastName has capital first letter, otherwise lowercase
         lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length());
         return (fName +" "+ lName);
     }
