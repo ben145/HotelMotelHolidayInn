@@ -14,30 +14,51 @@ public class Customer {
     private String lName;
     private int room;
     private boolean checkedIn;
+    private boolean loggedIn;
 
     Customer(String nameIn, String idIn) {
         name = nameIn;
         id = idIn;
+        loggedIn = false;
     }
 
     Customer(){
-        name = makeName();
-        id = makeID();
+//        name = makeName();
+//        id = makeID();
+
+        name = "";
+        id = "";
+        loggedIn = false;
     }
 
-    public String makeName() {
-        String firstName, lastName;
-        Scanner scan = new Scanner(System.in);
-        // getting first name and storing in firstName
-        System.out.println("Please enter your first name");
-        firstName = scan.next();
+
+    //set name
+    public String makeName(String firstName, String lastName) {
+//        String firstName, lastName;
+////        Scanner scan = new Scanner(System.in);
+////        // getting first name and storing in firstName
+////        System.out.println("Please enter your first name");
+////        firstName = scan.next();
         // reformatting so firstName has capital first letter, lowercase otherwise
+
+
+
         fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length());
-        // getting last name and storing in lastName
-        System.out.println("Please enter your last name");
-        lastName = scan.next();
+
+
+
+//        // getting last name and storing in lastName
+//        System.out.println("Please enter your last name");
+//        lastName = scan.next();
         // reformatting so lastName has capital first letter, otherwise lowercase
+
+
+
+
         lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length());
+
+
+        name = firstName + " " + lastName;
         return (fName +" "+ lName);
     }
 
@@ -64,20 +85,28 @@ public class Customer {
         return id;
     }
 
-    public void login() {
-        Scanner k = new Scanner(System.in);
-        String idIn;
-        System.out.println("Please enter your ID");
-        idIn = k.next();
+
+    //ONly one log in right now
+    public void login(String idIn) {
+//        Scanner k = new Scanner(System.in);
+//        String idIn;
+//        System.out.println("Please enter your ID");
+//        idIn = k.next();
         String custID = "abc123";
-        if (idIn.equals(custID))
-            System.out.println("Log in successful");
+        if (idIn.equals(custID)){
+            loggedIn = true;
+        }
+
     }
 
-    public static void main(String[] args) {
-        Customer c = new Customer();
-        c.login();
+    public void logOut(){
+        loggedIn = false;
     }
+
+//    public static void main(String[] args) {
+//        Customer c = new Customer();
+//        c.login();
+//    }
 
     public boolean isCheckedIn() {
         return checkedIn;
@@ -87,22 +116,22 @@ public class Customer {
         if(this.room>0){
             if(!this.checkedIn){
                 if(roomNumber==this.room){
-                    System.out.println("Welcome. Enjoy your stay.");
+//                    System.out.println("Welcome. Enjoy your stay.");
                     this.checkedIn=true;
                     return true;
                 }
                 else{
-                    System.out.println("You have not reserved this room.");
+//                    System.out.println("You have not reserved this room.");
                     return false;
                 }
             }
             else{
-                System.out.println("You are already checked in.");
+//                System.out.println("You are already checked in.");
                 return false;
             }
         }
         else {
-            System.out.println("You have not reserved a room. Please reserve a room to check in.");
+//            System.out.println("You have not reserved a room. Please reserve a room to check in.");
             return false;
         }
     }
@@ -110,18 +139,18 @@ public class Customer {
     public boolean checkOut(int roomNumber) {
         if(roomNumber==room){
             if(checkedIn){
-                System.out.println("Thank you. We hope you enjoyed your stay.");
+//                System.out.println("Thank you. We hope you enjoyed your stay.");
                 this.checkedIn=false;
                 this.room = -1;
                 return true;
             }
             else{
-                System.out.println("You are not checked in. You must be checked in to check out.");
+//                System.out.println("You are not checked in. You must be checked in to check out.");
                 return false;
             }
         }
         else {
-            System.out.println("Incorrect Room.");
+//            System.out.println("Incorrect Room.");
             return false;
         }
     }

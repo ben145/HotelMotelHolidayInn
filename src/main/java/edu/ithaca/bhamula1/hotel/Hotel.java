@@ -123,4 +123,45 @@ public class Hotel {
     }
 
 
+    public void logIn (String name, String id){
+        Customer customer = new Customer(name, id);
+        logIn(name, id);
+    }
+
+    public Customer getCustomer(String first, String last){
+
+        for(Customer c: customers){
+            if(c.getName().equals(first + " " + last)){
+                return c;
+            }
+
+        }
+        return new Customer();
+    }
+
+    public Customer getCustomer(String ID){
+
+        for(Customer c: customers){
+            if(c.getId().equals(ID)){
+                return c;
+            }
+
+        }
+        return new Customer();
+    }
+
+    public void createAccount (String fname, String lastName){
+        Customer customer = new Customer();
+        customer.makeName(fname, lastName);
+        String ID = customer.makeID();
+        customer.login(ID);
+
+        customers.add(customer);
+    }
+
+
+
+
+
+
 }
