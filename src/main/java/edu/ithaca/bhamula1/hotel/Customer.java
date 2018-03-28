@@ -43,7 +43,7 @@ public class Customer {
 
 
 
-        fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length());
+        fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length()-1);
 
 
 
@@ -55,7 +55,7 @@ public class Customer {
 
 
 
-        lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length());
+        lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length()-1);
 
 
         name = firstName + " " + lastName;
@@ -74,7 +74,8 @@ public class Customer {
             for (int i = 0; i < diff; i++)
                 extraZeroes = extraZeroes + "0";
         }
-        return (flName + extraZeroes + numStr);
+        id = (flName + extraZeroes + numStr);
+        return (id);
     }
 
     public String getName() {

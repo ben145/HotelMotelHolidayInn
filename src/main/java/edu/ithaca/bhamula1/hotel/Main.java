@@ -78,6 +78,8 @@ public class Main {
         hotel.addRoom(4, true, 100,2, "double", "mini bar");
         hotel.addRoom(3, false, 100,2, "double", "mini bar");
 
+        //hotel.createAccount("Brad","Keith");
+        //System.out.println(hotel.getCustomer("Brad", "Keith").getId());
 
         return hotel;
     }
@@ -114,11 +116,13 @@ public class Main {
             scan.next();
 
             String firstName = scan.nextLine();
+            System.out.println(firstName);
 
             System.out.println("Type Your User ID: ");
             scan.next();
 
             String id = scan.nextLine();
+            System.out.println(id);
             hotel.logIn(firstName, id);
 
             onceLoggedIn(hotel.getCustomer(id), hotel);
@@ -128,15 +132,17 @@ public class Main {
             System.out.println("Sign Up");
 
             System.out.println("Type Your First Name: ");
-            scan.next();
+            //scan.next();
 
-            String firstName = scan.nextLine();
+            String firstName = scan.next();
+            //System.out.println(firstName);
 
 
             System.out.println("Type Your Last Name: ");
-            scan.next();
+            //scan.next();
 
-            String lastName = scan.nextLine();
+            String lastName = scan.next();
+            //System.out.println(lastName);
 
 
             hotel.createAccount(firstName, lastName);
