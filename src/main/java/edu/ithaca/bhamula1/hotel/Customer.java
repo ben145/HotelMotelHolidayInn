@@ -13,7 +13,8 @@ public class Customer {
     private String fName;
     private String lName;
     private int room;
-    private boolean checkedIn;
+    private boolean isCheckedIn;
+    private boolean isLoggedIn;
 
     Customer(String nameIn, String idIn) {
         name = nameIn;
@@ -69,8 +70,7 @@ public class Customer {
         String idIn;
         System.out.println("Please enter your ID");
         idIn = k.next();
-        String custID = "abc123";
-        if (idIn.equals(custID))
+        if (idIn.equals(getId()))
             System.out.println("Log in successful");
     }
 
@@ -80,15 +80,15 @@ public class Customer {
     }
 
     public boolean isCheckedIn() {
-        return checkedIn;
+        return isCheckedIn;
     }
 
     public boolean checkIn(int roomNumber) {
         if(this.room>0){
-            if(!this.checkedIn){
+            if(!this.isCheckedIn){
                 if(roomNumber==this.room){
                     System.out.println("Welcome. Enjoy your stay.");
-                    this.checkedIn=true;
+                    this.isCheckedIn=true;
                     return true;
                 }
                 else{
@@ -109,9 +109,9 @@ public class Customer {
 
     public boolean checkOut(int roomNumber) {
         if(roomNumber==room){
-            if(checkedIn){
+            if(isCheckedIn){
                 System.out.println("Thank you. We hope you enjoyed your stay.");
-                this.checkedIn=false;
+                this.isCheckedIn=false;
                 this.room = -1;
                 return true;
             }
