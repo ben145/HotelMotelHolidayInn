@@ -10,54 +10,9 @@ import java.util.Scanner;
  * Created: 3/24/18
  */
 public class SelectReserveRoom {
-    public Guest guest;
+    public customerImpl customer;
     public Room room;
 
-    /**
-     * Below are two mock classses for room and guest - customer to run tests
-     */
-
-    class Guest{
-        String guestID;
-        String roomNum;
-        String gReserveID;
-
-        //String roomNum;
-        private Guest(){
-//            guestID = null;
-//            roomNum= null;
-//            gReserveID = null;
-        }
-
-        public Guest (String gID, String rmNum, String rmResID){
-            this.guestID = gID;
-            this.roomNum = rmNum;
-            this.gReserveID = rmResID;
-        }
-    }
-    class Room{
-        String rmNum;
-        String gID;
-        String rReserveID;
-        boolean available = false;
-        //String roomNum;
-        private Room(){
-//            rmNum = null;
-//            gID = null;
-//            rReserveID = null;
-        }
-
-        public Room (String rNum, String guID, String rmResID){
-            this.rmNum =rNum;
-            this.gID = guID;
-            this.rReserveID = rmResID;
-            if(guID==null){
-                this.available = true;
-            }else{
-                this.available = false;
-            }
-        }
-    }
 
     /**
      * Default constructor
@@ -71,24 +26,24 @@ public class SelectReserveRoom {
      */
     public void setGuestAndRoom(){
         Room testRoom;
-        Guest testGuest;
-        testGuest = new Guest("Guest1",null,null);
+        customerImpl testGuest;
+        testGuest = new customerImpl("Guest1",null,null);
         testRoom = new Room("18A",null,null);
         room = testRoom;
-        guest = testGuest;
+        customer = testGuest;
     }
 
 
     /**
      * Constructor for SelectReserveRoom object
-     * Passing in pointers to customer/guest object and room object so that room and guest data
+     * Passing in pointers to customer object and room object so that room and customerImpl data
      * can be updated with reservation data
-     * @param g guest/customer object
+     * @param c customer object
      * @param r room object -
      */
-    public SelectReserveRoom(Guest g, Room r){
-        guest = g;
-        room = r;
+    public SelectReserveRoom(customerImpl c, Room r){
+        this.customer = c;
+        this.room = r;
 
     }
 
@@ -99,7 +54,7 @@ public class SelectReserveRoom {
      */
     public boolean checkGuestID(){
         boolean has_GID;
-        if(guest.guestID !=null){
+        if(customer.getName() !=null){
             has_GID = true;
         }else{
             has_GID = false;
@@ -113,7 +68,7 @@ public class SelectReserveRoom {
      */
     public boolean checkRoomNum(){
         boolean has_RNUM;
-        if(room.rmNum != null){
+        if(room.roomNumber != 0){
             has_RNUM= true;
         }else{
             has_RNUM = false;
@@ -146,15 +101,16 @@ public class SelectReserveRoom {
      */
     public void selectRoom(){
 
-        System.out.println("Please enter room number to select room to reserve: ");
-        StringBuffer s = new StringBuffer();
+        int input = -1;
         Scanner scan = new Scanner(System.in);
-        s.append(scan.next());
-        System.out.println(s);
+        System.out.println("Please enter room number to select room to reserve: ");
+
+        input = scan.nextInt();
+        System.out.println(input);
         // print room
         System.out.println("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
 
-        if(room.rmNum == s.toString()){
+        if(room.roomNumber == s.toString()){
             s.setLength(0);
             s.append(scan.nextLine());
         }
@@ -177,9 +133,9 @@ public class SelectReserveRoom {
      *
      */
     public void cancelRoom(){
-        guest.roomNum = null;
-        room.gID = null;
-
+        customer.setRoom(0);
+        // not private, do not need getters and setters?
+        room.setReservationName(null);
     }
 
     /**
@@ -193,13 +149,12 @@ public class SelectReserveRoom {
      */
     public String reserveRoom(){
 
-        room.gID = guest.guestID;
-        guest.roomNum = room.rmNum;
+        customer.setRoom(room.roomNumber);
         String reserveID = createReservationID();
-        guest.gReserveID = reserveID;
-        room.rReserveID = reserveID;
+        customer.setReservation(reserveID);
+        room.setReservationName(reserveID);
         room.available = false;
-        return guest.gReserveID;
+        return customer.getReservation();
     }
 
     /**
@@ -211,7 +166,7 @@ public class SelectReserveRoom {
      */
     public String createReservationID(){
 
-        String reservationID = guest.guestID+"-";
+        String reservationID = customer.getId()+"-";
         String randomGen = "ABCDEGH0123456789";
         SimpleDateFormat sd = new SimpleDateFormat("Mddyyy");
         String date = sd.format(new Date());
@@ -234,21 +189,4 @@ public class SelectReserveRoom {
 
     }
 
-
-    /**
-     * Getter to get reservation ID - may not use
-     * @return
-     */
-    public String getResId(){
-        return room.rReserveID;
-    }
-
-    /**
-     * Setter to set reservation ID - May not use
-     * @param resID
-     *
-     */
-    public void setResID(String resID){
-        room.rReserveID = resID;
-    }
 }

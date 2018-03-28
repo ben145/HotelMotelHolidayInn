@@ -69,4 +69,6 @@ public class Hotel {
     public void addTestRoom(int roomNumber){
         this.rooms.put(roomNumber,new Room(false,1,100.00,2,"Full","Mini bar"));
     }
+
+
 }

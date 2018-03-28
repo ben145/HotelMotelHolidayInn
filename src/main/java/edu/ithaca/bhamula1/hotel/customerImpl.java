@@ -15,6 +15,9 @@ public class customerImpl implements customer {
     private int room;
     private boolean checkedIn;
 
+    //adding reservation to cust class
+    private String reservation;
+
     customerImpl(String nameIn, String idIn) {
         name = nameIn;
         id = idIn;
@@ -65,6 +68,24 @@ public class customerImpl implements customer {
     public String getId() {
         return id;
     }
+
+    /**
+     * Used to get the room associated with the customer
+     * @return int
+     */
+    public int getRoom(){ return room; }
+
+    /**
+     * Used to get the reservation associated with the room and customer
+     * @return String
+     */
+    public String getReservation(){return reservation;}
+
+    /**
+     * sets the reservation associated with the room
+     * @param r String
+     */
+    public void setReservation(String r){ reservation = r;}
 
     @Override
     public void login() {
