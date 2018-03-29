@@ -156,7 +156,7 @@ public class Hotel {
         Customer customer = new Customer();
         customer.makeName(fname, lastName);
         String ID = customer.makeID();
-        customer.login(ID);
+        //customer.login(ID);
 
         customers.add(customer);
     }
@@ -200,7 +200,10 @@ public class Hotel {
                         if(selRes.checkRoomAvailable()){
                             String resID = selRes.createReservationID();
                             cust.setReservation(resID);
-                            rm.setReservationName(resID);
+                            cust.setRoom(rmNum);
+                            rm.setReservationName(cust.getName());
+                            rm.setIfAvailable(false);
+                            //rm.setReservationName(resID);
                             System.out.println("Your reservation ID for room "+ 1 + " is "+ cust.getReservation());
                         }
                     }

@@ -48,7 +48,9 @@ public class Main {
 
                 hotel.checkIn(rmNum, customer);
 
-
+                if(customer.isCheckedIn()) {
+                    checkedIn(customer, hotel);
+                }
 
             } else if (option == 2) {
                 System.out.println("Check Out");
@@ -116,10 +118,37 @@ public class Main {
         hotel.addRoom(3, false, 100,2, "double", "mini bar");
 
         hotel.createAccount("Brad","Keith");
-        System.out.println(hotel.getCustomer("Brad", "Keith").getId());
+//        System.out.println(hotel.getCustomer("Brad", "Keith").getId());
 
 
         return hotel;
+    }
+
+    public static void checkedIn(Customer customer, Hotel hotel){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome! We hope you enjoy your stay.");
+        int req = 0;
+        Requests myReq = new Requests();
+        while(req!=5){
+            System.out.println("What can we do for you?");
+            myReq.viewRequests();
+            System.out.println("5) Checkout");
+            req = scan.nextInt();
+            while(req<1||req>5){
+                System.out.println("Invalid option");
+                System.out.println("What can we do for you?");
+                myReq.viewRequests();
+                System.out.println("5) Checkout");
+                req = scan.nextInt();
+            }
+            if(req>0&&req<5){
+                System.out.println("Your request will be fulfilled as soon as is possible.");
+                System.out.println("Please let us know if there is anything else we can do for you.");
+            }
+            else if(req==5){
+                hotel.checkOut(customer.getRoom(),customer);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -155,9 +184,9 @@ public class Main {
 
 
                 System.out.println("Type Your First Name: ");
-                scan.next();
+                //scan.next();
 
-                String firstName = scan.nextLine();
+                String firstName = scan.next();
                 System.out.println(firstName);
 
                 System.out.println("Type Your User ID: ");
@@ -211,7 +240,7 @@ public class Main {
                  *  ID is bob
                  */
 
-                onceLoggedIn(hotel.getCustomer("den", null), hotel);
+                //onceLoggedIn(hotel.getCustomer("den", null), hotel);
 
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");

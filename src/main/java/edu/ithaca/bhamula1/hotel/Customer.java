@@ -75,6 +75,7 @@ public class Customer {
         }
 
         String yourId = (flName + extraZeroes + numStr);
+        id = yourId;
         System.out.println("Your login ID is " + yourId);
         return yourId;
 
@@ -188,5 +189,7 @@ public class Customer {
      */
     public void setReservation(String r){ reservation = r;}
 
-
+    public int getRoom() {
+        return room;
+    }
 }

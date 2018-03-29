@@ -7,6 +7,10 @@ public class Requests {
     public ArrayList<String> requests = new ArrayList<String>();
     public ArrayList<String> tierTwoRequests;
 
+    public Requests(){
+        loadRecs();
+    }
+
     //some requests any guest can make
     public void loadRecs(){
         requests.add("Room service");
@@ -41,9 +45,9 @@ public class Requests {
 
     //view the requests a customer can make
     public void viewRequests(){
-        loadRecs();
+        //loadRecs();
         for(int i=0; i<requests.size();i++){
-            System.out.println(requests.get(i));
+            System.out.println((i+1)+") "+requests.get(i));
         }
         //check customer for tier status,if higher:
         /*
