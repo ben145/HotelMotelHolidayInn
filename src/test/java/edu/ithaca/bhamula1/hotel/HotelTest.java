@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -16,8 +17,8 @@ public class HotelTest {
         for(int i = 1; i<5; i++){
             myHotel.addTestRoom(i);
         }
-        customer customer1 = new Customer("Brad Keith","1234");
-        customer customer2 = new Customer("John Doe","4321");
+        Customer customer1 = new Customer("Brad Keith","1234");
+        Customer customer2 = new Customer("John Doe","4321");
         myHotel.getRoom(1).setReservationName(customer1.getName());
         customer1.setRoom(1);
         assertEquals(false,myHotel.checkIn(1,customer2));
@@ -34,8 +35,8 @@ public class HotelTest {
         for(int i = 1; i<5; i++){
             myHotel.addTestRoom(i);
         }
-        customer customer1 = new Customer("Brad Keith","1234");
-        customer customer2 = new Customer("John Doe","4321");
+        Customer customer1 = new Customer("Brad Keith","1234");
+        Customer customer2 = new Customer("John Doe","4321");
         myHotel.getRoom(1).setReservationName(customer1.getName());
         customer1.setRoom(1);
         assertEquals(false,myHotel.checkOut(1,customer1));
@@ -45,4 +46,27 @@ public class HotelTest {
         assertEquals(true,myHotel.checkOut(1,customer1));
     }
 
+
+
+    @Test
+    void viewOrderedAvailableRooms(){
+        Hotel hotel = new Hotel();
+        hotel.setNumberOfRooms(5);
+
+        hotel.addRoom(2, true, 100,2, "double", "mini bar");
+        hotel.addRoom(1, true, 100,2, "double", "mini bar");
+        hotel.addRoom(4, true, 100,2, "double", "mini bar");
+        hotel.addRoom(3, false, 100,2, "double", "mini bar");
+
+
+        Assert.assertEquals("Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0 Available: true\n" +
+                "Room: 2 Type: 2 double bed(s) Amenities: mini bar Price: $100.0 Available: true\n" +
+                "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0 Available: true", hotel.viewOrderedAvailableRooms());
+        String st = hotel.viewOrderedAvailableRooms();
+
+    }
+
+
+
 }
+

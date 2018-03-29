@@ -6,57 +6,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
+ * @author Denise FUullerton
+ * Created: 3/24/18
  */
 public class SelectReserveRoom {
-    public Guest guest;
+    public Customer customer;
     public Room room;
 
-    /**
-     * Below are two mock classses for room and guest - customer to run tests
-     */
-
-    class Guest{
-        String guestID;
-        String roomNum;
-        String gReserveID;
-
-        //String roomNum;
-        private Guest(){
-//            guestID = null;
-//            roomNum= null;
-//            gReserveID = null;
-        }
-
-        public Guest (String gID, String rmNum, String rmResID){
-            this.guestID = gID;
-            this.roomNum = rmNum;
-            this.gReserveID = rmResID;
-        }
-    }
-    class Room{
-        String rmNum;
-        String gID;
-        String rReserveID;
-        boolean available = false;
-        //String roomNum;
-        private Room(){
-//            rmNum = null;
-//            gID = null;
-//            rReserveID = null;
-        }
-
-        public Room (String rNum, String guID, String rmResID){
-            this.rmNum =rNum;
-            this.gID = guID;
-            this.rReserveID = rmResID;
-            if(guID==null){
-                this.available = true;
-            }else{
-                this.available = false;
-            }
-        }
-    }
 
     /**
      * Default constructor
@@ -70,24 +26,24 @@ public class SelectReserveRoom {
      */
     public void setGuestAndRoom(){
         Room testRoom;
-        Guest testGuest;
-        testGuest = new Guest("Guest1",null,null);
-        testRoom = new Room("18A",null,null);
+        Customer testGuest;
+        testGuest = new Customer("BobFrog" , "stuft-Shirt");
+        testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
         room = testRoom;
-        guest = testGuest;
+        customer = testGuest;
     }
 
 
     /**
      * Constructor for SelectReserveRoom object
-     * Passing in pointers to customer/guest object and room object so that room and guest data
+     * Passing in pointers to customer object and room object so that room and Customer data
      * can be updated with reservation data
-     * @param g guest/customer object
+     * @param c customer object
      * @param r room object -
      */
-    public SelectReserveRoom(Guest g, Room r){
-        guest = g;
-        room = r;
+    public SelectReserveRoom(Customer c, Room r){
+        this.customer = c;
+        this.room = r;
 
     }
 
@@ -98,7 +54,7 @@ public class SelectReserveRoom {
      */
     public boolean checkGuestID(){
         boolean has_GID;
-        if(guest.guestID !=null){
+        if(customer.getName() !=null){
             has_GID = true;
         }else{
             has_GID = false;
@@ -112,7 +68,7 @@ public class SelectReserveRoom {
      */
     public boolean checkRoomNum(){
         boolean has_RNUM;
-        if(room.rmNum != null){
+        if(room.roomNumber != 0){
             has_RNUM= true;
         }else{
             has_RNUM = false;
@@ -136,49 +92,13 @@ public class SelectReserveRoom {
     }
 
 
-
-    /**
-     * When guest chooses to select a room
-     * SelectReserveRoom  is instantiated with guest and room
-     *
-     *
-     */
-    public void selectRoom(){
-
-        System.out.println("Please enter room number to select room to reserve: ");
-        StringBuffer s = new StringBuffer();
-        Scanner scan = new Scanner(System.in);
-        s.append(scan.next());
-        System.out.println(s);
-        // print room
-        System.out.println("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
-
-        if(room.rmNum == s.toString()){
-            s.setLength(0);
-            s.append(scan.nextLine());
-        }
-        if(s.toString() == "Y" || s.toString() == "y"){
-            System.out.println("Your Reservation ID is "+ reserveRoom()+ " for Room "+room.rmNum);
-        }else if(s.toString() == "N" || s.toString() == "n"){
-            System.out.println("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
-            s.setLength(0);
-            s.append(scan.nextLine());
-            if(s.toString() == "Y" || s.toString() == "y") {
-                selectRoom();
-            }
-        }else{
-            System.out.println("Invalid input, you entered "+s.toString()+". Please try again.");
-            selectRoom();
-        }
-    }
-
     /**
      *
      */
     public void cancelRoom(){
-        guest.roomNum = null;
-        room.gID = null;
-
+        customer.setRoom(0);
+        // not private, do not need getters and setters?
+        room.setReservationName(null);
     }
 
     /**
@@ -190,15 +110,13 @@ public class SelectReserveRoom {
      * returning reservation ID to display for reservation confirmation
      * @return String reservation ID
      */
-    public String reserveRoom(){
+    public void reserveRoom(){
 
-        room.gID = guest.guestID;
-        guest.roomNum = room.rmNum;
+        customer.setRoom(room.roomNumber);
         String reserveID = createReservationID();
-        guest.gReserveID = reserveID;
-        room.rReserveID = reserveID;
+        customer.setReservation(reserveID);
+        room.setReservationName(reserveID);
         room.available = false;
-        return guest.gReserveID;
     }
 
     /**
@@ -210,7 +128,7 @@ public class SelectReserveRoom {
      */
     public String createReservationID(){
 
-        String reservationID = guest.guestID+"-";
+        String reservationID = customer.getId()+"-";
         String randomGen = "ABCDEGH0123456789";
         SimpleDateFormat sd = new SimpleDateFormat("Mddyyy");
         String date = sd.format(new Date());
@@ -221,6 +139,7 @@ public class SelectReserveRoom {
             reservationID += randomGen.charAt(r.nextInt(num));
         }
         reservationID += "-"+date;
+        System.out.println(reservationID);
         return reservationID;
     }
 
@@ -233,21 +152,4 @@ public class SelectReserveRoom {
 
     }
 
-
-    /**
-     * Getter to get reservation ID - may not use
-     * @return
-     */
-    public String getResId(){
-        return room.rReserveID;
-    }
-
-    /**
-     * Setter to set reservation ID - May not use
-     * @param resID
-     *
-     */
-    public void setResID(String resID){
-        room.rReserveID = resID;
-    }
 }
