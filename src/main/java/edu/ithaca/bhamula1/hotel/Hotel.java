@@ -6,6 +6,7 @@ import java.util.*;
  * Created by Ben on 3/22/2018.
  */
 public class Hotel {
+
     //have to set this!
     int numberOfRooms =0;
     private ArrayList<Room> rooms;
@@ -160,9 +161,62 @@ public class Hotel {
         customers.add(customer);
     }
 
+    /**
+     * checks to verify valid customer takes in a string for cust ID
+     * @param c
+     * @return returns customer object to be passed to SelectReserveRoom
+     * @author - DMF
+     */
+    public Customer checkValidCust(String c){
+        Customer g;
+        boolean found = false;
+        for(Iterator<Customer> customerIterator = customers.iterator(); customerIterator.hasNext();){
+            Customer cust = customerIterator.next();
+            if(Objects.equals(cust.getId(),c) && !found){
+                return cust;
+            }
+        }
+        if(!found){
+            System.out.println("Invalid Customer ID");
+        }
+        return null;
+    }
+
+    /**
+     * function to call function to check for valid customer and to check room is available
+     * If both are valid, proceed with the reservation
+     * @param rmNum
+     * @param cID
+     * @Author - DMF
+     */
+    public void checkRooms(int rmNum, String cID) {
+        for (Room rm : rooms) {
+            if (rm.getRoomNumber() == rmNum) {
+                System.out.println(rm.getRoomNumber());
+                if (rm.getIfAvailable() == true) {
+                    Customer cust = checkValidCust(cID);
+                    if (cust.getId() != null) {
+                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
+                        if(selRes.checkRoomAvailable()){
+                            String resID = selRes.createReservationID();
+                            cust.setReservation(resID);
+                            rm.setReservationName(resID);
+                            System.out.println("Your reservation ID for room "+ 1 + " is "+ cust.getReservation());
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
-
-
-
+    /**
+     * Faux person to test selectReserveRoom functions
+     * can be deleted
+     */
+    public void setCustomer(){
+        Customer cust = new Customer("den","bob");
+        System.out.println(cust.getId());
+        customers.add(cust);
+    }
 }

@@ -4,6 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * @author Denise FUullerton
+ * Created: 3/24/18
+ */
 
 class SelectReserveRoomTest {
 
@@ -59,7 +63,7 @@ class SelectReserveRoomTest {
     @Test
     void reserveRoomGuestRoomIDTest() {
         select.reserveRoom();
-        assertEquals("Guest1",select.room.gID, "Err - No guest ID associated with Room");
+        assertEquals(select.customer.getReservation(),select.room.reservationName, "Err - No guest ID associated with Room");
     }
 
     /**
@@ -68,7 +72,7 @@ class SelectReserveRoomTest {
     @Test
     void reserveRoomGuestRoomRmNumTest() {
         select.reserveRoom();
-        assertEquals("18A",select.guest.roomNum, "Err - No Room associated with guest ID");
+        assertEquals(54,select.customer.getRoom(), "Err - No Room associated with guest ID");
     }
 
     /**
@@ -86,7 +90,8 @@ class SelectReserveRoomTest {
     @Test
     void reserveRoomReserveIDTest() {
         select.reserveRoom();
-        assertEquals(select.guest.gReserveID, select.room.rReserveID, "Err - guest and room Reservation ID do not Match");
+        System.out.println(select.customer.getReservation() + "<--customer   room-->"+ select.room.getReservationName());
+        assertEquals(select.customer.getReservation(), select.room.getReservationName(), "Err - guest and room Reservation ID do not Match");
     }
 
     /**

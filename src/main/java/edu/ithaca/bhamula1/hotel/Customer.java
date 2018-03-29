@@ -13,6 +13,7 @@ public class Customer {
     private String fName;
     private String lName;
     private int room;
+
     private boolean checkedIn;
     private boolean loggedIn;
 
@@ -46,7 +47,6 @@ public class Customer {
         fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length()-1);
 
 
-
 //        // getting last name and storing in lastName
 //        System.out.println("Please enter your last name");
 //        lastName = scan.next();
@@ -57,7 +57,6 @@ public class Customer {
 
         lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length()-1);
 
-
         name = firstName + " " + lastName;
         return (fName +" "+ lName);
     }
@@ -65,17 +64,20 @@ public class Customer {
     public String makeID() {
         String flName = fName.substring(0,1) + lName.substring(0,1);
         Random rand = new Random();
-        double num = rand.nextInt(100000);
+        int num = rand.nextInt(100000);
         int diff = 0;
-        String numStr = Double.toString(num);
+        String numStr = Integer.toString(num);
         String extraZeroes = "";
         if (numStr.length() < 5) {
             diff = 5 - numStr.length();
             for (int i = 0; i < diff; i++)
                 extraZeroes = extraZeroes + "0";
         }
-        id = (flName + extraZeroes + numStr);
-        return (id);
+
+        String yourId = (flName + extraZeroes + numStr);
+        System.out.println("Your login ID is " + yourId);
+        return yourId;
+
     }
 
     public String getName() {
@@ -117,30 +119,29 @@ public class Customer {
     }
 
     public boolean checkIn(int roomNumber) {
-        if(this.room>0){
-            if(!this.checkedIn){
-                if(roomNumber==this.room){
+
+        if (this.room > 0) {
+            if (!this.checkedIn) {
+                if (roomNumber == this.room) {
 //                    System.out.println("Welcome. Enjoy your stay.");
-                    this.checkedIn=true;
+                    this.checkedIn = true;
                     return true;
-                }
-                else{
+                } else {
 //                    System.out.println("You have not reserved this room.");
                     return false;
                 }
-            }
-            else{
+            } else {
 //                System.out.println("You are already checked in.");
                 return false;
             }
-        }
-        else {
+        } else {
 //            System.out.println("You have not reserved a room. Please reserve a room to check in.");
             return false;
         }
     }
 
     public boolean checkOut(int roomNumber) {
+
         if(roomNumber==room){
             if(checkedIn){
 //                System.out.println("Thank you. We hope you enjoyed your stay.");
@@ -166,4 +167,26 @@ public class Customer {
     public boolean getLoggedIn(){
         return this.loggedIn;
     }
+
+
+    /**
+     * Reservation data type and functions to store room reservatin ID in Customer's class
+     * @author - DMF
+     */
+    //adding reservation to cust class
+     private String reservation;
+
+    /**
+     * Used to get the reservation associated with the room and customer
+     * @return String
+     */
+    public String getReservation(){return reservation;}
+
+    /**
+     * sets the reservation associated with the room
+     * @param r String
+     */
+    public void setReservation(String r){ reservation = r;}
+
+
 }
