@@ -160,4 +160,16 @@ public class Hotel {
         customers.add(customer);
     }
 
+    /**
+     *
+     */
+    public void selectRoom(){
+        // if yes
+
+        Room rm = getRoom(4);
+        //Customer cust = getCustomer();
+
+        //SelectReserveRoom selectReserve = new SelectReserveRoom(c,rm);
+
+    }
 }

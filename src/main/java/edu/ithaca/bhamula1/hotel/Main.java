@@ -151,6 +151,27 @@ public class Main {
         }else if(firstOption ==3){
             System.out.println("View Rooms ");
             System.out.println(hotel.viewOrderedAvailableRooms());
+
+            System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Y or N and hit enter");
+            boolean valid = false;
+            String respond = scan.next();
+            System.out.println("TEst Rm NUm "+respond);
+
+
+            while(!valid) {
+                if (Objects.equals(respond,"Y")||Objects.equals(respond,"y")) {
+                    System.out.println("\nPlease enter the room number you wish to reserve: ");
+                    int rmNum = scan.nextInt();
+                    System.out.println("TEst Rm NUm "+rmNum);
+                    valid = true;
+                } else if (Objects.equals(respond,"N")||Objects.equals(respond,"n")) {
+                    valid = true;
+                } else {
+                    valid = false;
+                }
+            }
+            //
+            hotel.selectRoom();
         }
 
 

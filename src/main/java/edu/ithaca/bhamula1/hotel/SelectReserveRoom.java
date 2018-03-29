@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Created: 3/24/18
  */
 public class SelectReserveRoom {
-    public customerImpl customer;
+    public Customer customer;
     public Room room;
 
 
@@ -26,8 +26,8 @@ public class SelectReserveRoom {
      */
     public void setGuestAndRoom(){
         Room testRoom;
-        customerImpl testGuest;
-        testGuest = new customerImpl("BobFrog" , "stuft-Shirt");
+        Customer testGuest;
+        testGuest = new Customer("BobFrog" , "stuft-Shirt");
         testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
         room = testRoom;
         customer = testGuest;
@@ -36,12 +36,12 @@ public class SelectReserveRoom {
 
     /**
      * Constructor for SelectReserveRoom object
-     * Passing in pointers to customer object and room object so that room and customerImpl data
+     * Passing in pointers to customer object and room object so that room and Customer data
      * can be updated with reservation data
      * @param c customer object
      * @param r room object -
      */
-    public SelectReserveRoom(customerImpl c, Room r){
+    public SelectReserveRoom(Customer c, Room r){
         this.customer = c;
         this.room = r;
 
