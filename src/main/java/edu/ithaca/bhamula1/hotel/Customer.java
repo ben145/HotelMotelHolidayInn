@@ -159,26 +159,24 @@ public class Customer {
         this.room = room;
     }
 
-            //adding reservation to cust class
-            private String reservation;
 
+    /**
+     * Reservation data type and functions to store room reservatin ID in Customer's class
+     * @author - DMF
+     */
+    //adding reservation to cust class
+     private String reservation;
 
-            /**
-             * Used to get the room associated with the customer
-             * @return int
-             */
-            public int getRoom(){ return room; }
+    /**
+     * Used to get the reservation associated with the room and customer
+     * @return String
+     */
+    public String getReservation(){return reservation;}
 
-            /**
-             * Used to get the reservation associated with the room and customer
-             * @return String
-             */
-            public String getReservation(){return reservation;}
-
-            /**
-             * sets the reservation associated with the room
-             * @param r String
-             */
-            public void setReservation(String r){ reservation = r;}
+    /**
+     * sets the reservation associated with the room
+     * @param r String
+     */
+    public void setReservation(String r){ reservation = r;}
 
 }

@@ -92,44 +92,6 @@ public class SelectReserveRoom {
     }
 
 
-
-    /**
-     * When guest chooses to select a room
-     * SelectReserveRoom  is instantiated with guest and room
-     *
-     *
-     */
-    public void selectRoom(){
-
-        int input = -1;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter room number to select room to reserve: ");
-
-        input = scan.nextInt();
-        System.out.println(input);
-        // print room
-        System.out.println("Is this the room you wish to reserve? enter \"Y\" to confirm or \"N\" to change  ");
-/*
-        if(room.roomNumber == s.toString()){
-            s.setLength(0);
-            s.append(scan.nextLine());
-        }
-        if(s.toString() == "Y" || s.toString() == "y"){
-            System.out.println("Your Reservation ID is "+ reserveRoom()+ " for Room "+room.rmNum);
-        }else if(s.toString() == "N" || s.toString() == "n"){
-            System.out.println("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
-            s.setLength(0);
-            s.append(scan.nextLine());
-            if(s.toString() == "Y" || s.toString() == "y") {
-                selectRoom();
-            }
-        }else{
-            System.out.println("Invalid input, you entered "+s.toString()+". Please try again.");
-            selectRoom();
-        }
-        */
-    }
-
     /**
      *
      */
@@ -148,14 +110,13 @@ public class SelectReserveRoom {
      * returning reservation ID to display for reservation confirmation
      * @return String reservation ID
      */
-    public String reserveRoom(){
+    public void reserveRoom(){
 
         customer.setRoom(room.roomNumber);
         String reserveID = createReservationID();
         customer.setReservation(reserveID);
         room.setReservationName(reserveID);
         room.available = false;
-        return customer.getReservation();
     }
 
     /**
@@ -178,6 +139,7 @@ public class SelectReserveRoom {
             reservationID += randomGen.charAt(r.nextInt(num));
         }
         reservationID += "-"+date;
+        System.out.println(reservationID);
         return reservationID;
     }
 
