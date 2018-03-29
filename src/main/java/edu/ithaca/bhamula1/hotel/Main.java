@@ -70,13 +70,13 @@ public class Main {
         }else if(option ==4){
             System.out.println("Reserve Room");
             System.out.println(hotel.viewOrderedAvailableRooms());
-            System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Y or N and hit enter");
-            boolean valid = false;
-            String respond = scan.next();
+                boolean valid = false;
             // as long as room selectino is invalid, keep asking until a valid input is given.
             // n will end the loop, essentially ending the program
             // y will move forward with room reservation
             while(!valid) {
+                System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Y or N and hit enter");
+                String respond = scan.next();
                 if (Objects.equals(respond,"Y")||Objects.equals(respond,"y")) {
                     System.out.println("\nPlease enter the room number you wish to reserve: ");
                     int rmNum = scan.nextInt();
@@ -225,7 +225,7 @@ public class Main {
                 hotel.createAccount(firstName, lastName);
 
                 String id = hotel.getCustomer(firstName, lastName).getId();
-                System.out.println("Your ID is " + id);
+                //System.out.println("Your ID is " + id);
 
                 firstOption = onceLoggedIn(hotel.getCustomer(firstName, lastName), hotel);
 
