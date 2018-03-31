@@ -17,3 +17,5 @@ Develop the frame for the hotel based on first sprint backlog.
 
 Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
 <br>State Diagram: https://i.snag.gy/etT3dV.jpg</blockquote>
+<blockquote><b>Sprint 1 Retrospective<b>:
+  https://docs.google.com/document/d/1i60z-cVSykN1X_D9edJBACO1goZnSEhqpX4UMS9VzY4/edit?usp=sharing
