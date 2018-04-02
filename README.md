@@ -25,3 +25,6 @@ Sprint Two:
 <blockquote><b>Second Sprint goal</b>:
 ?????????
 
+<b>DevTeam Sprint goal #2</b>:
+Add some muscle to that skeleton.
+
