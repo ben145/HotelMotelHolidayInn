@@ -20,4 +20,8 @@ Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
 
 <b>Sprint 1 Retrospective</b>:<br>
   https://docs.google.com/document/d/1i60z-cVSykN1X_D9edJBACO1goZnSEhqpX4UMS9VzY4/edit</blockquote>
+ 
+Sprint Two:
+<blockquote><b>Second Sprint goal</b>:
+?????????
 
