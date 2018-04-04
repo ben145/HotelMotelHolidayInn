@@ -1,19 +1,24 @@
 package edu.ithaca.bhamula1.hotel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Ben on 3/22/2018.
  */
 public class Hotel {
-    private Map<Integer,Room> rooms;
+
+    //have to set this!
+    int numberOfRooms =0;
+    private ArrayList<Room> rooms;
     private List<Customer> customers;
 
     public Hotel(){
-        rooms = new HashMap<>();
+        //this was a hash map. Changed to a array list
+        //the index is the room number
+//        rooms = new HashMap<>();
+        rooms = new ArrayList<Room>();
+
+        //should this is a linked list instead? better memory
         customers = new ArrayList<>();
     }
 
@@ -53,6 +58,7 @@ public class Hotel {
             if(customer.getName().equals(current.getReservationName())){
                 boolean c = customer.checkOut(roomNumber);
                 boolean r = current.checkOut(customer);
+                System.out.println("Thank You For Visiting ");
                 return c&r;
             }
             else{
@@ -67,6 +73,153 @@ public class Hotel {
     }
 
     public void addTestRoom(int roomNumber){
-        this.rooms.put(roomNumber,new Room(false,1,100.00,2,"Full","Mini bar"));
+        this.rooms.set(roomNumber,new Room(false,roomNumber,100.00,2,"Full","Mini bar"));
+    }
+
+
+    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites){
+        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites));
+    }
+
+
+    /**
+     * initializes  the array list so we can put the room in the proper index
+     * @param numberOfRooms
+     * @author Mia
+     */
+    public void setNumberOfRooms(int numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+
+        while(rooms.size() <numberOfRooms){
+            rooms.add(new Room());
+        }
+    }
+
+
+
+    public ArrayList<Room> getRooms(){
+        return rooms;
+    }
+
+    /**
+     * @Author Mia
+     * @return
+     */
+    public String viewOrderedAvailableRooms(){
+
+        String str="";
+        for (Room rm: rooms) {
+            if(rm.getRoomNumber()!=0 && rm.getIfAvailable()) {
+
+                if (str.equals("")) {
+                    str +=  rm.toString();
+                } else {
+                    str += "\n" + rm.toString();
+                }
+
+
+            }
+
+        }
+        return str;
+    }
+
+
+    public void logIn (String name, String id){
+        Customer customer = getCustomer(id);
+        customer.login(id);
+    }
+
+    public Customer getCustomer(String first, String last){
+
+        for(Customer c: customers){
+            if(c.getName().equals(first + " " + last)){
+                return c;
+            }
+
+        }
+        return null;
+    }
+
+    public Customer getCustomer(String ID){
+
+        for(Customer c: customers){
+            if(c.getId().equals(ID)){
+                return c;
+            }
+
+        }
+        return null;
+    }
+
+    public void createAccount (String fname, String lastName){
+        Customer customer = new Customer();
+        customer.makeName(fname, lastName);
+        String ID = customer.makeID();
+        //customer.login(ID);
+
+        customers.add(customer);
+    }
+
+    /**
+     * checks to verify valid customer takes in a string for cust ID
+     * @param c
+     * @return returns customer object to be passed to SelectReserveRoom
+     * @author - DMF
+     */
+    public Customer checkValidCust(String c){
+        Customer g;
+        boolean found = false;
+        for(Iterator<Customer> customerIterator = customers.iterator(); customerIterator.hasNext();){
+            Customer cust = customerIterator.next();
+            if(Objects.equals(cust.getId(),c) && !found){
+                return cust;
+            }
+        }
+        if(!found){
+            System.out.println("Invalid Customer ID");
+        }
+        return null;
+    }
+
+    /**
+     * function to call function to check for valid customer and to check room is available
+     * If both are valid, proceed with the reservation
+     * @param rmNum
+     * @param cID
+     * @Author - DMF
+     */
+    public void checkRooms(int rmNum, String cID) {
+        for (Room rm : rooms) {
+            if (rm.getRoomNumber() == rmNum) {
+                System.out.println(rm.getRoomNumber());
+                if (rm.getIfAvailable() == true) {
+                    Customer cust = checkValidCust(cID);
+                    if (cust.getId() != null) {
+                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
+                        if(selRes.checkRoomAvailable()){
+                            String resID = selRes.createReservationID();
+                            cust.setReservation(resID);
+                            cust.setRoom(rmNum);
+                            rm.setReservationName(cust.getName());
+                            rm.setIfAvailable(false);
+                            //rm.setReservationName(resID);
+                            System.out.println("Your reservation ID for room "+ 1 + " is "+ cust.getReservation());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Faux person to test selectReserveRoom functions
+     * can be deleted
+     */
+    public void setCustomer(){
+        Customer cust = new Customer("den","bob");
+        System.out.println(cust.getId());
+        customers.add(cust);
     }
 }
