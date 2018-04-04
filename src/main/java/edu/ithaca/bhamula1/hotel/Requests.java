@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Requests {
     public ArrayList<String> requests = new ArrayList<String>();
-    public ArrayList<String> tierTwoRequests;
 
     public Requests(){
         loadRecs();
@@ -17,6 +16,8 @@ public class Requests {
         requests.add("Bring every pillow you have");
         requests.add("Fresh towels");
         requests.add("Room maintenance (I have broken something in this room)");
+    	requests.add("Refill minibar");
+	requests.add("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'");
     }
 
     //some next level requests
@@ -45,16 +46,8 @@ public class Requests {
 
     //view the requests a customer can make
     public void viewRequests(){
-        //loadRecs();
         for(int i=0; i<requests.size();i++){
             System.out.println((i+1)+") "+requests.get(i));
         }
-        //check customer for tier status,if higher:
-        /*
-        * loadAdavncedRecs();
-        * for(int i=0; i<tierTworequests.size();i++){
-        *    System.out.println(tierTwoRequests.get(i));
-        * }
-        */
     }
 }
