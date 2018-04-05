@@ -29,7 +29,7 @@ public class Requests {
         String input = scanner.nextLine();
 
 	//request requirements
-	System.out.println("Does request require inventory items? (y/n)";
+	System.out.println("Does request require inventory items? (y/n)");
 	input = scanner.nextLine();
         if(input == "y"){
 	    boolean requirements = true;
