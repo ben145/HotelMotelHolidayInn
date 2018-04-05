@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by Ben on 3/22/2018.
  */
-public class Hotel {
+public class Hotel implements HotelInterface {
 
     //have to set this!
     int numberOfRooms =0;

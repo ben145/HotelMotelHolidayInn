@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by Ben on 3/25/2018.
  */
-public class Customer {
+public class Customer implements CustomerInterface {
 
     private String name;
     private String id;
