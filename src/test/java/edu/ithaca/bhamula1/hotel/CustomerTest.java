@@ -30,12 +30,12 @@ class CustomerTest {
         assertEquals(false,brad.isCheckedIn());
     }
 
-
-    @Test
-    void makeIdTest() {
-        Customer c = new Customer();
-        assertEquals(7, c.getId().length());
-        //assertEquals();
-    }
+    // NEED BETTER TEST (my (Ben's) fault)
+//    @Test
+//    void makeIdTest() {
+//        Customer c = new Customer();
+//        assertEquals(7, c.getId().length());
+//        //assertEquals();
+//    }
 
 }
