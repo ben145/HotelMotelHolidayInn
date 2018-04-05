@@ -62,6 +62,10 @@ public class Requests implements RequestsInterface{
 	System.out.println("Request removed from options list");
     }
 
+    public void requestTowels(){
+
+    }
+
     //view the requests a customer can make
     public void viewRequests(){
         for(int i=0; i<requests.size();i++){
