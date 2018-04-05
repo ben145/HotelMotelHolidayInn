@@ -1,6 +1,8 @@
 # HotelMotelHolidayInn
 COMP-345 Project
 
+![build status](https://circleci.com/gh/ben145/HotelMotelHolidayInn.png?circle-token=circle-token "Master Build Status")
+
 Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 
 Client Narratives and Scenarios:
@@ -27,4 +29,6 @@ Sprint Two:
 
 <b>DevTeam Sprint goal #2</b>:
 Add some muscle to that double skeleton.
+
+Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing </blockquote>
 
