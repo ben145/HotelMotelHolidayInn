@@ -175,7 +175,7 @@ public class Customer {
      * @author - DMF
      */
     //adding reservation to cust class
-     private String reservation;
+    private String reservation;
 
     /**
      * Used to get the reservation associated with the room and customer
