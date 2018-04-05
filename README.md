@@ -30,3 +30,5 @@ Sprint Two:
 <b>DevTeam Sprint goal #2</b>:
 Add some muscle to that double skeleton.
 
+Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing </blockquote>
+
