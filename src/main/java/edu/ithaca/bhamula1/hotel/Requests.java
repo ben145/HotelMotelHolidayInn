@@ -43,6 +43,10 @@ public class Requests {
         }
     }
 
+    public void requestTowels(){
+
+    }
+
     //view the requests a customer can make
     public void viewRequests(){
         //loadRecs();
