@@ -17,8 +17,6 @@ public interface CustomerInterface {
 
     void logOut();
 
-    void login();
-
     boolean isCheckedIn();
 
     boolean checkIn(int roomNumber);
