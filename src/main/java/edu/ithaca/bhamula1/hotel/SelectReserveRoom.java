@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Denise FUullerton
  * Created: 3/24/18
  */
-public class SelectReserveRoom {
+public class SelectReserveRoom implements SRRInterface{
     public Customer customer;
     public Room room;
 
