@@ -1,6 +1,8 @@
 # HotelMotelHolidayInn
 COMP-345 Project
 
+![build status](https://circleci.com/gh/ben145/HotelMotelHolidayInn.png?circle-token=circle-token "Master Build Status")
+
 Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 
 Client Narratives and Scenarios:
