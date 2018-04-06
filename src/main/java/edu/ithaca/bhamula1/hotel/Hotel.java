@@ -9,27 +9,27 @@ public class Hotel implements HotelInterface {
 
     //have to set this!
     int numberOfRooms =0;
-    private ArrayList<Room> rooms;
+    private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
         //the index is the room number
 //        rooms = new HashMap<>();
-        rooms = new ArrayList<Room>();
+        rooms = new ArrayList<RoomInterface>();
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
-    public Room getRoom(int roomNumber){
+    public RoomInterface getRoom(int roomNumber){
         return rooms.get(roomNumber);
     }
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
         //find room
-        Room current = getRoom(roomNumber);
+        RoomInterface current = getRoom(roomNumber);
         //check room is reserved
         if(!current.getIfAvailable()){
             if(customer.getName().equals(current.getReservationName())){
@@ -53,7 +53,7 @@ public class Hotel implements HotelInterface {
 
     public boolean checkOut(int roomNumber, CustomerInterface customer){
         //find room
-        Room current = getRoom(roomNumber);
+        RoomInterface current = getRoom(roomNumber);
         if(current.getCheckedIn()){
             if(customer.getName().equals(current.getReservationName())){
                 boolean c = customer.checkOut(roomNumber);
@@ -97,7 +97,7 @@ public class Hotel implements HotelInterface {
 
 
 
-    public ArrayList<Room> getRooms(){
+    public ArrayList<RoomInterface> getRooms(){
         return rooms;
     }
 
@@ -108,7 +108,7 @@ public class Hotel implements HotelInterface {
     public String viewOrderedAvailableRooms(){
 
         String str="";
-        for (Room rm: rooms) {
+        for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.getIfAvailable()) {
 
                 if (str.equals("")) {
@@ -190,7 +190,7 @@ public class Hotel implements HotelInterface {
      * @Author - DMF
      */
     public void checkRooms(int rmNum, String cID) {
-        for (Room rm : rooms) {
+        for (RoomInterface rm : rooms) {
             if (rm.getRoomNumber() == rmNum) {
                 System.out.println(rm.getRoomNumber());
                 if (rm.getIfAvailable() == true) {

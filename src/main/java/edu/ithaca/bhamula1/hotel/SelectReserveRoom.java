@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class SelectReserveRoom implements SRRInterface{
     public CustomerInterface customer;
-    public Room room;
+    public RoomInterface room;
 
 
     /**
@@ -25,7 +25,7 @@ public class SelectReserveRoom implements SRRInterface{
      *
      */
     public void setGuestAndRoom(){
-        Room testRoom;
+        RoomInterface testRoom;
         CustomerInterface testGuest;
         testGuest = new Customer("BobFrog" , "stuft-Shirt");
         testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
@@ -41,7 +41,7 @@ public class SelectReserveRoom implements SRRInterface{
      * @param c customer object
      * @param r room object -
      */
-    public SelectReserveRoom(CustomerInterface c, Room r){
+    public SelectReserveRoom(CustomerInterface c, RoomInterface r){
         this.customer = c;
         this.room = r;
 
@@ -68,7 +68,7 @@ public class SelectReserveRoom implements SRRInterface{
      */
     public boolean checkRoomNum(){
         boolean has_RNUM;
-        if(room.roomNumber != 0){
+        if(room.getRoomNumber() != 0){
             has_RNUM= true;
         }else{
             has_RNUM = false;
@@ -83,7 +83,7 @@ public class SelectReserveRoom implements SRRInterface{
      */
     public boolean checkRoomAvailable(){
         boolean isAvailable;
-        if(room.available){
+        if(room.getIfAvailable()){
             isAvailable = true;
         }else{
             isAvailable = false;
@@ -112,11 +112,11 @@ public class SelectReserveRoom implements SRRInterface{
      */
     public void reserveRoom(){
 
-        customer.setRoom(room.roomNumber);
+        customer.setRoom(room.getRoomNumber());
         String reserveID = createReservationID();
         customer.setReservation(reserveID);
         room.setReservationName(reserveID);
-        room.available = false;
+        room.setIfAvailable(false);
     }
 
     /**

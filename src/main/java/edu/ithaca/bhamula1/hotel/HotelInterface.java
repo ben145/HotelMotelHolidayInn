@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface HotelInterface {
 
-        Room getRoom(int roomNumber);
+        RoomInterface getRoom(int roomNumber);
 
         boolean checkIn(int roomNumber, CustomerInterface customer);
 
@@ -16,7 +16,7 @@ public interface HotelInterface {
 
         void setNumberOfRooms(int numberOfRooms);
 
-        ArrayList<Room> getRooms();
+        ArrayList<RoomInterface> getRooms();
 
         String viewOrderedAvailableRooms();
 

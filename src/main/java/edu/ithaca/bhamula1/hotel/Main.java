@@ -80,7 +80,7 @@ public class Main {
                 if (Objects.equals(respond,"Y")||Objects.equals(respond,"y")) {
                     System.out.println("\nPlease enter the room number you wish to reserve: ");
                     int rmNum = scan.nextInt();
-                    if(hotel.getRoom(rmNum).available) {
+                    if(hotel.getRoom(rmNum).getIfAvailable()) {
                         System.out.println("Please enter your customer ID: ");
                         String custID = scan.next();
                         hotel.checkRooms(rmNum, custID);
