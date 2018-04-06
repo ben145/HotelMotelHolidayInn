@@ -21,7 +21,7 @@ Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
 <br>State Diagram: https://i.snag.gy/etT3dV.jpg
 
 <b>Sprint 1 Retrospective</b>:<br>
-  https://docs.google.com/document/d/1i60z-cVSykN1X_D9edJBACO1goZnSEhqpX4UMS9VzY4/edit</blockquote>
+  https://docs.google.com/document/d/1i60z-cVSykN1X_D9edJBACO1goZnSEhqpX4UMS9VzY4/edit
   
  <b>Sprint 1 Review</b>:<br>
   https://docs.google.com/document/d/107E76HThJ1wuaCUPuxmTNLT0GGLR-TI39LIvnW7KCIY/edit?usp=sharing</blockquote>
