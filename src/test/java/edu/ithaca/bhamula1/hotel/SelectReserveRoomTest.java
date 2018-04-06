@@ -63,7 +63,7 @@ class SelectReserveRoomTest {
     @Test
     void reserveRoomGuestRoomIDTest() {
         select.reserveRoom();
-        assertEquals(select.customer.getReservation(),select.room.reservationName, "Err - No guest ID associated with Room");
+        assertEquals(select.customer.getReservation(),select.room.getReservationName(), "Err - No guest ID associated with Room");
     }
 
     /**
@@ -81,7 +81,7 @@ class SelectReserveRoomTest {
     @Test
     void reserveRoomAvailTest() {
         select.reserveRoom();
-       assertEquals(false,select.room.available, "Err - Room is showing available as true, should be false");
+       assertEquals(false,select.room.getIfAvailable(), "Err - Room is showing available as true, should be false");
     }
 
     /**
