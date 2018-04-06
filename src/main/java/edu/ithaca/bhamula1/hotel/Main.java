@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
 
-    public static int onceLoggedIn(Customer customer, Hotel hotel){
+    public static int onceLoggedIn(CustomerInterface customer, Hotel hotel){
         Scanner scan = new Scanner(System.in);
 
         int option =0;
@@ -124,7 +124,7 @@ public class Main {
         return hotel;
     }
 
-    public static void checkedIn(Customer customer, Hotel hotel){
+    public static void checkedIn(CustomerInterface customer, Hotel hotel){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome! We hope you enjoy your stay.");
         int req = 0;
