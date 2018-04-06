@@ -3,7 +3,7 @@ package edu.ithaca.bhamula1.hotel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Requests {
+public class Requests implements RequestsInterface{
     public ArrayList<String> requests = new ArrayList<String>();
 
     public Requests(){

@@ -3,7 +3,7 @@ package edu.ithaca.bhamula1.hotel;
 /**
  * Created by Ben on 3/22/2018.
  */
-public class Room {
+public class Room implements RoomInterface {
 
     boolean available;
     int roomNumber;

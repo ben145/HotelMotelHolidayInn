@@ -1,6 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
-public class User {
+public class User implements UserInterface {
     private String nameFirst;
     private String nameLast;
 
@@ -11,5 +11,20 @@ public class User {
 
     public String getLastName(){
         return this.nameLast;
+    }
+
+    @Override
+    public void setLastName(String n) {
+
+    }
+
+    @Override
+    public String getFirstName() {
+        return null;
+    }
+
+    @Override
+    public void setFirstName(String n) {
+
     }
 }
