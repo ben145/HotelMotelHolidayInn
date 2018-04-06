@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Created: 3/24/18
  */
 public class SelectReserveRoom implements SRRInterface{
-    public Customer customer;
+    public CustomerInterface customer;
     public Room room;
 
 
@@ -26,7 +26,7 @@ public class SelectReserveRoom implements SRRInterface{
      */
     public void setGuestAndRoom(){
         Room testRoom;
-        Customer testGuest;
+        CustomerInterface testGuest;
         testGuest = new Customer("BobFrog" , "stuft-Shirt");
         testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
         room = testRoom;
@@ -41,7 +41,7 @@ public class SelectReserveRoom implements SRRInterface{
      * @param c customer object
      * @param r room object -
      */
-    public SelectReserveRoom(Customer c, Room r){
+    public SelectReserveRoom(CustomerInterface c, Room r){
         this.customer = c;
         this.room = r;
 
