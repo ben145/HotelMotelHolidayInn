@@ -99,7 +99,7 @@ public class Room implements RoomInterface {
                 " Price: $"+ this.price + " Available: " + this.available;
     }
 
-    public boolean checkIn(Customer customer){
+    public boolean checkIn(CustomerInterface customer){
         if(customer.getName().equals(this.reservationName)){
             this.checkedIn=true;
             return true;
@@ -109,7 +109,7 @@ public class Room implements RoomInterface {
         }
     }
 
-    public boolean checkOut(Customer customer){
+    public boolean checkOut(CustomerInterface customer){
         if(customer.getName().equals(this.reservationName)&&this.checkedIn){
             this.checkedIn=false;
             this.available = true;

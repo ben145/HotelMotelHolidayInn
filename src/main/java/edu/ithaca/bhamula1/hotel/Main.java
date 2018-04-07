@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
 
-    public static int onceLoggedIn(Customer customer, Hotel hotel){
+    public static int onceLoggedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
 
         int option =0;
@@ -80,7 +80,7 @@ public class Main {
                 if (Objects.equals(respond,"Y")||Objects.equals(respond,"y")) {
                     System.out.println("\nPlease enter the room number you wish to reserve: ");
                     int rmNum = scan.nextInt();
-                    if(hotel.getRoom(rmNum).available) {
+                    if(hotel.getRoom(rmNum).getIfAvailable()) {
                         System.out.println("Please enter your customer ID: ");
                         String custID = scan.next();
                         hotel.checkRooms(rmNum, custID);
@@ -108,8 +108,8 @@ public class Main {
     }
 
 
-    public static Hotel createHotel(){
-        Hotel hotel = new Hotel();
+    public static HotelInterface createHotel(){
+        HotelInterface hotel = new Hotel();
         hotel.setNumberOfRooms(5);
 
         hotel.addRoom(2, true, 100,2, "double", "mini bar");
@@ -124,7 +124,7 @@ public class Main {
         return hotel;
     }
 
-    public static void checkedIn(Customer customer, Hotel hotel){
+    public static void checkedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome! We hope you enjoy your stay.");
         int req = 0;
@@ -153,7 +153,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Hotel hotel = createHotel();
+        HotelInterface hotel = createHotel();
 
         int firstOption = 0;
 

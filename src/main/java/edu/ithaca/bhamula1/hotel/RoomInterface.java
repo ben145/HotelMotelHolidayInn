@@ -18,8 +18,8 @@ public interface RoomInterface {
     String getBedType ();
     String getAmenities();
     String toString();
-    boolean checkIn(Customer customer);
-    boolean checkOut(Customer customer);
+    boolean checkIn(CustomerInterface customer);
+    boolean checkOut(CustomerInterface customer);
     void setReservationName(String name);
     String getReservationName();
     boolean getCheckedIn();
