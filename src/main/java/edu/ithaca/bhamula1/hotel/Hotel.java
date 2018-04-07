@@ -9,27 +9,27 @@ public class Hotel implements HotelInterface {
 
     //have to set this!
     int numberOfRooms =0;
-    private ArrayList<Room> rooms;
-    private List<Customer> customers;
+    private ArrayList<RoomInterface> rooms;
+    private List<CustomerInterface> customers;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
         //the index is the room number
 //        rooms = new HashMap<>();
-        rooms = new ArrayList<Room>();
+        rooms = new ArrayList<RoomInterface>();
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
-    public Room getRoom(int roomNumber){
+    public RoomInterface getRoom(int roomNumber){
         return rooms.get(roomNumber);
     }
 
-    public boolean checkIn(int roomNumber, Customer customer){
+    public boolean checkIn(int roomNumber, CustomerInterface customer){
         //find room
-        Room current = getRoom(roomNumber);
+        RoomInterface current = getRoom(roomNumber);
         //check room is reserved
         if(!current.getIfAvailable()){
             if(customer.getName().equals(current.getReservationName())){
@@ -51,9 +51,9 @@ public class Hotel implements HotelInterface {
         //set room to be checked in
     }
 
-    public boolean checkOut(int roomNumber, Customer customer){
+    public boolean checkOut(int roomNumber, CustomerInterface customer){
         //find room
-        Room current = getRoom(roomNumber);
+        RoomInterface current = getRoom(roomNumber);
         if(current.getCheckedIn()){
             if(customer.getName().equals(current.getReservationName())){
                 boolean c = customer.checkOut(roomNumber);
@@ -97,7 +97,7 @@ public class Hotel implements HotelInterface {
 
 
 
-    public ArrayList<Room> getRooms(){
+    public ArrayList<RoomInterface> getRooms(){
         return rooms;
     }
 
@@ -108,7 +108,7 @@ public class Hotel implements HotelInterface {
     public String viewOrderedAvailableRooms(){
 
         String str="";
-        for (Room rm: rooms) {
+        for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.getIfAvailable()) {
 
                 if (str.equals("")) {
@@ -126,13 +126,13 @@ public class Hotel implements HotelInterface {
 
 
     public void logIn (String name, String id){
-        Customer customer = getCustomer(id);
+        CustomerInterface customer = getCustomer(id);
         customer.login(id);
     }
 
-    public Customer getCustomer(String first, String last){
+    public CustomerInterface getCustomer(String first, String last){
 
-        for(Customer c: customers){
+        for(CustomerInterface c: customers){
             if(c.getName().equals(first + " " + last)){
                 return c;
             }
@@ -141,9 +141,9 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
-    public Customer getCustomer(String ID){
+    public CustomerInterface getCustomer(String ID){
 
-        for(Customer c: customers){
+        for(CustomerInterface c: customers){
             if(c.getId().equals(ID)){
                 return c;
             }
@@ -153,7 +153,7 @@ public class Hotel implements HotelInterface {
     }
 
     public void createAccount (String fname, String lastName){
-        Customer customer = new Customer();
+        CustomerInterface customer = new Customer();
         customer.makeName(fname, lastName);
         String ID = customer.makeID();
         //customer.login(ID);
@@ -167,11 +167,11 @@ public class Hotel implements HotelInterface {
      * @return returns customer object to be passed to SelectReserveRoom
      * @author - DMF
      */
-    public Customer checkValidCust(String c){
-        Customer g;
+    public CustomerInterface checkValidCust(String c){
+        CustomerInterface g;
         boolean found = false;
-        for(Iterator<Customer> customerIterator = customers.iterator(); customerIterator.hasNext();){
-            Customer cust = customerIterator.next();
+        for(Iterator<CustomerInterface> customerIterator = customers.iterator(); customerIterator.hasNext();){
+            CustomerInterface cust = customerIterator.next();
             if(Objects.equals(cust.getId(),c) && !found){
                 return cust;
             }
@@ -190,11 +190,11 @@ public class Hotel implements HotelInterface {
      * @Author - DMF
      */
     public void checkRooms(int rmNum, String cID) {
-        for (Room rm : rooms) {
+        for (RoomInterface rm : rooms) {
             if (rm.getRoomNumber() == rmNum) {
                 System.out.println(rm.getRoomNumber());
                 if (rm.getIfAvailable() == true) {
-                    Customer cust = checkValidCust(cID);
+                    CustomerInterface cust = checkValidCust(cID);
                     if (cust.getId() != null) {
                         SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
                         if(selRes.checkRoomAvailable()){
@@ -218,7 +218,7 @@ public class Hotel implements HotelInterface {
      * can be deleted
      */
     public void setCustomer(){
-        Customer cust = new Customer("den","bob");
+        CustomerInterface cust = new Customer("den","bob");
         System.out.println(cust.getId());
         customers.add(cust);
     }

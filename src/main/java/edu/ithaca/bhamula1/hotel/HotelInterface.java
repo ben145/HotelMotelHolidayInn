@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface HotelInterface {
 
-        Room getRoom(int roomNumber);
+        RoomInterface getRoom(int roomNumber);
 
-        boolean checkIn(int roomNumber, Customer customer);
+        boolean checkIn(int roomNumber, CustomerInterface customer);
 
-        boolean checkOut(int roomNumber, Customer customer);
+        boolean checkOut(int roomNumber, CustomerInterface customer);
 
         void addTestRoom(int roomNumber);
 
@@ -16,19 +16,19 @@ public interface HotelInterface {
 
         void setNumberOfRooms(int numberOfRooms);
 
-        ArrayList<Room> getRooms();
+        ArrayList<RoomInterface> getRooms();
 
         String viewOrderedAvailableRooms();
 
         void logIn (String name, String id);
 
-        Customer getCustomer(String first, String last);
+        CustomerInterface getCustomer(String first, String last);
 
-        Customer getCustomer(String ID);
+        CustomerInterface getCustomer(String ID);
 
         void createAccount (String fname, String lastName);
 
-        Customer checkValidCust(String c);
+        CustomerInterface checkValidCust(String c);
 
         void checkRooms(int rmNum, String cID);
 
