@@ -204,7 +204,7 @@ public class Hotel implements HotelInterface {
                             rm.setReservationName(cust.getName());
                             rm.setIfAvailable(false);
                             //rm.setReservationName(resID);
-                            System.out.println("Your reservation ID for room "+ 1 + " is "+ cust.getReservation());
+                            System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
                         }
                     }
                 }
