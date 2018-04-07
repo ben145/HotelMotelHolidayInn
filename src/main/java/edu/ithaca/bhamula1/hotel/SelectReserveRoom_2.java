@@ -165,7 +165,7 @@ public class SelectReserveRoom_2 implements SRRInterface {
             s.append(scan.nextLine());
         }
         if(s.toString() == "Y" || s.toString() == "y"){
-            System.out.println("Your Reservation ID is "+ reserveRoom()+ " for Room "+room.rmNum);
+           // System.out.println("Your Reservation ID is "+ reserveRoom+ " for Room "+room.rmNum);
         }else if(s.toString() == "N" || s.toString() == "n"){
             System.out.println("You entered "+s.toString()+ ". Do you wish to select a room? Enter \\\"Y\\\" for yes or \\\"N\\\" for no  \"");
             s.setLength(0);
