@@ -25,6 +25,7 @@ public class Hotel implements HotelInterface {
 
         // List of roles and employees in hotel
         employees = new ArrayList<>();
+        setEmplList();
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -229,7 +230,7 @@ public class Hotel implements HotelInterface {
     }
 
     /**
-     *
+     * loads data stored in e.txt to employee list on Hotel instantiation
      */
     @Override
     public void setEmplList(){
@@ -259,6 +260,9 @@ public class Hotel implements HotelInterface {
         }
     }
 
+    /**
+     * prints list of hotel employees and their data
+     */
     public void printEmployeeList(){
         for(int el = 0; el < employees.size();el++){
             System.out.println("empl num "+(el+1));
