@@ -69,6 +69,67 @@ public class HotelTest {
     }
 
 
+    @Test
+    void getRoom() {
+    }
 
+    @Test
+    void addTestRoom() {
+    }
+
+    @Test
+    void addRoom() {
+    }
+
+    @Test
+    void setNumberOfRooms() {
+    }
+
+    @Test
+    void getRooms() {
+    }
+
+    @Test
+    void logIn() {
+    }
+
+    @Test
+    void getCustomer() {
+    }
+
+    @Test
+    void getCustomer1() {
+    }
+
+    @Test
+    void createAccount() {
+    }
+
+    @Test
+    void checkValidCust() {
+    }
+
+    @Test
+    void checkRooms() {
+    }
+
+    @Test
+    void setCustomer() {
+    }
+
+
+    /**
+     * Testing length/number of Employees
+     */
+    @Test
+    void emplListTest() {
+        Hotel h = new Hotel();
+
+        h.setEmplList();
+        int length = h.getEList().size();
+        System.out.println(" num empls "+ length);
+        h.printEmployeeList();
+
+    }
 }
 
