@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Employee UI
+ * @athor DMF
+ */
+
 public class EmployeeUI implements EmployeeUI_Interface{
 
     private Employee employee;
@@ -19,48 +24,85 @@ public class EmployeeUI implements EmployeeUI_Interface{
         employeeScreenActive = true;
     }
 
+    /**
+     * sets Employee to this instance of login screen
+     * @param e
+     */
     void setEmployee(EmployeeIMPL e){
         this.employee = e;
     }
 
 
+    /**
+     * All UI interaction below - Employee can make choice if logged in
+     * Takes in Hotel object oto get employee list and other data associated with the hotel
+     * @param h
+     */
     public void uiInteraction(HotelInterface h){
         this.hotel = h;
-        System.out.println("Employee Screens");
+        System.out.println("------<>----Employee Page----<>------");
         employeeLogScreenUI();
-        if(employee.getE_LoggedIn()){
-            System.out.println("Please see open Customer Requests below:\n");
-            viewOpenRequests();
+        while(employeeScreenActive){
+            if(employee.getE_LoggedIn()){
+                Scanner scan = new Scanner(System.in);
+                System.out.print("\nWhat would you like to do?\n1) View Open Customer Requests\n" +
+                        "2) Select Customer Request\n" +
+                        "3) Complete Customer Request\n" +
+                        "4) LogOut\n"+"\nEnter Number Here -> ");
+                int option = scan.nextInt();
+                if(option == 1){
+                    System.out.println("\nPlease see open Customer Requests below:");
+                    viewOpenRequests();
+                    System.out.println("\n");
+                }else if(option == 2){
+                    System.out.println("\nPlease enter customer request number to complete below:\n");
+                    viewOpenRequests();
+
+                }else if(option == 3){
+                    System.out.println("\nMark customer request Complete in option 3");
+                }else if(option==4){
+                    closeUI();
+                }
+
+
+            }
+
         }
     }
 
+    /**
+     * Before employee can chose options, valid input
+     * must be entered - this method checks for valid input
+     * and calls checkEmployeeLogIn to verify login data
+     */
     @Override
     public void employeeLogScreenUI() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Employee LogIn ID:\n");
+        System.out.print("\nEnter Employee LogIn ID:");
         String eID = scan.nextLine();
-        System.out.println("Enter your password:\n");
+        System.out.print("\nEnter your password:");
         String ePwd = scan.nextLine();
 
         if(eID.isEmpty()||ePwd.isEmpty()){
-            System.out.println("Input cannot be blank, please try again\n");
+            System.out.println("\nInput cannot be blank, please try again\n");
             employeeLogScreenUI();
         }else{
             checkEmployeeLogIn(eID,ePwd);
             if(employee.getE_LoggedIn()){
-                System.out.println("Welcome "+employee.getE_FirstName());
+                System.out.println("\nWelcome "+employee.getE_FirstName()+" "+
+                        employee.getE_LastName()+" - "+employee.getE_Title());
             }else{
-                System.out.println("You have entered an invalid employee login ID/Password combination.\n" +
+                System.out.println("\nYou have entered an invalid employee login ID/Password combination.\n" +
                         "Access Denied\n");
             }
         }
     }
 
     /**
-     * Validates E Login and PWD
+     * Validates E Login and PWD based on user input
+     * compared to employee list
      * @param el
      * @param epwd
-     * @return
      * @author - DMF
      */
     @Override
@@ -102,8 +144,16 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     }
 
+    /**
+     * Employee logout
+     * closes/ends employeeUI and returns to main screen menu
+     */
     @Override
     public void closeUI() {
+        employee.setE_LoggedIn(false);
+        employeeScreenActive = false;
+        System.out.println("\n"+employee.getE_FirstName()+", you are now logged out of {insert hotel name here} employee system\n\n");
+        System.out.println("------<>----End Employee Page----<>------\n\n");
 
     }
 }
