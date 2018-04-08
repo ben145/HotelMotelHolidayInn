@@ -216,7 +216,7 @@ public class EmployeeIMPL implements Employee{
 
     @Override
     public String toString(){
-        return String.format(this.e_tNum+" - "+this.e_Title+": \n"+this.e_LName+", "+this.e_FName+"\nLogID: "+
+        return String.format(this.e_tNum+" - "+this.e_Title+": \nEmployee Name: "+this.e_LName+", "+this.e_FName+"\nLogID: "+
                 e_LogID+"  Pwd: "+e_PWD+"\nIs Available: "+e_Available+"\nIs position vacant: "+positionVacant+"\n");
     }
 }
