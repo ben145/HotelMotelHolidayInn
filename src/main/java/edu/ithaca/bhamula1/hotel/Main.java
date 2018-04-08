@@ -2,8 +2,13 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.util.*;
 
-public class Main {
+public abstract class Main {
 
+    public static void main(String[] args) {
+        HotelInterface hotel = createHotel();
+        mainScreen(hotel);
+
+    }
 
     public static int onceLoggedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
@@ -124,6 +129,7 @@ public class Main {
         return hotel;
     }
 
+
     public static void checkedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome! We hope you enjoy your stay.");
@@ -151,9 +157,8 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void mainScreen(HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
-        HotelInterface hotel = createHotel();
 
         int firstOption = 0;
 
@@ -165,15 +170,17 @@ public class Main {
                     "1) sign in\n" +
                     "2) sign up\n" +
                     "3) view rooms \n" +
-                    "4) quit");
+                    "4) quit\n\n" +
+                    "5) -Staff Login-");
 
             firstOption = scan.nextInt();
 
-            while (firstOption < 1 || firstOption > 4) {
+            while (firstOption < 1 || firstOption > 5) {
                 System.out.println("1) sign in\n" +
                         "2) sign up\n" +
                         "3) view rooms\n " +
-                        "4) quit");
+                        "4) quit\n\n"+
+                        "5) -Staff Login-");
 
                 firstOption = scan.nextInt();
             }
@@ -248,10 +255,48 @@ public class Main {
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*");
             } else if (firstOption == 4) {
                 System.out.println("Thank you");
+            } else if(firstOption == 5){
+
+                // Employee Login call
+                employeeLogScreen(hotel);
+
             }
-
-
         }
+
     }
+
+
+    /**
+     *
+     * @param h
+     * @author - DMF
+     */
+    public static void employeeLogScreen(HotelInterface h){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Employee LogIn ID:\n");
+        String eID = scan.nextLine();
+        System.out.println("Enter your password:\n");
+        String ePwd = scan.nextLine();
+
+        if(eID.isEmpty()||ePwd.isEmpty()){
+            System.out.println("Input cannot be blank, please try again\n");
+            employeeLogScreen(h);
+        }else{
+            // calls function to check log and pwd
+            // returns boolean
+            if(h.checkEmployeeLogIn(eID,ePwd)){
+             System.out.println("Welcome ");
+            }else{
+                System.out.println("You have entered an invalid employee login ID/Password combination.\n" +
+                        "Access Denied\n");
+            }
+        }
+        h.printEmployeeList();
+    }
+
+
+
+
+
 
 }

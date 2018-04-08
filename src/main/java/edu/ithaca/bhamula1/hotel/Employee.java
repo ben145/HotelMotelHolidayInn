@@ -4,6 +4,8 @@ package edu.ithaca.bhamula1.hotel;
 public interface Employee {
 
 
+
+
     int getE_TitleNum();
     void setE_TitleNum(int num);
 
@@ -24,6 +26,9 @@ public interface Employee {
 
     boolean checkE_LoginID(String eLog);
     boolean checkE_PWD(String ePWD);
+
+    boolean getE_LoggedIn();
+    void setE_LoggedIn(boolean in);
 
     boolean getE_Available();
     void setE_Available(boolean a);

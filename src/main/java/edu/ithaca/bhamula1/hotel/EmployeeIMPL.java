@@ -13,6 +13,7 @@ public class EmployeeIMPL implements Employee{
     private String e_FName;
     private String e_LogID;
     private String e_PWD;
+    private boolean e_LoggedIn;
     private boolean e_Available;
     private boolean positionVacant;
 
@@ -27,6 +28,7 @@ public class EmployeeIMPL implements Employee{
         this.e_FName = null;
         this.e_LogID = null;
         this.e_PWD = null;
+        this.e_LoggedIn = false;
         this.e_Available = false;
         this.positionVacant = true;
     }
@@ -40,13 +42,16 @@ public class EmployeeIMPL implements Employee{
      * @param lID
      * @param p
      */
-    public EmployeeIMPL(int tn, String t, String ln, String fn, String lID, String p){
+    public EmployeeIMPL(int tn, String t, String ln, String fn, String lID, String p, boolean in, boolean a, boolean pa){
         this.e_tNum = tn;
         this.e_Title = t;
         this.e_LName = ln;
         this.e_FName = fn;
         this.e_LogID = lID;
         this.e_PWD = p;
+        this.e_LoggedIn = in;
+        this.e_Available = a;
+        this.positionVacant = pa;
     }
 
     /**
@@ -178,6 +183,16 @@ public class EmployeeIMPL implements Employee{
         return ePWD.equals(this.e_PWD);
     }
 
+    @Override
+    public boolean getE_LoggedIn(){
+        return this.e_LoggedIn;
+    }
+
+    @Override
+    public void setE_LoggedIn(boolean in){
+        this.e_LoggedIn = in;
+    }
+
     /**
      *
      * @return
@@ -217,6 +232,6 @@ public class EmployeeIMPL implements Employee{
     @Override
     public String toString(){
         return String.format(this.e_tNum+" - "+this.e_Title+": \nEmployee Name: "+this.e_LName+", "+this.e_FName+"\nLogID: "+
-                e_LogID+"  Pwd: "+e_PWD+"\nIs Available: "+e_Available+"\nIs position vacant: "+positionVacant+"\n");
+                e_LogID+"  Pwd: "+e_PWD+"\nIs Logged In: "+e_LoggedIn+"\nIs Available: "+e_Available+"\nIs position vacant: "+positionVacant+"\n");
     }
 }
