@@ -7,6 +7,7 @@ public abstract class Main {
     public static void main(String[] args) {
         HotelInterface hotel = createHotel();
         mainScreen(hotel);
+        hotel.saveEmplList();
 
     }
 
