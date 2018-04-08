@@ -11,6 +11,7 @@ public class Hotel implements HotelInterface {
     int numberOfRooms =0;
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
+    private List<EmployeeIMPL> employees;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
@@ -20,6 +21,9 @@ public class Hotel implements HotelInterface {
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
+
+        // List of roles and employees in hotel
+        employees = new ArrayList<>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -221,5 +225,13 @@ public class Hotel implements HotelInterface {
         CustomerInterface cust = new Customer("den","bob");
         System.out.println(cust.getId());
         customers.add(cust);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void setEmplList() {
+
     }
 }

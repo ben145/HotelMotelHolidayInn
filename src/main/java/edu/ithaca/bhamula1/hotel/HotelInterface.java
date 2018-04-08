@@ -34,5 +34,6 @@ public interface HotelInterface {
 
         void setCustomer();
 
+        void setEmplList();
 
 }
