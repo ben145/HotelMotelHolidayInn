@@ -18,6 +18,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
 // added this to use requests - think the reqeusts should be in Hotel as a list with room number associated?
     private Requests requests;
+    boolean invalid = true;
 
     public EmployeeUI(){
         requests = new Requests();
@@ -32,6 +33,13 @@ public class EmployeeUI implements EmployeeUI_Interface{
         this.employee = e;
     }
 
+    /**
+     * returns employee title - used for test
+     * @return
+     */
+    public String getEmplTitle(){
+        return employee.getE_Title();
+    }
 
     /**
      * All UI interaction below - Employee can make choice if logged in
@@ -43,7 +51,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
         System.out.println("------<>----Employee Page----<>------");
         employeeLogScreenUI();
         while(employeeScreenActive){
-            if(employee.getE_LoggedIn()){
+            if(!invalid){
                 Scanner scan = new Scanner(System.in);
                 System.out.print("\nWhat would you like to do?\n1) View Open Customer Requests\n" +
                         "2) Select Customer Request\n" +
@@ -65,6 +73,8 @@ public class EmployeeUI implements EmployeeUI_Interface{
                 }
 
 
+            }else{
+                employeeScreenActive=false;
             }
 
         }
@@ -88,7 +98,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
             employeeLogScreenUI();
         }else{
             checkEmployeeLogIn(eID,ePwd);
-            if(employee.getE_LoggedIn()){
+            if(!invalid){
                 System.out.println("\nWelcome "+employee.getE_FirstName()+" "+
                         employee.getE_LastName()+" - "+employee.getE_Title());
             }else{
@@ -117,6 +127,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
             empls.get(index).checkE_LoginID(el);
             if(empls.get(index).checkE_LoginID(el)
                     && empls.get(index).checkE_PWD(epwd)){
+                invalid = false;
                 // store employee values in UI
                 setEmployee(empls.get(index));
                 if(!employee.getE_LoggedIn()){
