@@ -231,6 +231,7 @@ public class Hotel implements HotelInterface {
 
     /**
      * loads data stored in e.txt to employee list on Hotel instantiation
+     * @author - DMF
      */
     @Override
     public void setEmplList(){
@@ -262,6 +263,7 @@ public class Hotel implements HotelInterface {
 
     /**
      * prints list of hotel employees and their data
+     * @author - DMF
      */
     public void printEmployeeList(){
         for(int el = 0; el < employees.size();el++){
@@ -269,8 +271,32 @@ public class Hotel implements HotelInterface {
             System.out.println(employees.get(el).toString());
         }
     }
-    public List getEList(){
 
+
+    /**
+     * Validates E Login and PWD
+     * @param el
+     * @param epwd
+     * @return
+     * @author - DMF
+     */
+    public boolean checkEmployeeLogIn(String el, String epwd){
+
+        int index = 0;
+        Iterator iterator = employees.iterator();
+        while(iterator.hasNext() && index!=employees.size()){
+            //System.out.println(index + "  " +employees.size());
+            //System.out.println(employees.get(index).toString());
+            if(employees.get(index).checkE_LoginID(el)
+                && employees.get(index).checkE_PWD(epwd)){
+
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+    public List getEList(){
         return employees;
     }
 }

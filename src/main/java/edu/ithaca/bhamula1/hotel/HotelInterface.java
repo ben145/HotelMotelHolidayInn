@@ -37,4 +37,6 @@ public interface HotelInterface {
 
         void setEmplList();
 
+        boolean checkEmployeeLogIn(String el, String epwd);
+
 }

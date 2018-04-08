@@ -129,5 +129,19 @@ public class HotelTest {
         h.printEmployeeList();
 
     }
+
+    /**
+     * Testing empl login
+     */
+    @Test
+    void emplLogInTest(){
+        Hotel h = new Hotel();
+
+        assertTrue("False - Expected True for hotel.checkEmployeeLogin", h.checkEmployeeLogIn("mogrady","Password4321"));
+        assertFalse("True - Expected False for hotel.checkEmployeeLogin", h.checkEmployeeLogIn("ogrady","Password4321"));
+        assertFalse("True - Employee List is empty - invalid",h.getEList().isEmpty());
+
+
+    }
 }
 
