@@ -1,6 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface HotelInterface {
 

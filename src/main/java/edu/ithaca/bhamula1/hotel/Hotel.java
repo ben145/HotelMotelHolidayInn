@@ -234,4 +234,9 @@ public class Hotel implements HotelInterface {
     public void setEmplList() {
 
     }
+
+    public List getEList(){
+
+        return employees;
+    }
 }

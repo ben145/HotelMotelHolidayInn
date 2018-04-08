@@ -118,10 +118,11 @@ public class HotelTest {
     }
 
     @Test
-    void setEmplList() {
+    void emplListTest() {
         Hotel h = new Hotel();
 
-        int length =
+        int length = h.getEList().size();
+        System.out.println(" num empls "+ length);
 
     }
 }
