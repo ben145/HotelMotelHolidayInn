@@ -36,13 +36,14 @@ public interface HotelInterface {
         void setCustomer();
 
         void setEmplList();
+        void saveEmplList();
 
-        boolean checkEmployeeLogIn(String el, String epwd);
 
         void printEmployeeList();
         void printLoggedInEmployeeList();
         void printAvailableEmployeeList();
         void printStaffVacancies();
+        List getEList();
 
 
 }

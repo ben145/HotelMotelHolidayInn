@@ -7,6 +7,7 @@ public abstract class Main {
     public static void main(String[] args) {
         HotelInterface hotel = createHotel();
         mainScreen(hotel);
+        hotel.saveEmplList();
 
     }
 
@@ -272,26 +273,11 @@ public abstract class Main {
      * @author - DMF
      */
     public static void employeeLogScreen(HotelInterface h){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Employee LogIn ID:\n");
-        String eID = scan.nextLine();
-        System.out.println("Enter your password:\n");
-        String ePwd = scan.nextLine();
 
-        if(eID.isEmpty()||ePwd.isEmpty()){
-            System.out.println("Input cannot be blank, please try again\n");
-            employeeLogScreen(h);
-        }else{
-            // calls function to check log and pwd
-            // returns boolean
-            if(h.checkEmployeeLogIn(eID,ePwd)){
-             System.out.println("Welcome ");
-            }else{
-                System.out.println("You have entered an invalid employee login ID/Password combination.\n" +
-                        "Access Denied\n");
-            }
-        }
-        h.printEmployeeList();
+        EmployeeUI eUI = new EmployeeUI();
+        eUI.uiInteraction(h);
+
+       // h.printEmployeeList();
     }
 
 

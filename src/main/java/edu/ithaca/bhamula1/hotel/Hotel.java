@@ -1,6 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -25,7 +26,9 @@ public class Hotel implements HotelInterface {
 
         // List of roles and employees in hotel
         employees = new ArrayList<>();
-        setEmplList();
+        if(employees.isEmpty()) {
+            setEmplList();
+        }
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -260,6 +263,31 @@ public class Hotel implements HotelInterface {
     }
 
     /**
+     * Save Employee Data when exit program
+     */
+    @Override
+    public void saveEmplList(){
+
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/e.txt");
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            for(int s = 0; s < employees.size(); s++){
+                Employee emp = employees.get(s);
+                String line = emp.getE_TitleNum()+","+ emp.getE_Title()+","+emp.getE_LastName()+","+emp.getE_FirstName()+
+                        ","+emp.getE_LogID()+","+emp.getE_PWD()+","+emp.getE_LoggedIn()+","+emp.getE_Available()+
+                        ","+emp.getPositionVacant();
+                bw.write(line);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
+    /**
      * prints list of all vacant hotel positions
      * @author - DMF
      */
@@ -330,32 +358,9 @@ public class Hotel implements HotelInterface {
         }
     }
 
-
-    /**
-     * Validates E Login and PWD
-     * @param el
-     * @param epwd
-     * @return
-     * @author - DMF
-     */
     @Override
-    public boolean checkEmployeeLogIn(String el, String epwd){
-
-        int index = 0;
-        Iterator iterator = employees.iterator();
-        while(iterator.hasNext() && index!=employees.size()){
-            //System.out.println(index + "  " +employees.size());
-            //System.out.println(employees.get(index).toString());
-            if(employees.get(index).checkE_LoginID(el)
-                && employees.get(index).checkE_PWD(epwd)){
-                employees.get(index).setE_LoggedIn(true);
-                return true;
-            }
-            index++;
-        }
-        return false;
-    }
     public List getEList(){
         return employees;
     }
+
 }
