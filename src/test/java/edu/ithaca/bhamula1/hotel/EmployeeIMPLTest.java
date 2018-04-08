@@ -13,19 +13,19 @@ class EmployeeIMPLTest {
 
 
     @Test
-    void getRoleNumTest() {
+    void getE_TitleNumTest() {
     }
 
     @Test
-    void setRoleNumTest() {
+    void setE_TitleNumTest() {
     }
 
     @Test
-    void getRoleClassTest() {
+    void getE_TitleTest() {
     }
 
     @Test
-    void setRoleClassTest() {
+    void setE_TitleTest() {
     }
 
     @Test
@@ -33,7 +33,7 @@ class EmployeeIMPLTest {
     }
 
     @Test
-    void setELastNameTest() {
+    void setE_LastNameTest() {
     }
 
     @Test
@@ -41,7 +41,7 @@ class EmployeeIMPLTest {
     }
 
     @Test
-    void setEFirstNameTest() {
+    void setE_FirstNameTest() {
     }
 
     @Test

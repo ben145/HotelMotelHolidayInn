@@ -7,37 +7,41 @@ package edu.ithaca.bhamula1.hotel;
  */
 public class EmployeeIMPL implements Employee{
 
-    private int e_Role;
+    private int e_tNum;
     private String e_Title;
     private String e_LName;
     private String e_FName;
     private String e_LogID;
     private String e_PWD;
+    private boolean e_Available;
+    private boolean positionVacant;
 
 
     /**
      * Default Constructor
      */
     public EmployeeIMPL(){
-        this.e_Role = -1;
+        this.e_tNum = -1;
         this.e_Title = null;
         this.e_LName = null;
         this.e_FName = null;
         this.e_LogID = null;
         this.e_PWD = null;
+        this.e_Available = false;
+        this.positionVacant = true;
     }
 
     /**
      * Constructor
-     * @param r
+     * @param tn
      * @param t
      * @param ln
      * @param fn
      * @param lID
      * @param p
      */
-    public EmployeeIMPL(int r, String t, String ln, String fn, String lID, String p){
-        this.e_Role = r;
+    public EmployeeIMPL(int tn, String t, String ln, String fn, String lID, String p){
+        this.e_tNum = tn;
         this.e_Title = t;
         this.e_LName = ln;
         this.e_FName = fn;
@@ -50,8 +54,8 @@ public class EmployeeIMPL implements Employee{
      * @return
      */
     @Override
-    public int getRoleNum() {
-        return 0;
+    public int getE_TitleNum() {
+        return e_tNum;
     }
 
     /**
@@ -59,7 +63,8 @@ public class EmployeeIMPL implements Employee{
      * @param num
      */
     @Override
-    public void setRoleNum(int num) {
+    public void setE_TitleNum(int num) {
+        this.e_tNum = num;
 
     }
 
@@ -68,17 +73,17 @@ public class EmployeeIMPL implements Employee{
      * @return
      */
     @Override
-    public String getRoleClass() {
-        return null;
+    public String getE_Title() {
+        return e_Title;
     }
 
     /**
      *
-     * @param c
+     * @param t
      */
     @Override
-    public void setRoleClass(String c) {
-
+    public void setE_Title(String t) {
+        this.e_Title = t;
     }
 
     /**
@@ -87,7 +92,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public String getE_LastName() {
-        return null;
+        return e_LName;
     }
 
     /**
@@ -95,8 +100,8 @@ public class EmployeeIMPL implements Employee{
      * @param ln
      */
     @Override
-    public void setELastName(String ln) {
-
+    public void setE_LastName(String ln) {
+        this.e_LName = ln;
     }
 
     /**
@@ -105,7 +110,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public String getE_FirstName() {
-        return null;
+        return e_FName;
     }
 
     /**
@@ -113,8 +118,8 @@ public class EmployeeIMPL implements Employee{
      * @param fn
      */
     @Override
-    public void setEFirstName(String fn) {
-
+    public void setE_FirstName(String fn) {
+        this.e_FName = fn;
     }
 
     /**
@@ -123,7 +128,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public String getE_LogID() {
-        return null;
+        return e_LogID;
     }
 
     /**
@@ -132,7 +137,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public void setE_LogID(String elID) {
-
+        this.e_LogID = elID;
     }
 
     /**
@@ -141,7 +146,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public String getE_PWD() {
-        return null;
+        return e_PWD;
     }
 
     /**
@@ -150,7 +155,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public void setE_PWD(String pwd) {
-
+        this.e_PWD = pwd;
     }
 
     /**
@@ -160,7 +165,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public boolean checkE_LoginID(String eLog) {
-        return false;
+        return eLog.equals(this.e_LogID);
     }
 
     /**
@@ -170,7 +175,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public boolean checkE_PWD(String ePWD) {
-        return false;
+        return ePWD.equals(this.e_PWD);
     }
 
     /**
@@ -179,7 +184,7 @@ public class EmployeeIMPL implements Employee{
      */
     @Override
     public boolean getE_Available() {
-        return false;
+        return e_Available;
     }
 
     /**
@@ -187,7 +192,31 @@ public class EmployeeIMPL implements Employee{
      * @return
      */
     @Override
-    public boolean setE_Available() {
-        return false;
+    public void setE_Available(boolean a) {
+        this.e_Available = a;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public boolean getPositionVacant(){
+        return positionVacant;
+    }
+
+    /**
+     *
+     * @param v
+     */
+    @Override
+    public void setPositionVacant(boolean v){
+        this.positionVacant = v;
+    }
+
+    @Override
+    public String toString(){
+        return String.format(this.e_tNum+" - "+this.e_Title+": \n"+this.e_LName+", "+this.e_FName+"\nLogID: "+
+                e_LogID+"  Pwd: "+e_PWD+"\nIs Available: "+e_Available+"\nIs position vacant: "+positionVacant+"\n");
     }
 }

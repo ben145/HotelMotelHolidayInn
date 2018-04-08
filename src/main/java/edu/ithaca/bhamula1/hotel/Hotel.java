@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -231,10 +232,39 @@ public class Hotel implements HotelInterface {
      *
      */
     @Override
-    public void setEmplList() {
+    public void setEmplList(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/e.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+            while((line = br.readLine())!= null) {
+                EmployeeIMPL empl = new EmployeeIMPL();
+                String [] sArr = line.split(",");
+                empl.setE_TitleNum(Integer.parseInt(sArr[0]));
+                empl.setE_Title(sArr[1]);
+                empl.setE_LastName(sArr[2]);
+                empl.setE_FirstName(sArr[3]);
+                empl.setE_LogID(sArr[4]);
+                empl.setE_PWD(sArr[5]);
+                empl.setE_Available(Boolean.parseBoolean(sArr[6]));
+                empl.setPositionVacant(Boolean.parseBoolean(sArr[7]));
+                employees.add(empl);
+            }
+            System.out.println(employees.get(4).toString());
+            System.out.println(employees.get(10).toString());
 
+        }catch (IOException e){
+            System.out.println(e);
+        }
     }
 
+    public void printEmployeeList(){
+        for(int el = 0; el < employees.size();el++){
+            System.out.println("empl num "+(el+1));
+            System.out.println(employees.get(el).toString());
+        }
+    }
     public List getEList(){
 
         return employees;
