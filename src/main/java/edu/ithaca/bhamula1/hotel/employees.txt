@@ -1,0 +1,17 @@
+1,Manager,Afolabi,Samuel,safolabi,Password4321
+2,Concierge,Akimchuk,Daniel,dakimchuk,Password4321
+2,Concierge,Barreto,Fernando,fbarreto,Password4321
+3,Front Desk Associate,Barrett,Austin,abarrett1,Password4321
+3,Front Desk Associate,Brown-McMillin,Benjamin,bbrownmcmillin,Password4321
+4,Event Planner,Burger,Jonathan,jburger1,Password4321
+4,Event Planner,O'Grady,Megan,mogrady,Password4321
+5,Room Attendent,Desmery,Martin,mdesmery,Password4321
+5,Room Attendent,Dragon,Toby,tdragon,Password4321
+6,Housekeeping,Fullerton,Denise,dfullerton,Password4321
+6,Housekeeping,Gable,Alexander,agable,Password4321
+7,Spa Attendant,Garelli,Colton,cgarelli,Password4321
+7,Spa Attendant,Hamula,Benjamin,bhamula1,Password4321
+8,Reservations Agent,Hill,Isaak,ihill,Password4321
+8,Reservations Agent,Junker,Eric,ejunker,Password4321
+9,Tech Support,Keith,Bradley,bkeith,Password4321
+9,Tech Support,Kimmich Mitchell,Elisabeth,ekimmichmitchell,Password4321
