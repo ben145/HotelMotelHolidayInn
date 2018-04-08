@@ -143,5 +143,33 @@ public class HotelTest {
 
 
     }
+
+    @Test
+    void setEmplList() {
+    }
+
+    @Test
+    void printStaffVacancies() {
+    }
+
+    @Test
+    void printEmployeeList() {
+    }
+
+    @Test
+    void printLoggedInEmployeeList() {
+    }
+
+    @Test
+    void printAvailableEmployeeList() {
+    }
+
+    @Test
+    void checkEmployeeLogIn() {
+    }
+
+    @Test
+    void getEList() {
+    }
 }
 

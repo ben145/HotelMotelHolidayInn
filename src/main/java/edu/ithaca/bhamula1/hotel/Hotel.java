@@ -253,8 +253,6 @@ public class Hotel implements HotelInterface {
                 empl.setPositionVacant(Boolean.parseBoolean(sArr[7]));
                 employees.add(empl);
             }
-            System.out.println(employees.get(4).toString());
-            System.out.println(employees.get(10).toString());
 
         }catch (IOException e){
             System.out.println(e);
@@ -262,13 +260,73 @@ public class Hotel implements HotelInterface {
     }
 
     /**
+     * prints list of all vacant hotel positions
+     * @author - DMF
+     */
+    @Override
+    public void printStaffVacancies(){
+        int index = 0;
+        Iterator iterator = employees.iterator();
+        while(iterator.hasNext() && index!=employees.size()){
+            if(employees.get(index).getPositionVacant()){
+                System.out.println(employees.get(index).toString());
+            }
+            index++;
+        }
+    }
+
+
+
+    /**
+     * prints list of all hotel employees and their data
+     * @author - DMF
+     */
+    @Override
+    public void printEmployeeList(){
+        int index = 0;
+        Iterator iterator = employees.iterator();
+        while(iterator.hasNext() && index!=employees.size()){
+            if(!employees.get(index).getPositionVacant()){
+                System.out.println(employees.get(index).toString());
+            }
+            index++;
+        }
+    }
+
+    /**
      * prints list of hotel employees and their data
      * @author - DMF
      */
-    public void printEmployeeList(){
-        for(int el = 0; el < employees.size();el++){
-            System.out.println("empl num "+(el+1));
-            System.out.println(employees.get(el).toString());
+    @Override
+    public void printLoggedInEmployeeList(){
+        int index = 0;
+        Iterator iterator = employees.iterator();
+        while(iterator.hasNext() && index!=employees.size()){
+            //System.out.println(index + "  " +employees.size());
+            //System.out.println(employees.get(index).toString());
+            if(employees.get(index).getE_LoggedIn()){
+                System.out.println(employees.get(index).toString());
+            }
+            index++;
+        }
+    }
+
+    /**
+     * prints list of Available hotel employees and their data
+     * @author - DMF
+     */
+    @Override
+    public void printAvailableEmployeeList(){
+
+        int index = 0;
+        Iterator iterator = employees.iterator();
+        while(iterator.hasNext() && index!=employees.size()){
+            //System.out.println(index + "  " +employees.size());
+            //System.out.println(employees.get(index).toString());
+            if(employees.get(index).getE_Available()){
+                System.out.println(employees.get(index).toString());
+            }
+            index++;
         }
     }
 
@@ -280,6 +338,7 @@ public class Hotel implements HotelInterface {
      * @return
      * @author - DMF
      */
+    @Override
     public boolean checkEmployeeLogIn(String el, String epwd){
 
         int index = 0;
@@ -289,7 +348,7 @@ public class Hotel implements HotelInterface {
             //System.out.println(employees.get(index).toString());
             if(employees.get(index).checkE_LoginID(el)
                 && employees.get(index).checkE_PWD(epwd)){
-
+                employees.get(index).setE_LoggedIn(true);
                 return true;
             }
             index++;

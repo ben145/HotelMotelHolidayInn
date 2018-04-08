@@ -170,16 +170,17 @@ public abstract class Main {
                     "1) sign in\n" +
                     "2) sign up\n" +
                     "3) view rooms \n" +
-                    "4) quit\n\n\n" +
-                    "8) -Staff Login-");
+                    "4) quit\n\n" +
+                    "5) -Staff Login-");
 
             firstOption = scan.nextInt();
 
-            while (firstOption < 1 || firstOption > 8) {
+            while (firstOption < 1 || firstOption > 5) {
                 System.out.println("1) sign in\n" +
                         "2) sign up\n" +
                         "3) view rooms\n " +
-                        "4) quit");
+                        "4) quit\n\n"+
+                        "5) -Staff Login-");
 
                 firstOption = scan.nextInt();
             }
@@ -254,8 +255,9 @@ public abstract class Main {
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*");
             } else if (firstOption == 4) {
                 System.out.println("Thank you");
-            } else if(firstOption == 8){
+            } else if(firstOption == 5){
 
+                // Employee Login call
                 employeeLogScreen(hotel);
 
             }
@@ -267,6 +269,7 @@ public abstract class Main {
     /**
      *
      * @param h
+     * @author - DMF
      */
     public static void employeeLogScreen(HotelInterface h){
         Scanner scan = new Scanner(System.in);
@@ -288,6 +291,7 @@ public abstract class Main {
                         "Access Denied\n");
             }
         }
+        h.printEmployeeList();
     }
 
 
