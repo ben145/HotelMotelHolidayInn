@@ -1,0 +1,20 @@
+Don Felder,1
+Don Henley,1
+Gin,87
+Glenn Fry,1
+my wine,1969
+Joe Walsh,1
+Pen,1776
+Pillow,890
+Raisins,7
+Randy Meisner,1
+Rum,45
+Salt,1000
+Sheet Set,786
+Shower Curtain,600
+Small Shampoo,563
+Soap,40000
+Tequila,63
+Tiny Conditioner,562
+Towels,3000
+Vodka,20

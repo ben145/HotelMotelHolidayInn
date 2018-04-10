@@ -31,8 +31,9 @@ public class Hotel implements HotelInterface {
             setEmplList();
         }
 
-        //hotel inventory
+        //hotel inventory w/ sample population
         inventory = new ArrayList<InventoryInterface>();
+        testInventory();
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -367,4 +368,27 @@ public class Hotel implements HotelInterface {
         return employees;
     }
 
+    /*
+      * reads in the stock stock file i pulled straight out of my ass
+      * populates hotel inventory
+    */
+    public void testInventory(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/stock.txt");
+            InputStreamReader streamReader = new InputStreamReader(file);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+            String line;
+            while((line = bufferedReader.readLine())!= null) {
+                Inventory item = new Inventory();
+                String[] input = line.split(",");
+                item.setItem(input[0]);
+                item.setQuantity(Integer.parseInt(input[1]));
+                inventory.add(item);
+            }
+
+        }
+        catch (IOException e){
+            System.out.println(e);
+        }
+    }
 }
