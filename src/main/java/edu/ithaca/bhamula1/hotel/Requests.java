@@ -17,49 +17,7 @@ public class Requests implements RequestsInterface{
         requests.add("Fresh towels");
         requests.add("Room maintenance (I have broken something in this room)");
     	requests.add("Refill minibar");
-	requests.add("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'");
-    }
-
-    //allows authorized staff to add a request to they system
-    public void addRequest(){
-        //check authorization
-
-	System.out.println("Enter request to add: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
-	//request requirements
-	System.out.println("Does request require inventory items? (y/n)");
-	input = scanner.nextLine();
-        if(input == "y"){
-	    boolean requirements = true;
-	    String input2;
-	    while(requirements){
-            	System.out.println("Enter inventory item required: ");
-            	input = scanner.nextLine();
-		System.out.println("Enter number of above items required: ");
-		input2 = scanner.nextLine();
-		Integer.parseInt(input2);
-
-		//prolly have to associate inventory with request at some point
-            }
-        }
-        requests.add(input);
-	System.out.println("Request added to options list");
-    }
-
-    //allows authorized staff to add a request to the system
-    public void removeRequest(){
-    	//check authorization
-	
-	//remove requests
-	viewRequests();
-	System.out.println("Enter request number to delete: ");
-	Scanner scanner = new Scanner(System.in);
-	String input = scanner.nextLine();
-	requests.remove(input);
-
-	System.out.println("Request removed from options list");
+	    requests.add("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'");
     }
 
     //view the requests a customer can make
@@ -68,4 +26,50 @@ public class Requests implements RequestsInterface{
             System.out.println((i+1)+") "+requests.get(i));
         }
     }
+
+    //allows authorized staff to add a request to they system
+    public void addRequest(){
+        //check authorization
+
+	    System.out.println("Enter request to add: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        //request requirements
+        System.out.println("Does request require inventory items? (y/n)");
+        input = scanner.nextLine();
+            if(input == "y"){
+            boolean requirements = true;
+            String input2;
+            while(requirements){
+                    System.out.println("Enter inventory item required: ");
+                    input = scanner.nextLine();
+            System.out.println("Enter number of above items required: ");
+            input2 = scanner.nextLine();
+            Integer.parseInt(input2);
+
+            //prolly have to associate inventory with request at some point
+                }
+            }
+            requests.add(input);
+        System.out.println("Request added to options list");
+    }
+
+    //allows authorized staff to remove a request to the system
+    public void removeRequest(){
+    	//check authorization
+	
+        //remove requests
+        viewRequests();
+        System.out.println("Enter request number to delete: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        requests.remove(input);
+
+        System.out.println("Request removed from options list");
+    }
+
+
+
+    //allows a customer to make a request
 }
