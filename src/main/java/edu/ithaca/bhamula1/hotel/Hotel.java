@@ -14,6 +14,7 @@ public class Hotel implements HotelInterface {
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
+    private List<InventoryInterface> inventory;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
@@ -29,6 +30,9 @@ public class Hotel implements HotelInterface {
         if(employees.isEmpty()) {
             setEmplList();
         }
+
+        //hotel inventory
+        inventory = new ArrayList<InventoryInterface>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
