@@ -1,15 +1,22 @@
+A Phone Book Somehow,100
+Bedbug Spray,49
 Don Felder,1
 Don Henley,1
+The Finest Frenched Fries,3300
 Gin,87
-Glenn Fry,1
-my wine,1969
+Glenn Frey,1
+Instant Coffee,300
 Joe Walsh,1
+my wine,1969
+Notepad,200
 Pen,1776
 Pillow,890
 Raisins,7
 Randy Meisner,1
 Rum,45
 Salt,1000
+Scotch,78
+Scratchy Toilet Paper,1400
 Sheet Set,786
 Shower Curtain,600
 Small Shampoo,563
@@ -18,3 +25,6 @@ Tequila,63
 Tiny Conditioner,562
 Towels,3000
 Vodka,20
+Washcloths,45
+Whiskey,78
+Wrench,2
