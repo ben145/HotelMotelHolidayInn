@@ -2,7 +2,19 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+class ActiveRequest{
+    String request;
+    String customerId;
+    String employeeId;
+    boolean active;
 
+    public ActiveRequest(String request, String customerId, String employeeId){
+        this.request = request;
+        this.customerId = customerId;
+        this.employeeId = employeeId;
+        active = false;
+    }
+}
 public class Requests implements RequestsInterface{
     public ArrayList<String> requests = new ArrayList<String>();
 
