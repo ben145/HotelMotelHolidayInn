@@ -45,5 +45,7 @@ public interface HotelInterface {
         void printStaffVacancies();
         List getEList();
 
+        int getNumberOfRooms();
+
 
 }

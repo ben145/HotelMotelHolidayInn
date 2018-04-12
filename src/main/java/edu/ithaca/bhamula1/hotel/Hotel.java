@@ -391,4 +391,8 @@ public class Hotel implements HotelInterface {
             System.out.println(e);
         }
     }
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
 }
