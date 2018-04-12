@@ -43,7 +43,7 @@ public class CustomerUI implements CustomerUIInterface {
 
         System.out.println("Welcome to {insert hotel name here}");
         //login or room view loop
-        while (firstOption != 4) {
+        while (firstOption != 5) {
             System.out.println("Would you like to:\n" +
                     "1) sign in\n" +
                     "2) sign up\n" +
