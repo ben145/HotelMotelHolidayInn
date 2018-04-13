@@ -112,12 +112,11 @@ public class CustomerUI implements CustomerUIInterface {
         while(option!=5) {
             System.out.println("Would you like to \n" +
                     "1)check in \n" +
-                    "2) check out \n" +
-                    "3) review rooms \n" +
-                    "4) reserve room \n" +
-                    "5) quit\n");
+                    "2) review rooms \n" +
+                    "3) reserve room \n" +
+                    "4) quit\n");
             while(option == 0) {
-                option = checkChoiceInput(scan.next(),1,5);
+                option = checkChoiceInput(scan.next(),1,4);
             }
             if(option == 1){
                 System.out.println("Check In");
@@ -133,19 +132,23 @@ public class CustomerUI implements CustomerUIInterface {
             }
 
             else if(option == 2){
-                System.out.println("Check Out");
-                int rmNum = 0;
-                System.out.println("What room number: ");
-                while(rmNum == 0){
-                    
-                }
+                System.out.println("Review Rooms");
+                System.out.println("View Available Rooms  ");
+                System.out.println(hotel.viewOrderedAvailableRooms());
+            }
+
+            else if(option == 3){
+                System.out.println("Reserve Room");
+                System.out.println(hotel.viewOrderedAvailableRooms());
+                boolean valid = false;
+                
             }
         }
         return 4;
     }
 
     public int checkedInMenu(CustomerInterface c){
-        return 5;
+        return 4;
     }
 
     public static void main(String[] args) {
