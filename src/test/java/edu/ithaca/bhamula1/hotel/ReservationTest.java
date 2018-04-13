@@ -21,6 +21,20 @@ public class ReservationTest {
 
     }
 
+    @Test
+    void ConstructorTest() {
+        Customer cus = new Customer();
+        Room room = new Room(true, 1, 90,1, "full", "things");
+
+
+        Reservation rev = new Reservation();
+        Assert.assertEquals(rev.getCustomer().getName, "");
+        Assert.assertEquals(rev.getRoom().getRoomNumeber(), 0);
+        Assert.assertEquals(rev.getRoom().getIfAvailable(), false);
+
+
+    }
+
 
 
 

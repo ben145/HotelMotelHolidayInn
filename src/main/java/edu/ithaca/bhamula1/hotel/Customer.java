@@ -32,6 +32,15 @@ public class Customer implements CustomerInterface {
         loggedIn = false;
     }
 
+    public Customer (String fname, String lName, String id, int room, boolean checkedIn){
+        this.name = fname+ " "+ lName;
+        this.id = fname+lName;
+        this.fName = fname;
+        this.lName = lName;
+        this.room = room;
+        this.checkedIn = checkedIn;
+        this.loggedIn = true;
+    }
 
     //set name
     public String makeName(String firstName, String lastName) {
