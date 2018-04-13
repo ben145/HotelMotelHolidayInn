@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 class ActiveRequest{
     String request;
-    String customerId;
+    String roomNumber;
     String employeeId;
     boolean active;
 
-    public ActiveRequest(String request, String customerId, String employeeId){
+    public ActiveRequest(String request, String roomNumber){
         this.request = request;
-        this.customerId = customerId;
-        this.employeeId = employeeId;
+        this.roomNumber = roomNumber;
+        employeeId = "";
         active = false;
     }
 }
@@ -81,7 +81,14 @@ public class Requests implements RequestsInterface{
         System.out.println("Request removed from options list");
     }
 
-
-
     //allows a customer to make a request
+    public ActiveRequest makeRequest(){
+        viewRequests();
+        System.out.println("Enter request number: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if(Integer.parseInt(input))
+        ActiveRequest newRequest = new ActiveRequest(requests.get(Integer.parseInt(input)), roomNumber);
+        return newRequest;
+    }
 }
