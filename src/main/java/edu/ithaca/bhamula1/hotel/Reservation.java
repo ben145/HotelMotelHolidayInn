@@ -18,7 +18,13 @@ public class Reservation {
         this.room = room;
     }
 
+    public Customer getCustomer(){
+        return this.customer;
+    }
 
+    public Room getRoom(){
+        return this.room;
+    }
 
 
 }
