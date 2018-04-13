@@ -35,11 +35,11 @@ public class EmployeeIMPL implements Employee{
 
     /**
      * Constructor
-     * @param tn
-     * @param t
-     * @param ln
-     * @param fn
-     * @param lID
+     * @param tn    title number
+     * @param t     title
+     * @param ln    last name
+     * @param fn    first name
+     * @param lID   login ID
      * @param p
      */
     public EmployeeIMPL(int tn, String t, String ln, String fn, String lID, String p, boolean in, boolean a, boolean pa){
@@ -70,7 +70,6 @@ public class EmployeeIMPL implements Employee{
     @Override
     public void setE_TitleNum(int num) {
         this.e_tNum = num;
-
     }
 
     /**

@@ -9,7 +9,6 @@ public class User implements UserInterface {
         nameFirst = f_name;
         nameLast = l_name;
         userType = uT;
-
     }
 
     public String getLastName(){
@@ -18,16 +17,16 @@ public class User implements UserInterface {
 
     @Override
     public void setLastName(String n) {
-
+        this.nameLast = n;
     }
 
     @Override
     public String getFirstName() {
-        return null;
+        return this.nameFirst;
     }
 
     @Override
     public void setFirstName(String n) {
-
+        this.nameFirst = n;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * Employee UI
- * @athor DMF
+ * @author DMF
  */
 
 public class EmployeeUI implements EmployeeUI_Interface{
@@ -16,7 +16,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
     private HotelInterface hotel;
     private boolean employeeScreenActive;
 
-// added this to use requests - think the reqeusts should be in Hotel as a list with room number associated?
+    // added this to use requests - think the requests should be in Hotel as a list with room number associated?
     private Requests requests;
     boolean invalid = true;
 
@@ -27,7 +27,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     /**
      * sets Employee to this instance of login screen
-     * @param e
+     * @param e employee associated with this login screen
      */
     void setEmployee(EmployeeIMPL e){
         this.employee = e;
@@ -137,7 +137,6 @@ public class EmployeeUI implements EmployeeUI_Interface{
             index++;
         }
     }
-
 
     @Override
     public void viewOpenRequests() {
