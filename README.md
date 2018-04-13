@@ -29,7 +29,7 @@ Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
 Sprint Two:
 <blockquote><b>Second Sprint goal</b>:
   
-To increase functionality for our system by enhancing the user interface (for customers and employees) by implementing a calander and requests. 
+To increase functionality for our system by enhancing the user interface (for customers and employees) by implementing a calendar and requests.
 
 <b>DevTeam Sprint goal #2</b>:
 Add some muscle to that double skeleton.
