@@ -47,7 +47,7 @@ public class CustomerUI implements CustomerUIInterface {
         yOrN = yOrN.toLowerCase();
         char choice = yOrN.charAt(0);
         if(choice!='y'&&choice!='n'){
-            System.out.println("Invalid input, Please Enter 'yes' or 'no'.");
+            //System.out.println("Invalid input, Please Enter 'yes' or 'no'.");
             return 1;
         }
         System.out.println(choice);
@@ -143,7 +143,7 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("What room number: ");
                 int rmNum = 0;
                 while(rmNum == 0) {
-                    rmNum = checkChoiceInput(scan.next(), 1, hotel.getNumberOfRooms());
+                    rmNum = checkChoiceInput(scan.next(), 1, hotel.getNumberOfRooms()-1);
                 }
                 hotel.checkIn(rmNum,c);
                 if(c.isCheckedIn()){
@@ -175,13 +175,18 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
-                            rmNum=checkChoiceInput(scan.next(),0, hotel.getNumberOfRooms());
+                            rmNum=checkChoiceInput(scan.next(),0, hotel.getNumberOfRooms()-1);
                         }
                         if(hotel.getRoom(rmNum).getIfAvailable()) {
                             System.out.println("Please enter your customer ID: ");
                             String custID = scan.next();
-                            hotel.checkRooms(rmNum, custID);
-                            valid = true;
+                            if(hotel.getCustomer(custID)==null){
+                                System.out.println("Invalid ID.");
+                            }
+                            else {
+                                hotel.checkRooms(rmNum, custID);
+                                valid = true;
+                            }
                         }else{
                             System.out.println("Room not available.");
                         }
@@ -209,5 +214,6 @@ public class CustomerUI implements CustomerUIInterface {
 
     public static void main(String[] args) {
         CustomerUI ui = new CustomerUI();
+        ui.mainScreen();
     }
 }
