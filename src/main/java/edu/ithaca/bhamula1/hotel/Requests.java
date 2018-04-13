@@ -18,6 +18,7 @@ public class Requests implements RequestsInterface{
         requests.add("Room maintenance (I have broken something in this room)");
     	requests.add("Refill minibar");
 	    requests.add("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'");
+        requests.add("Another Bathtub! A balcony bathtub! I wish to gaze upon the splendour of the world as I bathe");
     }
 
     //view the requests a customer can make
