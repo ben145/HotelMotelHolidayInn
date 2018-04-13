@@ -12,6 +12,7 @@ public class CustomerUI implements CustomerUIInterface {
 
     public CustomerUI(){
         hotel = createHotel();
+        //mainScreen();
     }
 
     @Override
@@ -42,13 +43,24 @@ public class CustomerUI implements CustomerUIInterface {
         }
     }
 
+    public char checkYorN(String yOrN){
+        yOrN = yOrN.toLowerCase();
+        char choice = yOrN.charAt(0);
+        if(choice!='y'&&choice!='n'){
+            System.out.println("Invalid input, Please Enter 'yes' or 'no'.");
+            return 1;
+        }
+        System.out.println(choice);
+        return choice;
+    }
+
     public int mainScreen(){
 
         int firstOption = 0;
 
         System.out.println("Welcome to {insert hotel name here}");
         //login or room view loop
-        while (firstOption != 5) {
+        while (firstOption != 4) {
             System.out.println("Would you like to:\n" +
                     "1) sign in\n" +
                     "2) sign up\n" +
@@ -60,6 +72,7 @@ public class CustomerUI implements CustomerUIInterface {
                 firstOption = checkChoiceInput(scan.next(), 1, 5);
             }
 
+            //SIGN IN
             if(firstOption==1) {
                 System.out.println("Sign In");
                 System.out.println("Type Your First Name: ");
@@ -78,6 +91,7 @@ public class CustomerUI implements CustomerUIInterface {
                 }
             }
 
+            //SIGN UP
             else if(firstOption==2) {
                 System.out.println("Sign Up");
                 System.out.println("Type Your First Name: ");
@@ -89,19 +103,24 @@ public class CustomerUI implements CustomerUIInterface {
                 firstOption = loggedIn(hotel.getCustomer(firstName, lastName), hotel);
             }
 
+            //VIEW ROOMS
             else if(firstOption == 3){
                 System.out.println("View Rooms ");
                 System.out.println(hotel.viewOrderedAvailableRooms());
-                System.out.println("*If you would like to reserve a room, you must create an account or log in first*");
+                System.out.println("*If you would like to reserve a room, you must create an account or log in first*\n");
             }
 
+            //QUIT
             else if(firstOption == 4){
                 System.out.println("Thank you");
+                return 0;
             }
 
+            //EMPLOYEE LOGIN
             else if(firstOption == 5){
                 employeeLogScreen(hotel);
             }
+            firstOption = 0;
         }
         return 0;
     }
@@ -109,7 +128,7 @@ public class CustomerUI implements CustomerUIInterface {
     public int loggedIn(CustomerInterface c, HotelInterface hotel){
         int option =0;
         System.out.println("Welcome " + c.getName());
-        while(option!=5) {
+        while(option!=4) {
             System.out.println("Would you like to \n" +
                     "1)check in \n" +
                     "2) review rooms \n" +
@@ -118,6 +137,7 @@ public class CustomerUI implements CustomerUIInterface {
             while(option == 0) {
                 option = checkChoiceInput(scan.next(),1,4);
             }
+            //CHECK IN
             if(option == 1){
                 System.out.println("Check In");
                 System.out.println("What room number: ");
@@ -131,28 +151,63 @@ public class CustomerUI implements CustomerUIInterface {
                 }
             }
 
+            //REVIEW ROOMS
             else if(option == 2){
                 System.out.println("Review Rooms");
                 System.out.println("View Available Rooms  ");
                 System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println();
             }
 
+            //RESERVE ROOM
             else if(option == 3){
                 System.out.println("Reserve Room");
                 System.out.println(hotel.viewOrderedAvailableRooms());
                 boolean valid = false;
-                
+                System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Yes or No and hit enter");
+                char r = 1;
+                while(r==1) {
+                    String respond = scan.next();
+                    r = checkYorN(respond);
+                }
+                switch(r){
+                    case 'y':
+                        System.out.println("\nPlease enter the room number you wish to reserve: ");
+                        int rmNum = 0;
+                        while(rmNum==0){
+                            rmNum=checkChoiceInput(scan.next(),0, hotel.getNumberOfRooms());
+                        }
+                        if(hotel.getRoom(rmNum).getIfAvailable()) {
+                            System.out.println("Please enter your customer ID: ");
+                            String custID = scan.next();
+                            hotel.checkRooms(rmNum, custID);
+                            valid = true;
+                        }else{
+                            System.out.println("Room not available.");
+                        }
+                        break;
+                    case 'n':
+                        System.out.println("Thank you, please visit again");
+                        valid = true;
+                        break;
+                }
             }
+
+            else if(option == 4){
+                return 4;
+            }
+            option = 0;
         }
         return 4;
     }
 
     public int checkedInMenu(CustomerInterface c){
+        System.out.println("Welcome! We hope you enjoy your stay.");
+        //Request Stuff and check out
         return 4;
     }
 
     public static void main(String[] args) {
         CustomerUI ui = new CustomerUI();
-
     }
 }
