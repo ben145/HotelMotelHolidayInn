@@ -128,14 +128,15 @@ public class CustomerUI implements CustomerUIInterface {
     public int loggedIn(CustomerInterface c, HotelInterface hotel){
         int option =0;
         System.out.println("Welcome " + c.getName());
-        while(option!=4) {
+        while(option!=5) {
             System.out.println("Would you like to \n" +
                     "1)check in \n" +
                     "2) review rooms \n" +
                     "3) reserve room \n" +
-                    "4) quit\n");
+                    "4) cancel room reservation \n" +
+                    "5) quit\n");
             while(option == 0) {
-                option = checkChoiceInput(scan.next(),1,4);
+                option = checkChoiceInput(scan.next(),1,5);
             }
             //CHECK IN
             if(option == 1){
@@ -199,6 +200,24 @@ public class CustomerUI implements CustomerUIInterface {
             }
 
             else if(option == 4){
+                //CANCEL ROOM RESERVATION
+                System.out.println("Cancel Room Reservation");
+                if(c.getReservation().equals(null)){
+                    System.out.println("You do not currently have a room reserved");
+                }
+                else {
+                    System.out.println("We are sorry to here you will not be staying with us please contact us with any complaints.");
+                    System.out.println("Which room do you wish to check out of?");
+                    int rmNum = 0;
+                    while (rmNum == 0) {
+                        rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms() - 1);
+                    }
+                    //need to actually cancel the reservation
+                }
+
+            }
+
+            else if(option == 5){
                 return 4;
             }
             option = 0;
