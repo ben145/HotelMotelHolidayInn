@@ -35,6 +35,7 @@ public class CustomerUI implements CustomerUIInterface {
                 return choice;
             }
             else{
+                System.out.println("Invalid input. Please enter a choice from "+lowestChoice+" to "+highestChoice);
                 return 0;
             }
         }catch(NumberFormatException e){
@@ -47,11 +48,24 @@ public class CustomerUI implements CustomerUIInterface {
         yOrN = yOrN.toLowerCase();
         char choice = yOrN.charAt(0);
         if(choice!='y'&&choice!='n'){
-            //System.out.println("Invalid input, Please Enter 'yes' or 'no'.");
+            System.out.println("Invalid input, Please Enter 'yes' or 'no'.");
             return 1;
         }
-        System.out.println(choice);
+        //System.out.println(choice);
         return choice;
+    }
+
+    public int signIn(String firstName, String ID){
+        if (hotel.getCustomer(ID) == null) {
+            System.out.println("Incorrect account information");
+        } else {
+            hotel.logIn(firstName, ID);
+            if (hotel.getCustomer(ID).getLoggedIn()) {
+                int r = loggedIn(hotel.getCustomer(ID), hotel);
+                return r;
+            }
+        }
+        return 0;
     }
 
     public int mainScreen(){
@@ -69,35 +83,28 @@ public class CustomerUI implements CustomerUIInterface {
                     "5) -Staff Login-\n\n");
 
             while(firstOption == 0) {
-                firstOption = checkChoiceInput(scan.next(), 1, 5);
+                firstOption = checkChoiceInput(scan.nextLine(), 1, 5);
             }
 
             //SIGN IN
             if(firstOption==1) {
                 System.out.println("Sign In");
                 System.out.println("Type Your First Name: ");
-                String firstName = scan.next();
+                String firstName = scan.nextLine();
                 //System.out.println(firstName);
                 System.out.println("Type Your User ID: ");
-                String id = scan.next();
+                String id = scan.nextLine();
                 //System.out.println(id);
-                if (hotel.getCustomer(id) == null) {
-                    System.out.println("Incorrect account information");
-                } else {
-                    hotel.logIn(firstName, id);
-                    if (hotel.getCustomer(id).getLoggedIn()) {
-                        firstOption = loggedIn(hotel.getCustomer(id), hotel);
-                    }
-                }
+                firstOption = signIn(firstName, id);
             }
 
             //SIGN UP
             else if(firstOption==2) {
                 System.out.println("Sign Up");
                 System.out.println("Type Your First Name: ");
-                String firstName = scan.next();
+                String firstName = scan.nextLine();
                 System.out.println("Type Your Last Name: ");
-                String lastName = scan.next();
+                String lastName = scan.nextLine();
                 hotel.createAccount(firstName, lastName);
                 String id = hotel.getCustomer(firstName, lastName).getId();
                 firstOption = loggedIn(hotel.getCustomer(firstName, lastName), hotel);
@@ -130,21 +137,21 @@ public class CustomerUI implements CustomerUIInterface {
         System.out.println("Welcome " + c.getName());
         while(option!=5) {
             System.out.println("Would you like to \n" +
-                    "1)check in \n" +
+                    "1) check in \n" +
                     "2) review rooms \n" +
                     "3) reserve room \n" +
                     "4) cancel room reservation \n" +
                     "5) quit\n");
             while(option == 0) {
-                option = checkChoiceInput(scan.next(),1,5);
+                option = checkChoiceInput(scan.nextLine(),1,5);
             }
             //CHECK IN
             if(option == 1){
                 System.out.println("Check In");
-                System.out.println("What room number: ");
+                System.out.println("What is your room number: ");
                 int rmNum = 0;
                 while(rmNum == 0) {
-                    rmNum = checkChoiceInput(scan.next(), 1, hotel.getNumberOfRooms()-1);
+                    rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
                 }
                 hotel.checkIn(rmNum,c);
                 if(c.isCheckedIn()){
@@ -168,7 +175,7 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Yes or No and hit enter");
                 char r = 1;
                 while(r==1) {
-                    String respond = scan.next();
+                    String respond = scan.nextLine();
                     r = checkYorN(respond);
                 }
                 switch(r){
@@ -176,11 +183,11 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
-                            rmNum=checkChoiceInput(scan.next(),0, hotel.getNumberOfRooms()-1);
+                            rmNum=checkChoiceInput(scan.nextLine(),0, hotel.getNumberOfRooms()-1);
                         }
                         if(hotel.getRoom(rmNum).getIfAvailable()) {
                             System.out.println("Please enter your customer ID: ");
-                            String custID = scan.next();
+                            String custID = scan.nextLine();
                             if(hotel.getCustomer(custID)==null){
                                 System.out.println("Invalid ID.");
                             }
