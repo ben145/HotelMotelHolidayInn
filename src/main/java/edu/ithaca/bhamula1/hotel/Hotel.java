@@ -15,6 +15,7 @@ public class Hotel implements HotelInterface {
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
     private List<InventoryInterface> inventory;
+    public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
 
     public Hotel(){
@@ -38,6 +39,9 @@ public class Hotel implements HotelInterface {
         //hotel inventory w/ sample population
         inventory = new ArrayList<InventoryInterface>();
         testInventory();
+
+        //linked list of active requests
+        activeRequests = new LinkedList<ActiveRequest>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
