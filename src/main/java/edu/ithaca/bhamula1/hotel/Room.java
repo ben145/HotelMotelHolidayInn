@@ -3,6 +3,7 @@ package edu.ithaca.bhamula1.hotel;
 /**
  * Created by Ben on 3/22/2018.
  */
+
 public class Room implements RoomInterface {
 
     boolean available;
@@ -132,4 +133,15 @@ public class Room implements RoomInterface {
     public boolean getCheckedIn(){
         return this.checkedIn;
     }
+
+    public void makeRequestFromRoom(){
+        Requests req = new Requests();
+        req.makeRequest(roomNumber);
+    }
+
+    public void viewAvailableRequests(){
+        Requests req = new Requests();
+        req.viewRequests();
+    }
+
 }

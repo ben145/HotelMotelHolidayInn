@@ -4,15 +4,49 @@ import java.util.ArrayList;
 import java.util.Scanner;
 class ActiveRequest{
     String request;
-    String roomNumber;
+    int roomNumber;
     String employeeId;
     boolean active;
 
-    public ActiveRequest(String request, String roomNumber){
+    //constructor
+    public ActiveRequest(String request, int roomNumber){
         this.request = request;
         this.roomNumber = roomNumber;
         employeeId = "";
         active = false;
+    }
+
+    //some getters with bad but very specific names so they're not confused with other getters
+    public String getActiveRequest(){
+        return request;
+    }
+    public int getRequestRoomNumber(){
+        return roomNumber;
+    }
+    public String getActiveRequestEmployeeId(){
+        return employeeId;
+    }
+    public boolean requestActive(){
+        return active;
+    }
+
+    //setters with equally bad names
+    public void setActiveRequest(String newRequest){
+        request = newRequest;
+    }
+    public void setRequestRoomNumber(int newRoomNumber){
+        roomNumber = newRoomNumber;
+    }
+    public void setActiveRequestEmployeeId(String newEmployeeId){
+        employeeId = newEmployeeId;
+    }
+    public void activateRequest(){
+        if(active){
+            active = false;
+        }
+        else{
+            active = true;
+        }
     }
 }
 public class Requests implements RequestsInterface{
@@ -57,6 +91,7 @@ public class Requests implements RequestsInterface{
                     System.out.println("Enter inventory item required: ");
                     input = scanner.nextLine();
             System.out.println("Enter number of above items required: ");
+            System.out.println();
             input2 = scanner.nextLine();
             Integer.parseInt(input2);
 
@@ -82,13 +117,15 @@ public class Requests implements RequestsInterface{
     }
 
     //allows a customer to make a request
-    public ActiveRequest makeRequest(){
+    public ActiveRequest makeRequest(int roomNumber){
         viewRequests();
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        if(Integer.parseInt(input))
-        ActiveRequest newRequest = new ActiveRequest(requests.get(Integer.parseInt(input)), roomNumber);
+        //if()
+        int inputInt = Integer.parseInt(input);
+        input = requests.get(inputInt);
+        ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
         return newRequest;
     }
 }
