@@ -47,18 +47,22 @@ class RequestsTest {
     }
 
     @Test
-    void loadRecs() {
+    void testLoadRecs() {
     }
 
     @Test
-    void addRequest() {
+    void testAddRequest() {
     }
 
     @Test
-    void removeRequest() {
+    void testRemoveRequest() {
     }
 
     @Test
-    void viewRequests() {
+    void testViewRequests() {
+    }
+    @Test
+    void testMakeRequest(){
+
     }
 }

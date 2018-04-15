@@ -29,5 +29,5 @@ public interface RequestsInterface {
     void removeRequest(String employeeId);
 
     //a customer checked in to a room can make a request
-    ActiveRequest makeRequest(int roomNumber);
+    void makeRequest(int roomNumber);
 }

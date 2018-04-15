@@ -3,6 +3,7 @@ package edu.ithaca.bhamula1.hotel;
 import java.util.ArrayList;
 import java.util.Scanner;
 import edu.ithaca.bhamula1.hotel.Hotel;
+
 class ActiveRequest{
     String request;
     int roomNumber;
@@ -119,7 +120,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows a customer to make a request
-    public ActiveRequest makeRequest(int roomNumber){
+    public void makeRequest(int roomNumber){
         viewRequests();
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
@@ -128,7 +129,6 @@ public class Requests implements RequestsInterface{
         int inputInt = Integer.parseInt(input);
         input = requests.get(inputInt);
         ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
-        //hotel.activeRequests.add(newRequest);
-        return newRequest;
+        Hotel.activeRequests.add(newRequest);
     }
 }

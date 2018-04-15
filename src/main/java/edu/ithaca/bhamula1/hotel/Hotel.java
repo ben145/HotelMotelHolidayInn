@@ -15,7 +15,7 @@ public class Hotel implements HotelInterface {
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
     private List<InventoryInterface> inventory;
-    public List<ActiveRequest> activeRequests;
+    public static List<ActiveRequest> activeRequests;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
