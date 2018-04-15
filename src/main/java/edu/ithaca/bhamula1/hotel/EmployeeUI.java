@@ -1,6 +1,5 @@
 package edu.ithaca.bhamula1.hotel;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
     private HotelInterface hotel;
     private boolean employeeScreenActive;
 
-    // added this to use requests - think the requests should be in Hotel as a list with room number associated?
+    // added this to use orderables - think the orderables should be in Hotel as a list with room number associated?
     private Requests requests;
     boolean invalid = true;
 
@@ -146,7 +145,10 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     @Override
     public void takeRequests() {
-
+        requests.viewRequests();
+        for (int i = 0; i < requests.orderables.size(); i++) {
+            if (requests.)
+        }
     }
 
     @Override
