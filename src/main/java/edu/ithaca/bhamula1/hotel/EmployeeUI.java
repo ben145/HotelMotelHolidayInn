@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import static edu.ithaca.bhamula1.hotel.Hotel.viewInventory;
+
 /**
  * Employee UI
  * @athor DMF
@@ -16,7 +18,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
     private HotelInterface hotel;
     private boolean employeeScreenActive;
 
-// added this to use requests - think the reqeusts should be in Hotel as a list with room number associated?
+// added this to use requests - think the requests should be in Hotel as a list with room number associated?
     private Requests requests;
     boolean invalid = true;
 
@@ -153,6 +155,10 @@ public class EmployeeUI implements EmployeeUI_Interface{
     @Override
     public void completeRequest() {
 
+    }
+
+    public void viewHotelInventory(){
+        viewInventory();
     }
 
     /**
