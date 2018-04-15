@@ -26,17 +26,17 @@ class RequestsTest {
         assertEquals(false, act.requestActive(),"FAIL - request prematurely active");
     }
     @Test
-    void testSetActiveRequest(String newRequest){
+    void testSetActiveRequest(){
         act.setActiveRequest("now test the setters");
         assertEquals("now test the setters", act.getActiveRequest(), "FAIL - new request name not stored");
     }
     @Test
-    void testSetRequestRoomNumber(int newRoomNumber){
+    void testSetRequestRoomNumber(){
         act.setRequestRoomNumber(69);
         assertEquals(69, act.getRequestRoomNumber(), "FAIL - new room number not stored");
     }
     @Test
-    void testSetActiveRequestEmployeeId(String newEmployeeId){
+    void testSetActiveRequestEmployeeId(){
         act.setActiveRequestEmployeeId("867-5309");
         assertEquals("867-5309", act.getActiveRequestEmployeeId(),"FAIL - employee ID not stored");
     }
