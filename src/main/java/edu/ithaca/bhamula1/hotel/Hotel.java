@@ -15,7 +15,8 @@ public class Hotel implements HotelInterface {
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
     private List<InventoryInterface> inventory;
-    private List<ActiveRequest> activeRequests;
+    public List<ActiveRequest> activeRequests;
+
     public Hotel(){
         //this was a hash map. Changed to a array list
         //the index is the room number
@@ -34,6 +35,9 @@ public class Hotel implements HotelInterface {
         //hotel inventory w/ sample population
         inventory = new ArrayList<InventoryInterface>();
         testInventory();
+
+        //linked list of active requests
+        activeRequests = new LinkedList<ActiveRequest>();
     }
 
     //only for use in testing checkin and checkout before actual function is added

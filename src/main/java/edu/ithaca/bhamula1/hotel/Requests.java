@@ -2,6 +2,7 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import edu.ithaca.bhamula1.hotel.Hotel;
 class ActiveRequest{
     String request;
     int roomNumber;
@@ -49,6 +50,7 @@ class ActiveRequest{
         }
     }
 }
+
 public class Requests implements RequestsInterface{
     public ArrayList<String> requests = new ArrayList<String>();
 
@@ -74,7 +76,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to add a request to they system
-    public void addRequest(){
+    public void addRequest(String employeeId){
         //check authorization
 
 	    System.out.println("Enter request to add: ");
@@ -103,7 +105,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to remove a request to the system
-    public void removeRequest(){
+    public void removeRequest(String employeeId){
     	//check authorization
 	
         //remove requests
@@ -126,6 +128,7 @@ public class Requests implements RequestsInterface{
         int inputInt = Integer.parseInt(input);
         input = requests.get(inputInt);
         ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
+        hotel.activeRequests.add(newRequest);
         return newRequest;
     }
 }
