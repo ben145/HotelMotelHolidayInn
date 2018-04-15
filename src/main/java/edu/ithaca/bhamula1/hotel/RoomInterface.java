@@ -43,9 +43,11 @@ public interface RoomInterface {
 
     boolean getCheckedIn();
 
-    void addReservation(Calendar date, int nightDuration);
+    int addReservation(Calendar date, int nightDuration);
 
     List<Calendar> getNotAvailTheseDays();
 
+    boolean canReserve(Calendar date, int nightDuration);
 
-}
+
+    }

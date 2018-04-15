@@ -34,6 +34,8 @@ public interface HotelInterface {
 
         void checkRooms(int rmNum, String cID, Calendar checkIn, int durration);
 
+        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration);
+
         void setCustomer();
 
         void setEmplList();

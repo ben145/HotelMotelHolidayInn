@@ -26,6 +26,7 @@ public class Hotel implements HotelInterface {
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
 
+        reservations = new ArrayList<>();
 
 
         // List of roles and employees in hotel
@@ -206,16 +207,17 @@ public class Hotel implements HotelInterface {
      * If both are valid, proceed with the reservation
      * @param rmNum
      * @param cID
-     * @Author - DMF
+     * @Author - DMF and mia
      */
-    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int durration ) {
+    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
         for (RoomInterface rm : rooms) {
             if (rm.getRoomNumber() == rmNum) {
-                System.out.println(rm.getRoomNumber());
+//                System.out.println(rm.getRoomNumber());
                 if (rm.getIfAvailable() == true) {
                     CustomerInterface cust = checkValidCust(cID);
                     if (cust.getId() != null) {
                         SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
+                        //if the room available
                         if(selRes.checkRoomAvailable()){
                             String resID = selRes.createReservationID();
                             cust.setReservation(resID);
@@ -224,7 +226,7 @@ public class Hotel implements HotelInterface {
 
 //                            rm.setIfAvailable(false);
                             //rm.setReservationName(resID);
-                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, durration);
+                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
                             reservations.add(res);
                             System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
                         }
@@ -399,4 +401,14 @@ public class Hotel implements HotelInterface {
             System.out.println(e);
         }
     }
+
+    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration){
+
+        Reservation res = new Reservation(cus, rm, checkIn, duration);
+        reservations.add(res);
+
+    }
+
 }
+
+

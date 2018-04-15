@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -49,20 +50,24 @@ public class Room implements RoomInterface {
     /*
     when a reservation is created for a room, then add the dates that are booked here
     shouldn't add the dates if some of the dates are already in the blocked out list
+    will return 1 if it works
+    will return -1 if it doesn't not work because there is reservation conflicts
      */
-    public void addReservation(Calendar date, int nightDuration){
+    public int addReservation(Calendar date, int nightDuration){
+        boolean notAvailAlreadyContains = false;
 
-        if(!notAvailTheseDays.contains(date)){
             List<Calendar> blockedOutDates = new ArrayList<>();
-            blockedOutDates.add(date);
-
-            boolean notAvailAlreadyContains = false;
 
             for(int i =0; i< nightDuration; i++ ) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.setTime(date.getTime());
                 date.add(Calendar.DAY_OF_MONTH, 1);
-                blockedOutDates.add(date);
+                blockedOutDates.add(newDate);
+                //                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
 
-                if (notAvailTheseDays.contains(date)) {
+//                System.out.println("here "+ dateFormat.format(newDate.getTime()));
+
+                if (notAvailTheseDays.contains(newDate)) {
                       notAvailAlreadyContains = true;
                       break;
                 }
@@ -70,11 +75,54 @@ public class Room implements RoomInterface {
 
             if(!notAvailAlreadyContains){
                 this.notAvailTheseDays.addAll(blockedOutDates);
+                return 1;
+
+            }else{
+                return -1;
+            }
+
+    }
+
+    public boolean canReserve(Calendar date, int nightDuration){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+
+        for(int x =0; x<notAvailTheseDays.size(); x++){
+            System.out.println("ALREADY IN HERE " + dateFormat.format(notAvailTheseDays.get(x).getTime()));
+        }
+
+
+        boolean notAvailAlreadyContains = false;
+
+        for(int i =0; i< nightDuration; i++ ) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.setTime(date.getTime());
+            date.add(Calendar.DAY_OF_MONTH, 1);
+            System.out.println("here "+ dateFormat.format(newDate.getTime()));
+
+
+            for(int x =0; x<notAvailTheseDays.size(); x++){
+                System.out.println("DOES IT HERE HEREKJ");
+                if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(newDate.getTime()))){
+                    System.out.println("does this work pleas work");
+                    notAvailAlreadyContains = true;
+
+                }
 
             }
 
+
+//            if (notAvailTheseDays.contains(newDate)) {
+//                System.out.println("HELLO? DO WE REACH HERE");
+//                break;
+//            }
         }
 
+        if(!notAvailAlreadyContains){
+            return true;
+
+        }else{
+            return false;
+        }
     }
 
     public List<Calendar> getNotAvailTheseDays(){
@@ -177,4 +225,6 @@ public class Room implements RoomInterface {
     public boolean getCheckedIn(){
         return this.checkedIn;
     }
+
+
 }
