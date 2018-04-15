@@ -15,6 +15,8 @@ public class Hotel implements HotelInterface {
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
     private List<InventoryInterface> inventory;
+    public static List<ActiveRequest> activeRequests;
+    private List<Reservation> reservations;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
@@ -25,6 +27,9 @@ public class Hotel implements HotelInterface {
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
 
+        reservations = new ArrayList<>();
+
+
         // List of roles and employees in hotel
         employees = new ArrayList<>();
         if(employees.isEmpty()) {
@@ -34,6 +39,9 @@ public class Hotel implements HotelInterface {
         //hotel inventory w/ sample population
         inventory = new ArrayList<InventoryInterface>();
         testInventory();
+
+        //linked list of active requests
+        activeRequests = new LinkedList<ActiveRequest>();
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -196,28 +204,34 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
+
+
     /**
      * function to call function to check for valid customer and to check room is available
      * If both are valid, proceed with the reservation
      * @param rmNum
      * @param cID
-     * @Author - DMF
+     * @Author - DMF and mia
      */
-    public void checkRooms(int rmNum, String cID) {
+    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
         for (RoomInterface rm : rooms) {
             if (rm.getRoomNumber() == rmNum) {
-                System.out.println(rm.getRoomNumber());
+//                System.out.println(rm.getRoomNumber());
                 if (rm.getIfAvailable() == true) {
                     CustomerInterface cust = checkValidCust(cID);
                     if (cust.getId() != null) {
                         SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
+                        //if the room available
                         if(selRes.checkRoomAvailable()){
                             String resID = selRes.createReservationID();
                             cust.setReservation(resID);
                             cust.setRoom(rmNum);
                             rm.setReservationName(cust.getName());
-                            rm.setIfAvailable(false);
+
+//                            rm.setIfAvailable(false);
                             //rm.setReservationName(resID);
+                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
+                            reservations.add(res);
                             System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
                         }
                     }
@@ -391,8 +405,18 @@ public class Hotel implements HotelInterface {
             System.out.println(e);
         }
     }
-
+    
     public int getNumberOfRooms() {
         return numberOfRooms;
     }
+
+    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration){
+
+        Reservation res = new Reservation(cus, rm, checkIn, duration);
+        reservations.add(res);
+
+    }
+
 }
+
+

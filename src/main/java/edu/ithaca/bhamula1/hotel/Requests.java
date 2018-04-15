@@ -2,6 +2,55 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import edu.ithaca.bhamula1.hotel.Hotel;
+
+class ActiveRequest{
+    String request;
+    int roomNumber;
+    String employeeId;
+    boolean active;
+
+    //constructor
+    public ActiveRequest(String request, int roomNumber){
+        this.request = request;
+        this.roomNumber = roomNumber;
+        employeeId = "";
+        active = false;
+    }
+
+    //some getters with bad but very specific names so they're not confused with other getters
+    public String getActiveRequest(){
+        return request;
+    }
+    public int getRequestRoomNumber(){
+        return roomNumber;
+    }
+    public String getActiveRequestEmployeeId(){
+        return employeeId;
+    }
+    public boolean requestActive(){
+        return active;
+    }
+
+    //setters with equally bad names
+    public void setActiveRequest(String newRequest){
+        request = newRequest;
+    }
+    public void setRequestRoomNumber(int newRoomNumber){
+        roomNumber = newRoomNumber;
+    }
+    public void setActiveRequestEmployeeId(String newEmployeeId){
+        employeeId = newEmployeeId;
+    }
+    public void activateRequest(){
+        if(active){
+            active = false;
+        }
+        else{
+            active = true;
+        }
+    }
+}
 
 public class Requests implements RequestsInterface{
     public ArrayList<String> requests = new ArrayList<String>();
@@ -28,7 +77,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to add a request to they system
-    public void addRequest(){
+    public void addRequest(String employeeId){
         //check authorization
 
 	    System.out.println("Enter request to add: ");
@@ -45,6 +94,7 @@ public class Requests implements RequestsInterface{
                     System.out.println("Enter inventory item required: ");
                     input = scanner.nextLine();
             System.out.println("Enter number of above items required: ");
+            System.out.println();
             input2 = scanner.nextLine();
             Integer.parseInt(input2);
 
@@ -56,7 +106,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to remove a request to the system
-    public void removeRequest(){
+    public void removeRequest(String employeeId){
     	//check authorization
 	
         //remove requests
@@ -69,7 +119,16 @@ public class Requests implements RequestsInterface{
         System.out.println("Request removed from options list");
     }
 
-
-
     //allows a customer to make a request
+    public void makeRequest(int roomNumber){
+        viewRequests();
+        System.out.println("Enter request number: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        //if()
+        int inputInt = Integer.parseInt(input);
+        input = requests.get(inputInt);
+        ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
+        Hotel.activeRequests.add(newRequest);
+    }
 }

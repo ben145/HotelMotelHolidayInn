@@ -1,6 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public interface HotelInterface {
@@ -31,7 +32,9 @@ public interface HotelInterface {
 
         CustomerInterface checkValidCust(String c);
 
-        void checkRooms(int rmNum, String cID);
+        void checkRooms(int rmNum, String cID, Calendar checkIn, int durration);
+
+        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration);
 
         void setCustomer();
 
