@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Reservation {
 
-    Customer customer;
-    Room room;
+    CustomerInterface customer;
+    RoomInterface room;
     //how many nights they are going to stay
     int nightDurration;
     Calendar checkInDate;
@@ -19,18 +19,18 @@ public class Reservation {
     }
 
 
-    public Reservation (Customer customer, Room room, Calendar checkInDate, int nightDurration){
+    public Reservation (CustomerInterface customer, RoomInterface room, Calendar checkInDate, int nightDurration){
         this.customer = customer;
         this.room = room;
         this.nightDurration = nightDurration;
         this.checkInDate = checkInDate;
     }
 
-    public Customer getCustomer(){
+    public CustomerInterface getCustomer(){
         return this.customer;
     }
 
-    public Room getRoom(){
+    public RoomInterface getRoom(){
         return this.room;
     }
 

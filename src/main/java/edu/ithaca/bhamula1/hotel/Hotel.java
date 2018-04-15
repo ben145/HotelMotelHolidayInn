@@ -199,6 +199,8 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
+
+
     /**
      * function to call function to check for valid customer and to check room is available
      * If both are valid, proceed with the reservation
@@ -206,7 +208,7 @@ public class Hotel implements HotelInterface {
      * @param cID
      * @Author - DMF
      */
-    public void checkRooms(int rmNum, String cID) {
+    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int durration ) {
         for (RoomInterface rm : rooms) {
             if (rm.getRoomNumber() == rmNum) {
                 System.out.println(rm.getRoomNumber());
@@ -219,8 +221,11 @@ public class Hotel implements HotelInterface {
                             cust.setReservation(resID);
                             cust.setRoom(rmNum);
                             rm.setReservationName(cust.getName());
-                            rm.setIfAvailable(false);
+
+//                            rm.setIfAvailable(false);
                             //rm.setReservationName(resID);
+                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, durration);
+                            reservations.add(res);
                             System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
                         }
                     }

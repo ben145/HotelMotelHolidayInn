@@ -1,8 +1,12 @@
 package edu.ithaca.bhamula1.hotel;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.jupiter.api.Test;
 
 import org.junit.Assert;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class RoomTest {
@@ -98,5 +102,42 @@ class RoomTest {
         Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0 Available: true", exampleRoom.toString());
 
     }
+
+
+    @Test
+    public void addReservationTest(){
+
+
+        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+
+        Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
+        exampleRoom.addReservation(firstRes, 1);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+
+
+        List<Calendar> notAvailDays = exampleRoom.getNotAvailTheseDays();
+
+
+//        Assert.assertEquals(dateFormat.format(rev.getCheckInDate().getTime()), "04/15/2018");
+
+
+        for(int i=0; i<notAvailDays.size(); i++){
+            System.out.println(dateFormat.format(notAvailDays.get(i).getTime()));
+        }
+
+//        Assert.assertEquals(dateFormat.format(notAvailDays.get(0).getTime()), "04/15/2018" );
+
+
+        Calendar secondRes = new GregorianCalendar(2018, Calendar.APRIL, 5);
+        exampleRoom.addReservation(secondRes, 3);
+
+
+
+
+    }
+
+
+
+
 
 }

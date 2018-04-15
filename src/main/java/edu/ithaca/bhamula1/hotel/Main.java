@@ -75,7 +75,15 @@ public abstract class Main {
 
         }else if(option ==4){
             System.out.println("Reserve Room");
-            System.out.println(hotel.viewOrderedAvailableRooms());
+
+            //need to select date range
+
+            Calendar checkinDate = new GregorianCalendar(2018,Calendar.APRIL, 10 );
+            int nightDurration = 2;
+
+            //view rooms that are within that range
+
+                System.out.println(hotel.viewOrderedAvailableRooms());
                 boolean valid = false;
             // as long as room selectino is invalid, keep asking until a valid input is given.
             // n will end the loop, essentially ending the program
@@ -86,10 +94,11 @@ public abstract class Main {
                 if (Objects.equals(respond,"Y")||Objects.equals(respond,"y")) {
                     System.out.println("\nPlease enter the room number you wish to reserve: ");
                     int rmNum = scan.nextInt();
+
                     if(hotel.getRoom(rmNum).getIfAvailable()) {
                         System.out.println("Please enter your customer ID: ");
                         String custID = scan.next();
-                        hotel.checkRooms(rmNum, custID);
+                        hotel.checkRooms(rmNum, custID, checkinDate, nightDurration);
                         valid = true;
                     }else{
                         System.out.println("invalid selection, please try again");

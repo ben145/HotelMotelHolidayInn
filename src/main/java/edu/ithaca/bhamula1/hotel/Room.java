@@ -1,5 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.util.*;
+
 /**
  * Created by Ben on 3/22/2018.
  */
@@ -13,6 +15,7 @@ public class Room implements RoomInterface {
     String amenities; // such as view?
     boolean checkedIn;
     String reservationName;
+    List<Calendar> notAvailTheseDays;
 
     public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities){
         this.available = avail;
@@ -22,6 +25,7 @@ public class Room implements RoomInterface {
         this.bedType = bedType;
         this.amenities = amenities;
         this.checkedIn = false;
+        this.notAvailTheseDays = new ArrayList<>();
     }
 
     public Room(){
@@ -33,12 +37,51 @@ public class Room implements RoomInterface {
         this.bedType = "";
         this.amenities = "";
         this.checkedIn = false;
+        this.notAvailTheseDays = new ArrayList<>();
     }
 
 
     public void setIfAvailable(boolean avail){
         this.available = avail;
     }
+
+
+    /*
+    when a reservation is created for a room, then add the dates that are booked here
+    shouldn't add the dates if some of the dates are already in the blocked out list
+     */
+    public void addReservation(Calendar date, int nightDuration){
+
+        if(!notAvailTheseDays.contains(date)){
+            List<Calendar> blockedOutDates = new ArrayList<>();
+            blockedOutDates.add(date);
+
+            boolean notAvailAlreadyContains = false;
+
+            for(int i =0; i< nightDuration; i++ ) {
+                date.add(Calendar.DAY_OF_MONTH, 1);
+                blockedOutDates.add(date);
+
+                if (notAvailTheseDays.contains(date)) {
+                      notAvailAlreadyContains = true;
+                      break;
+                }
+            }
+
+            if(!notAvailAlreadyContains){
+                this.notAvailTheseDays.addAll(blockedOutDates);
+
+            }
+
+        }
+
+    }
+
+    public List<Calendar> getNotAvailTheseDays(){
+        return this.notAvailTheseDays;
+    }
+
+
 
     public void setRoomNumber(int num){
         this.roomNumber = num;
@@ -72,6 +115,8 @@ public class Room implements RoomInterface {
     public boolean getIfAvailable(){
         return this.available;
     }
+
+
 
     public int getRoomNumber(){
         return this.roomNumber;
