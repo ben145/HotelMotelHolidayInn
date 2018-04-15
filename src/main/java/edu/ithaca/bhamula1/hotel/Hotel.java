@@ -15,6 +15,7 @@ public class Hotel implements HotelInterface {
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
     private List<InventoryInterface> inventory;
+    private List<Reservation> reservations;
 
     public Hotel(){
         //this was a hash map. Changed to a array list
@@ -24,6 +25,8 @@ public class Hotel implements HotelInterface {
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
+
+
 
         // List of roles and employees in hotel
         employees = new ArrayList<>();
