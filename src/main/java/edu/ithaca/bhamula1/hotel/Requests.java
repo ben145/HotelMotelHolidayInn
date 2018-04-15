@@ -128,7 +128,7 @@ public class Requests implements RequestsInterface{
         int inputInt = Integer.parseInt(input);
         input = requests.get(inputInt);
         ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
-        hotel.activeRequests.add(newRequest);
+        //hotel.activeRequests.add(newRequest);
         return newRequest;
     }
 }
