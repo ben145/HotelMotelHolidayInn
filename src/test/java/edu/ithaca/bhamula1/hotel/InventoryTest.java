@@ -31,6 +31,6 @@ public class InventoryTest {
     void testToString_Inventory(){
         Inventory important = new Inventory("our lord and savior jesus christ", 13);
 
-        assertEquals("our lord and savior jesus christ, 13", important.toString_Inventory());
+        assertEquals("our lord and savior jesus christ, 13", important.toString_Inventory(), "FAIL - nice try, toString_Inventory");
     }
 }
