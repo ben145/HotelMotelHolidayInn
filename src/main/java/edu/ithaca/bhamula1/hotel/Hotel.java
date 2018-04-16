@@ -127,11 +127,11 @@ public class Hotel implements HotelInterface {
      * @Author Mia
      * @return
      */
-    public String viewOrderedAvailableRooms(){
+    public String viewOrderedRooms(){
 
         String str="";
         for (RoomInterface rm: rooms) {
-            if(rm.getRoomNumber()!=0 && rm.getIfAvailable()) {
+            if(rm.getRoomNumber()!=0 ) {
 
                 if (str.equals("")) {
                     str +=  rm.toString();
@@ -145,6 +145,27 @@ public class Hotel implements HotelInterface {
         }
         return str;
     }
+
+
+    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration){
+
+        String str="";
+        for (RoomInterface rm: rooms) {
+            if(rm.getRoomNumber()!=0 && rm.canReserve(checkin, nightDuration) ) {
+
+                if (str.equals("")) {
+                    str +=  rm.toString();
+                } else {
+                    str += "\n" + rm.toString();
+                }
+
+
+            }
+
+        }
+        return str;
+
+        }
 
 
     public void logIn (String name, String id){
@@ -205,40 +226,40 @@ public class Hotel implements HotelInterface {
     }
 
 
-
-    /**
-     * function to call function to check for valid customer and to check room is available
-     * If both are valid, proceed with the reservation
-     * @param rmNum
-     * @param cID
-     * @Author - DMF and mia
-     */
-    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
-        for (RoomInterface rm : rooms) {
-            if (rm.getRoomNumber() == rmNum) {
-//                System.out.println(rm.getRoomNumber());
-                if (rm.getIfAvailable() == true) {
-                    CustomerInterface cust = checkValidCust(cID);
-                    if (cust.getId() != null) {
-                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
-                        //if the room available
-                        if(selRes.checkRoomAvailable()){
-                            String resID = selRes.createReservationID();
-                            cust.setReservation(resID);
-                            cust.setRoom(rmNum);
-                            rm.setReservationName(cust.getName());
-
-//                            rm.setIfAvailable(false);
-                            //rm.setReservationName(resID);
-                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
-                            reservations.add(res);
-                            System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
-                        }
-                    }
-                }
-            }
-        }
-    }
+//
+//    /**
+//     * function to call function to check for valid customer and to check room is available
+//     * If both are valid, proceed with the reservation
+//     * @param rmNum
+//     * @param cID
+//     * @Author - DMF and mia
+//     */
+//    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
+//        for (RoomInterface rm : rooms) {
+//            if (rm.getRoomNumber() == rmNum) {
+////                System.out.println(rm.getRoomNumber());
+//                if (rm.getIfAvailable() == true) {
+//                    CustomerInterface cust = checkValidCust(cID);
+//                    if (cust.getId() != null) {
+//                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
+//                        //if the room available
+//                        if(selRes.checkRoomAvailable()){
+//                            String resID = selRes.createReservationID();
+//                            cust.setReservation(resID);
+//                            cust.setRoom(rmNum);
+//                            rm.setReservationName(cust.getName());
+//
+////                            rm.setIfAvailable(false);
+//                            //rm.setReservationName(resID);
+//                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
+//                            reservations.add(res);
+//                            System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     /**
@@ -406,6 +427,13 @@ public class Hotel implements HotelInterface {
         }
     }
 
+    /**
+     *
+     * @param cus
+     * @param rm
+     * @param checkIn
+     * @param duration
+     */
     public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration){
 
         Reservation res = new Reservation(cus, rm, checkIn, duration);
@@ -417,6 +445,10 @@ public class Hotel implements HotelInterface {
         for(Inventory x : inventory){
             System.out.println(x.toString_Inventory());
         }
+    }
+
+    public  List<Reservation> getReservations(){
+        return reservations;
     }
 
 }
