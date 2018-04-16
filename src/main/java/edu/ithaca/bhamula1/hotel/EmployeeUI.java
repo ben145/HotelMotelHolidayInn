@@ -34,7 +34,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     /**
      * returns employee title - used for test
-     * @return
+     * @return employee's title
      */
     public String getEmplTitle(){
         return employee.getE_Title();
@@ -42,7 +42,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     /**
      * All UI interaction below - Employee can make choice if logged in
-     * Takes in Hotel object oto get employee list and other data associated with the hotel
+     * Takes in Hotel object to get employee list and other data associated with the hotel
      * @param h
      */
     public void uiInteraction(HotelInterface h){
@@ -111,14 +111,14 @@ public class EmployeeUI implements EmployeeUI_Interface{
      * Validates E Login and PWD based on user input
      * compared to employee list
      * @param el
-     * @param epwd
+     * @param epwd employee password
      * @author - DMF
      */
     @Override
     public void checkEmployeeLogIn(String el, String epwd){
 
         int index = 0;
-        List<EmployeeIMPL>empls = hotel.getEList();
+        List<EmployeeIMPL> empls = hotel.getEList();
         Iterator iterator = hotel.getEList().iterator();
         while(iterator.hasNext() && index!=hotel.getEList().size()){
             //System.out.println(index + "  " +employees.size());
@@ -145,7 +145,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
     @Override
     public void takeRequests() {
-        requests.viewRequests();
+        viewOpenRequests();
         for (int i = 0; i < requests.orderables.size(); i++) {
             if (requests.)
         }

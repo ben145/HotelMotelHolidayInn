@@ -10,7 +10,7 @@ import java.util.*;
 public class Hotel implements HotelInterface {
 
     //have to set this!
-    int numberOfRooms =0;
+    private int numberOfRooms =0;
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
@@ -366,6 +366,10 @@ public class Hotel implements HotelInterface {
     @Override
     public List getEList(){
         return employees;
+    }
+
+    public List getMadeRequests() {
+        return madeRequests;
     }
 
     /*
