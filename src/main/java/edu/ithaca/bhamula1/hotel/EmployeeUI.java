@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import static edu.ithaca.bhamula1.hotel.Hotel.activeRequests;
 import static edu.ithaca.bhamula1.hotel.Hotel.viewInventory;
 
 /**
@@ -140,10 +141,25 @@ public class EmployeeUI implements EmployeeUI_Interface{
         }
     }
 
-
+    /**
+     * Function displays active requests made for specific room numbers
+     * uses the static list of activeRequests in Hotel
+     * If no requests, displays a message that there are no active requests
+     * @author DMF
+     */
     @Override
     public void viewOpenRequests() {
-        requests.viewRequests();
+
+        if(Hotel.activeRequests.size()>0) {
+
+            System.out.println("\n-- Current number of Active Guest Requests -->  "+ Hotel.activeRequests.size()+"\n");
+            for (int a = 0; a < activeRequests.size(); a++) {
+                System.out.format("%-15s %15s %n","Active Request: " + (a+1) , "~ Room Number: " + activeRequests.get(a).roomNumber + "\t request:  " + activeRequests.get(a).request);
+            }
+            System.out.println("\n---- End Active Guest Requests ----");
+        }else{
+            System.out.println("\n<-- There are no Active Guest Requests at this time -->\n");
+        }
 
     }
 
