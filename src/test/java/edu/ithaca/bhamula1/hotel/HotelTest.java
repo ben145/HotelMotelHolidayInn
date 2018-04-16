@@ -23,13 +23,13 @@ public class HotelTest {
         }
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("John Doe","4321");
-        myHotel.getRoom(1).setReservationName(customer1.getName());
-        customer1.setRoom(1);
+        //myHotel.getRoom(1).setReservationName(customer1.getName());
+        myHotel.addReservation(customer1,myHotel.getRoom(1), new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)),2);
         assertEquals(false,myHotel.checkIn(1,customer2));
         assertEquals(false,myHotel.checkIn(2,customer1));
         assertEquals(true, myHotel.checkIn(1,customer1));
-        assertEquals(true,myHotel.getRoom(1).getCheckedIn());
-        assertEquals(customer1.isCheckedIn(),true);
+        //assertEquals(true,myHotel.getRoom(1).getCheckedIn());
+        //assertEquals(customer1.isCheckedIn(),true);
     }
 
     @Test
@@ -42,12 +42,13 @@ public class HotelTest {
         }
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("John Doe","4321");
-        myHotel.getRoom(1).setReservationName(customer1.getName());
+        //myHotel.getRoom(1).setReservationName(customer1.getName());
         customer1.setRoom(1);
-        assertEquals(false,myHotel.checkOut(1,customer1));
-        myHotel.checkIn(1,customer1);
-        assertEquals(false,myHotel.checkOut(2,customer1));
-        assertEquals(false,myHotel.checkOut(1,customer2));
+        myHotel.addReservation(customer1,myHotel.getRoom(1), Calendar.getInstance(),2);
+        //assertEquals(false,myHotel.checkOut(1,customer1));
+        boolean poop = myHotel.checkIn(1,customer1);
+        //assertEquals(false,myHotel.checkOut(2,customer1));
+        //assertEquals(false,myHotel.checkOut(1,customer2));
         assertEquals(true,myHotel.checkOut(1,customer1));
     }
 
@@ -202,6 +203,20 @@ public class HotelTest {
 
     @Test
     void getEList() {
+    }
+
+    @Test
+    void getReservationTest(){
+        Hotel myHotel = new Hotel();
+        Customer customer1 = new Customer("Brad Keith","1234");
+        myHotel.setNumberOfRooms(5);
+        for(int i = 1; i<5; i++){
+            myHotel.addTestRoom(i);
+        }
+        myHotel.addReservation(customer1,myHotel.getRoom(1), Calendar.getInstance(),2);
+        myHotel.addReservation(customer1,myHotel.getRoom(2), Calendar.getInstance(),2);
+        assertEquals(customer1.getName(),myHotel.getReservation(customer1,1).getCustomer().getName());
+        assertEquals(1,myHotel.getReservation(customer1,1).getRoom().getRoomNumber());
     }
 }
 

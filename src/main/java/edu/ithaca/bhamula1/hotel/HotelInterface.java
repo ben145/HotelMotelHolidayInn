@@ -52,7 +52,12 @@ public interface HotelInterface {
         void printStaffVacancies();
         List getEList();
 
+        int getNumberOfRooms();
+
         void testInventory();
         //this is where "void viewInventory();" would go if it wasn't static
+
+        public Reservation removeReservation(CustomerInterface customer, int roomNumber);
+        public Reservation getReservation(CustomerInterface customer, int roomNumber);
 
 }

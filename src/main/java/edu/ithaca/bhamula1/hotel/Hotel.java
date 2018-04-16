@@ -51,31 +51,32 @@ public class Hotel implements HotelInterface {
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
         //find room
+        Reservation res = getReservation(customer,roomNumber);
         RoomInterface current = getRoom(roomNumber);
-        //check room is reserved
-        if(!current.getIfAvailable()){
-            if(customer.getName().equals(current.getReservationName())){
-                boolean c = customer.checkIn(roomNumber);
-                boolean r = current.checkIn(customer);
-                return c&r;
-            }
-            else{
-                System.out.println("You have not reserved this room. You must have reserved a room to check in.");
-                return false;
+        if(res!=null){
+            if(customer.getId()==res.getCustomer().getId()){
+                if(roomNumber==res.getRoom().getRoomNumber()){
+                    if(Calendar.getInstance().get(Calendar.YEAR)==res.getCheckInDate().get(Calendar.YEAR)
+                            &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
+                            &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
+                        customer.checkIn(roomNumber);
+                        current.checkIn(customer);
+                        removeReservation(customer,roomNumber);
+                        return true;
+                    }
+                    System.out.println("Your reservation is not for today. Please change reservation to check in today.");
+                    return false;
+                }
             }
         }
-        else{
-            System.out.println("Room "+roomNumber+" has not been reserved. A room must be reserved to be checked into.");
-            return false;
-        }
-        //find customer check matches stored room number
-        //set customer as checked in
-        //set room to be checked in
+        System.out.println("This reservation was not found. Please make a reservation or reenter information.");
+        return false;
     }
 
     public boolean checkOut(int roomNumber, CustomerInterface customer){
         //find room
         RoomInterface current = getRoom(roomNumber);
+        /*
         if(current.getCheckedIn()){
             if(customer.getName().equals(current.getReservationName())){
                 boolean c = customer.checkOut(roomNumber);
@@ -92,6 +93,11 @@ public class Hotel implements HotelInterface {
             System.out.println("This room is not checked into.");
             return false;
         }
+        */
+        boolean c = customer.checkOut(roomNumber);
+        boolean r = current.checkOut(customer);
+        System.out.println("Thank You For Visiting ");
+        return c&r;
     }
 
     public void addTestRoom(int roomNumber){
@@ -427,6 +433,11 @@ public class Hotel implements HotelInterface {
         }
     }
 
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
     /**
      *
      * @param cus
@@ -439,6 +450,29 @@ public class Hotel implements HotelInterface {
         Reservation res = new Reservation(cus, rm, checkIn, duration);
         reservations.add(res);
 
+    }
+
+    public Reservation removeReservation(CustomerInterface customer, int roomNumber) {
+        Iterator<Reservation> itr = this.reservations.iterator();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
+                reservations.remove(curr);
+                return curr;
+            }
+        }
+        return null;
+    }
+
+    public Reservation getReservation(CustomerInterface customer, int roomNumber){
+        Iterator<Reservation> itr = this.reservations.iterator();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
+                return curr;
+            }
+        }
+        return null;
     }
 
     public static void viewInventory(){
