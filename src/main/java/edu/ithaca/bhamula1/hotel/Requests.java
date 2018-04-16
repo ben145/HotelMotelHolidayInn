@@ -126,9 +126,19 @@ public class Requests implements RequestsInterface{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         //if()
-        int inputInt = Integer.parseInt(input);
-        input = requests.get(inputInt);
-        ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
-        Hotel.activeRequests.add(newRequest);
+        try {
+            int inputInt = Integer.parseInt(input);
+            if(inputInt>0&&inputInt<requests.size()) {
+                input = requests.get(inputInt);
+                ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
+                Hotel.activeRequests.add(newRequest);
+                System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
+            }
+            else{
+                System.out.println("Invalid Choice.");
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Invalid Input.");
+        }
     }
 }

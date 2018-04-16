@@ -155,8 +155,10 @@ public class CustomerUI implements CustomerUIInterface {
                 while(rmNum == 0) {
                     rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
                 }
+                Reservation res  = hotel.getReservation(c,rmNum);
                 if(hotel.checkIn(rmNum,c)){
                    checkedInMenu(c,rmNum);
+                    hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
                 }
             }
 
@@ -248,8 +250,8 @@ public class CustomerUI implements CustomerUIInterface {
                 }
                 //actually cancel the reservation
                 Reservation removed = hotel.removeReservation(c,rmNum);
-                hotel.getRoom(rmNum).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
                 if (removed!=null){
+                    hotel.getRoom(rmNum).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
                     System.out.println("Your reservation has been cancelled.");
                 }
                 else{
@@ -293,7 +295,6 @@ public class CustomerUI implements CustomerUIInterface {
                 switch (yOrN){
                     case 'y':
                         myRequests.makeRequest(rmNum);
-                        System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
                         break;
                     case 'n':
                         System.out.println("Let us know if we can help with anything.");
