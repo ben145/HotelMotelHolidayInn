@@ -34,5 +34,13 @@ To increase functionality for our system by enhancing the user interface (for cu
 <b>DevTeam Sprint goal #2</b>:
 Add some muscle to that double skeleton.
 
-Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing </blockquote>
+Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing 
 
+<br><b>Sprint 2 Review</b>:<br>https://docs.google.com/document/d/1rGhC6-P5m44sgy92N6Sal1hwCTHtmS_vzpM6n8ihCvE/edit</blockquote>
+
+Sprint Three:
+
+<blockquote><b>First Sprint goal</b>:
+
+<b>DevTeam Sprint goal #1</b>:
+</blockquote>
