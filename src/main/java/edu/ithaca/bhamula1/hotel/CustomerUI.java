@@ -115,7 +115,7 @@ public class CustomerUI implements CustomerUIInterface {
             //VIEW ROOMS
             else if(firstOption == 3){
                 System.out.println("View Rooms ");
-                System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println(hotel.viewOrderedRooms());
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*\n");
             }
 
@@ -163,15 +163,15 @@ public class CustomerUI implements CustomerUIInterface {
             //REVIEW ROOMS
             else if(option == 2){
                 System.out.println("Review Rooms");
-                System.out.println("View Available Rooms  ");
-                System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println("View Rooms  ");
+                System.out.println(hotel.viewOrderedRooms());
                 System.out.println();
             }
 
             //RESERVE ROOM
             else if(option == 3){
                 System.out.println("Reserve Room");
-                System.out.println(hotel.viewOrderedAvailableRooms());
+                //System.out.println(hotel.viewOrderedAvailableRooms());
                 boolean valid = false;
                 System.out.println("\nWould you like to reserve one of our rooms?\nEnter Yes or No and hit enter");
                 char r = 1;
@@ -206,12 +206,14 @@ public class CustomerUI implements CustomerUIInterface {
                             stayDuration = checkChoiceInput(scan.nextLine(),1,21);
                         }
                         //TODO need to view rooms available for the set date and number of nights
+                        Calendar resDate = new GregorianCalendar(resYear,resMonth,resDay);
+                        System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration));
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
                             rmNum=checkChoiceInput(scan.nextLine(),0, hotel.getNumberOfRooms()-1);
                         }
-                        if(hotel.getRoom(rmNum).getIfAvailable()) {
+                        if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
                             System.out.println("Please enter your customer ID: ");
                             String custID = scan.nextLine();
                             if(hotel.getCustomer(custID)==null){
@@ -219,8 +221,10 @@ public class CustomerUI implements CustomerUIInterface {
                             }
                             else {
                                 //TODO need to actually reserve the room!
-                                //hotel.checkRooms(rmNum, custID,,);
+                                hotel.getRoom(rmNum).addReservation(resDate,stayDuration);
+                                hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration);
                                 valid = true;
+                                System.out.println("Your reservation has been made.");
                             }
                         }else{
                             System.out.println("Room not available.");
@@ -236,32 +240,28 @@ public class CustomerUI implements CustomerUIInterface {
             else if(option == 4){
                 //CANCEL ROOM RESERVATION
                 System.out.println("Cancel Room Reservation");
-                if(c.getReservation().equals(null)){
-                    System.out.println("You do not currently have a room reserved");
+                System.out.println("We are sorry to here you will not be staying with us please contact us with any complaints.");
+                System.out.println("Which room do you wish to cancel?");
+                int rmNum = 0;
+                while (rmNum == 0) {
+                    rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms() - 1);
                 }
-                else {
-                    System.out.println("We are sorry to here you will not be staying with us please contact us with any complaints.");
-                    System.out.println("Which room do you wish to check out of?");
-                    int rmNum = 0;
-                    while (rmNum == 0) {
-                        rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms() - 1);
-                    }
-                    //actually cancel the reservation
-                    Reservation removed = hotel.removeReservation(c,rmNum);
-                    if (removed!=null){
-                        System.out.println("Your reservation has been cancelled.");
-                    }
-                    else{
-                        System.out.println("This reservation does not exist.");
-                    }
-                    System.out.println();
+                //actually cancel the reservation
+                Reservation removed = hotel.removeReservation(c,rmNum);
+                hotel.getRoom(rmNum).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
+                if (removed!=null){
+                    System.out.println("Your reservation has been cancelled.");
                 }
-
+                else{
+                    System.out.println("This reservation does not exist.");
+                }
+                System.out.println();
             }
 
             else if(option == 5){
                 return 4;
             }
+            System.out.println();
             option = 0;
         }
         return 4;
@@ -293,12 +293,14 @@ public class CustomerUI implements CustomerUIInterface {
                 switch (yOrN){
                     case 'y':
                         myRequests.makeRequest(rmNum);
+                        System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
                         break;
                     case 'n':
                         System.out.println("Let us know if we can help with anything.");
                         break;
                 }
             }
+            System.out.println();
         }
         return 4;
     }

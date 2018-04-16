@@ -51,5 +51,5 @@ public interface RoomInterface {
 
     void printNotAvailDates();
 
-
+    public void removeReservation(Calendar date, int nightDuration);
     }
