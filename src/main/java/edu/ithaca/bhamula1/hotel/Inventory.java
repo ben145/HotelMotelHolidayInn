@@ -45,4 +45,9 @@ public class Inventory implements InventoryInterface {
         input = scanner.nextLine();
         this.quantity = Integer.parseInt(input);
     }
+
+    public String toString_Inventory(){
+        String inventoryItem = item + ", " + quantity;
+        return inventoryItem;
+    }
 }

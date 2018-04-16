@@ -48,5 +48,7 @@ public interface HotelInterface {
         void printStaffVacancies();
         List getEList();
 
+        void testInventory();
+        //this is where "void viewInventory();" would go if it wasn't static
 
 }
