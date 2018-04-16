@@ -202,25 +202,15 @@ public class Room implements RoomInterface {
     }
 
     public boolean checkIn(CustomerInterface customer){
-        if(customer.getName().equals(this.reservationName)){
-            this.checkedIn=true;
-            return true;
-        }
-        else {
-            return false;
-        }
+        this.checkedIn=true;
+        return true;
     }
 
     public boolean checkOut(CustomerInterface customer){
-        if(customer.getName().equals(this.reservationName)&&this.checkedIn){
-            this.checkedIn=false;
-            this.available = true;
-            this.reservationName=null;
-            return true;
-        }
-        else {
-            return false;
-        }
+        this.checkedIn=false;
+        this.available = true;
+        this.reservationName=null;
+        return true;
     }
 
     public void setReservationName(String name){

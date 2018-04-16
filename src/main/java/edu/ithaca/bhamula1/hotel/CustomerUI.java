@@ -155,8 +155,7 @@ public class CustomerUI implements CustomerUIInterface {
                 while(rmNum == 0) {
                     rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
                 }
-                hotel.checkIn(rmNum,c);
-                if(c.isCheckedIn()){
+                if(hotel.checkIn(rmNum,c)){
                    checkedInMenu(c);
                 }
             }
