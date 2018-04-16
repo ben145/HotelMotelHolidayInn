@@ -1,5 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import static edu.ithaca.bhamula1.hotel.Main.createHotel;
@@ -172,7 +174,7 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("Reserve Room");
                 System.out.println(hotel.viewOrderedAvailableRooms());
                 boolean valid = false;
-                System.out.println("\nWould you like to reserve one of the rooms above?\nEnter Yes or No and hit enter");
+                System.out.println("\nWould you like to reserve one of our rooms?\nEnter Yes or No and hit enter");
                 char r = 1;
                 while(r==1) {
                     String respond = scan.nextLine();
@@ -180,6 +182,30 @@ public class CustomerUI implements CustomerUIInterface {
                 }
                 switch(r){
                     case 'y':
+                        int currYear = Calendar.getInstance().get(Calendar.YEAR);
+                        System.out.println("Please enter the year you would like to reserve your room for. We only book up to three years ahead:");
+                        int resYear = 0;
+                        while(resYear==0){
+                            resYear = checkChoiceInput(scan.nextLine(),currYear,currYear+3);
+                        }
+                        System.out.println("Please enter the month you would like to reserve for as a number(1-12):");
+                        int resMonth = 0;
+                        while(resMonth==0){
+                            resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                        }
+                        Calendar calcCal = new GregorianCalendar(resYear,resMonth-1,1);
+                        int daysInMonth = calcCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                        System.out.println("What day of the month will your reservation start on?");
+                        int resDay = 0;
+                        while(resDay==0){
+                            resDay = checkChoiceInput(scan.nextLine(),1,daysInMonth);
+                        }
+                        System.out.println("How many nights will you be staying?");
+                        int stayDuration = 0;
+                        while(stayDuration==0){
+                            stayDuration = checkChoiceInput(scan.nextLine(),1,21);
+                        }
+                        //TODO need to view rooms available for the set date and number of nights
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
@@ -192,7 +218,8 @@ public class CustomerUI implements CustomerUIInterface {
                                 System.out.println("Invalid ID.");
                             }
                             else {
-                                hotel.checkRooms(rmNum, custID);
+                                //TODO need to actually reserve the room!
+                                //hotel.checkRooms(rmNum, custID,,);
                                 valid = true;
                             }
                         }else{
