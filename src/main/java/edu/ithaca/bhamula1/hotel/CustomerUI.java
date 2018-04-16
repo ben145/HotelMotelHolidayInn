@@ -156,7 +156,7 @@ public class CustomerUI implements CustomerUIInterface {
                     rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
                 }
                 if(hotel.checkIn(rmNum,c)){
-                   checkedInMenu(c);
+                   checkedInMenu(c,rmNum);
                 }
             }
 
@@ -192,7 +192,8 @@ public class CustomerUI implements CustomerUIInterface {
                         while(resMonth==0){
                             resMonth = checkChoiceInput(scan.nextLine(),1,12);
                         }
-                        Calendar calcCal = new GregorianCalendar(resYear,resMonth-1,1);
+                        resMonth= resMonth-1;
+                        Calendar calcCal = new GregorianCalendar(resYear,resMonth,1);
                         int daysInMonth = calcCal.getActualMaximum(Calendar.DAY_OF_MONTH);
                         System.out.println("What day of the month will your reservation start on?");
                         int resDay = 0;
@@ -266,9 +267,39 @@ public class CustomerUI implements CustomerUIInterface {
         return 4;
     }
 
-    public int checkedInMenu(CustomerInterface c){
+    public int checkedInMenu(CustomerInterface c,int rmNum){
         System.out.println("Welcome! We hope you enjoy your stay.");
-        //Request Stuff and check out
+        Requests myRequests = new Requests();
+        int choice = 0;
+        while(choice!=3){
+            choice=0;
+            System.out.println("What can we do for you?");
+            System.out.println("1) View Requests");
+            System.out.println("2) Make a Request");
+            System.out.println("3) Checkout");
+            while(choice==0){
+                choice = checkChoiceInput(scan.nextLine(),1,3);
+            }
+            if(choice==1){
+                myRequests.viewRequests();
+            }
+            else if(choice==2){
+                myRequests.viewRequests();
+                System.out.println("Do you wish to make a request?");
+                char yOrN = 1;
+                while(yOrN==1){
+                    yOrN = checkYorN(scan.nextLine());
+                }
+                switch (yOrN){
+                    case 'y':
+                        myRequests.makeRequest(rmNum);
+                        break;
+                    case 'n':
+                        System.out.println("Let us know if we can help with anything.");
+                        break;
+                }
+            }
+        }
         return 4;
     }
 
