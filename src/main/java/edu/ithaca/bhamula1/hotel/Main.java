@@ -69,71 +69,13 @@ public abstract class Main {
 
             } else if (option == 3) {
                 System.out.println("Review Rooms");
-                System.out.println("View Available Rooms  ");
-                System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println(hotel.viewOrderedRooms());
 
 
 
         }else if(option ==4){
             System.out.println("Reserve Room");
-
-                System.out.println("\nPlease enter your desired check in month (1-12)");
-                int month = scan.nextInt();
-                System.out.println("\nPlease enter your desired check in day");
-                int day = scan.nextInt();
-
-                System.out.println("\nPlease enter your desired check in year");
-                int year = scan.nextInt();
-
-                System.out.println("\n How many nights will you be stay?");
-                int nightDuration = scan.nextInt();
-
-                Calendar checkinDate = new GregorianCalendar(year,month-1,day);
-                Calendar copyDate = new GregorianCalendar(year,month-1,day);
-
-                System.out.println("Rooms Available For That Date Range:");
-                System.out.println(hotel.viewOrderedAvailableRooms());
-
-
-                System.out.println("Which room would you like to reserve?");
-                int rmNum = scan.nextInt();
-
-                System.out.println("WHY DO YOU NOT WORK " + hotel.getRoom(rmNum).canReserve(checkinDate,nightDuration));
-
-                SimpleDateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
-
-                System.out.println("WOOOOORK");
-                List<Calendar> list = hotel.getRoom(rmNum).getNotAvailTheseDays();
-                for(int i= 0; i< list.size(); i++){
-                    System.out.println( "NOOOOOO! " + dateFormat2.format(list.get(i).getTime()));
-                }
-
-                Calendar copyDate2 = new GregorianCalendar(year,month-1,day);
-
-                System.out.println("STOP CHANGING THE FKN DATE "+  dateFormat2.format(copyDate2.getTime()));
-
-                if(hotel.getRoom(rmNum).canReserve(copyDate2,nightDuration)){
-                    hotel.getRoom(rmNum).addReservation(copyDate2, nightDuration);
-                    hotel.addReservation(customer, hotel.getRoom(rmNum), copyDate2, nightDuration);
-
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-
-                    System.out.println("you have a reservation!");
-
-                    System.out.println("Check in is at after 2pm on " + dateFormat.format(copyDate.getTime()));
-
-
-                    Calendar copyDate3 = new GregorianCalendar(year,month-1,day+nightDuration);
-
-
-                    System.out.println("Check out is before 11 am on " + dateFormat.format(copyDate3.getTime()));
-
-
-                }else{
-                    //shouldn't be able to get here
-                    System.out.println("The Room is already reserved during this time");
-                }
-
+            reserveARoom(scan, hotel, customer);
 
 
             }else if (option == 5) {
@@ -141,6 +83,48 @@ public abstract class Main {
             }
         }
         return 4;
+
+    }
+
+    public static void reserveARoom(Scanner scan, HotelInterface hotel, CustomerInterface customer){
+        System.out.println("\nPlease enter your desired check in month (1-12)");
+        int month = scan.nextInt();
+        System.out.println("\nPlease enter your desired check in day");
+        int day = scan.nextInt();
+
+        System.out.println("\nPlease enter your desired check in year");
+        int year = scan.nextInt();
+
+        System.out.println("\n How many nights will you be stay?");
+        int nightDuration = scan.nextInt();
+
+        Calendar checkinDate = new GregorianCalendar(year,month-1,day);
+        Calendar copyDate = new GregorianCalendar(year,month-1,day);
+        System.out.println("Rooms Available For That Date Range:");
+        System.out.println(hotel.viewOrderedAvailableRooms(checkinDate,nightDuration));
+        System.out.println("Which room would you like to reserve?");
+        int rmNum = scan.nextInt();
+
+
+        Calendar copyDate2 = new GregorianCalendar(year,month-1,day);
+
+        if(hotel.getRoom(rmNum).canReserve(copyDate2,nightDuration)){
+            hotel.getRoom(rmNum).addReservation(copyDate2, nightDuration);
+            hotel.addReservation(customer, hotel.getRoom(rmNum), copyDate2, nightDuration);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+            System.out.println("you have a reservation!");
+            System.out.println("Check in is at after 2pm on " + dateFormat.format(copyDate.getTime()));
+            Calendar copyDate3 = new GregorianCalendar(year,month-1,day+nightDuration);
+            System.out.println("Check out is before 11 am on " + dateFormat.format(copyDate3.getTime()));
+
+
+        }else{
+            //shouldn't be able to get here
+            System.out.println("The Room is already reserved during this time");
+        }
+
 
     }
 
@@ -284,7 +268,7 @@ public abstract class Main {
 
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");
-                System.out.println(hotel.viewOrderedAvailableRooms());
+                System.out.println(hotel.viewOrderedRooms());
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*");
             } else if (firstOption == 4) {
                 System.out.println("Thank you");

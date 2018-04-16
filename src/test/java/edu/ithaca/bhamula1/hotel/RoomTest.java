@@ -99,7 +99,7 @@ class RoomTest {
     void toStringTest(){
         Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar, view");
 
-        Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0 Available: true", exampleRoom.toString());
+        Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0", exampleRoom.toString());
 
     }
 
@@ -185,20 +185,19 @@ class RoomTest {
         Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
-        //exampleRoom.addReservation(firstRes, 1);
         Assert.assertEquals(exampleRoom.canReserve(firstRes, 1), true );
+        exampleRoom.addReservation(firstRes, 1);
+
 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
-
         Calendar secondRes = new GregorianCalendar(2018, Calendar.APRIL, 14);
-        //System.out.println("Test before add "+dateFormat.format(secondRes.getTime()));
 
         exampleRoom.addReservation(secondRes, 3);
         Assert.assertEquals(exampleRoom.canReserve(secondRes,3), false );
 
         Calendar thirdRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
         Assert.assertEquals(exampleRoom.canReserve(thirdRes,3), false );
-        exampleRoom.printNotAvailDates();
+//        exampleRoom.printNotAvailDates();
 
     }
 
