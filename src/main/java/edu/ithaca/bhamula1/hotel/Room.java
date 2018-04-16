@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Room implements RoomInterface {
 
+    //should maybe get rid of this?
     boolean available;
     int roomNumber;
     double price;
@@ -99,10 +100,6 @@ public class Room implements RoomInterface {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
         Calendar dateClone = (Calendar) date.clone();
 
-//        for(int x =0; x<notAvailTheseDays.size(); x++){
-//            System.out.println("ALREADY IN HERE " + dateFormat.format(notAvailTheseDays.get(x).getTime()));
-//        }
-
 
         boolean notAvailAlreadyContains = false;
 
@@ -111,17 +108,10 @@ public class Room implements RoomInterface {
             newDate.setTime(dateClone.getTime());
             dateClone.add(Calendar.DAY_OF_MONTH, 1);
 
-            //System.out.println("here "+ dateFormat.format(newDate.getTime()));
-
             for(int x =0; x<notAvailTheseDays.size(); x++){
-               // System.out.println("DOES IT HERE HEREKJ"+ "  new date"+dateFormat.format(newDate.getTime()));
-                //System.out.println("DOES IT HERE HEREKJ"+ "  STORED  date"+dateFormat.format(notAvailTheseDays.get(x).getTime()));
 
                 if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(newDate.getTime()))){
-
                     notAvailAlreadyContains = true;
-                    //System.out.println("does this work pleas work");
-
                 }
             }
         }
@@ -198,7 +188,7 @@ public class Room implements RoomInterface {
 
     public String toString(){
         return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " + this.amenities +
-                " Price: $"+ this.price + " Available: " + this.available;
+                " Price: $"+ this.price ;
     }
 
     public boolean checkIn(CustomerInterface customer){

@@ -43,4 +43,12 @@ public class Reservation {
     }
 
 
+    public String toString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+
+        return customer.getName() + " Room " + room.getRoomNumber() + " Check in" + dateFormat.format(checkInDate.getTime()) + " Nights" + nightDurration;
+
+
+    }
+
 }
