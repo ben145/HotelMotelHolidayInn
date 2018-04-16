@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,6 +48,16 @@ public class Room implements RoomInterface {
         this.available = avail;
     }
 
+    /**
+     * Cloning objects - this is used to ensure date pointer passed is not incremented
+     * can be used for deep copying other objects
+     * @return
+     * @throws CloneNotSupportedException
+     */
+    protected Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
+
 
     /*
     when a reservation is created for a room, then add the dates that are booked here
@@ -55,18 +66,18 @@ public class Room implements RoomInterface {
     will return -1 if it doesn't not work because there is reservation conflicts
      */
     public int addReservation(Calendar date, int nightDuration){
+
+        Calendar dateClone = (Calendar) date.clone();
         boolean notAvailAlreadyContains = false;
+
 
             List<Calendar> blockedOutDates = new ArrayList<>();
 
             for(int i =0; i< nightDuration; i++ ) {
                 Calendar newDate = Calendar.getInstance();
-                newDate.setTime(date.getTime());
-                date.add(Calendar.DAY_OF_MONTH, 1);
+                newDate.setTime(dateClone.getTime());
+                dateClone.add(Calendar.DAY_OF_MONTH, 1);
                 blockedOutDates.add(newDate);
-                //                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
-
-//                System.out.println("here "+ dateFormat.format(newDate.getTime()));
 
                 if (notAvailTheseDays.contains(newDate)) {
                       notAvailAlreadyContains = true;
@@ -86,36 +97,33 @@ public class Room implements RoomInterface {
 
     public boolean canReserve(Calendar date, int nightDuration){
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+        Calendar dateClone = (Calendar) date.clone();
 
-        for(int x =0; x<notAvailTheseDays.size(); x++){
-            System.out.println("ALREADY IN HERE " + dateFormat.format(notAvailTheseDays.get(x).getTime()));
-        }
+//        for(int x =0; x<notAvailTheseDays.size(); x++){
+//            System.out.println("ALREADY IN HERE " + dateFormat.format(notAvailTheseDays.get(x).getTime()));
+//        }
 
 
         boolean notAvailAlreadyContains = false;
 
         for(int i =0; i< nightDuration; i++ ) {
             Calendar newDate = Calendar.getInstance();
-            newDate.setTime(date.getTime());
-            date.add(Calendar.DAY_OF_MONTH, 1);
-            System.out.println("here "+ dateFormat.format(newDate.getTime()));
+            newDate.setTime(dateClone.getTime());
+            dateClone.add(Calendar.DAY_OF_MONTH, 1);
 
+            //System.out.println("here "+ dateFormat.format(newDate.getTime()));
 
             for(int x =0; x<notAvailTheseDays.size(); x++){
-                System.out.println("DOES IT HERE HEREKJ");
+               // System.out.println("DOES IT HERE HEREKJ"+ "  new date"+dateFormat.format(newDate.getTime()));
+                //System.out.println("DOES IT HERE HEREKJ"+ "  STORED  date"+dateFormat.format(notAvailTheseDays.get(x).getTime()));
+
                 if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(newDate.getTime()))){
-                    System.out.println("does this work pleas work");
+
                     notAvailAlreadyContains = true;
+                    //System.out.println("does this work pleas work");
 
                 }
-
             }
-
-
-//            if (notAvailTheseDays.contains(newDate)) {
-//                System.out.println("HELLO? DO WE REACH HERE");
-//                break;
-//            }
         }
 
         if(!notAvailAlreadyContains){
@@ -235,6 +243,15 @@ public class Room implements RoomInterface {
     public void viewAvailableRequests(){
         Requests req = new Requests();
         req.viewRequests();
+    }
+
+    public void printNotAvailDates(){
+        System.out.println("This room is reserved for the following dates: ");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+        for(int na = 0; na < notAvailTheseDays.size(); na++){
+            System.out.println( dateFormat.format(notAvailTheseDays.get(na).getTime()));
+
+        }
     }
 
 }

@@ -120,9 +120,10 @@ class RoomTest {
         Calendar secondRes = new GregorianCalendar(2018, Calendar.APRIL, 5);
         exampleRoom.addReservation(secondRes, 3);
 
-        Assert.assertEquals(dateFormat.format(notAvailDays.get(0).getTime()), "04/05/2018" );
-        Assert.assertEquals(dateFormat.format(notAvailDays.get(1).getTime()), "04/06/2018" );
-        Assert.assertEquals(dateFormat.format(notAvailDays.get(2).getTime()), "04/07/2018" );
+        System.out.println("Date Test: "+dateFormat.format(notAvailDays2.get(1).getTime())+" "+notAvailDays2.size());
+        Assert.assertEquals(dateFormat.format(notAvailDays2.get(1).getTime()), "04/05/2018" );
+        Assert.assertEquals(dateFormat.format(notAvailDays2.get(2).getTime()), "04/06/2018" );
+        Assert.assertEquals(dateFormat.format(notAvailDays2.get(3).getTime()), "04/07/2018" );
 
 
 //        for(int i=0; i<notAvailDays2.size(); i++){
@@ -184,18 +185,20 @@ class RoomTest {
         Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
-        exampleRoom.addReservation(firstRes, 1);
-
+        //exampleRoom.addReservation(firstRes, 1);
         Assert.assertEquals(exampleRoom.canReserve(firstRes, 1), true );
 
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
 
         Calendar secondRes = new GregorianCalendar(2018, Calendar.APRIL, 14);
+        //System.out.println("Test before add "+dateFormat.format(secondRes.getTime()));
+
         exampleRoom.addReservation(secondRes, 3);
         Assert.assertEquals(exampleRoom.canReserve(secondRes,3), false );
 
-//        Calendar thirdRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
-//        Assert.assertEquals(exampleRoom.canReserve(thirdRes,3), false );
-//
+        Calendar thirdRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
+        Assert.assertEquals(exampleRoom.canReserve(thirdRes,3), false );
+        exampleRoom.printNotAvailDates();
 
     }
 

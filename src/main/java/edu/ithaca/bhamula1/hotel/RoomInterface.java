@@ -49,5 +49,7 @@ public interface RoomInterface {
 
     boolean canReserve(Calendar date, int nightDuration);
 
+    void printNotAvailDates();
+
 
     }
