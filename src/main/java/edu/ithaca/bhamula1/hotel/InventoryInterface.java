@@ -10,4 +10,5 @@ public interface InventoryInterface {
     void setQuantity(int quantity);
 
     public void addItemToInventory();
+    public String toString_Inventory();
 }

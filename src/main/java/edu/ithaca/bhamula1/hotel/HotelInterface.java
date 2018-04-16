@@ -50,5 +50,7 @@ public interface HotelInterface {
 
         int getNumberOfRooms();
 
+        void testInventory();
+        //this is where "void viewInventory();" would go if it wasn't static
 
 }

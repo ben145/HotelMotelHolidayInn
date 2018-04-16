@@ -14,7 +14,7 @@ public class Hotel implements HotelInterface {
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
-    private List<InventoryInterface> inventory;
+    private static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
 
@@ -37,7 +37,7 @@ public class Hotel implements HotelInterface {
         }
 
         //hotel inventory w/ sample population
-        inventory = new ArrayList<InventoryInterface>();
+        inventory = new ArrayList<Inventory>();
         testInventory();
 
         //linked list of active requests
@@ -415,6 +415,12 @@ public class Hotel implements HotelInterface {
         Reservation res = new Reservation(cus, rm, checkIn, duration);
         reservations.add(res);
 
+    }
+
+    public static void viewInventory(){
+        for(Inventory x : inventory){
+            System.out.println(x.toString_Inventory());
+        }
     }
 
 }

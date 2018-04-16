@@ -10,6 +10,7 @@ public interface EmployeeUI_Interface {
     void viewOpenRequests();
     void takeRequests();
     void completeRequest();
+    void viewHotelInventory();
     void closeUI();
 
 
