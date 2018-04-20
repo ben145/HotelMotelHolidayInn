@@ -44,8 +44,10 @@ Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP
 
 Sprint Three:
 
-<blockquote><b>First Sprint goal</b>:
+<blockquote><b>Third Sprint goal</b>:
+  Polish and complete request system. (Polish)
 
-<b>DevTeam Sprint goal #1</b>:
+<b>DevTeam Sprint goal #3</b>:
+  Slide that double skeleton into some skin and coiffe that hair
 
 </blockquote>
