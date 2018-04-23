@@ -48,6 +48,6 @@ Sprint Three:
   Polish and complete request system. (Polish)
 
 <b>DevTeam Sprint goal #3</b>:
-  Slide that double skeleton into some skin and coiffe that hair
+  Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)
 
 </blockquote>
