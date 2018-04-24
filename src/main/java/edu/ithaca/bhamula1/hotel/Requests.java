@@ -101,10 +101,17 @@ class RoomService{
         request = newRequest;
     }
     public void setAssociatedPrice(double newPrice){ associatedPrice = newPrice; }
-    public void addRequirement(String newRequirement){ requirements.add(newRequirement); }
+    public void addRequirement(String newRequirement){
+        requirements.add(newRequirement);
+        numRequirements++;
+    }
     public void removeRequirement(String toDelete){
         if(requirements.contains(toDelete)){
             requirements.remove(toDelete);
+            numRequirements--;
+            if(numRequirements == 0){
+                requirements = null;
+            }
         }
         else{
             System.out.println("requirement not found");
