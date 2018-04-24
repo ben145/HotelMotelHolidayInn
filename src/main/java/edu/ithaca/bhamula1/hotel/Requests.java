@@ -178,29 +178,24 @@ public class Requests implements RequestsInterface{
     //allows authorized staff to add a request to they system
     public void addRequest(String employeeId){
         //check authorization
-
-	    System.out.println("Enter request to add: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
+        //request name
+            System.out.println("Enter request to add: ");
+            Scanner scanner = new Scanner(System.in);
+            String req = scanner.nextLine();
+        //request price
+            System.out.println("Enter additional charge associated with request: ");
+            String input = scanner.nextLine();
+            double price = Double.parseDouble(input);
         //request requirements
-        System.out.println("Does request require inventory items? (y/n)");
-        input = scanner.nextLine();
-            if(input == "y"){
-            boolean requirements = true;
-            String input2;
-            while(requirements){
-                    System.out.println("Enter inventory item required: ");
+            System.out.println("Does request require inventory items? (y/n)");
+            input = scanner.nextLine();
+            int num = 0;
+                if(input == "y"){
+                    System.out.println("Enter number of Requirements: ");
                     input = scanner.nextLine();
-            System.out.println("Enter number of above items required: ");
-            System.out.println();
-            input2 = scanner.nextLine();
-            Integer.parseInt(input2);
-
-            //prolly have to associate inventory with request at some point
+                    num = Integer.parseInt(input);
                 }
-            }
-            requests.add(input);
+        RoomService newReq = new RoomService(req,price,num);
         System.out.println("Request added to options list");
     }
 
@@ -225,9 +220,10 @@ public class Requests implements RequestsInterface{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         try {
-            int inputInt = Integer.parseInt(input);
+            //compensating for 0
+            int inputInt = (Integer.parseInt(input))-1;
             if(inputInt>0&&inputInt<requests.size()) {
-                input = requests.get(inputInt);
+                input = requests.get(inputInt).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
@@ -238,9 +234,5 @@ public class Requests implements RequestsInterface{
         }catch (NumberFormatException e){
             System.out.println("Invalid Input.");
         }
-    }
-
-    public static void main(String[] args){
-        viewRequests();
     }
 }
