@@ -189,26 +189,42 @@ public class CustomerUI implements CustomerUIInterface {
                         while(resYear==0){
                             resYear = checkChoiceInput(scan.nextLine(),currYear,currYear+3);
                         }
+                        //TODO make this next line print so if you are reserving for current year says enter number (currMonth - 12)
                         System.out.println("Please enter the month you would like to reserve for as a number(1-12):");
                         int resMonth = 0;
+                        int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+                        currMonth++;
                         while(resMonth==0){
-                            resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            //resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            if(resYear==currYear){
+                                resMonth = checkChoiceInput(scan.nextLine(),currMonth,12);
+                            }
+                            else{
+                                resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            }
                         }
                         resMonth= resMonth-1;
+                        currMonth = currMonth - 1;
                         Calendar calcCal = new GregorianCalendar(resYear,resMonth,1);
                         int daysInMonth = calcCal.getActualMaximum(Calendar.DAY_OF_MONTH);
                         System.out.println("What day of the month will your reservation start on?");
                         int resDay = 0;
+                        int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
                         while(resDay==0){
-                            resDay = checkChoiceInput(scan.nextLine(),1,daysInMonth);
+                            if(resYear==currYear&&resMonth==currMonth){
+                                resDay = checkChoiceInput(scan.nextLine(), currDay, daysInMonth);
+                            }
+                            else {
+                                resDay = checkChoiceInput(scan.nextLine(), 1, daysInMonth);
+                            }
                         }
                         System.out.println("How many nights will you be staying?");
                         int stayDuration = 0;
                         while(stayDuration==0){
                             stayDuration = checkChoiceInput(scan.nextLine(),1,21);
                         }
-                        //TODO need to view rooms available for the set date and number of nights
                         Calendar resDate = new GregorianCalendar(resYear,resMonth,resDay);
+
                         System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration));
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
