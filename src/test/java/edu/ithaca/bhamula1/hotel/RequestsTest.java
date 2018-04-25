@@ -82,6 +82,7 @@ class RequestsTest {
     }
     @Test
     void testRemoveRequirement(){
+        test2.addRequirement("ice");
         test2.removeRequirement("ice");
         assertEquals(null, test2.getRequirements(), "FAIL - request not removed");
     }
