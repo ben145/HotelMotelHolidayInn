@@ -109,7 +109,7 @@ class RoomService{
         numRequirements++;
     }
     public void removeRequirement(String toDelete){
-        if(requirements.contains(toDelete)){
+        if((requirements != null) && (requirements.contains(toDelete))){
             requirements.remove(toDelete);
             numRequirements--;
             if(numRequirements == 0){
