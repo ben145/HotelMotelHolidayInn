@@ -17,7 +17,7 @@ Rum,45
 Salt,1000
 Scotch,78
 Scratchy Toilet Paper,1400
-Sheet Set,786
+Sheet Set,2786
 Shower Curtain,600
 Small Shampoo,563
 Soap,40000
@@ -27,4 +27,4 @@ Towels,3000
 Vodka,20
 Washcloths,45
 Whiskey,78
-Wrench,2
+Wrench,20
