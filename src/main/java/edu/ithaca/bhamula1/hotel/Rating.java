@@ -1,7 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 import java.util.Scanner;
-
+// + 7mins
 public class Rating {
 
     private int rating;
@@ -41,7 +41,7 @@ public class Rating {
                 convertRating();
             }
             else {
-                System.out.println("(Rating of "+evalInt+" recorded.)\nThank you for your time! We appreciate your input.");
+                System.out.println("(Rating of "+evalInt+" recorded.)\nThank you for your time! We appreciate your input.\n");
             }
         }
         else {
@@ -51,8 +51,17 @@ public class Rating {
         return evalInt;
     }
 
+    public String createComments() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("If there is anything you would like to say about your experience with us, please do so now.");
+        String comment = s.nextLine();
+        return comment;
+    }
+
     public static void main(String[] args) {
         Rating r = new Rating();
         r.convertRating();
+        r.setComments(r.createComments());
+        System.out.println(r.getComments());
     }
 }
