@@ -208,6 +208,15 @@ public class Room implements RoomInterface {
                 " Price: $"+ this.price ;
     }
 
+    public String printDiscountedPrices(){
+
+        double discountPrice = this.price - (this.price* .10);
+
+
+        return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " + this.amenities +
+                " Price: $"+ discountPrice ;
+    }
+
     public boolean checkIn(CustomerInterface customer){
         this.checkedIn=true;
         return true;
@@ -230,16 +239,6 @@ public class Room implements RoomInterface {
 
     public boolean getCheckedIn(){
         return this.checkedIn;
-    }
-
-    public void makeRequestFromRoom(){
-        Requests req = new Requests();
-        req.makeRequest(roomNumber);
-    }
-
-    public void viewAvailableRequests(){
-        Requests req = new Requests();
-        req.viewRequests();
     }
 
     public void printNotAvailDates(){
