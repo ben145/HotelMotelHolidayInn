@@ -191,7 +191,7 @@ public class CustomerUI implements CustomerUIInterface {
                         res.setPaymentType(Reservation.PaymentType.CASH);
                     }
 
-                    checkedInMenu(c,rmNum);
+                    checkedInMenu(c,res);
                     hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
                 }
             }
@@ -333,9 +333,8 @@ public class CustomerUI implements CustomerUIInterface {
         return 4;
     }
 
-    public int checkedInMenu(CustomerInterface c,int rmNum){
+    public int checkedInMenu(CustomerInterface c, Reservation res){
         System.out.println("Welcome! We hope you enjoy your stay.");
-        Requests myRequests = new Requests();
         int choice = 0;
         while(choice!=3){
             choice=0;
@@ -347,10 +346,10 @@ public class CustomerUI implements CustomerUIInterface {
                 choice = checkChoiceInput(scan.nextLine(),1,3);
             }
             if(choice==1){
-                myRequests.viewRequests();
+                res.viewAvailableRequests();
             }
             else if(choice==2){
-                myRequests.viewRequests();
+                res.viewAvailableRequests();
                 System.out.println("Do you wish to make a request?");
                 char yOrN = 1;
                 while(yOrN==1){
@@ -358,7 +357,7 @@ public class CustomerUI implements CustomerUIInterface {
                 }
                 switch (yOrN){
                     case 'y':
-                        myRequests.makeRequest(rmNum);
+                        res.makeRequestFromReservation();
                         break;
                     case 'n':
                         System.out.println("Let us know if we can help with anything.");
