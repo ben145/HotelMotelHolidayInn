@@ -211,12 +211,12 @@ public class CustomerUI implements CustomerUIInterface {
                 boolean valid = false;
 
 
-//                //change later
-                Calendar resDate = new GregorianCalendar(2018,3,26);
-
-                hotel.getRoom(1).addReservation(resDate,1);
-                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
- /*
+////                //change later
+//                Calendar resDate = new GregorianCalendar(2018,3,26);
+//
+//                hotel.getRoom(1).addReservation(resDate,1);
+//                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
+//
 
                         int currYear = Calendar.getInstance().get(Calendar.YEAR);
                         System.out.println("Please enter the year you would like to reserve your room for. We only book up to three years ahead:");
@@ -224,18 +224,33 @@ public class CustomerUI implements CustomerUIInterface {
                         while(resYear==0){
                             resYear = checkChoiceInput(scan.nextLine(),currYear,currYear+3);
                         }
-                        System.out.println("Please enter the month you would like to reserve for as a number(1-12):");
+                        int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+                        System.out.println("Please enter the month you would like to reserve for as a number("+(currMonth+1)+"-12):");
                         int resMonth = 0;
+                        currMonth++;
                         while(resMonth==0){
-                            resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            //resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            if(resYear==currYear){
+                                resMonth = checkChoiceInput(scan.nextLine(),currMonth,12);
+                            }
+                            else{
+                                resMonth = checkChoiceInput(scan.nextLine(),1,12);
+                            }
                         }
                         resMonth= resMonth-1;
+                        currMonth = currMonth - 1;
                         Calendar calcCal = new GregorianCalendar(resYear,resMonth,1);
                         int daysInMonth = calcCal.getActualMaximum(Calendar.DAY_OF_MONTH);
                         System.out.println("What day of the month will your reservation start on?");
                         int resDay = 0;
+                        int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
                         while(resDay==0){
-                            resDay = checkChoiceInput(scan.nextLine(),1,daysInMonth);
+                            if(resYear==currYear&&resMonth==currMonth){
+                                resDay = checkChoiceInput(scan.nextLine(), currDay, daysInMonth);
+                            }
+                            else {
+                                resDay = checkChoiceInput(scan.nextLine(), 1, daysInMonth);
+                            }
                         }
                         System.out.println("How many nights will you be staying?");
                         int stayDuration = 0;
@@ -244,6 +259,7 @@ public class CustomerUI implements CustomerUIInterface {
                         }
 
                         Calendar resDate = new GregorianCalendar(resYear,resMonth,resDay);
+
                         System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration));
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
@@ -259,10 +275,9 @@ public class CustomerUI implements CustomerUIInterface {
                                     cardNum = scan.nextLine();
                                 }
 
+
                                 hotel.getRoom(rmNum).addReservation(resDate,stayDuration);
                                 hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration, cardNum);
-
-
 
                                 valid = true;
                                 System.out.println("Your reservation has been made.");
@@ -275,7 +290,7 @@ public class CustomerUI implements CustomerUIInterface {
                             System.out.println("Room not available.");
                         }
 
-*/
+
 
             }
 
