@@ -87,6 +87,20 @@ public class Reservation {
         }
     }
 
+    public void makeRequestFromReservation(){
+        Requests req = new Requests();
+        String newReq = req.makeRequest(room.getRoomNumber());
+        if(newReq != ""){
+            String[] reqInstance= newReq.split(",");
+            paymentTracker.put(reqInstance[0], Double.parseDouble(reqInstance[1]));
+        }
+    }
+
+    public void viewAvailableRequests(){
+        Requests req = new Requests();
+        req.viewRequests();
+    }
+
     public void setPaymentType(PaymentType paymentType){
         this.paymentType = paymentType;
     }

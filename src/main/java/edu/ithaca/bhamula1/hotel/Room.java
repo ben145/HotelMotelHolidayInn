@@ -241,16 +241,6 @@ public class Room implements RoomInterface {
         return this.checkedIn;
     }
 
-    public void makeRequestFromRoom(){
-        Requests req = new Requests();
-        req.makeRequest(roomNumber);
-    }
-
-    public void viewAvailableRequests(){
-        Requests req = new Requests();
-        req.viewRequests();
-    }
-
     public void printNotAvailDates(){
         System.out.println("This room is reserved for the following dates: ");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");

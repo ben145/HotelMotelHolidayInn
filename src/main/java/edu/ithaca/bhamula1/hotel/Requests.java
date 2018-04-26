@@ -224,7 +224,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows a customer to make a request
-    public void makeRequest(int roomNumber){
+    public String makeRequest(int roomNumber){
         viewRequests();
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
@@ -238,6 +238,7 @@ public class Requests implements RequestsInterface{
                 Hotel.activeRequests.add(newRequest);
 
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
+                return input + "," + requests.get(inputInt).getAssociatedPrice();
             }
             else{
                 System.out.println("Invalid Choice.");
@@ -245,5 +246,6 @@ public class Requests implements RequestsInterface{
         }catch (NumberFormatException e){
             System.out.println("Invalid Input.");
         }
+        return "";
     }
 }
