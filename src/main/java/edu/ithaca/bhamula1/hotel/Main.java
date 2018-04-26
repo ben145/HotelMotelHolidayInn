@@ -56,7 +56,44 @@ public abstract class Main {
                 hotel.checkIn(rmNum, customer);
 
                 if(customer.isCheckedIn()) {
+
+                    System.out.println("Would you like change the card on file. Type '1' for  yes or '0' for no ");
+                    int yesOrNo = scan.nextInt();
+                    while(yesOrNo != 0 && yesOrNo != 1){
+                        System.out.println("Try again");
+                        yesOrNo = scan.nextInt();
+                    }
+
+                    if(yesOrNo == 1){
+                        System.out.println("Type the new card number");
+                        String card = scan.next();
+
+                        while(card.length()>15 || card.length()< 13){
+                            System.out.println("Try again");
+                            card = scan.next();
+                        }
+
+                        hotel.getReservation(customer, rmNum).setCardPayment(card);
+                    }
+
+                    System.out.println("Would you like the room charged to the card or pay in cash? Type '1' for card or type '0' for cash");
+                    int cardOrCash = scan.nextInt();
+                    while(cardOrCash != 0 && cardOrCash != 1){
+                        System.out.println("Try again");
+                        cardOrCash = scan.nextInt();
+                    }
+
+                    if(cardOrCash ==1){
+                        hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CARD);
+                    }else{
+                        hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CASH);
+                    }
+
+
                     checkedIn(customer, hotel);
+
+
+
                 }
 
             } else if (option == 2) {
@@ -109,8 +146,17 @@ public abstract class Main {
         Calendar copyDate2 = new GregorianCalendar(year,month-1,day);
 
         if(hotel.getRoom(rmNum).canReserve(copyDate2,nightDuration)){
+
+            System.out.println("Please enter a card number:");
+            String cardNum  = scan.nextLine();
+
+//            while(cardNum.length()< 15 && cardNum.length()<13){
+//                System.out.println("Could not process card. Try typing it in again ");
+//                cardNum = scan.nextLine();
+//            }
+
             hotel.getRoom(rmNum).addReservation(copyDate2, nightDuration);
-            hotel.addReservation(customer, hotel.getRoom(rmNum), copyDate2, nightDuration);
+            hotel.addReservation(customer, hotel.getRoom(rmNum), copyDate2, nightDuration, cardNum);
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -127,6 +173,11 @@ public abstract class Main {
 
 
     }
+
+
+
+
+
 
 
 

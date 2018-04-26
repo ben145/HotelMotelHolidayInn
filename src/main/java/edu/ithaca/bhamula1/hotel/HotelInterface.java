@@ -36,7 +36,7 @@ public interface HotelInterface {
 
 //        void checkRooms(int rmNum, String cID, Calendar checkIn, int durration);
 
-        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration);
+        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String card);
 
         void setCustomer();
 
@@ -60,4 +60,5 @@ public interface HotelInterface {
         public Reservation removeReservation(CustomerInterface customer, int roomNumber);
         public Reservation getReservation(CustomerInterface customer, int roomNumber);
 
-}
+
+    }

@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -157,8 +158,45 @@ public class CustomerUI implements CustomerUIInterface {
                 }
                 Reservation res  = hotel.getReservation(c,rmNum);
                 if(hotel.checkIn(rmNum,c)){
-                   checkedInMenu(c,rmNum);
+                    System.out.println("Would you like change the card on file. Type '1' for  yes or '0' for no ");
+                    int yesOrNo = scan.nextInt();
+                    while(yesOrNo != 0 && yesOrNo != 1){
+                        System.out.println("Try again");
+                        yesOrNo = scan.nextInt();
+                    }
+
+                    if(yesOrNo == 1){
+                        System.out.println("Type the new card number");
+                        String card = scan.nextLine();
+                        scan.next();
+
+                        while(card.length()>15 || card.length()< 13){
+                            System.out.println("Try again");
+                            card = scan.next();
+                            scan.next();
+
+                        }
+
+                        hotel.getReservation(c, rmNum).setCardPayment(card);
+                    }
+
+                    System.out.println("Would you like the room charged to the card or pay in cash? Type '1' for card or type '0' for cash");
+                    int cardOrCash = scan.nextInt();
+                    while(cardOrCash != 0 && cardOrCash != 1){
+                        System.out.println("Try again");
+                        cardOrCash = scan.nextInt();
+                    }
+
+                    if(cardOrCash ==1){
+                        res.setPaymentType(Reservation.PaymentType.CARD);
+                    }else{
+                        res.setPaymentType(Reservation.PaymentType.CASH);
+                    }
+
+
+                    checkedInMenu(c,rmNum);
                     hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
+
                 }
             }
 
@@ -216,18 +254,35 @@ public class CustomerUI implements CustomerUIInterface {
                             rmNum=checkChoiceInput(scan.nextLine(),0, hotel.getNumberOfRooms()-1);
                         }
                         if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
-                            System.out.println("Please enter your customer ID: ");
-                            String custID = scan.nextLine();
-                            if(hotel.getCustomer(custID)==null){
-                                System.out.println("Invalid ID.");
-                            }
-                            else {
+//                            System.out.println("Please enter your customer ID: ");
+//                            String custID = scan.nextLine();
+//                            if(hotel.getCustomer(custID)==null){
+//                                System.out.println("Invalid ID.");
+//                            }
+//                            else {
+                                System.out.println("Please enter a card number:");
+                                String cardNum  = scan.nextLine();
+                                while(cardNum.length()< 15 && cardNum.length()<13){
+                                    System.out.println("Could not process card. Try typing it in again ");
+                                    cardNum = scan.nextLine();
+                                }
+
+
                                 //TODO need to actually reserve the room!
                                 hotel.getRoom(rmNum).addReservation(resDate,stayDuration);
-                                hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration);
+                                hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration, cardNum);
                                 valid = true;
                                 System.out.println("Your reservation has been made.");
-                            }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+                            System.out.println("you have a reservation!");
+
+                            //fix!
+//                            System.out.println("Check in is at after 2pm on " + dateFormat.format(copyDate.getTime()));
+//                            Calendar copyDate3 = new GregorianCalendar(year,month-1,day+nightDuration);
+//                            System.out.println("Check out is before 11 am on " + dateFormat.format(copyDate3.getTime()));
+
+//                            }
                         }else{
                             System.out.println("Room not available.");
                         }
