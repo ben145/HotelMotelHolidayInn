@@ -51,15 +51,17 @@ public class EmployeeUI implements EmployeeUI_Interface{
      */
     public void uiInteraction(HotelInterface h){
         this.hotel = h;
-        System.out.println("------<>----Employee Page----<>------");
+        System.out.println("------<>----Employee login page----<>------");
         employeeLogScreenUI();
         while(employeeScreenActive){
             if(!invalid){
+                System.out.println("\n@>--->---- Employee Menu Page ----<---<@");
+
                 Scanner scan = new Scanner(System.in);
-                System.out.print("\nWhat would you like to do?\n1) View Open Customer Requests\n" +
-                        "2) Select Customer Request\n" +
-                        "3) Complete Customer Request\n" +
-                        "4) LogOut\n"+"\nEnter Number Here -> ");
+                System.out.print("\nWhat would you like to do, "+employee.getE_FirstName()+"?\n\n\t> Please select a menu number 1-4 below <\n\n\t1) View Open Customer Requests\n" +
+                        "\t2) Select Customer Request\n" +
+                        "\t3) Complete Customer Request\n" +
+                        "\t4) LogOut\n"+"\nEnter Number Here -> ");
                 int option = scan.nextInt();
                 if(option == 1){
                     System.out.println("\nPlease see open Customer Requests below:");
@@ -102,11 +104,12 @@ public class EmployeeUI implements EmployeeUI_Interface{
         }else{
             checkEmployeeLogIn(eID,ePwd);
             if(!invalid){
-                System.out.println("\nWelcome "+employee.getE_FirstName()+" "+
-                        employee.getE_LastName()+" - "+employee.getE_Title());
+                System.out.println("\n---> Employee Has Succesfully Logged In");
+                System.out.println("\n\n\tWelcome "+employee.getE_FirstName()+" "+
+                        employee.getE_LastName()+" - "+employee.getE_Title()+"\n\n\t\t\t\t<o> <o>\n\t\t\t\t   o\n\t\t\t\t \\___/\n\n ----<---<@ We value your service @>--->--");
             }else{
-                System.out.println("\nYou have entered an invalid employee login ID/Password combination.\n" +
-                        "Access Denied\n");
+                System.out.println("\n** You have entered an invalid employee login ID/Password combination. **\n" +
+                        "\n\t\t*** Access Denied To Employee System ***\n\n\n ---<--<@   Main Menu   @>-->---\n");
             }
         }
     }
@@ -114,6 +117,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
     /**
      * Validates E Login and PWD based on user input
      * compared to employee list
+     * if login is accurate, save employee state
      * @param el
      * @param epwd
      * @author - DMF
@@ -135,6 +139,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
                 setEmployee(empls.get(index));
                 if(!employee.getE_LoggedIn()){
                     employee.setE_LoggedIn(true);
+                    hotel.saveEmplList();
                 }
             }
             index++;
@@ -180,13 +185,16 @@ public class EmployeeUI implements EmployeeUI_Interface{
     /**
      * Employee logout
      * closes/ends employeeUI and returns to main screen menu
+     * saves state of employee
+     * @author DMF
      */
     @Override
     public void closeUI() {
         employee.setE_LoggedIn(false);
+        hotel.saveEmplList();
         employeeScreenActive = false;
         System.out.println("\n"+employee.getE_FirstName()+", you are now logged out of {insert hotel name here} employee system\n\n");
-        System.out.println("------<>----End Employee Page----<>------\n\n");
+        System.out.println("------<>----End Employee Page----<>------\n\n\n ---<--<@   Main Menu   @>-->---\n");
 
     }
 }
