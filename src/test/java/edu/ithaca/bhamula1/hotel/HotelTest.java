@@ -98,7 +98,6 @@ public class HotelTest {
                 "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                         "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                         "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0");
-
     }
 
 

@@ -1,9 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 import static edu.ithaca.bhamula1.hotel.Main.createHotel;
 import static edu.ithaca.bhamula1.hotel.Main.employeeLogScreen;
@@ -216,13 +214,6 @@ public class CustomerUI implements CustomerUIInterface {
                 boolean valid = false;
 
 
-////                //change later
-//                Calendar resDate = new GregorianCalendar(2018,3,26);
-//
-//                hotel.getRoom(1).addReservation(resDate,1);
-//                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
-//
-
                         int currYear = Calendar.getInstance().get(Calendar.YEAR);
                         System.out.println("Please enter the year you would like to reserve your room for. We only book up to three years ahead:");
                         int resYear = 0;
@@ -350,23 +341,23 @@ public class CustomerUI implements CustomerUIInterface {
             }
             else if(choice==2){
                 res.viewAvailableRequests();
-                System.out.println("Do you wish to make a request?");
-                char yOrN = 1;
-                while(yOrN==1){
-                    yOrN = checkYorN(scan.nextLine());
-                }
-                switch (yOrN){
-                    case 'y':
+//                System.out.println("Do you wish to make a request?");
+//                char yOrN = 1;
+//                while(yOrN==1){
+//                    yOrN = checkYorN(scan.nextLine());
+//                }
+//                switch (yOrN){
+//                    case 'y':
                         res.makeRequestFromReservation();
-                        break;
-                    case 'n':
-                        System.out.println("Let us know if we can help with anything.");
-                        break;
-                }
+//                        break;
+//                    case 'n':
+//                        System.out.println("Let us know if we can help with anything.");
+//                        break;
+//                }
             }else {
                 //checkout
                 c.setReturningCustomer(true);
-                System.out.println("Thank you for choosing to stay with us!");
+                System.out.println("Thank you for choosing to stay with us! \n");
                 System.out.println("Would you like to print a receipt? Type '1' for yes or '0' for no");
                 int wantReceipt = scan.nextInt();
 
@@ -377,7 +368,15 @@ public class CustomerUI implements CustomerUIInterface {
 
                 if(wantReceipt==1){
 
-                    //print the reciept
+                    Map<String, Double> costs = res.getPaymentTracker();
+
+                    double totalCost = 0;
+                    for(String thing: costs.keySet()){
+                        System.out.println(thing + " " + costs.get(thing));
+                        totalCost += costs.get(thing);
+                    }
+
+                    System.out.println("\nTotal Cost: "+ totalCost);
 
                 }
 

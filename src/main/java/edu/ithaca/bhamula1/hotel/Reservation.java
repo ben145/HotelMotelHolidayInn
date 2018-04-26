@@ -50,10 +50,10 @@ public class Reservation {
         }
 
         if(returning){
-            paymentTracker.put("Room Price", room.getRoomPrice()- (room.getRoomPrice() * 0.1));
+            paymentTracker.put("Room Price (for "+ nightDurration + " nights)",  (room.getRoomPrice()- (room.getRoomPrice() * 0.1)) * nightDurration);
 
         }else{
-            paymentTracker.put("Room Price", room.getRoomPrice());
+            paymentTracker.put("Room Price (for "+ nightDurration + " nights)", (room.getRoomPrice()*nightDurration));
 
         }
 
@@ -111,4 +111,8 @@ public class Reservation {
         return customer.getName() + " Room " + room.getRoomNumber() + " Check in" + dateFormat.format(checkInDate.getTime()) + " Nights" + nightDurration;
     }
 
+
+    public Map<String, Double> getPaymentTracker(){
+        return this.paymentTracker;
+    }
 }

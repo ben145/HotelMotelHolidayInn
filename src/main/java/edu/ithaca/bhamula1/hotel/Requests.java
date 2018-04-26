@@ -181,7 +181,7 @@ public class Requests implements RequestsInterface{
     //view the requests a customer can make
     public void viewRequests(){
         for(int i=0; i<requests.size();i++){
-            System.out.println((i+1)+") "+requests.get(i));
+            System.out.println((i+1)+") "+requests.get(i).getRequestName());
         }
     }
 
