@@ -189,7 +189,6 @@ public class CustomerUI implements CustomerUIInterface {
                         while(resYear==0){
                             resYear = checkChoiceInput(scan.nextLine(),currYear,currYear+3);
                         }
-                        //TODO make this next line print so if you are reserving for current year says enter number (currMonth - 12)
                         int currMonth = Calendar.getInstance().get(Calendar.MONTH);
                         System.out.println("Please enter the month you would like to reserve for as a number("+(currMonth+1)+"-12):");
                         int resMonth = 0;
@@ -238,7 +237,6 @@ public class CustomerUI implements CustomerUIInterface {
                                 System.out.println("Invalid ID.");
                             }
                             else {
-                                //TODO need to actually reserve the room!
                                 hotel.getRoom(rmNum).addReservation(resDate,stayDuration);
                                 hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration);
                                 valid = true;
