@@ -43,7 +43,6 @@ public class Reservation {
 
         this.paymentType = PaymentType.NODATA;
 
-
     }
 
     public CustomerInterface getCustomer(){
@@ -67,7 +66,7 @@ public class Reservation {
     }
 
     public void setCardPayment(String card ){
-        if(card.length()<= 15 && card.length()>= 13){
+        if(card.length()<= 16 && card.length()>= 14){
             this.cardPayment = card;
 
         }
