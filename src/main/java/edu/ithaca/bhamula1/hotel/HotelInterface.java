@@ -43,6 +43,8 @@ public interface HotelInterface {
         void setEmplList();
         void saveEmplList();
 
+
+
         List<Reservation> getReservations();
 
 

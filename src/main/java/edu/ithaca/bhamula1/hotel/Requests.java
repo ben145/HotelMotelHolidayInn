@@ -51,9 +51,78 @@ class ActiveRequest{
         }
     }
 }
+class RoomService{
+    String request;
+    double associatedPrice;
+    int numRequirements;
+    ArrayList<String> requirements;
 
+    //constructor without requirement list
+    public RoomService(String request, double associatedPrice, int numRequirements){
+        this.request = request;
+        this.associatedPrice = associatedPrice;
+        this.numRequirements = numRequirements;
+        if(numRequirements > 0){
+            Scanner scanner = new Scanner(System.in);
+            String input;
+            for(int i=0; i<numRequirements; i++){
+                System.out.println("Enter requirement " + (i+1) +": ");
+                input = scanner.nextLine();
+                requirements.add(input);
+            }
+        }
+        else{
+            requirements = null;
+        }
+    }
+
+    //constructor with requirement list
+    public RoomService(String request, double associatedPrice, int numRequirements, ArrayList<String> requirements){
+        this.request = request;
+        this.associatedPrice = associatedPrice;
+        this.numRequirements = numRequirements;
+        this.requirements = new ArrayList<String>(requirements);
+    }
+
+    //some getters
+    public String getRequestName(){
+        return request;
+    }
+    public double getAssociatedPrice(){
+        return associatedPrice;
+    }
+    public int getNumRequirements(){
+        return numRequirements;
+    }
+    public ArrayList getRequirements(){ return requirements; }
+
+    //some setters
+    public void setRequestName(String newRequest){
+        request = newRequest;
+    }
+    public void setAssociatedPrice(double newPrice){ associatedPrice = newPrice; }
+    public void addRequirement(String newRequirement){
+        if(requirements == null){
+            this.requirements = new ArrayList<String>();
+        }
+        requirements.add(newRequirement);
+        numRequirements++;
+    }
+    public void removeRequirement(String toDelete){
+        if((requirements != null) && (requirements.contains(toDelete))){
+            requirements.remove(toDelete);
+            numRequirements--;
+            if(numRequirements == 0){
+                requirements = null;
+            }
+        }
+        else{
+            System.out.println("requirement not found");
+        }
+    }
+}
 public class Requests implements RequestsInterface{
-    public ArrayList<String> requests = new ArrayList<String>();
+    public ArrayList<RoomService> requests = new ArrayList<RoomService>();
 
     public Requests(){
         loadRecs();
@@ -61,12 +130,52 @@ public class Requests implements RequestsInterface{
 
     //some requests any guest can make
     public void loadRecs(){
-        requests.add("Room service");
-        requests.add("Bring every pillow you have");
-        requests.add("Fresh towels");
-        requests.add("Room maintenance (I have broken something in this room)");
-    	requests.add("Refill minibar");
-	    requests.add("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'");
+        //first request
+            ArrayList<String> reqs = new ArrayList<>();
+            reqs.add("Pillow");
+            reqs.add("Scratchy Toilet Paper");
+            reqs.add("Sheet Set");
+            reqs.add("Small Shampoo");
+            reqs.add("Soap");
+            reqs.add("Tiny Conditioner");
+            reqs.add("Towels");
+            reqs.add("Washcloths");
+            RoomService req = new RoomService("Room service",0,8, reqs);
+            requests.add(req);
+            reqs.clear();
+        //second request
+            reqs.add("Pillow");
+            req = new RoomService("Bring every pillow you have",0,1, reqs);
+            requests.add(req);
+            reqs.clear();
+        //third
+            reqs.add("Towels");
+            req = new RoomService("Fresh Towels",0,1, reqs);
+            requests.add(req);
+            reqs.clear();
+        //and so fo(u)rth
+            reqs.add("Wrench");
+            req = new RoomService("Room maintenance (I have broken something in this room)",0,1, reqs);
+            requests.add(req);
+            reqs.clear();
+        //and this one
+            reqs.add("Gin");
+            reqs.add("Rum");
+            reqs.add("Tequila");
+            reqs.add("Vodka");
+            reqs.add("Whiskey");
+            req = new RoomService("Refill minibar",0,5, reqs);
+            requests.add(req);
+            reqs.clear();
+	    //can't forget that
+            reqs.add("Don Felder");
+            reqs.add("Don Henley");
+            reqs.add("Glenn Frey");
+            reqs.add("Joe Walsh");
+            reqs.add("Randy Meisner");
+            req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'",6.66,5, reqs);
+            requests.add(req);
+            reqs.clear();
     }
 
     //view the requests a customer can make
@@ -79,29 +188,24 @@ public class Requests implements RequestsInterface{
     //allows authorized staff to add a request to they system
     public void addRequest(String employeeId){
         //check authorization
-
-	    System.out.println("Enter request to add: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
+        //request name
+            System.out.println("Enter request to add: ");
+            Scanner scanner = new Scanner(System.in);
+            String req = scanner.nextLine();
+        //request price
+            System.out.println("Enter additional charge associated with request: ");
+            String input = scanner.nextLine();
+            double price = Double.parseDouble(input);
         //request requirements
-        System.out.println("Does request require inventory items? (y/n)");
-        input = scanner.nextLine();
-            if(input == "y"){
-            boolean requirements = true;
-            String input2;
-            while(requirements){
-                    System.out.println("Enter inventory item required: ");
+            System.out.println("Does request require inventory items? (y/n)");
+            input = scanner.nextLine();
+            int num = 0;
+                if(input == "y"){
+                    System.out.println("Enter number of Requirements: ");
                     input = scanner.nextLine();
-            System.out.println("Enter number of above items required: ");
-            System.out.println();
-            input2 = scanner.nextLine();
-            Integer.parseInt(input2);
-
-            //prolly have to associate inventory with request at some point
+                    num = Integer.parseInt(input);
                 }
-            }
-            requests.add(input);
+        RoomService newReq = new RoomService(req,price,num);
         System.out.println("Request added to options list");
     }
 
@@ -125,11 +229,11 @@ public class Requests implements RequestsInterface{
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        //if()
         try {
-            int inputInt = Integer.parseInt(input);
+            //compensating for 0
+            int inputInt = (Integer.parseInt(input))-1;
             if(inputInt>0&&inputInt<requests.size()) {
-                input = requests.get(inputInt);
+                input = requests.get(inputInt).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
