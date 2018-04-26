@@ -12,13 +12,13 @@ https://docs.google.com/document/d/1ukBbPHb75XiOq4zC387g7idGG97uU2atw_DODzhi2ig/
 Sprint One:
 
 <blockquote><b>First Sprint goal</b>:
-Create a navigable interface that shows rooms available and commands to select/manipulate them. Should also include a mockup of what requests are available.
+<span title="so articulate">Create a navigable interface that shows rooms available and commands to select/manipulate them. Should also include a mockup of what requests are available.</span>
 
 <b>DevTeam Sprint goal #1</b>:
-Develop the frame for the hotel based on first sprint backlog.
+<span title="double skeleton">Develop the frame for the hotel based on first sprint backlog.</span>
 
-Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
-<br>State Diagram: https://i.snag.gy/etT3dV.jpg
+Current Class Diagram: <a href="https://i.snag.gy/fgFAkK.jpg" target="_blank">class diagram</a>
+<br>State Diagram: <a href="https://i.snag.gy/etT3dV.jpg" target="_blank">state diagram</a>
 
 <b>Sprint 1 Retrospective</b>:<br>
   https://docs.google.com/document/d/1i60z-cVSykN1X_D9edJBACO1goZnSEhqpX4UMS9VzY4/edit
@@ -29,12 +29,12 @@ Current Class Diagram: https://i.snag.gy/fgFAkK.jpg
 Sprint Two:
 <blockquote><b>Second Sprint goal</b>:
   
-To increase functionality for our system by enhancing the user interface (for customers and employees) by implementing a calendar and requests.
+<span title="we wrote this ourselves close to the end of the sprint">To increase functionality for our system by enhancing the user interface (for customers and employees) by implementing a calendar and requests.</span>
 
 <b>DevTeam Sprint goal #2</b>:
-Add some muscle to that double skeleton.
+<span title="a secret message from your teeth!">Add some muscle to that double skeleton.</span>
 
-Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing 
+Current Class Diagram: <a href="https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP73_Ae-BC/view?usp=sharing" target="_blank">updated class diagram</a>
 
 <b>Sprint 2 Retrospective</b>:<br>
   https://docs.google.com/document/d/10MleAlgFV1BG0rgvcqXzfnDCHPBKCGEBmBFmfaML_To/edit
@@ -45,9 +45,9 @@ Current Class Diagram: https://drive.google.com/file/d/1vJIw47QJxzJYErnzBj0dNypP
 Sprint Three:
 
 <blockquote><b>Third Sprint goal</b>:
-  Polish and complete request system. (Polish)
+  <span title="Polish">Polish and complete request system. (Polish)</span>
 
 <b>DevTeam Sprint goal #3</b>:
-  Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)
+  <span title="look who briefly googled markup">Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)</span>
 
 </blockquote>
