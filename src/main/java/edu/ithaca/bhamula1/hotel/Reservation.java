@@ -34,7 +34,8 @@ public class Reservation {
         this.room = room;
         this.nightDurration = nightDurration;
         this.checkInDate = checkInDate;
-        if(cardPayment.length()>15 || cardPayment.length()<13){
+        if(cardPayment.length()>16 || cardPayment.length()<14){
+            System.out.println("hello " + cardPayment.length());
             this.cardPayment = "";
         }else{
             this.cardPayment = cardPayment;
