@@ -1,8 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 import static edu.ithaca.bhamula1.hotel.Main.createHotel;
 import static edu.ithaca.bhamula1.hotel.Main.employeeLogScreen;
@@ -137,15 +135,16 @@ public class CustomerUI implements CustomerUIInterface {
     public int loggedIn(CustomerInterface c, HotelInterface hotel){
         int option =0;
         System.out.println("Welcome " + c.getName());
-        while(option!=5) {
+        while(option!=6) {
             System.out.println("Would you like to \n" +
                     "1) check in \n" +
                     "2) review rooms \n" +
                     "3) reserve room \n" +
                     "4) cancel room reservation \n" +
-                    "5) quit\n");
+                    "5) view reservations \n" +
+                    "6) quit\n");
             while(option == 0) {
-                option = checkChoiceInput(scan.nextLine(),1,5);
+                option = checkChoiceInput(scan.nextLine(),1,6);
             }
             //CHECK IN
             if(option == 1){
@@ -275,6 +274,13 @@ public class CustomerUI implements CustomerUIInterface {
             }
 
             else if(option == 5){
+                //VIEW RESVERVATIONS
+                System.out.println("Your Reservations");
+                List<Reservation> reservations = new ArrayList<>();
+                
+            }
+
+            else if(option == 6){
                 return 4;
             }
             System.out.println();
