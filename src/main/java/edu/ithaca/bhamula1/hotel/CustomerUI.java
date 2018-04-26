@@ -212,11 +212,11 @@ public class CustomerUI implements CustomerUIInterface {
 
 
 //                //change later
-//                Calendar resDate = new GregorianCalendar(2018,3,26);
-//
-//                hotel.getRoom(1).addReservation(resDate,1);
-//                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
+                Calendar resDate = new GregorianCalendar(2018,3,26);
 
+                hotel.getRoom(1).addReservation(resDate,1);
+                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
+ /*
 
                         int currYear = Calendar.getInstance().get(Calendar.YEAR);
                         System.out.println("Please enter the year you would like to reserve your room for. We only book up to three years ahead:");
@@ -275,7 +275,7 @@ public class CustomerUI implements CustomerUIInterface {
                             System.out.println("Room not available.");
                         }
 
-
+*/
 
             }
 
@@ -340,6 +340,23 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("Let us know if we can help with anything.");
                         break;
                 }
+            }else {
+                //checkout
+                System.out.println("Thank you for choosing to stay with us!");
+                System.out.println("Would you like to print a receipt? Type '1' for yes or '0' for no");
+                int wantReceipt = scan.nextInt();
+
+                while(wantReceipt != 1 && wantReceipt != 0){
+                    System.out.println("Try again");
+                    wantReceipt = scan.nextInt();
+                }
+
+                if(wantReceipt==1){
+
+                    //print the reciept
+
+                }
+
             }
             System.out.println();
         }
