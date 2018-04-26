@@ -20,8 +20,8 @@ public interface HotelInterface {
 
         ArrayList<RoomInterface> getRooms();
 
-        String viewOrderedRooms();
-        String viewOrderedAvailableRooms(Calendar checkin, int nightDuration);
+        String viewOrderedRooms(boolean returning);
+        String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning);
 
 
       void logIn (String name, String id);
@@ -36,7 +36,7 @@ public interface HotelInterface {
 
 //        void checkRooms(int rmNum, String cID, Calendar checkIn, int durration);
 
-        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration);
+        void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String card);
 
         void setCustomer();
 
@@ -62,4 +62,5 @@ public interface HotelInterface {
         public Reservation removeReservation(CustomerInterface customer, int roomNumber);
         public Reservation getReservation(CustomerInterface customer, int roomNumber);
 
-}
+
+    }

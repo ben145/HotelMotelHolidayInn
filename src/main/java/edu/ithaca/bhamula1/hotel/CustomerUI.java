@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -115,7 +116,7 @@ public class CustomerUI implements CustomerUIInterface {
             //VIEW ROOMS
             else if(firstOption == 3){
                 System.out.println("View Rooms ");
-                System.out.println(hotel.viewOrderedRooms());
+                System.out.println(hotel.viewOrderedRooms(false));
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*\n");
             }
 
@@ -157,16 +158,54 @@ public class CustomerUI implements CustomerUIInterface {
                 }
                 Reservation res  = hotel.getReservation(c,rmNum);
                 if(hotel.checkIn(rmNum,c)){
-                   checkedInMenu(c,rmNum);
+                    Scanner scan1 = new Scanner(System.in);
+
+                    System.out.println("Would you like change the card on file. Type '1' for  yes or '0' for no ");
+                    int yesOrNo = scan1.nextInt();
+                    while(yesOrNo != 0 && yesOrNo != 1){
+                        System.out.println("Try again");
+                        yesOrNo = scan1.nextInt();
+                    }
+
+                    if(yesOrNo == 1){
+                        System.out.println("Type the new card number");
+                        String card = scan1.next();
+
+                        while(card.length()>16 || card.length()< 14){
+                            System.out.println("Try again");
+                            card = scan1.nextLine();
+                        }
+
+                        res.setCardPayment(card);
+                    }
+
+                    System.out.println("Would you like the room charged to the card on file or pay in cash? Type '1' for card or type '0' for cash");
+                    int cardOrCash = scan1.nextInt();
+                    while(cardOrCash != 0 && cardOrCash != 1){
+                        System.out.println("Try again");
+                        cardOrCash = scan1.nextInt();
+                    }
+                    if(cardOrCash ==1){
+                        res.setPaymentType(Reservation.PaymentType.CARD);
+                    }else{
+                        res.setPaymentType(Reservation.PaymentType.CASH);
+                    }
+
+                    checkedInMenu(c,rmNum);
                     hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
                 }
             }
 
             //REVIEW ROOMS
             else if(option == 2){
+                boolean returning = false;
+                if(c.getReturningCustomer()){
+                    returning = true;
+                }
+
                 System.out.println("Review Rooms");
                 System.out.println("View Rooms  ");
-                System.out.println(hotel.viewOrderedRooms());
+                System.out.println(hotel.viewOrderedRooms(true));
                 System.out.println();
             }
 
@@ -175,14 +214,15 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("Reserve Room");
                 //System.out.println(hotel.viewOrderedAvailableRooms());
                 boolean valid = false;
-                System.out.println("\nWould you like to reserve one of our rooms?\nEnter Yes or No and hit enter");
-                char r = 1;
-                while(r==1) {
-                    String respond = scan.nextLine();
-                    r = checkYorN(respond);
-                }
-                switch(r){
-                    case 'y':
+
+
+////                //change later
+//                Calendar resDate = new GregorianCalendar(2018,3,26);
+//
+//                hotel.getRoom(1).addReservation(resDate,1);
+//                hotel.addReservation(c,hotel.getRoom(1),resDate,1, "1234123412341234");
+//
+
                         int currYear = Calendar.getInstance().get(Calendar.YEAR);
                         System.out.println("Please enter the year you would like to reserve your room for. We only book up to three years ahead:");
                         int resYear = 0;
@@ -222,41 +262,51 @@ public class CustomerUI implements CustomerUIInterface {
                         while(stayDuration==0){
                             stayDuration = checkChoiceInput(scan.nextLine(),1,21);
                         }
+
                         Calendar resDate = new GregorianCalendar(resYear,resMonth,resDay);
 
-                        System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration));
+                        boolean returning = false;
+                        if(c.getReturningCustomer()){
+                            returning = true;
+                        }
+                        System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration, returning));
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
                             rmNum=checkChoiceInput(scan.nextLine(),0, hotel.getNumberOfRooms()-1);
                         }
                         if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
-                            System.out.println("Please enter your customer ID: ");
-                            String custID = scan.nextLine();
-                            if(hotel.getCustomer(custID)==null){
-                                System.out.println("Invalid ID.");
-                            }
-                            else {
+
+                                System.out.println("Please enter a card number:");
+                                String cardNum  = scan.nextLine();
+                                while(cardNum.length()< 15 && cardNum.length()<13){
+                                    System.out.println("Could not process card. Try typing it in again ");
+                                    cardNum = scan.nextLine();
+                                }
+
+
                                 hotel.getRoom(rmNum).addReservation(resDate,stayDuration);
-                                hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration);
+                                hotel.addReservation(c,hotel.getRoom(rmNum),resDate,stayDuration, cardNum);
+
                                 valid = true;
                                 System.out.println("Your reservation has been made.");
-                            }
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                                System.out.println("Check in is at after 2pm on " + dateFormat.format(resDate.getTime()));
+                                Calendar copyDate3 = new GregorianCalendar(resYear,resMonth-1,resDay+stayDuration);
+                                System.out.println("Check out is before 11 am on " + dateFormat.format(copyDate3.getTime()));
+
                         }else{
                             System.out.println("Room not available.");
                         }
-                        break;
-                    case 'n':
-                        System.out.println("Thank you, please visit again");
-                        valid = true;
-                        break;
-                }
+
+
+
             }
 
             else if(option == 4){
                 //CANCEL ROOM RESERVATION
                 System.out.println("Cancel Room Reservation");
-                System.out.println("We are sorry to here you will not be staying with us please contact us with any complaints.");
+                System.out.println("We are sorry to hear you will not be staying with us please contact us with any complaints... or compliments :)");
                 System.out.println("Which room do you wish to cancel?");
                 int rmNum = 0;
                 while (rmNum == 0) {
@@ -314,6 +364,24 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("Let us know if we can help with anything.");
                         break;
                 }
+            }else {
+                //checkout
+                c.setReturningCustomer(true);
+                System.out.println("Thank you for choosing to stay with us!");
+                System.out.println("Would you like to print a receipt? Type '1' for yes or '0' for no");
+                int wantReceipt = scan.nextInt();
+
+                while(wantReceipt != 1 && wantReceipt != 0){
+                    System.out.println("Try again");
+                    wantReceipt = scan.nextInt();
+                }
+
+                if(wantReceipt==1){
+
+                    //print the reciept
+
+                }
+
             }
             System.out.println();
         }
