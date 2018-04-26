@@ -69,13 +69,13 @@ public class HotelTest {
         Assert.assertEquals("Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                 "Room: 2 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                 "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n"+
-                "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0", hotel.viewOrderedRooms());
-        String st = hotel.viewOrderedRooms();
+                "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0", hotel.viewOrderedRooms(false));
+        String st = hotel.viewOrderedRooms(false);
 
     }
 
     @Test
-    void viewOrderedAvailableRooms(){
+    void viewOrderedAvailableRoomsNotReturningTest(){
         Hotel hotel = new Hotel();
         hotel.setNumberOfRooms(5);
         Customer customer = new Customer("Mia", "Kimmich", "mk", -1, false);
@@ -94,14 +94,43 @@ public class HotelTest {
 //        System.out.println(hotel.getReservations());
 
         //looking for a hotel starting on 1/1/1 for 3 nights
-        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3),
+        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, false),
                 "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                         "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
                         "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0");
 
+    }
+
+
+
+    @Test
+    void viewOrderedAvailableRoomsReturningTest(){
+        Hotel hotel = new Hotel();
+        hotel.setNumberOfRooms(5);
+        Customer customer = new Customer("Mia", "Kimmich", "mk", -1, false);
+        Calendar checkIn = new GregorianCalendar(1,1-1,1);
+        Calendar checkDate = new GregorianCalendar(1,1-1,1);
+
+        hotel.addRoom(2, true, 50,2, "double", "mini bar");
+        hotel.addRoom(1, true, 100,2, "double", "mini bar");
+        hotel.addRoom(4, true, 100,2, "double", "mini bar");
+        hotel.addRoom(3, false, 50,2, "double", "mini bar");
+
+        //this all happens when the user reserves a room in the ui
+        hotel.getRoom(2).addReservation(checkDate,2);
+        hotel.addReservation(customer, hotel.getRoom(2), checkIn, 2, "" );
+
+        //looking for a hotel starting on 1/1/1 for 3 nights
+        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, true),
+                "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $90.0\n" +
+                        "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $45.0\n" +
+                        "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $90.0");
 
 
     }
+
+
+
 
     @Test
     void getRoom() {

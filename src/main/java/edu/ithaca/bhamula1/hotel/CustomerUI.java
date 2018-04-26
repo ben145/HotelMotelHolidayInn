@@ -116,7 +116,7 @@ public class CustomerUI implements CustomerUIInterface {
             //VIEW ROOMS
             else if(firstOption == 3){
                 System.out.println("View Rooms ");
-                System.out.println(hotel.viewOrderedRooms());
+                System.out.println(hotel.viewOrderedRooms(false));
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*\n");
             }
 
@@ -198,9 +198,14 @@ public class CustomerUI implements CustomerUIInterface {
 
             //REVIEW ROOMS
             else if(option == 2){
+                boolean returning = false;
+                if(c.getReturningCustomer()){
+                    returning = true;
+                }
+
                 System.out.println("Review Rooms");
                 System.out.println("View Rooms  ");
-                System.out.println(hotel.viewOrderedRooms());
+                System.out.println(hotel.viewOrderedRooms(true));
                 System.out.println();
             }
 
@@ -260,7 +265,11 @@ public class CustomerUI implements CustomerUIInterface {
 
                         Calendar resDate = new GregorianCalendar(resYear,resMonth,resDay);
 
-                        System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration));
+                        boolean returning = false;
+                        if(c.getReturningCustomer()){
+                            returning = true;
+                        }
+                        System.out.println(hotel.viewOrderedAvailableRooms(resDate,stayDuration, returning));
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
@@ -357,6 +366,7 @@ public class CustomerUI implements CustomerUIInterface {
                 }
             }else {
                 //checkout
+                c.setReturningCustomer(true);
                 System.out.println("Thank you for choosing to stay with us!");
                 System.out.println("Would you like to print a receipt? Type '1' for yes or '0' for no");
                 int wantReceipt = scan.nextInt();

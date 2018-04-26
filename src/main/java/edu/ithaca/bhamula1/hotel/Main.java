@@ -106,7 +106,11 @@ public abstract class Main {
 
             } else if (option == 3) {
                 System.out.println("Review Rooms");
-                System.out.println(hotel.viewOrderedRooms());
+                boolean returning = false;
+                if(customer.getReturningCustomer()){
+                    returning = true;
+                }
+                System.out.println(hotel.viewOrderedRooms(returning));
 
 
 
@@ -138,7 +142,11 @@ public abstract class Main {
         Calendar checkinDate = new GregorianCalendar(year,month-1,day);
         Calendar copyDate = new GregorianCalendar(year,month-1,day);
         System.out.println("Rooms Available For That Date Range:");
-        System.out.println(hotel.viewOrderedAvailableRooms(checkinDate,nightDuration));
+        boolean returning = false;
+        if(customer.getReturningCustomer()){
+            returning = true;
+        }
+        System.out.println(hotel.viewOrderedAvailableRooms(checkinDate,nightDuration, returning));
         System.out.println("Which room would you like to reserve?");
         int rmNum = scan.nextInt();
 
@@ -319,7 +327,7 @@ public abstract class Main {
 
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");
-                System.out.println(hotel.viewOrderedRooms());
+                System.out.println(hotel.viewOrderedRooms(false));
                 System.out.println("*If you would like to reserve a room, you must create an account or log in first*");
             } else if (firstOption == 4) {
                 System.out.println("Thank you");

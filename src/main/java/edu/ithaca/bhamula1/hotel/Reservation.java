@@ -16,6 +16,7 @@ public class Reservation {
     Calendar checkInDate;
     String cardPayment;
     PaymentType paymentType;
+    Map<String, Double> paymentTracker;
 
 
     public Reservation(){
@@ -25,6 +26,7 @@ public class Reservation {
         this.checkInDate = new GregorianCalendar(1,Calendar.JANUARY,1);
         this.cardPayment = "";
         this.paymentType = PaymentType.NODATA;
+        this.paymentTracker = new HashMap<String, Double>();
     }
 
 
@@ -35,13 +37,26 @@ public class Reservation {
         this.nightDurration = nightDurration;
         this.checkInDate = checkInDate;
         if(cardPayment.length()>16 || cardPayment.length()<14){
-            System.out.println("hello " + cardPayment.length());
             this.cardPayment = "";
         }else{
             this.cardPayment = cardPayment;
         }
 
         this.paymentType = PaymentType.NODATA;
+
+        boolean returning = false;
+        if(customer.getReturningCustomer()){
+            returning = true;
+        }
+
+        if(returning){
+            paymentTracker.put("Room Price", room.getRoomPrice()- (room.getRoomPrice() * 0.1));
+
+        }else{
+            paymentTracker.put("Room Price", room.getRoomPrice());
+
+        }
+
 
     }
 

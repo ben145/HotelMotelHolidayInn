@@ -33,4 +33,8 @@ public interface CustomerInterface {
 
     void setReservation(String r);
 
+    boolean getReturningCustomer();
+
+    void setReturningCustomer(boolean returning);
+
 }

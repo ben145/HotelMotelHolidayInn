@@ -20,8 +20,8 @@ public interface HotelInterface {
 
         ArrayList<RoomInterface> getRooms();
 
-        String viewOrderedRooms();
-        String viewOrderedAvailableRooms(Calendar checkin, int nightDuration);
+        String viewOrderedRooms(boolean returning);
+        String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning);
 
 
       void logIn (String name, String id);

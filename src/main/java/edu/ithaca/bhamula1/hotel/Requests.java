@@ -236,6 +236,7 @@ public class Requests implements RequestsInterface{
                 input = requests.get(inputInt).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
+
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
             }
             else{

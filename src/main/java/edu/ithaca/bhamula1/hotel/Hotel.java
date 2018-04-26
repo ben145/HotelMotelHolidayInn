@@ -134,18 +134,33 @@ public class Hotel implements HotelInterface {
      * @Author Mia
      * @return
      */
-    public String viewOrderedRooms(){
+    public String viewOrderedRooms(boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 ) {
 
                 if (str.equals("")) {
-                    str +=  rm.toString();
-                } else {
-                    str += "\n" + rm.toString();
-                }
 
+
+                    if(returning){
+                        str+= rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+                    }
+
+
+                } else {
+
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+
+                    }
+
+
+                }
 
             }
 
@@ -154,16 +169,31 @@ public class Hotel implements HotelInterface {
     }
 
 
-    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration){
+    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.canReserve(checkin, nightDuration) ) {
 
                 if (str.equals("")) {
-                    str +=  rm.toString();
+
+                    if(returning){
+                        str += rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+
+                    }
+
+
                 } else {
-                    str += "\n" + rm.toString();
+
+
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+
+                    }
                 }
 
 
