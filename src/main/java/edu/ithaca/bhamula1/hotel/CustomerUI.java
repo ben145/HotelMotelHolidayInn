@@ -190,9 +190,9 @@ public class CustomerUI implements CustomerUIInterface {
                             resYear = checkChoiceInput(scan.nextLine(),currYear,currYear+3);
                         }
                         //TODO make this next line print so if you are reserving for current year says enter number (currMonth - 12)
-                        System.out.println("Please enter the month you would like to reserve for as a number(1-12):");
-                        int resMonth = 0;
                         int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+                        System.out.println("Please enter the month you would like to reserve for as a number("+(currMonth+1)+"-12):");
+                        int resMonth = 0;
                         currMonth++;
                         while(resMonth==0){
                             //resMonth = checkChoiceInput(scan.nextLine(),1,12);
