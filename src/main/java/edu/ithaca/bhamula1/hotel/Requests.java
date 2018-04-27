@@ -102,11 +102,22 @@ class RoomService{
     }
     public void setAssociatedPrice(double newPrice){ associatedPrice = newPrice; }
     public void addRequirement(String newRequirement){
-        if(requirements == null){
+        if (requirements == null) {
             this.requirements = new ArrayList<String>();
         }
-        requirements.add(newRequirement);
-        numRequirements++;
+        boolean found = false;
+        for(Inventory item: Hotel.inventory) {
+
+            if(item.getItem() == newRequirement){
+                found = true;
+                requirements.add(newRequirement);
+                numRequirements++;
+            }
+
+        }
+        if(!found){
+            System.out.println(newRequirement + " not found in inventory. Please restock and try again.");
+        }
     }
     public void removeRequirement(String toDelete){
         if((requirements != null) && (requirements.contains(toDelete))){
@@ -130,51 +141,109 @@ public class Requests implements RequestsInterface{
 
     //some requests any guest can make
     public void loadRecs(){
+        RoomService req;
         //first request
             ArrayList<String> reqs = new ArrayList<>();
-            reqs.add("Pillow");
-            reqs.add("Scratchy Toilet Paper");
-            reqs.add("Sheet Set");
-            reqs.add("Small Shampoo");
-            reqs.add("Soap");
-            reqs.add("Tiny Conditioner");
-            reqs.add("Towels");
-            reqs.add("Washcloths");
-            RoomService req = new RoomService("Room service",0,8, reqs);
-            requests.add(req);
+            int numReqs = 0;
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Scratchy Toilet Paper") {
+                    reqs.add("Scratchy Toilet Paper");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Sheet Set") {
+                    reqs.add("Sheet Set");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Small Shampoo") {
+                    reqs.add("Small Shampoo");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Soap") {
+                    reqs.add("Soap");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Tiny Conditioner") {
+                    reqs.add("Tiny Conditioner");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Towels") {
+                    reqs.add("Towels");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Washcloths") {
+                    reqs.add("Washcloths");numReqs++; }
+            }
+            if(numReqs > 2) {
+                req = new RoomService("Room service", 0, numReqs, reqs);
+                requests.add(req);
+            }
             reqs.clear();
         //second request
-            reqs.add("Pillow");
-            req = new RoomService("Bring every pillow you have",0,1, reqs);
-            requests.add(req);
-            reqs.clear();
+            for(Inventory item: Hotel.inventory) {
+                if(item.getItem() == "Pillow"){
+                    reqs.add("Pillow");
+                    req = new RoomService("Bring every pillow you have", 0, 1, reqs);
+                    requests.add(req);
+                    reqs.clear();
+                }
+            }
         //third
-            reqs.add("Towels");
-            req = new RoomService("Fresh Towels",0,1, reqs);
-            requests.add(req);
-            reqs.clear();
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Towels") {
+                    reqs.add("Towels");
+                    req = new RoomService("Fresh Towels", 0, 1, reqs);
+                    requests.add(req);
+                    reqs.clear();
+                }
+            }
         //and so fo(u)rth
-            reqs.add("Wrench");
-            req = new RoomService("Room maintenance (I have broken something in this room)",0,1, reqs);
-            requests.add(req);
-            reqs.clear();
+            for(Inventory item : Hotel.inventory) {
+                if (item.getItem() == "Wrench") {
+                    reqs.add("Wrench");
+                    req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
+                    requests.add(req);
+                    reqs.clear();
+                }
+            }
         //and this one
-            reqs.add("Gin");
-            reqs.add("Rum");
-            reqs.add("Tequila");
-            reqs.add("Vodka");
-            reqs.add("Whiskey");
-            req = new RoomService("Refill minibar",0,5, reqs);
-            requests.add(req);
+            numReqs = 0;
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Gin") {
+                    reqs.add("Gin");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Rum") {
+                    reqs.add("Rum");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Tequila") {
+                    reqs.add("Tequila");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Vodka") {
+                    reqs.add("Vodka");numReqs++; }
+            }
+            for(Inventory item: Hotel.inventory) {
+                if (item.getItem() == "Whiskey") {
+                    reqs.add("Whiskey");numReqs++; }
+            }
+            if(numReqs > 1) {
+                req = new RoomService("Refill minibar", 35.56, numReqs, reqs);
+                requests.add(req);
+            }
             reqs.clear();
 	    //can't forget that
-            reqs.add("Don Felder");
-            reqs.add("Don Henley");
-            reqs.add("Glenn Frey");
-            reqs.add("Joe Walsh");
-            reqs.add("Randy Meisner");
-            req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'",6.66,5, reqs);
-            requests.add(req);
+            for(Inventory item : Hotel.inventory){
+                if(item.getItem() == "Don Felder") {
+                    reqs.add("Don Felder");
+                    reqs.add("Don Henley");
+                    reqs.add("Glenn Frey");
+                    reqs.add("Joe Walsh");
+                    reqs.add("Randy Meisner");
+                    req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'", 6.66, 5, reqs);
+                    requests.add(req);
+                }
+            }
             reqs.clear();
     }
 
@@ -231,14 +300,14 @@ public class Requests implements RequestsInterface{
         String input = scanner.nextLine();
         try {
             //compensating for 0
-            int inputInt = (Integer.parseInt(input))-1;
+            int inputInt = (Integer.parseInt(input));
             if(inputInt>0&&inputInt<requests.size()) {
-                input = requests.get(inputInt).getRequestName();
+                input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
 
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
-                return input + "," + requests.get(inputInt).getAssociatedPrice();
+                return input + "," + requests.get(inputInt-1).getAssociatedPrice();
             }
             else{
                 System.out.println("Invalid Choice.");

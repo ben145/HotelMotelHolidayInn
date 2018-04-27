@@ -14,7 +14,7 @@ public class Hotel implements HotelInterface {
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
-    private static List<Inventory> inventory;
+    public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
 
@@ -51,7 +51,9 @@ public class Hotel implements HotelInterface {
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
         //find room
-        Reservation res = getReservation(customer,roomNumber);
+        Calendar today = new GregorianCalendar();
+        today.set(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        Reservation res = getReservation(customer,roomNumber,today);
         RoomInterface current = getRoom(roomNumber);
         if(res!=null){
             if(customer.getId()==res.getCustomer().getId()){
@@ -62,7 +64,7 @@ public class Hotel implements HotelInterface {
                         customer.checkIn(roomNumber);
 
                         current.checkIn(customer);
-                        removeReservation(customer,roomNumber);
+                        removeReservation(res);
                         return true;
                     }
                     System.out.println("Your reservation is not for today. Please change reservation to check in today.");
@@ -202,7 +204,7 @@ public class Hotel implements HotelInterface {
         }
         return str;
 
-        }
+    }
 
 
     public void logIn (String name, String id){
@@ -406,9 +408,9 @@ public class Hotel implements HotelInterface {
     }
 
     /*
-      * reads in the stock stock file i pulled straight out of my ass
-      * populates hotel inventory
-    */
+     * reads in the stock stock file i pulled straight out of my ass
+     * populates hotel inventory
+     */
     public void testInventory(){
         try {
             InputStream file = this.getClass().getResourceAsStream("/stock.txt");
@@ -448,11 +450,11 @@ public class Hotel implements HotelInterface {
 
     }
 
-    public Reservation removeReservation(CustomerInterface customer, int roomNumber) {
+    public Reservation removeReservation(Reservation reservation) {
         Iterator<Reservation> itr = this.reservations.iterator();
         while(itr.hasNext()){
             Reservation curr = itr.next();
-            if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
+            if(curr==reservation){
                 reservations.remove(curr);
                 return curr;
             }
@@ -460,12 +462,18 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
-    public Reservation getReservation(CustomerInterface customer, int roomNumber){
+    public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate){
         Iterator<Reservation> itr = this.reservations.iterator();
         while(itr.hasNext()){
             Reservation curr = itr.next();
             if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
-                return curr;
+                if(checkInDate.get(Calendar.YEAR)==curr.getCheckInDate().get(Calendar.YEAR)){
+                    if(checkInDate.get(Calendar.MONTH)==curr.getCheckInDate().get(Calendar.MONTH)){
+                        if(checkInDate.get(Calendar.DAY_OF_MONTH)==curr.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
+                            return curr;
+                        }
+                    }
+                }
             }
         }
         return null;
@@ -503,5 +511,3 @@ public class Hotel implements HotelInterface {
 
 
 }
-
-

@@ -4,8 +4,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -242,10 +241,11 @@ public class HotelTest {
         for(int i = 1; i<5; i++){
             myHotel.addTestRoom(i);
         }
-        myHotel.addReservation(customer1,myHotel.getRoom(1), Calendar.getInstance(),2, "");
-        myHotel.addReservation(customer1,myHotel.getRoom(2), Calendar.getInstance(),2, "");
-        assertEquals(customer1.getName(),myHotel.getReservation(customer1,1).getCustomer().getName());
-        assertEquals(1,myHotel.getReservation(customer1,1).getRoom().getRoomNumber());
+        Calendar today = Calendar.getInstance();
+        myHotel.addReservation(customer1,myHotel.getRoom(1), today,2, "1234567890987");
+        myHotel.addReservation(customer1,myHotel.getRoom(2), today,2, "1234567890987");
+        assertEquals(customer1.getName(),myHotel.getReservation(customer1,1,today).getCustomer().getName());
+        assertEquals(1,myHotel.getReservation(customer1,1,today).getRoom().getRoomNumber());
     }
 
 
@@ -269,6 +269,80 @@ public class HotelTest {
 ////        Assert.assertEquals(true, hotel.getCardInformation("1234123412341234"));
 //
 //    }
+
+    @Test
+    void getCustomerReservationsTest(){
+        Hotel myHotel = new Hotel();
+        Customer customer1 = new Customer("Brad Keith","1234");
+        Customer customer2 = new Customer("Bill Joe","5678");
+        myHotel.setNumberOfRooms(5);
+        for(int i = 1; i<5; i++){
+            myHotel.addTestRoom(i);
+        }
+        List<Calendar> dates1 = new ArrayList<>();
+        List<Calendar> dates2 = new ArrayList<>();
+        for(int i = 0; i<3; i++){
+            dates1.add(new GregorianCalendar());
+        }
+        for(int i = 0; i<2; i++){
+            dates2.add(new GregorianCalendar());
+        }
+        dates1.get(2).set(2019,6,23);
+        myHotel.addReservation(customer1,myHotel.getRoom(1),dates1.get(2),2,"1234567890987");
+        dates1.get(1).set(2019,6,20);
+        myHotel.addReservation(customer1,myHotel.getRoom(2),dates1.get(1),2,"1234567890987");
+        dates2.get(1).set(2021,6,7);
+        myHotel.addReservation(customer2,myHotel.getRoom(1),dates2.get(1),2,"1234567890987");
+        dates2.get(0).set(2018,2,7);
+        myHotel.addReservation(customer2,myHotel.getRoom(1),dates2.get(0),2,"1234567890987");
+        dates1.get(0).set(2018,8,24);
+        myHotel.addReservation(customer1,myHotel.getRoom(1),dates1.get(0),2,"1234567890987");
+        List<Reservation> c1Res = myHotel.getCustomerReservations(customer1);
+        Iterator<Reservation> itr1 = c1Res.iterator();
+        Reservation previous = itr1.next();
+        int ndx = 0;
+        assertEquals(customer1,previous.getCustomer());
+        assertEquals(dates1.get(ndx),previous.getCheckInDate());
+        assertEquals(2,previous.getNightDurration());
+        Reservation curr;
+        while(itr1.hasNext()){
+            curr = itr1.next();
+            ndx++;
+            assertEquals(customer1,curr.getCustomer());
+            assertEquals(dates1.get(ndx),curr.getCheckInDate());
+            assertEquals(2,curr.getNightDurration());
+            Comparator<Reservation> cmp = new CompareReservationByDate() {
+                @Override
+                public int compare(Reservation r1, Reservation r2) {
+                    return super.compare(r1, r2);
+                }
+            };
+            assertEquals(-1,cmp.compare(previous,curr));
+            previous = curr;
+        }
+        List<Reservation> c2Res = myHotel.getCustomerReservations(customer2);
+        Iterator<Reservation> itr2 = c2Res.iterator();
+        previous = itr2.next();
+        ndx = 0;
+        assertEquals(customer2,previous.getCustomer());
+        assertEquals(dates2.get(ndx),previous.getCheckInDate());
+        assertEquals(2,previous.getNightDurration());
+        while(itr2.hasNext()){
+            curr = itr2.next();
+            ndx++;
+            assertEquals(customer2,curr.getCustomer());
+            assertEquals(dates2.get(ndx),curr.getCheckInDate());
+            assertEquals(2,curr.getNightDurration());
+            Comparator<Reservation> cmp = new CompareReservationByDate() {
+                @Override
+                public int compare(Reservation r1, Reservation r2) {
+                    return super.compare(r1, r2);
+                }
+            };
+            assertEquals(-1,cmp.compare(previous,curr));
+            previous = curr;
+        }
+    }
 
 
 
