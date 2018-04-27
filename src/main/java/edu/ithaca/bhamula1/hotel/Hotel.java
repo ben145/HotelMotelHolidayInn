@@ -481,6 +481,19 @@ public class Hotel implements HotelInterface {
         return reservations;
     }
 
+    public List<Reservation> getCustomerReservations(CustomerInterface customer){
+        Iterator<Reservation> itr = this.reservations.iterator();
+        List<Reservation> myRes = new ArrayList<>();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer()==customer){
+                myRes.add(curr);
+            }
+        }
+        //TODO sort Reservations by Date
+        return myRes;
+    }
+
 
 
 }

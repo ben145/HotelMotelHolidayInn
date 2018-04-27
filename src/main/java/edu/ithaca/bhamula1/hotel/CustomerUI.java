@@ -320,8 +320,16 @@ public class CustomerUI implements CustomerUIInterface {
             else if(option == 5){
                 //VIEW RESVERVATIONS
                 System.out.println("Your Reservations");
-                List<Reservation> reservations = new ArrayList<>();
-                
+                List<Reservation> reservations = hotel.getCustomerReservations(c);
+                Iterator<Reservation> itr = reservations.iterator();
+                if(!itr.hasNext()){
+                    System.out.println("You do not have any reservations");
+                }
+                else{
+                    while(itr.hasNext()){
+                        System.out.println(itr.next().toString());
+                    }
+                }
             }
 
             else if(option == 6){
