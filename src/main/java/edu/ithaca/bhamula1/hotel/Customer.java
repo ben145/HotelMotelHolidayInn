@@ -44,6 +44,15 @@ public class Customer implements CustomerInterface {
         this.loggedIn = true;
         this.returningCustomer  = false;
     }
+    public Customer (String fname, String lName, String id, int room, boolean ckedIn, boolean logIn, boolean rCust){
+        this.id = fname+lName;
+        this.fName = fname;
+        this.lName = lName;
+        this.room = room;
+        this.checkedIn = ckedIn;
+        this.loggedIn = logIn;
+        this.returningCustomer  = rCust;
+    }
 
     //set name
     public String makeName(String firstName, String lastName) {
@@ -97,9 +106,17 @@ public class Customer implements CustomerInterface {
         return name;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getFName() {return fName;}
+
+    public void setFName(String first){fName = first;}
+
+    public String getLName() {return lName;}
+
+    public void setLName(String last) {lName = last;}
+
+    public String getId() {return id;}
+
+    public void setId(String custid) { id=custid;}
 
 
     //ONly one log in right now
@@ -181,4 +198,10 @@ public class Customer implements CustomerInterface {
     public void setReturningCustomer(boolean returning){
         this.returningCustomer = returning;
     }
+
+    public void setCheckedIn(Boolean ckIn){checkedIn=ckIn;}
+
+    public void setLoggedIn(boolean logIn){loggedIn = logIn;}
+
+
 }

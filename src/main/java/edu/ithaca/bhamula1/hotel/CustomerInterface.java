@@ -11,13 +11,27 @@ public interface CustomerInterface {
 
     String getName();
 
+    String getFName();
+
+    void setFName(String first);
+
+    String getLName();
+
+    void setLName(String last);
+
     String getId();
 
+    void setId(String custid);
+
     void login(String idIn);
+
+    void setLoggedIn(boolean logIn);
 
     void logOut();
 
     boolean isCheckedIn();
+
+    void setCheckedIn(Boolean ckIn);
 
     boolean checkIn(int roomNumber);
 

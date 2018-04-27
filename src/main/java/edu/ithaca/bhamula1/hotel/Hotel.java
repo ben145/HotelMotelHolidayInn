@@ -481,6 +481,61 @@ public class Hotel implements HotelInterface {
         return reservations;
     }
 
+    /**
+     * Save Customer Data when exit program
+     */
+    @Override
+    public void saveCustList(){
+
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            for(int s = 0; s < customers.size(); s++){
+                CustomerInterface customer = customers.get(s);
+                String line = customer.getFName()+","+ customer.getLName()+","+customer.getId()+","+customer.getRoom()+
+                        ","+customer.isCheckedIn()+","+customer.getLoggedIn()+","+customer.getReturningCustomer();
+                bw.write(line);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * loads data stored in c.txt for storing customer list on Hotel instantiation
+     * @author - DMF
+     */
+    @Override
+    public void setCustList(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/c.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+            while((line = br.readLine())!= null) {
+                CustomerInterface setCust = new Customer();
+                String [] sArr = line.split(",");
+                setCust.setId(sArr[0]);
+                setCust.setFName(sArr[1]);
+                setCust.setLName(sArr[2]);
+                setCust.setRoom(Integer.parseInt(sArr[3]));
+                setCust.setCheckedIn(Boolean.parseBoolean(sArr[4]));
+                setCust.setLoggedIn(Boolean.parseBoolean(sArr[5]));
+                setCust.setReturningCustomer(Boolean.parseBoolean(sArr[6]));
+                customers.add(setCust);
+            }
+
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
+
+
 
 
 }
