@@ -14,7 +14,7 @@ public class Hotel implements HotelInterface {
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
-    private static List<Inventory> inventory;
+    public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
 
