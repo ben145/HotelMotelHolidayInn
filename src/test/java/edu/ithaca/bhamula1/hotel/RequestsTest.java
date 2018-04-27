@@ -65,8 +65,8 @@ class RequestsTest {
     }
     @Test
     void testSetRequestName(){
-        test2.setRequestName("ice");
-        assertEquals("ice", test2.getRequestName(),"FAIL - unknown request name");
+        test2.setRequestName("Ice");
+        assertEquals("Ice", test2.getRequestName(),"FAIL - unknown request name");
     }
     @Test
     void testSetAssociatedPrice(){
@@ -75,15 +75,27 @@ class RequestsTest {
     }
     @Test
     void testAddRequirement(){
-        test2.addRequirement("ice");
-        ArrayList<String> temp = new ArrayList<>();
-        temp.add("ice");
-        assertEquals(temp, test2.getRequirements(), "FAIL - additional request failed to store");
+        //ensures item is in inventory
+        Hotel.inventory = new ArrayList<Inventory>();
+        Inventory item = new Inventory("Ice", 50);
+        Hotel.inventory.add(item);
+        //add requirement to RoomService object
+        test2.addRequirement("Ice");
+        //comparison
+        ArrayList<String> reqArr = new ArrayList<>();
+        reqArr.add("Ice");
+        assertEquals(reqArr, test2.getRequirements(), "FAIL - additional request failed to store");
     }
     @Test
     void testRemoveRequirement(){
-        test2.addRequirement("ice");
-        test2.removeRequirement("ice");
+        //ensures item is in inventory
+        Hotel.inventory = new ArrayList<Inventory>();
+        Inventory item = new Inventory("Ice", 50);
+        Hotel.inventory.add(item);
+        //add requirement so there's something to remove
+        test2.addRequirement("Ice");
+        //remove that requirement
+        test2.removeRequirement("Ice");
         assertEquals(null, test2.getRequirements(), "FAIL - request not removed");
     }
 
