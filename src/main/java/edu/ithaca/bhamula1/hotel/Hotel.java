@@ -413,7 +413,7 @@ public class Hotel implements HotelInterface {
     */
     public void testInventory(){
         try {
-            InputStream file = this.getClass().getResourceAsStream("/stock.txt");
+            InputStream file = this.getClass().getResourceAsStream("/src/main/resources/stock.txt");
             InputStreamReader streamReader = new InputStreamReader(file);
             BufferedReader bufferedReader = new BufferedReader(streamReader);
             String line;
