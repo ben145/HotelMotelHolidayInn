@@ -76,8 +76,9 @@ class RequestsTest {
     @Test
     void testAddRequirement(){
         //ensures item is in inventory
-        ArrayList<Inventory> testInvent = new ArrayList<>();
+        Hotel.inventory = new ArrayList<Inventory>();
         Inventory item = new Inventory("Ice", 50);
+        Hotel.inventory.add(item);
         //add requirement to RoomService object
         test2.addRequirement("Ice");
         //comparison
@@ -88,8 +89,9 @@ class RequestsTest {
     @Test
     void testRemoveRequirement(){
         //ensures item is in inventory
-        ArrayList<Inventory> testInvent = new ArrayList<>();
+        Hotel.inventory = new ArrayList<Inventory>();
         Inventory item = new Inventory("Ice", 50);
+        Hotel.inventory.add(item);
         //add requirement so there's something to remove
         test2.addRequirement("Ice");
         //remove that requirement

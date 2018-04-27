@@ -102,13 +102,14 @@ class RoomService{
     }
     public void setAssociatedPrice(double newPrice){ associatedPrice = newPrice; }
     public void addRequirement(String newRequirement){
+        if (requirements == null) {
+            this.requirements = new ArrayList<String>();
+        }
         boolean found = false;
         for(Inventory item: Hotel.inventory) {
+
             if(item.getItem() == newRequirement){
                 found = true;
-                if (requirements == null) {
-                    this.requirements = new ArrayList<String>();
-                }
                 requirements.add(newRequirement);
                 numRequirements++;
             }
