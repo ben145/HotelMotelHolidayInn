@@ -46,9 +46,7 @@ class RequestsTest {
 
 
     /*room service objects*/
-    ArrayList<String> reqArr = new ArrayList<String>();
-    reqArr.add("my wine");
-    RoomService test2 = new RoomService("she sells seashells by the seashore", 19.99, 1, reqArr);
+    RoomService test2 = new RoomService("she sells seashells by the seashore", 19.99, 0);
     @Test
     void testGetRequestName(){
         assertEquals("she sells seashells by the seashore", test2.getRequestName(), "FAIL - request name not stored");
@@ -78,9 +76,9 @@ class RequestsTest {
     @Test
     void testAddRequirement(){
         test2.addRequirement("Ice");
-        System.out.println(test2.getRequirements());
-        temp.add("Ice");
-        assertEquals(temp, test2.getRequirements(), "FAIL - additional request failed to store");
+        ArrayList<String> reqArr = new ArrayList<>();
+        reqArr.add("Ice");
+        assertEquals(reqArr, test2.getRequirements(), "FAIL - additional request failed to store");
     }
     @Test
     void testRemoveRequirement(){
