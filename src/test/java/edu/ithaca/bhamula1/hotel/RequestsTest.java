@@ -58,6 +58,8 @@ class RequestsTest {
     @Test
     void testGetNumRequirements(){
         assertEquals(0, test2.getNumRequirements(), "FAIL - number of requirements not stored");
+        test2.addRequirement("Ice");
+        assertEquals(1, test2.getNumRequirements(), "FAIL - number of requirements not stored");
     }
     @Test
     void testGetRequirements(){

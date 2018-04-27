@@ -105,6 +105,7 @@ class RoomService{
         boolean found = false;
         for(Inventory item: Hotel.inventory) {
             if(item.getItem() == newRequirement){
+                found = true;
                 if (requirements == null) {
                     this.requirements = new ArrayList<String>();
                 }
