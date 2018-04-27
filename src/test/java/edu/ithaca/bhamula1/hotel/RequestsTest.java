@@ -65,8 +65,8 @@ class RequestsTest {
     }
     @Test
     void testSetRequestName(){
-        test2.setRequestName("ice");
-        assertEquals("ice", test2.getRequestName(),"FAIL - unknown request name");
+        test2.setRequestName("Ice");
+        assertEquals("Ice", test2.getRequestName(),"FAIL - unknown request name");
     }
     @Test
     void testSetAssociatedPrice(){
@@ -75,15 +75,15 @@ class RequestsTest {
     }
     @Test
     void testAddRequirement(){
-        test2.addRequirement("ice");
+        test2.addRequirement("Ice");
         ArrayList<String> temp = new ArrayList<>();
-        temp.add("ice");
+        temp.add("Ice");
         assertEquals(temp, test2.getRequirements(), "FAIL - additional request failed to store");
     }
     @Test
     void testRemoveRequirement(){
-        test2.addRequirement("ice");
-        test2.removeRequirement("ice");
+        test2.addRequirement("Ice");
+        test2.removeRequirement("Ice");
         assertEquals(null, test2.getRequirements(), "FAIL - request not removed");
     }
 

@@ -5,6 +5,7 @@ Don Henley,1
 The Finest Frenched Fries,3300
 Gin,87
 Glenn Frey,1
+Ice,50
 Instant Coffee,300
 Joe Walsh,1
 my wine,1969
