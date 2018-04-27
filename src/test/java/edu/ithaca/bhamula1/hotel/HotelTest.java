@@ -241,10 +241,11 @@ public class HotelTest {
         for(int i = 1; i<5; i++){
             myHotel.addTestRoom(i);
         }
-        myHotel.addReservation(customer1,myHotel.getRoom(1), Calendar.getInstance(),2, "");
-        myHotel.addReservation(customer1,myHotel.getRoom(2), Calendar.getInstance(),2, "");
-        assertEquals(customer1.getName(),myHotel.getReservation(customer1,1).getCustomer().getName());
-        assertEquals(1,myHotel.getReservation(customer1,1).getRoom().getRoomNumber());
+        Calendar today = Calendar.getInstance();
+        myHotel.addReservation(customer1,myHotel.getRoom(1), today,2, "1234567890987");
+        myHotel.addReservation(customer1,myHotel.getRoom(2), today,2, "1234567890987");
+        assertEquals(customer1.getName(),myHotel.getReservation(customer1,1,today).getCustomer().getName());
+        assertEquals(1,myHotel.getReservation(customer1,1,today).getRoom().getRoomNumber());
     }
 
 

@@ -5,6 +5,7 @@ import java.util.*;
 
 public abstract class Main {
 
+    /*
     public static void main(String[] args) {
         HotelInterface hotel = createHotel();
         mainScreen(hotel);
@@ -84,7 +85,7 @@ public abstract class Main {
                     }
 
                     if(cardOrCash ==1){
-                        hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CARD);
+                        hotel.getReservation(customer, rmNum,).setPaymentType(Reservation.PaymentType.CARD);
                     }else{
                         hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CASH);
                     }
@@ -181,7 +182,7 @@ public abstract class Main {
 
 
     }
-
+*/
 
 
 
@@ -205,7 +206,7 @@ public abstract class Main {
         return hotel;
     }
 
-
+/*
     public static void checkedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome! We hope you enjoy your stay.");
@@ -324,7 +325,7 @@ public abstract class Main {
                  */
 
                 //onceLoggedIn(hotel.getCustomer("den", null), hotel);
-
+/*
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");
                 System.out.println(hotel.viewOrderedRooms(false));
@@ -340,7 +341,7 @@ public abstract class Main {
         }
 
     }
-
+*/
 
     /**
      *
