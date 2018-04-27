@@ -73,17 +73,26 @@ class RequestsTest {
         test2.setAssociatedPrice(.82);
         assertEquals(.82, test2.getAssociatedPrice(), "FAIL - unknown associated cost");
     }
-    /*
     @Test
     void testAddRequirement(){
+        //ensures item is in inventory
+        ArrayList<Inventory> testInvent = new ArrayList<>();
+        Inventory item = new Inventory("Ice", 50);
+        //add requirement to RoomService object
         test2.addRequirement("Ice");
+        //comparison
         ArrayList<String> reqArr = new ArrayList<>();
         reqArr.add("Ice");
         assertEquals(reqArr, test2.getRequirements(), "FAIL - additional request failed to store");
-    }*/
+    }
     @Test
     void testRemoveRequirement(){
+        //ensures item is in inventory
+        ArrayList<Inventory> testInvent = new ArrayList<>();
+        Inventory item = new Inventory("Ice", 50);
+        //add requirement so there's something to remove
         test2.addRequirement("Ice");
+        //remove that requirement
         test2.removeRequirement("Ice");
         assertEquals(null, test2.getRequirements(), "FAIL - request not removed");
     }
