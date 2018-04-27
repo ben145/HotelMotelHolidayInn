@@ -209,7 +209,7 @@ public class CustomerUI implements CustomerUIInterface {
 
                 System.out.println("Review Rooms");
                 System.out.println("View Rooms  ");
-                System.out.println(hotel.viewOrderedRooms(true));
+                System.out.println(hotel.viewOrderedRooms(returning));
                 System.out.println();
             }
 
