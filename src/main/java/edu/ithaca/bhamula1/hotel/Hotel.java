@@ -536,19 +536,13 @@ public class Hotel implements HotelInterface {
             InputStreamReader read = new InputStreamReader(file);
             BufferedReader br = new BufferedReader(read);
             String line;
+
             while((line = br.readLine())!= null) {
-                CustomerInterface setCust = new Customer();
                 String [] sArr = line.split(",");
-                setCust.setId(sArr[0]);
-                setCust.setFName(sArr[1]);
-                setCust.setLName(sArr[2]);
-                setCust.setRoom(Integer.parseInt(sArr[3]));
-                setCust.setCheckedIn(Boolean.parseBoolean(sArr[4]));
-                setCust.setLoggedIn(Boolean.parseBoolean(sArr[5]));
-                setCust.setReturningCustomer(Boolean.parseBoolean(sArr[6]));
+                CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[2]),
+                        Boolean.parseBoolean(sArr[3]),Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]));
                 customers.add(setCust);
             }
-
         }catch (IOException e){
             System.out.println(e);
         }

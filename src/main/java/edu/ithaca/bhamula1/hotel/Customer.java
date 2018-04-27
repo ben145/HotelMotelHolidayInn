@@ -24,6 +24,7 @@ public class Customer implements CustomerInterface {
         loggedIn = false;
     }
 
+
     Customer(){
 //        name = makeName();
 //        id = makeID();
@@ -44,7 +45,7 @@ public class Customer implements CustomerInterface {
         this.loggedIn = true;
         this.returningCustomer  = false;
     }
-    public Customer (String fname, String lName, String id, int room, boolean ckedIn, boolean logIn, boolean rCust){
+    public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust){
         this.id = fname+lName;
         this.fName = fname;
         this.lName = lName;
