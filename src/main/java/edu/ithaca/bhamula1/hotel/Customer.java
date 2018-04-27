@@ -13,6 +13,7 @@ public class Customer implements CustomerInterface {
     private String fName;
     private String lName;
     private int room;
+    private boolean returningCustomer;
 
     private boolean checkedIn;
     private boolean loggedIn;
@@ -30,6 +31,7 @@ public class Customer implements CustomerInterface {
         name = "";
         id = "";
         loggedIn = false;
+        this.returningCustomer = false;
     }
 
     public Customer (String fname, String lName, String id, int room, boolean checkedIn){
@@ -40,6 +42,7 @@ public class Customer implements CustomerInterface {
         this.room = room;
         this.checkedIn = checkedIn;
         this.loggedIn = true;
+        this.returningCustomer  = false;
     }
 
     //set name
@@ -169,5 +172,13 @@ public class Customer implements CustomerInterface {
 
     public int getRoom() {
         return room;
+    }
+
+    public boolean getReturningCustomer(){
+        return this.returningCustomer;
+    }
+
+    public void setReturningCustomer(boolean returning){
+        this.returningCustomer = returning;
     }
 }

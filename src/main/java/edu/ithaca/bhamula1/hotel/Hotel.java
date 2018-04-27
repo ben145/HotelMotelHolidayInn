@@ -60,6 +60,7 @@ public class Hotel implements HotelInterface {
                             &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
                             &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
                         customer.checkIn(roomNumber);
+
                         current.checkIn(customer);
                         removeReservation(customer,roomNumber);
                         return true;
@@ -133,18 +134,33 @@ public class Hotel implements HotelInterface {
      * @Author Mia
      * @return
      */
-    public String viewOrderedRooms(){
+    public String viewOrderedRooms(boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 ) {
 
                 if (str.equals("")) {
-                    str +=  rm.toString();
-                } else {
-                    str += "\n" + rm.toString();
-                }
 
+
+                    if(returning){
+                        str+= rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+                    }
+
+
+                } else {
+
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+
+                    }
+
+
+                }
 
             }
 
@@ -153,16 +169,31 @@ public class Hotel implements HotelInterface {
     }
 
 
-    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration){
+    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.canReserve(checkin, nightDuration) ) {
 
                 if (str.equals("")) {
-                    str +=  rm.toString();
+
+                    if(returning){
+                        str += rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+
+                    }
+
+
                 } else {
-                    str += "\n" + rm.toString();
+
+
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+
+                    }
                 }
 
 
@@ -231,41 +262,6 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
-
-//
-//    /**
-//     * function to call function to check for valid customer and to check room is available
-//     * If both are valid, proceed with the reservation
-//     * @param rmNum
-//     * @param cID
-//     * @Author - DMF and mia
-//     */
-//    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
-//        for (RoomInterface rm : rooms) {
-//            if (rm.getRoomNumber() == rmNum) {
-////                System.out.println(rm.getRoomNumber());
-//                if (rm.getIfAvailable() == true) {
-//                    CustomerInterface cust = checkValidCust(cID);
-//                    if (cust.getId() != null) {
-//                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
-//                        //if the room available
-//                        if(selRes.checkRoomAvailable()){
-//                            String resID = selRes.createReservationID();
-//                            cust.setReservation(resID);
-//                            cust.setRoom(rmNum);
-//                            rm.setReservationName(cust.getName());
-//
-////                            rm.setIfAvailable(false);
-//                            //rm.setReservationName(resID);
-//                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
-//                            reservations.add(res);
-//                            System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
 
     /**
@@ -445,9 +441,9 @@ public class Hotel implements HotelInterface {
      * @param checkIn
      * @param duration
      */
-    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration){
+    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String cardInfo){
 
-        Reservation res = new Reservation(cus, rm, checkIn, duration);
+        Reservation res = new Reservation(cus, rm, checkIn, duration, cardInfo);
         reservations.add(res);
 
     }
@@ -484,6 +480,27 @@ public class Hotel implements HotelInterface {
     public  List<Reservation> getReservations(){
         return reservations;
     }
+
+    public List<Reservation> getCustomerReservations(CustomerInterface customer){
+        Iterator<Reservation> itr = this.reservations.iterator();
+        List<Reservation> myRes = new ArrayList<>();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer()==customer){
+                myRes.add(curr);
+            }
+        }
+        Comparator<Reservation> cmp = new CompareReservationByDate() {
+            @Override
+            public int compare(Reservation r1, Reservation r2) {
+                return super.compare(r1, r2);
+            }
+        };
+        myRes.sort(cmp);
+        return myRes;
+    }
+
+
 
 }
 
