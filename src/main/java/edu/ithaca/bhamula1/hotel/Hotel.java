@@ -481,6 +481,25 @@ public class Hotel implements HotelInterface {
         return reservations;
     }
 
+    public List<Reservation> getCustomerReservations(CustomerInterface customer){
+        Iterator<Reservation> itr = this.reservations.iterator();
+        List<Reservation> myRes = new ArrayList<>();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer()==customer){
+                myRes.add(curr);
+            }
+        }
+        Comparator<Reservation> cmp = new CompareReservationByDate() {
+            @Override
+            public int compare(Reservation r1, Reservation r2) {
+                return super.compare(r1, r2);
+            }
+        };
+        myRes.sort(cmp);
+        return myRes;
+    }
+
     /**
      * Save Customer Data when exit program
      */
@@ -534,9 +553,6 @@ public class Hotel implements HotelInterface {
             System.out.println(e);
         }
     }
-
-
-
 
 }
 

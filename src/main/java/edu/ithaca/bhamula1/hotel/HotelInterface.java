@@ -61,6 +61,7 @@ public interface HotelInterface {
 
         public Reservation removeReservation(CustomerInterface customer, int roomNumber);
         public Reservation getReservation(CustomerInterface customer, int roomNumber);
+        public List<Reservation> getCustomerReservations(CustomerInterface customer);
 
         void saveCustList();
         void setCustList();
