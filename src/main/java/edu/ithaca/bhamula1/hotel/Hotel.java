@@ -490,7 +490,13 @@ public class Hotel implements HotelInterface {
                 myRes.add(curr);
             }
         }
-        //TODO sort Reservations by Date
+        Comparator<Reservation> cmp = new CompareReservationByDate() {
+            @Override
+            public int compare(Reservation r1, Reservation r2) {
+                return super.compare(r1, r2);
+            }
+        };
+        myRes.sort(cmp);
         return myRes;
     }
 
