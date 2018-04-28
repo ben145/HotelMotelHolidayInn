@@ -23,7 +23,7 @@ public interface CustomerInterface {
 
     void setId(String custid);
 
-    void login(String idIn);
+    void login(String idIn,String pwdIn);
 
     void setLoggedIn(boolean logIn);
 

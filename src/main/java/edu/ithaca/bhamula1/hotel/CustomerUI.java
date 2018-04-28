@@ -58,11 +58,11 @@ public class CustomerUI implements CustomerUIInterface {
         return choice;
     }
 
-    public int signIn(String firstName, String ID){
+    public int signIn(String firstName, String ID, String pass){
         if (hotel.getCustomer(ID) == null) {
             System.out.println("Incorrect account information");
         } else {
-            hotel.logIn(firstName, ID);
+            hotel.logIn(firstName, ID, pass);
             if (hotel.getCustomer(ID).getLoggedIn()) {
                 int r = loggedIn(hotel.getCustomer(ID), hotel);
                 return r;
@@ -97,8 +97,12 @@ public class CustomerUI implements CustomerUIInterface {
                 //System.out.println(firstName);
                 System.out.println("Type Your User ID: ");
                 String id = scan.nextLine();
+
+                System.out.println("Type Your User Password: ");
+                String p = scan.nextLine();
+
                 //System.out.println(id);
-                firstOption = signIn(firstName, id);
+                firstOption = signIn(firstName, id, p);
             }
 
             //SIGN UP

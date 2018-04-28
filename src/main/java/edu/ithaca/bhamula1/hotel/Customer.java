@@ -17,6 +17,7 @@ public class Customer implements CustomerInterface {
 
     private boolean checkedIn;
     private boolean loggedIn;
+    private String pwd;
 
     Customer(String nameIn, String idIn) {
         name = nameIn;
@@ -45,7 +46,7 @@ public class Customer implements CustomerInterface {
         this.loggedIn = true;
         this.returningCustomer  = false;
     }
-    public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust){
+    public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust, String p){
         this.id = fname+lName;
         this.fName = fname;
         this.lName = lName;
@@ -53,6 +54,7 @@ public class Customer implements CustomerInterface {
         this.checkedIn = ckedIn;
         this.loggedIn = logIn;
         this.returningCustomer  = rCust;
+        this.pwd = p;
     }
 
     //set name
@@ -121,13 +123,13 @@ public class Customer implements CustomerInterface {
 
 
     //ONly one log in right now
-    public void login(String idIn) {
+    public void login(String idIn,String pwdIn) {
 //        Scanner k = new Scanner(System.in);
 //        String idIn;
 //        System.out.println("Please enter your ID");
 //        idIn = k.next();
 //        String custID = "abc123";
-        if (idIn.equals(this.id)){
+        if (idIn.equals(this.id)&&pwdIn.equals(this.pwd)){
             loggedIn = true;
         }
         else{
@@ -150,6 +152,7 @@ public class Customer implements CustomerInterface {
     }
 
     public boolean checkIn(int roomNumber) {
+        this.room = roomNumber;
         this.checkedIn = true;
         return true;
     }

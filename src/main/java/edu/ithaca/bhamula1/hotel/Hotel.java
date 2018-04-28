@@ -26,6 +26,9 @@ public class Hotel implements HotelInterface {
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
+        if(customers.isEmpty()){
+            loadCustList();
+        }
 
         reservations = new ArrayList<>();
 
@@ -62,6 +65,7 @@ public class Hotel implements HotelInterface {
                             &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
                             &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
                         customer.checkIn(roomNumber);
+                        saveCustList();
 
                         current.checkIn(customer);
                         removeReservation(res);
@@ -100,6 +104,7 @@ public class Hotel implements HotelInterface {
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
+        saveCustList();
         return c&r;
     }
 
@@ -207,9 +212,12 @@ public class Hotel implements HotelInterface {
         }
 
 
-    public void logIn (String name, String id){
+    public void logIn (String name, String id, String p){
         CustomerInterface customer = getCustomer(id);
-        customer.login(id);
+        customer.login(id,p);
+        if(customer.getLoggedIn()){
+            saveCustList();
+        }
     }
 
     public CustomerInterface getCustomer(String first, String last){
@@ -241,6 +249,7 @@ public class Hotel implements HotelInterface {
         //customer.login(ID);
 
         customers.add(customer);
+        saveCustList();
     }
 
     /**
@@ -538,17 +547,20 @@ public class Hotel implements HotelInterface {
      * @author - DMF
      */
     @Override
-    public void setCustList(){
+    public void loadCustList(){
         try {
             InputStream file = this.getClass().getResourceAsStream("/c.txt");
             InputStreamReader read = new InputStreamReader(file);
             BufferedReader br = new BufferedReader(read);
             String line;
+            int test = 0;
 
             while((line = br.readLine())!= null) {
+                System.out.println(" customers  "+(test+=1));
                 String [] sArr = line.split(",");
                 CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[2]),
-                        Boolean.parseBoolean(sArr[3]),Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]));
+                        Boolean.parseBoolean(sArr[3]),Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]),sArr[6]);
+
                 customers.add(setCust);
             }
         }catch (IOException e){

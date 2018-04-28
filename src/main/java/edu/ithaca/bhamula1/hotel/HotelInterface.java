@@ -24,7 +24,7 @@ public interface HotelInterface {
         String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning);
 
 
-      void logIn (String name, String id);
+      void logIn (String name, String id, String p);
 
         CustomerInterface getCustomer(String first, String last);
 
@@ -64,6 +64,6 @@ public interface HotelInterface {
         public List<Reservation> getCustomerReservations(CustomerInterface customer);
 
         void saveCustList();
-        void setCustList();
+        void loadCustList();
 
     }
