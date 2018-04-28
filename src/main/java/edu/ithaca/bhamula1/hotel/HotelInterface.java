@@ -59,8 +59,8 @@ public interface HotelInterface {
         void testInventory();
         //this is where "void viewInventory();" would go if it wasn't static
 
-        public Reservation removeReservation(CustomerInterface customer, int roomNumber);
-        public Reservation getReservation(CustomerInterface customer, int roomNumber);
+        public Reservation removeReservation(Reservation reservation);
+        public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate);
         public List<Reservation> getCustomerReservations(CustomerInterface customer);
 
         void saveCustList();

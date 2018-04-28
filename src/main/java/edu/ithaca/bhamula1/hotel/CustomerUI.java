@@ -2,6 +2,7 @@ package edu.ithaca.bhamula1.hotel;
 
 
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.*;
 
 import static edu.ithaca.bhamula1.hotel.Main.createHotel;
@@ -156,34 +157,35 @@ public class CustomerUI implements CustomerUIInterface {
                 while(rmNum == 0) {
                     rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
                 }
-                Reservation res  = hotel.getReservation(c,rmNum);
+                Calendar today = new GregorianCalendar();
+                today.set(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                Reservation res  = hotel.getReservation(c,rmNum,today);
                 if(hotel.checkIn(rmNum,c)){
-                    Scanner scan1 = new Scanner(System.in);
+                    //TODO dont need this scanner, and should use one of the check functions or else this will crass with non integer input!!!!!
+                    //Scanner scan1 = new Scanner(System.in);
 
-                    System.out.println("Would you like change the card on file. Type '1' for  yes or '0' for no ");
-                    int yesOrNo = scan1.nextInt();
-                    while(yesOrNo != 0 && yesOrNo != 1){
-                        System.out.println("Try again");
-                        yesOrNo = scan1.nextInt();
+                    System.out.println("Would you like change the card on file. (Enter 'yes' or 'no') ");
+                    char yesOrNo = 1;
+                    while(yesOrNo==1){
+                        yesOrNo = checkYorN(scan.nextLine());
                     }
 
-                    if(yesOrNo == 1){
+                    if(yesOrNo == 'y'){
                         System.out.println("Type the new card number");
-                        String card = scan1.next();
+                        String card = scan.nextLine();
 
                         while(card.length()>16 || card.length()< 14){
                             System.out.println("Try again");
-                            card = scan1.nextLine();
+                            card = scan.nextLine();
                         }
 
                         res.setCardPayment(card);
                     }
 
-                    System.out.println("Would you like the room charged to the card on file or pay in cash? Type '1' for card or type '0' for cash");
-                    int cardOrCash = scan1.nextInt();
-                    while(cardOrCash != 0 && cardOrCash != 1){
-                        System.out.println("Try again");
-                        cardOrCash = scan1.nextInt();
+                    System.out.println("Would you like the room charged to the card on file or pay in cash? Type '1' for card or type '2' for cash");
+                    int cardOrCash = 0;
+                    while(cardOrCash == 0){
+                        cardOrCash = checkChoiceInput(scan.nextLine(),1,2);
                     }
                     if(cardOrCash ==1){
                         res.setPaymentType(Reservation.PaymentType.CARD);
@@ -205,7 +207,7 @@ public class CustomerUI implements CustomerUIInterface {
 
                 System.out.println("Review Rooms");
                 System.out.println("View Rooms  ");
-                System.out.println(hotel.viewOrderedRooms(true));
+                System.out.println(hotel.viewOrderedRooms(returning));
                 System.out.println();
             }
 
@@ -300,21 +302,31 @@ public class CustomerUI implements CustomerUIInterface {
                 //CANCEL ROOM RESERVATION
                 System.out.println("Cancel Room Reservation");
                 System.out.println("We are sorry to hear you will not be staying with us please contact us with any complaints... or compliments :)");
-                System.out.println("Which room do you wish to cancel?");
-                int rmNum = 0;
-                while (rmNum == 0) {
-                    rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms() - 1);
-                }
-                //actually cancel the reservation
-                Reservation removed = hotel.removeReservation(c,rmNum);
-                if (removed!=null){
-                    hotel.getRoom(rmNum).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
-                    System.out.println("Your reservation has been cancelled.");
+                List<Reservation> reservations = hotel.getCustomerReservations(c);
+                Iterator<Reservation> itr = reservations.iterator();
+                System.out.println("Your current reservations:");
+                if(!itr.hasNext()){
+                    System.out.println("You do not have any reservations");
                 }
                 else{
-                    System.out.println("This reservation does not exist.");
+                    int ndx = 1;
+                    while(itr.hasNext()){
+                        System.out.println(ndx+") "+itr.next().toString());
+                        ndx++;
+                    }
+                    int pick = 0;
+                    while(pick==0){
+                        pick = checkChoiceInput(scan.nextLine(),1,reservations.size());
+                    }
+                    Reservation removed = hotel.removeReservation(reservations.get(pick-1));
+                    if (removed!=null){
+                        hotel.getRoom(reservations.get(pick-1).getRoom().getRoomNumber()).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
+                        System.out.println("Your reservation has been cancelled.");
+                    }
+                    else{
+                        System.out.println("This reservation does not exist.");
+                    }
                 }
-                System.out.println();
             }
 
             else if(option == 5){
@@ -375,15 +387,14 @@ public class CustomerUI implements CustomerUIInterface {
                 //checkout
                 c.setReturningCustomer(true);
                 System.out.println("Thank you for choosing to stay with us! \n");
-                System.out.println("Would you like to print a receipt? Type '1' for yes or '0' for no");
-                int wantReceipt = scan.nextInt();
+                System.out.println("Would you like to print a receipt? Enter 'yes' or  'no'");
+                char wantReceipt = 1;
 
-                while(wantReceipt != 1 && wantReceipt != 0){
-                    System.out.println("Try again");
-                    wantReceipt = scan.nextInt();
+                while(wantReceipt == 1){
+                    wantReceipt = checkYorN(scan.nextLine());
                 }
 
-                if(wantReceipt==1){
+                if(wantReceipt=='y'){
 
                     Map<String, Double> costs = res.getPaymentTracker();
 
