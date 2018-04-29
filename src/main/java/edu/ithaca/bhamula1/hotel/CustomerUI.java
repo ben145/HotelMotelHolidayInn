@@ -274,7 +274,7 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
-                            rmNum=checkChoiceInput(scan.nextLine(),1, hotel.getNumberOfRooms()-1);
+                            rmNum=checkChoiceInput(scan.nextLine(),1, hotel.getNumberOfRooms());
                         }
                         if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
 

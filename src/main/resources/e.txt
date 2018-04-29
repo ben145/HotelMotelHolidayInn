@@ -4,7 +4,7 @@
 3,Front Desk Associate,null,null,null,null,false,false,false
 3,Front Desk Associate,Brown-McMillin,Benjamin,bbrownmcmillin,Password4321,false,false,false
 4,Event Planner,Burger,Jonathan,jburger1,Password4321,false,false,false
-4,Event Planner,O'Grady,Megan,mogrady,Password4321,false,true,true
+4,Event Planner,O'Grady,Megan,mogrady,Password4321,false,false,true
 5,Room Attendent,Desmery,Martin,mdesmery,Password4321,false,false,false
 5,Room Attendent,Dragon,Toby,tdragon,Password4321,false,false,false
 6,Housekeeping,Fullerton,Denise,dfullerton,Password4321,false,false,false

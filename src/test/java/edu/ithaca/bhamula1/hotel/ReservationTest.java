@@ -29,7 +29,7 @@ public class ReservationTest {
     @Test
     void ConstructorTest() {
         Customer cus = new Customer("Mia", "Kimmich Mitchell", "miakimmichmitchell", 1, false);
-        Room room = new Room(false, 1, 90,1, "full", "things");
+        Room room = new Room(false, 1, 90,1, "full", "things", false);
 
         GregorianCalendar theDate = new GregorianCalendar(2018,Calendar.APRIL, 15);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
@@ -50,7 +50,7 @@ public class ReservationTest {
     @Test
     void ConstructorTest2() {
         Customer cus = new Customer("Mia", "Kimmich Mitchell", "miakimmichmitchell", 1, false);
-        Room room = new Room(false, 1, 90,1, "full", "things");
+        Room room = new Room(false, 1, 90,1, "full", "things", false);
 
         GregorianCalendar theDate = new GregorianCalendar(2018,Calendar.APRIL, 1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
