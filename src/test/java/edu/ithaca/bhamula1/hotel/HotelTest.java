@@ -15,7 +15,7 @@ public class HotelTest {
 
     @Test
     void checkIn() {
-        Hotel myHotel = new Hotel();
+        Hotel myHotel = new Hotel(true);
         //myHotel.getRoom(1);
         myHotel.setNumberOfRooms(5);
         for(int i = 1; i<5; i++){
@@ -23,11 +23,18 @@ public class HotelTest {
         }
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("John Doe","4321");
-        //myHotel.getRoom(1).setReservationName(customer1.getName());
-        myHotel.addReservation(customer1,myHotel.getRoom(1), new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)),2, "");
+
+        myHotel.addReservation(customer1,myHotel.getRoom(2),
+                new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),
+                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)),2, "");
+
+
+        for(int rr = 0; rr< myHotel.getReservations().size(); rr++){
+            System.out.println(myHotel.getReservations().get(rr).toString());
+        }
         assertEquals(false,myHotel.checkIn(1,customer2));
-        assertEquals(false,myHotel.checkIn(2,customer1));
-        assertEquals(true, myHotel.checkIn(1,customer1));
+        assertEquals(false,myHotel.checkIn(1,customer1));
+        assertEquals(true, myHotel.checkIn(2,customer1));
         //assertEquals(true,myHotel.getRoom(1).getCheckedIn());
         //assertEquals(customer1.isCheckedIn(),true);
     }
@@ -86,11 +93,12 @@ public class HotelTest {
         hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
         hotel.addRoom(1, true, 100,2, "double", "mini bar", false);
         hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
-        hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
+        hotel.addRoom(3, true, 100,2, "double", "mini bar", false);
 
 
         //this all happens when the user reserves a room in the ui
         hotel.getRoom(2).addReservation(checkDate,2);
+
         hotel.addReservation(customer, hotel.getRoom(2), checkIN, 2, "" );
 
 //        System.out.println(hotel.getReservations());
@@ -186,6 +194,8 @@ public class HotelTest {
     @Test
     void emplListTest() {
         Hotel h = new Hotel();
+        System.out.println(" num rms "+ h.getRooms().size());
+
         int length = h.getEList().size();
         System.out.println(" num empls "+ length);
         h.printEmployeeList();
@@ -236,7 +246,7 @@ public class HotelTest {
 
     @Test
     void getReservationTest(){
-        Hotel myHotel = new Hotel();
+        Hotel myHotel = new Hotel(true);
         Customer customer1 = new Customer("Brad Keith","1234");
         myHotel.setNumberOfRooms(5);
         for(int i = 1; i<5; i++){
@@ -273,7 +283,7 @@ public class HotelTest {
 
     @Test
     void getCustomerReservationsTest(){
-        Hotel myHotel = new Hotel();
+        Hotel myHotel = new Hotel(true);
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("Bill Joe","5678");
         myHotel.setNumberOfRooms(5);

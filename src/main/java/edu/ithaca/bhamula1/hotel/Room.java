@@ -21,6 +21,17 @@ public class Room implements RoomInterface {
     String reservationName;
     List<Calendar> notAvailTheseDays;
 
+    public Room(boolean test, boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities, boolean checkedIn){
+        this.available = avail;
+        this.roomNumber = roomNum;
+        this.price = price;
+        this.bedNum = bedNum;
+        this.bedType = bedType;
+        this.amenities = amenities;
+        this.checkedIn = checkedIn;
+        this.notAvailTheseDays = new ArrayList<>();
+    }
+
     public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities, boolean checkedIn){
         this.available = avail;
         this.roomNumber = roomNum;

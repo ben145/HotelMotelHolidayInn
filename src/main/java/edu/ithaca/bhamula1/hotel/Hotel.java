@@ -17,9 +17,11 @@ public class Hotel implements HotelInterface {
     public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
+    boolean forTEsts = false;
 
 
     public Hotel(boolean test){
+        forTEsts = test;
         rooms = new ArrayList<RoomInterface>();
         customers = new ArrayList<>();
         employees = new ArrayList<>();
@@ -66,7 +68,7 @@ public class Hotel implements HotelInterface {
 
     //only for use in testing checkin and checkout before actual function is added
     public RoomInterface getRoom(int roomNumber){
-        return rooms.get(roomNumber-1);
+        return rooms.get(roomNumber);
     }
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
@@ -82,6 +84,7 @@ public class Hotel implements HotelInterface {
                             &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
                             &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
                         customer.checkIn(roomNumber);
+
                         saveCustList();
 
                         current.checkIn(customer);
@@ -134,7 +137,7 @@ public class Hotel implements HotelInterface {
 
 
     public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn){
-        this.rooms.set(roomNumber-1,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
+        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
     }
 
 
@@ -465,7 +468,6 @@ public class Hotel implements HotelInterface {
      * @param duration
      */
     public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String cardInfo){
-
         Reservation res = new Reservation(cus, rm, checkIn, duration, cardInfo);
         reservations.add(res);
     }
@@ -534,22 +536,24 @@ public class Hotel implements HotelInterface {
     @Override
     public void saveCustList(){
 
-        try {
-            OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
-            OutputStreamWriter write = new OutputStreamWriter(file);
-            BufferedWriter bw = new BufferedWriter(write);
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
 
-            for(int s = 0; s < customers.size(); s++){
-                CustomerInterface customer = customers.get(s);
-                String line = customer.getFName()+","+ customer.getLName()+","+customer.getId()+","+customer.getRoom()+
-                        ","+customer.isCheckedIn()+","+customer.getLoggedIn()+","+customer.getReturningCustomer()+","+customer.getPwd();
-                bw.write(line);
-                bw.newLine();
-                bw.flush();
+                for (int s = 0; s < customers.size(); s++) {
+                    CustomerInterface customer = customers.get(s);
+                    String line = customer.getFName() + "," + customer.getLName() + "," + customer.getId() + "," + customer.getRoom() +
+                            "," + customer.isCheckedIn() + "," + customer.getLoggedIn() + "," + customer.getReturningCustomer() + "," + customer.getPwd();
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
             }
-            bw.close();
-        }catch (IOException e){
-            System.err.println(e);
         }
     }
 
@@ -581,23 +585,24 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void saveRooms(){
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/rooms.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
 
-        try {
-            OutputStream file = new FileOutputStream("./src/main/resources/rooms.txt");
-            OutputStreamWriter write = new OutputStreamWriter(file);
-            BufferedWriter bw = new BufferedWriter(write);
-
-            for(int s = 0; s < rooms.size(); s++){
-                RoomInterface room = rooms.get(s);
-                String line = room.getIfAvailable()+";"+ room.getRoomNumber()+";"+room.getRoomPrice()+";"+room.getBedCount()+
-                        ";"+room.getBedType()+";"+room.getAmenities()+";"+room.getCheckedIn();
-                bw.write(line);
-                bw.newLine();
-                bw.flush();
+                for (int s = 0; s < rooms.size(); s++) {
+                    RoomInterface room = rooms.get(s);
+                    String line = room.getIfAvailable() + ";" + room.getRoomNumber() + ";" + room.getRoomPrice() + ";" + room.getBedCount() +
+                            ";" + room.getBedType() + ";" + room.getAmenities() + ";" + room.getCheckedIn();
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
             }
-            bw.close();
-        }catch (IOException e){
-            System.err.println(e);
         }
     }
 
