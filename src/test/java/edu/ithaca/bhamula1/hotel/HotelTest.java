@@ -41,7 +41,7 @@ public class HotelTest {
 
     @Test
     void checkOut() {
-        Hotel myHotel = new Hotel();
+        Hotel myHotel = new Hotel(true);
         //myHotel.getRoom(1);
         myHotel.setNumberOfRooms(5);
         for(int i = 1; i<5; i++){
