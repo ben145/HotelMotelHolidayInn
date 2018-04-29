@@ -68,4 +68,4 @@ true;65;150.0;1;bean-bag;mini-bar, waffle iron, toilet, towels, shower, seaside 
 true;66;150.0;3;queen;mini-bar, cooler, toilet, towels, bath, dance-floor;false
 true;67;150.0;3;king;mini-bar, cooler, toilet, towels, shower, city view;false
 true;68;400.0;2;king;mini-bar, cooler, porta-potty, towels, whirl-pool tub, air-conditioner, city-view, seaside view, dance floor, top-floor balcony;false
-true;69;500.0;3;king;mini-bar, cooler, outhouse, towels, whirl-pool tub, air-conditioner, city-view, seaside view, dance floor, roof-top access;false
+true;69;500.0;3;king;mini-bar, cooler, outhouse, towels, whirl-pool tub, air-conditioner, city-view, seaside view, dance floor, roof-top access;true
