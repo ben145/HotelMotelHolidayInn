@@ -163,7 +163,6 @@ public class CustomerUI implements CustomerUIInterface {
         System.out.println("\nWelcome " + c.getFName()+"\n");
 
         while(option!=6) {
-            System.out.println();
             System.out.println("=========================================================================================");
             System.out.println();
             System.out.println("Would you like to \n" +
@@ -186,8 +185,9 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("What is your room number: ");
                 int rmNum = 0;
                 while(rmNum == 0) {
-                    rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms()-1);
+                    rmNum = checkChoiceInput(scan.nextLine(), 1, hotel.getNumberOfRooms());
                 }
+                //rmNum = rmNum - 1;
                 Calendar today = new GregorianCalendar();
                 today.set(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
                 Reservation res  = hotel.getReservation(c,rmNum,today);
@@ -320,6 +320,7 @@ public class CustomerUI implements CustomerUIInterface {
                         while(rmNum==0){
                             rmNum=checkChoiceInput(scan.nextLine(),1, hotel.getNumberOfRooms());
                         }
+                        //rmNum = rmNum-1;
                         if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
 
                                 System.out.println("Please enter a card number:");
@@ -415,7 +416,10 @@ public class CustomerUI implements CustomerUIInterface {
     }
 
     public int checkedInMenu(CustomerInterface c, Reservation res){
-        System.out.println("Welcome! We hope you enjoy your stay.");
+        System.out.println();
+        System.out.println("=========================================================================================");
+        System.out.println();
+        System.out.println("Welcome! "+c.getFName()+" We hope you enjoy your stay in room "+c.getRoom());
         int choice = 0;
         while(choice!=3){
             choice=0;
