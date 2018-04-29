@@ -41,7 +41,6 @@ public class Reservation {
         }else{
             this.cardPayment = cardPayment;
         }
-
         this.paymentType = PaymentType.NODATA;
 
         boolean returning = false;

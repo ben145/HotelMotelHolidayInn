@@ -11,13 +11,27 @@ public interface CustomerInterface {
 
     String getName();
 
+    String getFName();
+
+    void setFName(String first);
+
+    String getLName();
+
+    void setLName(String last);
+
     String getId();
 
-    void login(String idIn);
+    void setId(String custid);
+
+    void login(String idIn,String pwdIn);
+
+    void setLoggedIn(boolean logIn);
 
     void logOut();
 
     boolean isCheckedIn();
+
+    void setCheckedIn(Boolean ckIn);
 
     boolean checkIn(int roomNumber);
 
@@ -36,5 +50,9 @@ public interface CustomerInterface {
     boolean getReturningCustomer();
 
     void setReturningCustomer(boolean returning);
+
+    boolean checkPwd(String p);
+
+    String getPwd();
 
 }

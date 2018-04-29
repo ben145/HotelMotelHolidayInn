@@ -14,7 +14,7 @@ public interface HotelInterface {
 
     void addTestRoom(int roomNumber);
 
-    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites);
+    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn);
 
     void setNumberOfRooms(int numberOfRooms);
 
@@ -23,14 +23,13 @@ public interface HotelInterface {
     String viewOrderedRooms(boolean returning);
     String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning);
 
+    CustomerInterface logIn (String name, String id, String p);
 
-    void logIn (String name, String id);
-
-    CustomerInterface getCustomer(String first, String last);
+    CustomerInterface checkCustomer(String first, String id, String passW);
 
     CustomerInterface getCustomer(String ID);
 
-    void createAccount (String fname, String lastName);
+    String createAccount (String fname, String lastName);
 
     CustomerInterface checkValidCust(String c);
 
@@ -63,5 +62,11 @@ public interface HotelInterface {
     public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate);
     public List<Reservation> getCustomerReservations(CustomerInterface customer);
 
+    void saveCustList();
+    void loadCustList();
+
+    void saveRooms();
+    void loadRooms();
+    void printRoomList();
 
 }

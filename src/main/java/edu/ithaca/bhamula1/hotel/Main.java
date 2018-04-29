@@ -192,14 +192,15 @@ public abstract class Main {
 
     public static HotelInterface createHotel(){
         HotelInterface hotel = new Hotel();
-        hotel.setNumberOfRooms(5);
+//        hotel.setNumberOfRooms(5);
+//
+//        hotel.addRoom(2, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(1, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(4, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(3, false, 100,2, "double", "mini bar");
+        //hotel.addRoom(3, false, 100,2, "double", "mini bar");
 
-        hotel.addRoom(2, true, 100,2, "double", "mini bar");
-        hotel.addRoom(1, true, 100,2, "double", "mini bar");
-        hotel.addRoom(4, true, 100,2, "double", "mini bar");
-        hotel.addRoom(3, false, 100,2, "double", "mini bar");
-
-        hotel.createAccount("Brad","Keith");
+       // hotel.createAccount("Brad","Keith");
 //        System.out.println(hotel.getCustomer("Brad", "Keith").getId());
 
 

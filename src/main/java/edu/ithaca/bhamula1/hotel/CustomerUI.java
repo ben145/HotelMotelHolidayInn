@@ -12,7 +12,6 @@ public class CustomerUI implements CustomerUIInterface {
     HotelInterface hotel;
     Scanner scan = new Scanner(System.in);
 
-
     public CustomerUI(){
         hotel = createHotel();
         //mainScreen();
@@ -58,13 +57,13 @@ public class CustomerUI implements CustomerUIInterface {
         return choice;
     }
 
-    public int signIn(String firstName, String ID){
+    public int signIn(String firstName, String ID, String pass){
         if (hotel.getCustomer(ID) == null) {
-            System.out.println("Incorrect account information");
+            System.out.println("\nOoops! Incorrect account information was entered for sign in\nPlese review the menu and try again =o)\n");
         } else {
-            hotel.logIn(firstName, ID);
-            if (hotel.getCustomer(ID).getLoggedIn()) {
-                int r = loggedIn(hotel.getCustomer(ID), hotel);
+            CustomerInterface cIn = hotel.logIn(firstName,ID,pass);
+            if (cIn.getLoggedIn()) {
+                int r = loggedIn(cIn, hotel);
                 return r;
             }
         }
@@ -97,8 +96,12 @@ public class CustomerUI implements CustomerUIInterface {
                 //System.out.println(firstName);
                 System.out.println("Type Your User ID: ");
                 String id = scan.nextLine();
+
+                System.out.println("Type Your User Password: ");
+                String p = scan.nextLine();
+
                 //System.out.println(id);
-                firstOption = signIn(firstName, id);
+                firstOption = signIn(firstName, id, p);
             }
 
             //SIGN UP
@@ -108,9 +111,10 @@ public class CustomerUI implements CustomerUIInterface {
                 String firstName = scan.nextLine();
                 System.out.println("Type Your Last Name: ");
                 String lastName = scan.nextLine();
-                hotel.createAccount(firstName, lastName);
-                String id = hotel.getCustomer(firstName, lastName).getId();
-                firstOption = loggedIn(hotel.getCustomer(firstName, lastName), hotel);
+                //String id = hotel.getCustomer(firstName, lastName).getId();
+                String id = hotel.createAccount(firstName, lastName);
+
+                firstOption = loggedIn(hotel.getCustomer(id), hotel);
             }
 
             //VIEW ROOMS
@@ -137,7 +141,7 @@ public class CustomerUI implements CustomerUIInterface {
 
     public int loggedIn(CustomerInterface c, HotelInterface hotel){
         int option =0;
-        System.out.println("Welcome " + c.getName());
+        System.out.println("\nWelcome " + c.getFName()+"\n");
         while(option!=6) {
             System.out.println("Would you like to \n" +
                     "1) check in \n" +
@@ -192,8 +196,10 @@ public class CustomerUI implements CustomerUIInterface {
                     }else{
                         res.setPaymentType(Reservation.PaymentType.CASH);
                     }
-
+                    c.setCheckedIn(true);
+                    hotel.saveCustList();
                     checkedInMenu(c,res);
+
                     hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
                 }
             }
@@ -268,7 +274,7 @@ public class CustomerUI implements CustomerUIInterface {
                         System.out.println("\nPlease enter the room number you wish to reserve: ");
                         int rmNum = 0;
                         while(rmNum==0){
-                            rmNum=checkChoiceInput(scan.nextLine(),0, hotel.getNumberOfRooms()-1);
+                            rmNum=checkChoiceInput(scan.nextLine(),1, hotel.getNumberOfRooms());
                         }
                         if(hotel.getRoom(rmNum).canReserve(resDate,stayDuration)) {
 
@@ -386,6 +392,8 @@ public class CustomerUI implements CustomerUIInterface {
             }else {
                 //checkout
                 c.setReturningCustomer(true);
+                c.setCheckedIn(false);
+                hotel.saveCustList();
                 System.out.println("Thank you for choosing to stay with us! \n");
                 System.out.println("Would you like to print a receipt? Enter 'yes' or  'no'");
                 char wantReceipt = 1;
