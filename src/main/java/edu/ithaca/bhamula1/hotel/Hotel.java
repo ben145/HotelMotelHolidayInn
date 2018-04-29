@@ -680,6 +680,7 @@ public class Hotel implements HotelInterface {
                     Reservation res = reservations.get(s);
                     String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + res.getCheckInDate() +
                             ";" + res.getCardPayment();
+                    System.out.println(res.getCheckInDate());
                     bw.write(line);
                     bw.newLine();
                     bw.flush();
@@ -698,7 +699,6 @@ public class Hotel implements HotelInterface {
             InputStreamReader read = new InputStreamReader(file);
             BufferedReader br = new BufferedReader(read);
             String line;
-
 
             while((line = br.readLine())!= null) {
 
