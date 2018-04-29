@@ -16,7 +16,7 @@ public class ReservationTest {
     void emptyConstructorTest() {
         Reservation rev = new Reservation();
 
-        Assert.assertEquals(rev.getCustomer().getName(), "");
+        Assert.assertEquals(rev.getCustomer().getName(),null+" "+ null);
         Assert.assertEquals(rev.getRoom().getRoomNumber(), 0);
         Assert.assertEquals(rev.getRoom().getIfAvailable(), false);
         Assert.assertEquals(rev.getNightDurration(), -1);
