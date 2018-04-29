@@ -2,6 +2,8 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -47,7 +49,6 @@ public class Hotel implements HotelInterface {
             loadCustList();
         }
 
-        reservations = new ArrayList<>();
 
 
         // List of roles and employees in hotel
@@ -55,6 +56,9 @@ public class Hotel implements HotelInterface {
         if(employees.isEmpty()) {
             setEmplList();
         }
+
+        reservations = new ArrayList<>();
+        loadReservationData();
 
         //hotel inventory w/ sample population
         inventory = new ArrayList<Inventory>();
@@ -272,7 +276,6 @@ public class Hotel implements HotelInterface {
      * @author - DMF
      */
     public CustomerInterface checkValidCust(String c){
-        CustomerInterface g;
         boolean found = false;
         for(Iterator<CustomerInterface> customerIterator = customers.iterator(); customerIterator.hasNext();){
             CustomerInterface cust = customerIterator.next();
@@ -470,6 +473,7 @@ public class Hotel implements HotelInterface {
     public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String cardInfo){
         Reservation res = new Reservation(cus, rm, checkIn, duration, cardInfo);
         reservations.add(res);
+        saveReservationData();
     }
 
     public Reservation removeReservation(Reservation reservation) {
@@ -643,6 +647,78 @@ public class Hotel implements HotelInterface {
             index++;
         }
     }
+
+    /**
+     * checks to verify valid customer takes in a string for cust ID
+     * @param rNum
+     * @return returns customer object to be passed to SelectReserveRoom
+     * @author - DMF
+     */
+    public RoomInterface checkValidRoom(int rNum){
+
+        for(Iterator<RoomInterface> roomIterator = rooms.iterator(); roomIterator.hasNext();){
+            RoomInterface currentRoom = roomIterator.next();
+            if(Objects.equals(currentRoom.getRoomNumber(),rNum)){
+
+                return currentRoom;
+            }
+        }
+        System.out.println("Invalid Room number");
+        return null;
+    }
+
+    @Override
+    public void saveReservationData(){
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/reservation_data.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
+
+                for (int s = 0; s < reservations.size(); s++) {
+                    Reservation res = reservations.get(s);
+                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + res.getCheckInDate() +
+                            ";" + res.getCardPayment();
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    @Override
+    public void loadReservationData(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/reservation_data.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+
+            while((line = br.readLine())!= null) {
+
+                String [] sArr = line.split(";");
+                Calendar resDate = new GregorianCalendar();
+                try{
+                    Timestamp date = new Timestamp(Long.parseLong(sArr[3]));
+                    resDate.setTime(date);
+                }catch(Exception e){
+
+                }
+                Reservation setRes = new Reservation(checkValidCust(sArr[0]),checkValidRoom(Integer.parseInt(sArr[1])),
+                        resDate,Integer.parseInt(sArr[2]),sArr[4]);
+
+                reservations.add(setRes);
+            }
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
+
 
 }
 
