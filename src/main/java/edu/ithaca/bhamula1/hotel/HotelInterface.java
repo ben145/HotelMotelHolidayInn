@@ -70,6 +70,11 @@ public interface HotelInterface {
     void printRoomList();
 
 
+    /**
+     * Checks for valid room number - used for loading reservations from saved file
+     * @param rNum
+     * @return
+     */
     RoomInterface checkValidRoom(int rNum);
 
     /**

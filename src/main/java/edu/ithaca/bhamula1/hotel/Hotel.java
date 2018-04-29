@@ -482,6 +482,7 @@ public class Hotel implements HotelInterface {
             Reservation curr = itr.next();
             if(curr==reservation){
                 reservations.remove(curr);
+                saveReservationData();
                 return curr;
             }
         }
