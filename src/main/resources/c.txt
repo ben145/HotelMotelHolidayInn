@@ -1,4 +1,4 @@
-John,Barr,JohnBarr,69,false,true,true,Customer1234
+John,Barr,JohnBarr,1,false,true,true,Customer1234
 Harrison,Kesel,HarrisonKesel,-1,false,false,false,Customer1234
 Benjamin,Klopcic,BenjaminKlopcic,-1,false,false,false,Customer1234
 David,Marcella,DavidMarcella,-1,false,false,false,Customer1234

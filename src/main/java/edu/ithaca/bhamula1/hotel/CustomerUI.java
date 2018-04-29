@@ -325,7 +325,7 @@ public class CustomerUI implements CustomerUIInterface {
 
                                 System.out.println("Please enter a card number:");
                                 String cardNum  = scan.nextLine();
-                                while(cardNum.length()< 15 && cardNum.length()<13){
+                                while(cardNum.length()< 16 && cardNum.length()<14){
                                     System.out.println("Could not process card. Try typing it in again ");
                                     cardNum = scan.nextLine();
                                 }
@@ -338,7 +338,8 @@ public class CustomerUI implements CustomerUIInterface {
                                 System.out.println("Your reservation has been made.");
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                                 System.out.println("Check in is at after 2pm on " + dateFormat.format(resDate.getTime()));
-                                Calendar copyDate3 = new GregorianCalendar(resYear,resMonth-1,resDay+stayDuration);
+                                Calendar copyDate3 = new GregorianCalendar(resYear,resMonth,resDay);
+                                copyDate3.add(Calendar.DATE,stayDuration);
                                 System.out.println("Check out is before 11 am on " + dateFormat.format(copyDate3.getTime()));
 
                         }else{
