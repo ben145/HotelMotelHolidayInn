@@ -1,8 +1,8 @@
-true;1;100.0;2;double;mini-bar, hot-plate, porta-potty, towels, air-conditioner;false
-true;2;100.0;2;double;mini-bar, mini-fridge, toilet, towels, air-conditioner;false
-true;3;100.0;2;double;mini-bar, can opener, toilet, towels, fan;false
-true;4;100.0;2;double;mini-bar, mini-fridge, porta-potty, towels, fan;false
-true;5;100.0;2;double;mini-bar, mini-fridge, toilet, towels, seaside view;false
+true;1;100.00;2;double;mini-bar, mini-fridge, toilet, towels, tub;false
+true;2;100.00;2;double;mini-bar, hot-plate, porta-potty, towels, air-conditioner;false
+true;3;100.00;2;double;mini-bar, mini-fridge, toilet, towels, air-conditioner;false
+true;4;100.00;2;double;mini-bar, can opener, toilet, towels, fan;false
+true;5;100.00;2;double;mini-bar, mini-fridge, porta-potty, towels, fan;false
 true;6;100.0;2;double;mini-bar, hot-plate, toilet, towels, dance-floor;false
 true;7;100.0;2;double;mini-bar, mini-fridge, toilet, towels, shower;false
 true;8;100.0;2;double;mini-bar, can opener, toilet, towels, shower;false
@@ -67,3 +67,4 @@ true;66;150.0;3;queen;mini-bar, cooler, toilet, towels, bath, dance-floor;false
 true;67;150.0;3;king;mini-bar, cooler, toilet, towels, shower, city view;false
 true;68;400.0;2;king;mini-bar, cooler, porta-potty, towels, whirl-pool tub, air-conditioner, city-view, seaside view, dance floor, top-floor balcony;false
 true;69;500.0;3;king;mini-bar, cooler, outhouse, towels, whirl-pool tub, air-conditioner, city-view, seaside view, dance floor, roof-top access;false
+

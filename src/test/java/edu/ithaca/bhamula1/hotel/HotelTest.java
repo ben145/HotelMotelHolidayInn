@@ -56,7 +56,7 @@ public class HotelTest {
 
     @Test
     void viewOrderedRooms(){
-        Hotel hotel = new Hotel();
+        Hotel hotel = new Hotel(true);
         hotel.setNumberOfRooms(5);
 
         hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
@@ -64,18 +64,20 @@ public class HotelTest {
         hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
         hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
 
+        String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
+                " Room number: 2\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
+                " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
+                " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n";
 
-        Assert.assertEquals("Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
-                "Room: 2 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
-                "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n"+
-                "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0", hotel.viewOrderedRooms(false));
+        Assert.assertEquals(test, hotel.viewOrderedRooms(false));
         String st = hotel.viewOrderedRooms(false);
 
     }
 
     @Test
     void viewOrderedAvailableRoomsNotReturningTest(){
-        Hotel hotel = new Hotel();
+
+        Hotel hotel = new Hotel(true);
         hotel.setNumberOfRooms(5);
         Customer customer = new Customer("Mia", "Kimmich", "mk", -1, false);
         Calendar checkIN = new GregorianCalendar(1,1-1,1);
@@ -92,41 +94,38 @@ public class HotelTest {
         hotel.addReservation(customer, hotel.getRoom(2), checkIN, 2, "" );
 
 //        System.out.println(hotel.getReservations());
+            String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
+            " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
+            " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n";
 
         //looking for a hotel starting on 1/1/1 for 3 nights
-        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, false),
-                "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
-                        "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
-                        "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $100.0");
+        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, false),test);
     }
-
-
 
     @Test
     void viewOrderedAvailableRoomsReturningTest(){
-        Hotel hotel = new Hotel();
+        Hotel hotel = new Hotel(true);
         hotel.setNumberOfRooms(5);
         Customer customer = new Customer("Mia", "Kimmich", "mk", -1, false);
         Calendar checkIn = new GregorianCalendar(1,1-1,1);
         Calendar checkDate = new GregorianCalendar(1,1-1,1);
 
-        hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
-        hotel.addRoom(1, true, 100,2, "double", "mini bar", false);
-        hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
-        hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
-
+        hotel.addRoom(1, true, 100,2, "double", "mini bar",false);
+        hotel.addRoom(4, true, 100,2, "double", "mini bar",false);
+        hotel.addRoom(3, true, 100,2, "double", "mini bar",false);
+        hotel.addRoom(2, true, 100,2, "double", "mini bar",false);
 
         //this all happens when the user reserves a room in the ui
-        hotel.getRoom(2).addReservation(checkDate,2);
-        hotel.addReservation(customer, hotel.getRoom(2), checkIn, 2, "" );
+       // hotel.getRoom(2).addReservation(checkDate,2);
+       hotel.addReservation(customer, hotel.getRoom((2-1)), checkIn, 2, "" );
+
+        String test = "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $90.0\n"+
+                "Room: 2 Type: 2 double bed(s) Amenities: mini bar Price: $90.0\n"+
+                "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $90.0\n"+
+                "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $90.0";
 
         //looking for a hotel starting on 1/1/1 for 3 nights
-        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, true),
-                "Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $90.0\n" +
-                        "Room: 3 Type: 2 double bed(s) Amenities: mini bar Price: $45.0\n" +
-                        "Room: 4 Type: 2 double bed(s) Amenities: mini bar Price: $90.0");
-
-
+        Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, true), test);
     }
 
 

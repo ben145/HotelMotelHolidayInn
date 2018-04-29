@@ -98,8 +98,9 @@ class RoomTest {
     @Test
     void toStringTest(){
         Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar, view", false);
+        String test = " Room number: 212\n\tType: 1 queen bed(s)\n\tAmenities: mini bar, view\n\tPrice: $500.0\n";
 
-        Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0", exampleRoom.toString());
+        Assert.assertEquals(test, exampleRoom.toString());
 
     }
 

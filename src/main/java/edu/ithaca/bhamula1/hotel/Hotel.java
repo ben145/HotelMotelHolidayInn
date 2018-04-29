@@ -18,12 +18,24 @@ public class Hotel implements HotelInterface {
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
 
+
+    public Hotel(boolean test){
+        rooms = new ArrayList<RoomInterface>();
+        customers = new ArrayList<>();
+        employees = new ArrayList<>();
+        inventory = new ArrayList<Inventory>();
+        activeRequests = new LinkedList<ActiveRequest>();
+        reservations = new ArrayList<>();
+
+    }
+
     public Hotel(){
         //this was a hash map. Changed to a array list
         //the index is the room number
 //        rooms = new HashMap<>();
         rooms = new ArrayList<RoomInterface>();
-        if(rooms.isEmpty()){
+
+        if (rooms.isEmpty()) {
             loadRooms();
         }
 
@@ -54,7 +66,7 @@ public class Hotel implements HotelInterface {
 
     //only for use in testing checkin and checkout before actual function is added
     public RoomInterface getRoom(int roomNumber){
-        return rooms.get(roomNumber);
+        return rooms.get(roomNumber-1);
     }
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
@@ -122,7 +134,7 @@ public class Hotel implements HotelInterface {
 
 
     public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn){
-        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
+        this.rooms.set(roomNumber-1,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
     }
 
 
@@ -134,7 +146,7 @@ public class Hotel implements HotelInterface {
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
 
-        while(rooms.size() <numberOfRooms){
+        while(rooms.size() < numberOfRooms){
             rooms.add(new Room());
         }
     }
@@ -189,34 +201,22 @@ public class Hotel implements HotelInterface {
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.canReserve(checkin, nightDuration) ) {
-
                 if (str.equals("")) {
-
                     if(returning){
                         str += rm.printDiscountedPrices();
                     }else{
                         str +=  rm.toString();
-
                     }
-
-
                 } else {
-
-
                     if(returning){
                         str += "\n" + rm.printDiscountedPrices();
                     }else{
                         str += "\n" + rm.toString();
-
                     }
                 }
-
-
             }
-
         }
         return str;
-
         }
 
 //HOtel
@@ -468,7 +468,6 @@ public class Hotel implements HotelInterface {
 
         Reservation res = new Reservation(cus, rm, checkIn, duration, cardInfo);
         reservations.add(res);
-
     }
 
     public Reservation removeReservation(Reservation reservation) {
