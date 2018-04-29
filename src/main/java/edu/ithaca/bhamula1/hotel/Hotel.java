@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -676,9 +677,10 @@ public class Hotel implements HotelInterface {
                 OutputStreamWriter write = new OutputStreamWriter(file);
                 BufferedWriter bw = new BufferedWriter(write);
 
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
                 for (int s = 0; s < reservations.size(); s++) {
                     Reservation res = reservations.get(s);
-                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + res.getCheckInDate() +
+                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
                             ";" + res.getCardPayment();
                     bw.write(line);
                     bw.newLine();
@@ -698,15 +700,12 @@ public class Hotel implements HotelInterface {
             InputStreamReader read = new InputStreamReader(file);
             BufferedReader br = new BufferedReader(read);
             String line;
-
-
             while((line = br.readLine())!= null) {
-
                 String [] sArr = line.split(";");
-                Calendar resDate = new GregorianCalendar();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+                Calendar resDate = Calendar.getInstance();
                 try{
-                    Timestamp date = new Timestamp(Long.parseLong(sArr[3]));
-                    resDate.setTime(date);
+                    resDate.setTime(dateFormat.parse(sArr[3]));                    //resDate.setTime(date);
                 }catch(Exception e){
 
                 }
