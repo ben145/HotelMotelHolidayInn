@@ -59,10 +59,10 @@ public class HotelTest {
         Hotel hotel = new Hotel();
         hotel.setNumberOfRooms(5);
 
-        hotel.addRoom(2, true, 100,2, "double", "mini bar");
-        hotel.addRoom(1, true, 100,2, "double", "mini bar");
-        hotel.addRoom(4, true, 100,2, "double", "mini bar");
-        hotel.addRoom(3, false, 100,2, "double", "mini bar");
+        hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(1, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
 
 
         Assert.assertEquals("Room: 1 Type: 2 double bed(s) Amenities: mini bar Price: $100.0\n" +
@@ -81,10 +81,11 @@ public class HotelTest {
         Calendar checkIN = new GregorianCalendar(1,1-1,1);
         Calendar checkDate = new GregorianCalendar(1,1-1,1);
 
-        hotel.addRoom(2, true, 100,2, "double", "mini bar");
-        hotel.addRoom(1, true, 100,2, "double", "mini bar");
-        hotel.addRoom(4, true, 100,2, "double", "mini bar");
-        hotel.addRoom(3, false, 100,2, "double", "mini bar");
+        hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(1, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
+
 
         //this all happens when the user reserves a room in the ui
         hotel.getRoom(2).addReservation(checkDate,2);
@@ -109,10 +110,11 @@ public class HotelTest {
         Calendar checkIn = new GregorianCalendar(1,1-1,1);
         Calendar checkDate = new GregorianCalendar(1,1-1,1);
 
-        hotel.addRoom(2, true, 50,2, "double", "mini bar");
-        hotel.addRoom(1, true, 100,2, "double", "mini bar");
-        hotel.addRoom(4, true, 100,2, "double", "mini bar");
-        hotel.addRoom(3, false, 50,2, "double", "mini bar");
+        hotel.addRoom(2, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(1, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
+        hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
+
 
         //this all happens when the user reserves a room in the ui
         hotel.getRoom(2).addReservation(checkDate,2);

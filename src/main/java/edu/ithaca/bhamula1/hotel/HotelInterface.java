@@ -14,7 +14,7 @@ public interface HotelInterface {
 
         void addTestRoom(int roomNumber);
 
-        void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites);
+        void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn);
 
         void setNumberOfRooms(int numberOfRooms);
 
@@ -64,5 +64,9 @@ public interface HotelInterface {
 
         void saveCustList();
         void loadCustList();
+
+        void saveRooms();
+        void loadRooms();
+        void printRoomList();
 
     }

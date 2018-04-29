@@ -21,14 +21,14 @@ public class Room implements RoomInterface {
     String reservationName;
     List<Calendar> notAvailTheseDays;
 
-    public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities){
+    public Room(boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities, boolean checkedIn){
         this.available = avail;
         this.roomNumber = roomNum;
         this.price = price;
         this.bedNum = bedNum;
         this.bedType = bedType;
         this.amenities = amenities;
-        this.checkedIn = false;
+        this.checkedIn = checkedIn;
         this.notAvailTheseDays = new ArrayList<>();
     }
 
@@ -204,8 +204,8 @@ public class Room implements RoomInterface {
 
 
     public String toString(){
-        return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " + this.amenities +
-                " Price: $"+ this.price ;
+        return " Room number: " + this.roomNumber + "\n\tType: "+ this.bedNum + " " + this.bedType+" bed(s)\n\tAmenities: " + this.amenities +
+                "\n\tPrice: $"+ this.price+"\n";
     }
 
     public String printDiscountedPrices(){
