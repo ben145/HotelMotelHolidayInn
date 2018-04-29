@@ -14,7 +14,7 @@ class RoomTest {
 
     @Test
     void checkIn() {
-        Room one = new Room(false,1,100.00,2,"Full","Mini bar");
+        Room one = new Room(true,false,1,100.00,2,"Full","Mini bar",false);
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("John Doe","4321");
         one.setReservationName(customer1.getName());
@@ -26,7 +26,7 @@ class RoomTest {
 
     @Test
     void checkOut() {
-        Room one = new Room(false,1,100.00,2,"Full","Mini bar");
+        Room one = new Room(true,false,1,100.00,2,"Full","Mini bar", false);
         Customer customer1 = new Customer("Brad Keith","1234");
         Customer customer2 = new Customer("John Doe","4321");
         one.setReservationName(customer1.getName());
@@ -85,7 +85,7 @@ class RoomTest {
     @Test
     void roomConstructorTest() {
         //available, room number,price, number of beds,  type of bed,  extras, view
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar", false);
         Assert.assertEquals(true, exampleRoom.getIfAvailable());
         Assert.assertEquals(212, exampleRoom.getRoomNumber());
         Assert.assertEquals(1, exampleRoom.getBedCount());
@@ -97,16 +97,17 @@ class RoomTest {
 
     @Test
     void toStringTest(){
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar, view");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar, view", false);
+        String test = " Room number: 212\n\tType: 1 queen bed(s)\n\tAmenities: mini bar, view\n\tPrice: $500.0\n";
 
-        Assert.assertEquals("Room: 212 Type: 1 queen bed(s) Amenities: mini bar, view Price: $500.0", exampleRoom.toString());
+        Assert.assertEquals(test, exampleRoom.toString());
 
     }
 
 
     @Test
     public void addReservationTest(){
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar", false);
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
         exampleRoom.addReservation(firstRes, 1);
@@ -135,7 +136,7 @@ class RoomTest {
 
     @Test
     public void conflictingReservationDates(){
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar", false);
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
         exampleRoom.addReservation(firstRes, 2);
@@ -158,7 +159,7 @@ class RoomTest {
 
     @Test
     public void canReserveTestGood(){
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar", false);
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
         //exampleRoom.addReservation(firstRes, 1);
@@ -182,7 +183,7 @@ class RoomTest {
 
     @Test
     public void canReserveTestBAD(){
-        Room exampleRoom = new Room(true, 212, 500, 1, "queen", "mini bar");
+        Room exampleRoom = new Room(true,true, 212, 500, 1, "queen", "mini bar", false);
 
         Calendar firstRes = new GregorianCalendar(2018, Calendar.APRIL, 15);
         Assert.assertEquals(exampleRoom.canReserve(firstRes, 1), true );
