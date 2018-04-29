@@ -89,4 +89,6 @@ public interface HotelInterface {
     */
     void loadReservationData();
 
+    void doYouHearWhatIHear();
+
     }
