@@ -51,4 +51,8 @@ public interface CustomerInterface {
 
     void setReturningCustomer(boolean returning);
 
+    boolean checkPwd(String p);
+
+    String getPwd();
+
 }

@@ -76,7 +76,7 @@ public class Hotel implements HotelInterface {
                 }
             }
         }
-        System.out.println("This reservation was not found. Please make a reservation or reenter information.");
+        System.out.println("This reservation was not found in our system for today's date. Please review your reservations and try again.\n");
         return false;
     }
 
@@ -211,22 +211,26 @@ public class Hotel implements HotelInterface {
 
         }
 
-
-    public void logIn (String name, String id, String p){
-        CustomerInterface customer = getCustomer(id);
+//HOtel
+    public CustomerInterface logIn (String name, String id, String p){
+        CustomerInterface customer = checkCustomer(name,id,p);
         customer.login(id,p);
         if(customer.getLoggedIn()){
             saveCustList();
+            return customer;
+        }else{
+            System.out.println("Invalid login information");
+            return null;
         }
+
     }
 
-    public CustomerInterface getCustomer(String first, String last){
+    public CustomerInterface checkCustomer(String first, String id, String passW){
 
         for(CustomerInterface c: customers){
-            if(c.getName().equals(first + " " + last)){
+            if(c.getFName().equals(first)&&c.getId().equals(id)&&c.checkPwd(passW)){
                 return c;
             }
-
         }
         return null;
     }
@@ -237,19 +241,17 @@ public class Hotel implements HotelInterface {
             if(c.getId().equals(ID)){
                 return c;
             }
-
         }
         return null;
     }
 
-    public void createAccount (String fname, String lastName){
+    public String createAccount (String fname, String lastName){
         CustomerInterface customer = new Customer();
         customer.makeName(fname, lastName);
         String ID = customer.makeID();
-        //customer.login(ID);
-
         customers.add(customer);
         saveCustList();
+        return ID;
     }
 
     /**
@@ -531,7 +533,7 @@ public class Hotel implements HotelInterface {
             for(int s = 0; s < customers.size(); s++){
                 CustomerInterface customer = customers.get(s);
                 String line = customer.getFName()+","+ customer.getLName()+","+customer.getId()+","+customer.getRoom()+
-                        ","+customer.isCheckedIn()+","+customer.getLoggedIn()+","+customer.getReturningCustomer();
+                        ","+customer.isCheckedIn()+","+customer.getLoggedIn()+","+customer.getReturningCustomer()+","+customer.getPwd();
                 bw.write(line);
                 bw.newLine();
                 bw.flush();
@@ -553,13 +555,11 @@ public class Hotel implements HotelInterface {
             InputStreamReader read = new InputStreamReader(file);
             BufferedReader br = new BufferedReader(read);
             String line;
-            int test = 0;
 
             while((line = br.readLine())!= null) {
-                System.out.println(" customers  "+(test+=1));
                 String [] sArr = line.split(",");
-                CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[2]),
-                        Boolean.parseBoolean(sArr[3]),Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]),sArr[6]);
+                CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[3]),
+                        Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]),Boolean.parseBoolean(sArr[6]),sArr[7]);
 
                 customers.add(setCust);
             }

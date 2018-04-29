@@ -106,7 +106,7 @@ public class Customer implements CustomerInterface {
     }
 
     public String getName() {
-        return name;
+        return fName+" "+lName;
     }
 
     public String getFName() {return fName;}
@@ -122,6 +122,7 @@ public class Customer implements CustomerInterface {
     public void setId(String custid) { id=custid;}
 
 
+    //CUstomer
     //ONly one log in right now
     public void login(String idIn,String pwdIn) {
 //        Scanner k = new Scanner(System.in);
@@ -133,7 +134,8 @@ public class Customer implements CustomerInterface {
             loggedIn = true;
         }
         else{
-            System.out.println("Incorrect Password.");
+            System.out.println("Problem logging in");
+            //System.out.println("Incorrect Password.");
         }
 
     }
@@ -206,6 +208,11 @@ public class Customer implements CustomerInterface {
     public void setCheckedIn(Boolean ckIn){checkedIn=ckIn;}
 
     public void setLoggedIn(boolean logIn){loggedIn = logIn;}
+
+    public boolean checkPwd(String p){
+        if(this.pwd.equals(p)){ return true;}else{return false;}
+    }
+    public String getPwd(){return pwd;}
 
 
 }
