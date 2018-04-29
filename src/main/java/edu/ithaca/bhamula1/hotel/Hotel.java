@@ -26,6 +26,9 @@ public class Hotel implements HotelInterface {
 
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
+        if(customers.isEmpty()){
+            loadCustList();
+        }
 
         reservations = new ArrayList<>();
 
@@ -62,6 +65,7 @@ public class Hotel implements HotelInterface {
                             &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
                             &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
                         customer.checkIn(roomNumber);
+                        saveCustList();
 
                         current.checkIn(customer);
                         removeReservation(res);
@@ -72,7 +76,7 @@ public class Hotel implements HotelInterface {
                 }
             }
         }
-        System.out.println("This reservation was not found. Please make a reservation or reenter information.");
+        System.out.println("This reservation was not found in our system for today's date. Please review your reservations and try again.\n");
         return false;
     }
 
@@ -100,6 +104,7 @@ public class Hotel implements HotelInterface {
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
+        saveCustList();
         return c&r;
     }
 
@@ -206,19 +211,26 @@ public class Hotel implements HotelInterface {
 
         }
 
+//HOtel
+    public CustomerInterface logIn (String name, String id, String p){
+        CustomerInterface customer = checkCustomer(name,id,p);
+        customer.login(id,p);
+        if(customer.getLoggedIn()){
+            saveCustList();
+            return customer;
+        }else{
+            System.out.println("Invalid login information");
+            return null;
+        }
 
-    public void logIn (String name, String id){
-        CustomerInterface customer = getCustomer(id);
-        customer.login(id);
     }
 
-    public CustomerInterface getCustomer(String first, String last){
+    public CustomerInterface checkCustomer(String first, String id, String passW){
 
         for(CustomerInterface c: customers){
-            if(c.getName().equals(first + " " + last)){
+            if(c.getFName().equals(first)&&c.getId().equals(id)&&c.checkPwd(passW)){
                 return c;
             }
-
         }
         return null;
     }
@@ -229,18 +241,17 @@ public class Hotel implements HotelInterface {
             if(c.getId().equals(ID)){
                 return c;
             }
-
         }
         return null;
     }
 
-    public void createAccount (String fname, String lastName){
+    public String createAccount (String fname, String lastName){
         CustomerInterface customer = new Customer();
         customer.makeName(fname, lastName);
         String ID = customer.makeID();
-        //customer.login(ID);
-
         customers.add(customer);
+        saveCustList();
+        return ID;
     }
 
     /**
@@ -508,7 +519,54 @@ public class Hotel implements HotelInterface {
         return myRes;
     }
 
+    /**
+     * Save Customer Data when exit program
+     */
+    @Override
+    public void saveCustList(){
 
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            for(int s = 0; s < customers.size(); s++){
+                CustomerInterface customer = customers.get(s);
+                String line = customer.getFName()+","+ customer.getLName()+","+customer.getId()+","+customer.getRoom()+
+                        ","+customer.isCheckedIn()+","+customer.getLoggedIn()+","+customer.getReturningCustomer()+","+customer.getPwd();
+                bw.write(line);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * loads data stored in c.txt for storing customer list on Hotel instantiation
+     * @author - DMF
+     */
+    @Override
+    public void loadCustList(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/c.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(",");
+                CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[3]),
+                        Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]),Boolean.parseBoolean(sArr[6]),sArr[7]);
+
+                customers.add(setCust);
+            }
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
 
 }
 
