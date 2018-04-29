@@ -1,5 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.*;
 import java.nio.file.Files;
 import java.sql.Time;
@@ -618,6 +620,8 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
+        doYouHearWhatIHear();
+
         try {
             InputStream file = this.getClass().getResourceAsStream("/rooms.txt");
             InputStreamReader read = new InputStreamReader(file);
@@ -719,6 +723,25 @@ public class Hotel implements HotelInterface {
         }
     }
 
+    public void doYouHearWhatIHear(){
+
+        try
+        {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/hotel_greeting.wav")));
+            clip.start();
+            while (!clip.isRunning())
+                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
+            clip.close();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace(System.out);
+        }
+
+    }
 
 }
 
