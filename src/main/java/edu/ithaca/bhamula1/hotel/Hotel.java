@@ -1,9 +1,12 @@
 package edu.ithaca.bhamula1.hotel;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.*;
 import java.nio.file.Files;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -617,6 +620,8 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
+        doYouHearWhatIHear();
+
         try {
             InputStream file = this.getClass().getResourceAsStream("/rooms.txt");
             InputStreamReader read = new InputStreamReader(file);
@@ -676,10 +681,12 @@ public class Hotel implements HotelInterface {
                 OutputStreamWriter write = new OutputStreamWriter(file);
                 BufferedWriter bw = new BufferedWriter(write);
 
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
                 for (int s = 0; s < reservations.size(); s++) {
                     Reservation res = reservations.get(s);
-                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + res.getCheckInDate() +
+                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
                             ";" + res.getCardPayment();
+                    System.out.println(res.getCheckInDate());
                     bw.write(line);
                     bw.newLine();
                     bw.flush();
@@ -699,14 +706,12 @@ public class Hotel implements HotelInterface {
             BufferedReader br = new BufferedReader(read);
             String line;
 
-
             while((line = br.readLine())!= null) {
-
                 String [] sArr = line.split(";");
-                Calendar resDate = new GregorianCalendar();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+                Calendar resDate = Calendar.getInstance();
                 try{
-                    Timestamp date = new Timestamp(Long.parseLong(sArr[3]));
-                    resDate.setTime(date);
+                    resDate.setTime(dateFormat.parse(sArr[3]));                    //resDate.setTime(date);
                 }catch(Exception e){
 
                 }
@@ -720,6 +725,25 @@ public class Hotel implements HotelInterface {
         }
     }
 
+    public void doYouHearWhatIHear(){
+
+        try
+        {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/hotel_greeting.wav")));
+            clip.start();
+            while (!clip.isRunning())
+                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
+            clip.close();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace(System.out);
+        }
+
+    }
 
 }
 
