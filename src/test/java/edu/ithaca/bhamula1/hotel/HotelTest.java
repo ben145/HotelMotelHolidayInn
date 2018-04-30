@@ -3,7 +3,6 @@ package edu.ithaca.bhamula1.hotel;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -273,7 +272,7 @@ public class HotelTest {
 //
 //
 //
-//        //    public Reservation (CustomerInterface customer, RoomInterface room, Calendar checkInDate, int nightDurration, String cardPayment){
+//        //    public Reservation (CustomerInterface customer, RoomInterface room, Calendar checkInDate, int nightDuration, String cardPayment){
 //        Reservation res = new Reservation(customer1, rm, checkIn, 2, ""  );
 //
 //
@@ -314,14 +313,14 @@ public class HotelTest {
         int ndx = 0;
         assertEquals(customer1,previous.getCustomer());
         assertEquals(dates1.get(ndx),previous.getCheckInDate());
-        assertEquals(2,previous.getNightDurration());
+        assertEquals(2,previous.getNightDuration());
         Reservation curr;
         while(itr1.hasNext()){
             curr = itr1.next();
             ndx++;
             assertEquals(customer1,curr.getCustomer());
             assertEquals(dates1.get(ndx),curr.getCheckInDate());
-            assertEquals(2,curr.getNightDurration());
+            assertEquals(2,curr.getNightDuration());
             Comparator<Reservation> cmp = new CompareReservationByDate() {
                 @Override
                 public int compare(Reservation r1, Reservation r2) {
@@ -337,13 +336,13 @@ public class HotelTest {
         ndx = 0;
         assertEquals(customer2,previous.getCustomer());
         assertEquals(dates2.get(ndx),previous.getCheckInDate());
-        assertEquals(2,previous.getNightDurration());
+        assertEquals(2,previous.getNightDuration());
         while(itr2.hasNext()){
             curr = itr2.next();
             ndx++;
             assertEquals(customer2,curr.getCustomer());
             assertEquals(dates2.get(ndx),curr.getCheckInDate());
-            assertEquals(2,curr.getNightDurration());
+            assertEquals(2,curr.getNightDuration());
             Comparator<Reservation> cmp = new CompareReservationByDate() {
                 @Override
                 public int compare(Reservation r1, Reservation r2) {

@@ -2,7 +2,6 @@ package edu.ithaca.bhamula1.hotel;
 
 
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.*;
 
 import static edu.ithaca.bhamula1.hotel.Main.createHotel;
@@ -245,7 +244,7 @@ public class CustomerUI implements CustomerUIInterface {
                     hotel.saveCustList();
                     checkedInMenu(c,res);
 
-                    hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDurration());
+                    hotel.getRoom(rmNum).removeReservation(res.getCheckInDate(),res.getNightDuration());
                 }
             }
 
@@ -391,7 +390,7 @@ public class CustomerUI implements CustomerUIInterface {
                     }
                     Reservation removed = hotel.removeReservation(reservations.get(pick-1));
                     if (removed!=null){
-                        hotel.getRoom(reservations.get(pick-1).getRoom().getRoomNumber()).removeReservation(removed.getCheckInDate(),removed.getNightDurration());
+                        hotel.getRoom(reservations.get(pick-1).getRoom().getRoomNumber()).removeReservation(removed.getCheckInDate(),removed.getNightDuration());
                         System.out.println("Your reservation has been cancelled.");
                     }
                     else{

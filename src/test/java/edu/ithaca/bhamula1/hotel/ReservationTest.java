@@ -19,7 +19,7 @@ public class ReservationTest {
         Assert.assertEquals(rev.getCustomer().getName(),null+" "+ null);
         Assert.assertEquals(rev.getRoom().getRoomNumber(), 0);
         Assert.assertEquals(rev.getRoom().getIfAvailable(), false);
-        Assert.assertEquals(rev.getNightDurration(), -1);
+        Assert.assertEquals(rev.getNightDuration(), -1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
         Assert.assertEquals(dateFormat.format(rev.getCheckInDate().getTime()), "01/01/001");
 
@@ -39,7 +39,7 @@ public class ReservationTest {
         Assert.assertEquals(rev.getCustomer().getName(), "Mia Kimmich Mitchell");
         Assert.assertEquals(rev.getRoom().getRoomNumber(), 1);
         Assert.assertEquals(rev.getRoom().getIfAvailable(), false);
-        Assert.assertEquals(rev.getNightDurration(), 2);
+        Assert.assertEquals(rev.getNightDuration(), 2);
         Assert.assertEquals(dateFormat.format(rev.getCheckInDate().getTime()), "04/15/2018");
 
         Assert.assertEquals(rev.getCardPayment(), "1234123412341234");
@@ -60,7 +60,7 @@ public class ReservationTest {
         Assert.assertEquals(rev.getCustomer().getName(), "Mia Kimmich Mitchell");
         Assert.assertEquals(rev.getRoom().getRoomNumber(), 1);
         Assert.assertEquals(rev.getRoom().getIfAvailable(), false);
-        Assert.assertEquals(rev.getNightDurration(), 2);
+        Assert.assertEquals(rev.getNightDuration(), 2);
         Assert.assertEquals(dateFormat.format(rev.getCheckInDate().getTime()), "04/01/2018");
 
         Assert.assertEquals(rev.getCardPayment(), "");

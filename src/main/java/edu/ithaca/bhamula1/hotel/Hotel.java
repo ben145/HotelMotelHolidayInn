@@ -3,9 +3,6 @@ package edu.ithaca.bhamula1.hotel;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.*;
-import java.nio.file.Files;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -689,7 +686,7 @@ public class Hotel implements HotelInterface {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
                 for (int s = 0; s < reservations.size(); s++) {
                     Reservation res = reservations.get(s);
-                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
+                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDuration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
                             ";" + res.getCardPayment();
                     // System.out.println(res.getCheckInDate());
                     bw.write(line);
@@ -724,7 +721,7 @@ public class Hotel implements HotelInterface {
                         resDate,Integer.parseInt(sArr[2]),sArr[4]);
 
                 reservations.add(setRes);
-                setRes.getRoom().addReservation(setRes.getCheckInDate(),setRes.getNightDurration());
+                setRes.getRoom().addReservation(setRes.getCheckInDate(),setRes.getNightDuration());
             }
         }catch (IOException e){
             System.out.println(e);
