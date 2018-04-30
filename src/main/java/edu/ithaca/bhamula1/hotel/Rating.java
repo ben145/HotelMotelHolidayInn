@@ -142,7 +142,9 @@ public class Rating {
         createComments();
     }
 
-    public String toString(Customer c) {
+
+    public String toString(CustomerInterface c) {
+
         StringBuilder stars = new StringBuilder();
         for (int i = 0; i < Math.round(getAvgRating()); i++) {
             stars.append("*");
@@ -152,7 +154,9 @@ public class Rating {
         return toReturn;
     }
 
-    public void saveRating(Customer c) {
+
+    public void saveRating(CustomerInterface c) {
+
         try {
             OutputStream file = new FileOutputStream("./src/main/resources/r.txt",true);
             OutputStreamWriter write = new OutputStreamWriter(file);
@@ -176,4 +180,6 @@ public class Rating {
         System.out.println(r.toString(c));
         r.saveRating(c);
     }
+
 }
+

@@ -513,7 +513,19 @@ public class CustomerUI implements CustomerUIInterface {
 
                 }
                 System.out.println("=========================================================================================");
-                System.out.println();
+                System.out.println("Please give us feedback");
+                System.out.println("=========================================================================================");
+                System.out.println("Would you like to fill out an optional survey?('yes' or 'no')");
+                char answer = 1;
+                while(answer==1){
+                    answer = checkYorN(scan.nextLine());
+                }
+                if(answer=='y'){
+                    Rating r = new Rating();
+                    r.startRating();
+                    System.out.println(r.toString(c));
+                    r.saveRating(c);
+                }
             }
             System.out.println();
         }
