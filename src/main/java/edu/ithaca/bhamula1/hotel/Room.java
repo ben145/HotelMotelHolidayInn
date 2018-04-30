@@ -108,6 +108,7 @@ public class Room implements RoomInterface {
     }
 
     public void removeReservation(Calendar date, int nightDuration) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
         Calendar dateClone = (Calendar) date.clone();
         boolean notAvailAlreadyContains = false;
 
@@ -121,7 +122,19 @@ public class Room implements RoomInterface {
             blockedOutDates.add(newDate);
 
         }
-        this.notAvailTheseDays.removeAll(blockedOutDates);
+        for(int i =0; i< nightDuration; i++ ) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.setTime(dateClone.getTime());
+            dateClone.add(Calendar.DAY_OF_MONTH, 1);
+
+            for(int x =0; x<notAvailTheseDays.size(); x++){
+
+                if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(blockedOutDates.get(i).getTime()))){
+                    notAvailTheseDays.remove(notAvailTheseDays.get(x));
+                }
+            }
+        }
+
     }
 
     public boolean canReserve(Calendar date, int nightDuration){
