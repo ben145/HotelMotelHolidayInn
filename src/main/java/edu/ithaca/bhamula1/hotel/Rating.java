@@ -1,5 +1,6 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.io.*;
 import java.util.Scanner;
 // + 74 minutes
 
@@ -106,7 +107,7 @@ public class Rating {
 
     public String createComments() {
         Scanner s = new Scanner(System.in);
-        System.out.println("If there is anything you would like to say about your experience with us, please do so now.");
+        System.out.println("\nIf there is anything you would like to say about your experience with us, please do so now.");
         String comment = s.nextLine();
         comment = "\"" + comment + "\"";
         setComments(comment);
@@ -127,8 +128,13 @@ public class Rating {
         setRating1(convertRating(s.nextLine()));
         System.out.print("\n2. Satisfaction with employee interactions.\nYour answer -> ");
         setRating2(convertRating(s.nextLine()));
-        System.out.print("\n3. Satisfaction with overall stay.\nYour answer -> ");
+        System.out.print("\n3. Satisfaction with range of room choices.\nYour answer -> ");
         setRating3(convertRating(s.nextLine()));
+        System.out.print("\n4. Satisfaction with ease of setting reservation date.\nYour answer -> ");
+        setRating4(convertRating(s.nextLine()));
+        System.out.print("\n5. Satisfaction with overall stay.\nYour answer -> ");
+        setRating5(convertRating(s.nextLine()));
+        createComments();
     }
 
     public String toString(Customer c) {
@@ -141,12 +147,28 @@ public class Rating {
         return toReturn;
     }
 
+    public void saveRating(Customer c) {
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/r.txt",true);
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            String line = c.getFName()+" "+c.getLName()+"\n"+getRating1()+" "+getRating2()+" "+
+                    getRating3()+" "+getRating4()+" "+getRating5()+"\n"+getComments();
+            bw.write(line);
+            bw.newLine();
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         Rating r = new Rating();
-        //r.convertRating();
         r.startRating();
-        //r.setComments(r.createComments());
-        Customer c = new Customer("John", "JP12345");
+        Customer c = new Customer("John","Smith","JS12345",4,false);
         System.out.println(r.toString(c));
+        r.saveRating(c);
     }
 }
