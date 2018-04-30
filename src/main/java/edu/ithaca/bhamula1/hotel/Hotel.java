@@ -232,6 +232,10 @@ public class Hotel implements HotelInterface {
 //HOtel
     public CustomerInterface logIn (String name, String id, String p){
         CustomerInterface customer = checkCustomer(name,id,p);
+        if(customer==null){
+            System.out.println("Invalid login information");
+            return null;
+        }
         customer.login(id,p);
         if(customer.getLoggedIn()){
             saveCustList();
@@ -620,6 +624,7 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
+        System.out.println("Loading........");
         doYouHearWhatIHear();
 
         try {
@@ -686,7 +691,7 @@ public class Hotel implements HotelInterface {
                     Reservation res = reservations.get(s);
                     String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
                             ";" + res.getCardPayment();
-                    System.out.println(res.getCheckInDate());
+                   // System.out.println(res.getCheckInDate());
                     bw.write(line);
                     bw.newLine();
                     bw.flush();
@@ -719,6 +724,7 @@ public class Hotel implements HotelInterface {
                         resDate,Integer.parseInt(sArr[2]),sArr[4]);
 
                 reservations.add(setRes);
+                setRes.getRoom().addReservation(setRes.getCheckInDate(),setRes.getNightDurration());
             }
         }catch (IOException e){
             System.out.println(e);
