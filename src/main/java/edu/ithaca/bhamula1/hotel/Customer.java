@@ -13,15 +13,18 @@ public class Customer implements CustomerInterface {
     private String fName;
     private String lName;
     private int room;
+    private boolean returningCustomer;
 
     private boolean checkedIn;
     private boolean loggedIn;
+    private String pwd;
 
     Customer(String nameIn, String idIn) {
         name = nameIn;
         id = idIn;
         loggedIn = false;
     }
+
 
     Customer(){
 //        name = makeName();
@@ -30,6 +33,7 @@ public class Customer implements CustomerInterface {
         name = "";
         id = "";
         loggedIn = false;
+        this.returningCustomer = false;
     }
 
     public Customer (String fname, String lName, String id, int room, boolean checkedIn){
@@ -40,6 +44,17 @@ public class Customer implements CustomerInterface {
         this.room = room;
         this.checkedIn = checkedIn;
         this.loggedIn = true;
+        this.returningCustomer  = false;
+    }
+    public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust, String p){
+        this.id = fname+lName;
+        this.fName = fname;
+        this.lName = lName;
+        this.room = room;
+        this.checkedIn = ckedIn;
+        this.loggedIn = logIn;
+        this.returningCustomer  = rCust;
+        this.pwd = p;
     }
 
     //set name
@@ -91,26 +106,36 @@ public class Customer implements CustomerInterface {
     }
 
     public String getName() {
-        return name;
+        return fName+" "+lName;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getFName() {return fName;}
+
+    public void setFName(String first){fName = first;}
+
+    public String getLName() {return lName;}
+
+    public void setLName(String last) {lName = last;}
+
+    public String getId() {return id;}
+
+    public void setId(String custid) { id=custid;}
 
 
+    //CUstomer
     //ONly one log in right now
-    public void login(String idIn) {
+    public void login(String idIn,String pwdIn) {
 //        Scanner k = new Scanner(System.in);
 //        String idIn;
 //        System.out.println("Please enter your ID");
 //        idIn = k.next();
 //        String custID = "abc123";
-        if (idIn.equals(this.id)){
+        if (idIn.equals(this.id)&&pwdIn.equals(this.pwd)){
             loggedIn = true;
         }
         else{
-            System.out.println("Incorrect Password.");
+            System.out.println("Problem logging in");
+            //System.out.println("Incorrect Password.");
         }
 
     }
@@ -129,6 +154,7 @@ public class Customer implements CustomerInterface {
     }
 
     public boolean checkIn(int roomNumber) {
+        this.room = roomNumber;
         this.checkedIn = true;
         return true;
     }
@@ -170,4 +196,23 @@ public class Customer implements CustomerInterface {
     public int getRoom() {
         return room;
     }
+
+    public boolean getReturningCustomer(){
+        return this.returningCustomer;
+    }
+
+    public void setReturningCustomer(boolean returning){
+        this.returningCustomer = returning;
+    }
+
+    public void setCheckedIn(Boolean ckIn){checkedIn=ckIn;}
+
+    public void setLoggedIn(boolean logIn){loggedIn = logIn;}
+
+    public boolean checkPwd(String p){
+        if(this.pwd.equals(p)){ return true;}else{return false;}
+    }
+    public String getPwd(){return pwd;}
+
+
 }

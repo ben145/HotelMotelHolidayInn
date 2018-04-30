@@ -1,7 +1,12 @@
 package edu.ithaca.bhamula1.hotel;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.*;
 import java.nio.file.Files;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -14,9 +19,22 @@ public class Hotel implements HotelInterface {
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     private List<EmployeeIMPL> employees;
-    private static List<Inventory> inventory;
+    public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
+    boolean forTEsts = false;
+
+
+    public Hotel(boolean test){
+        forTEsts = test;
+        rooms = new ArrayList<RoomInterface>();
+        customers = new ArrayList<>();
+        employees = new ArrayList<>();
+        inventory = new ArrayList<Inventory>();
+        activeRequests = new LinkedList<ActiveRequest>();
+        reservations = new ArrayList<>();
+
+    }
 
     public Hotel(){
         //this was a hash map. Changed to a array list
@@ -24,10 +42,16 @@ public class Hotel implements HotelInterface {
 //        rooms = new HashMap<>();
         rooms = new ArrayList<RoomInterface>();
 
+        if (rooms.isEmpty()) {
+            loadRooms();
+        }
+
         //should this is a linked list instead? better memory
         customers = new ArrayList<>();
+        if(customers.isEmpty()){
+            loadCustList();
+        }
 
-        reservations = new ArrayList<>();
 
 
         // List of roles and employees in hotel
@@ -36,12 +60,17 @@ public class Hotel implements HotelInterface {
             setEmplList();
         }
 
+        reservations = new ArrayList<>();
+        loadReservationData();
+
         //hotel inventory w/ sample population
         inventory = new ArrayList<Inventory>();
         testInventory();
 
         //linked list of active requests
         activeRequests = new LinkedList<ActiveRequest>();
+
+        //printRoomList();
     }
 
     //only for use in testing checkin and checkout before actual function is added
@@ -51,7 +80,9 @@ public class Hotel implements HotelInterface {
 
     public boolean checkIn(int roomNumber, CustomerInterface customer){
         //find room
-        Reservation res = getReservation(customer,roomNumber);
+        Calendar today = new GregorianCalendar();
+        today.set(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        Reservation res = getReservation(customer,roomNumber,today);
         RoomInterface current = getRoom(roomNumber);
         if(res!=null){
             if(customer.getId()==res.getCustomer().getId()){
@@ -60,8 +91,13 @@ public class Hotel implements HotelInterface {
                             &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
                             &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
                         customer.checkIn(roomNumber);
+
+                        saveCustList();
+
                         current.checkIn(customer);
-                        removeReservation(customer,roomNumber);
+                        saveRooms();
+
+                        removeReservation(res);
                         return true;
                     }
                     System.out.println("Your reservation is not for today. Please change reservation to check in today.");
@@ -69,7 +105,7 @@ public class Hotel implements HotelInterface {
                 }
             }
         }
-        System.out.println("This reservation was not found. Please make a reservation or reenter information.");
+        System.out.println("This reservation was not found in our system for today's date. Please review your reservations and try again.\n");
         return false;
     }
 
@@ -97,16 +133,18 @@ public class Hotel implements HotelInterface {
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
+        saveCustList();
+        saveRooms();
         return c&r;
     }
 
     public void addTestRoom(int roomNumber){
-        this.rooms.set(roomNumber,new Room(false,roomNumber,100.00,2,"Full","Mini bar"));
+        this.rooms.set(roomNumber,new Room(false,roomNumber,100.00,2,"Full","Mini bar",false));
     }
 
 
-    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites){
-        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites));
+    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn){
+        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
     }
 
 
@@ -118,7 +156,7 @@ public class Hotel implements HotelInterface {
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
 
-        while(rooms.size() <numberOfRooms){
+        while(rooms.size() < numberOfRooms){
             rooms.add(new Room());
         }
     }
@@ -133,18 +171,33 @@ public class Hotel implements HotelInterface {
      * @Author Mia
      * @return
      */
-    public String viewOrderedRooms(){
+    public String viewOrderedRooms(boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 ) {
 
                 if (str.equals("")) {
-                    str +=  rm.toString();
-                } else {
-                    str += "\n" + rm.toString();
-                }
 
+
+                    if(returning){
+                        str+= rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+                    }
+
+
+                } else {
+
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+
+                    }
+
+
+                }
 
             }
 
@@ -153,39 +206,53 @@ public class Hotel implements HotelInterface {
     }
 
 
-    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration){
+    public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning){
 
         String str="";
         for (RoomInterface rm: rooms) {
             if(rm.getRoomNumber()!=0 && rm.canReserve(checkin, nightDuration) ) {
-
                 if (str.equals("")) {
-                    str +=  rm.toString();
+                    if(returning){
+                        str += rm.printDiscountedPrices();
+                    }else{
+                        str +=  rm.toString();
+                    }
                 } else {
-                    str += "\n" + rm.toString();
+                    if(returning){
+                        str += "\n" + rm.printDiscountedPrices();
+                    }else{
+                        str += "\n" + rm.toString();
+                    }
                 }
-
-
             }
-
         }
         return str;
-
         }
 
+//HOtel
+    public CustomerInterface logIn (String name, String id, String p){
+        CustomerInterface customer = checkCustomer(name,id,p);
+        if(customer==null){
+            System.out.println("Invalid login information");
+            return null;
+        }
+        customer.login(id,p);
+        if(customer.getLoggedIn()){
+            saveCustList();
+            return customer;
+        }else{
+            System.out.println("Invalid login information");
+            return null;
+        }
 
-    public void logIn (String name, String id){
-        CustomerInterface customer = getCustomer(id);
-        customer.login(id);
     }
 
-    public CustomerInterface getCustomer(String first, String last){
+    public CustomerInterface checkCustomer(String first, String id, String passW){
 
         for(CustomerInterface c: customers){
-            if(c.getName().equals(first + " " + last)){
+            if(c.getFName().equals(first)&&c.getId().equals(id)&&c.checkPwd(passW)){
                 return c;
             }
-
         }
         return null;
     }
@@ -196,18 +263,17 @@ public class Hotel implements HotelInterface {
             if(c.getId().equals(ID)){
                 return c;
             }
-
         }
         return null;
     }
 
-    public void createAccount (String fname, String lastName){
+    public String createAccount (String fname, String lastName){
         CustomerInterface customer = new Customer();
         customer.makeName(fname, lastName);
         String ID = customer.makeID();
-        //customer.login(ID);
-
         customers.add(customer);
+        saveCustList();
+        return ID;
     }
 
     /**
@@ -217,7 +283,6 @@ public class Hotel implements HotelInterface {
      * @author - DMF
      */
     public CustomerInterface checkValidCust(String c){
-        CustomerInterface g;
         boolean found = false;
         for(Iterator<CustomerInterface> customerIterator = customers.iterator(); customerIterator.hasNext();){
             CustomerInterface cust = customerIterator.next();
@@ -231,41 +296,6 @@ public class Hotel implements HotelInterface {
         return null;
     }
 
-
-//
-//    /**
-//     * function to call function to check for valid customer and to check room is available
-//     * If both are valid, proceed with the reservation
-//     * @param rmNum
-//     * @param cID
-//     * @Author - DMF and mia
-//     */
-//    public void checkRooms(int rmNum, String cID, Calendar checkInDate, int duration ) {
-//        for (RoomInterface rm : rooms) {
-//            if (rm.getRoomNumber() == rmNum) {
-////                System.out.println(rm.getRoomNumber());
-//                if (rm.getIfAvailable() == true) {
-//                    CustomerInterface cust = checkValidCust(cID);
-//                    if (cust.getId() != null) {
-//                        SelectReserveRoom selRes = new SelectReserveRoom(checkValidCust(cID), rm);
-//                        //if the room available
-//                        if(selRes.checkRoomAvailable()){
-//                            String resID = selRes.createReservationID();
-//                            cust.setReservation(resID);
-//                            cust.setRoom(rmNum);
-//                            rm.setReservationName(cust.getName());
-//
-////                            rm.setIfAvailable(false);
-//                            //rm.setReservationName(resID);
-//                            Reservation res = new Reservation(cust, rooms.get(rmNum), checkInDate, duration);
-//                            reservations.add(res);
-//                            System.out.println("Your reservation ID for room "+ cust.getRoom() + " is "+ cust.getReservation());
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
 
     /**
@@ -435,7 +465,9 @@ public class Hotel implements HotelInterface {
 
 
     public int getNumberOfRooms() {
-        return numberOfRooms;
+        //System.out.println("TEsting room size"+rooms.size());
+        return rooms.size();
+
     }
 
     /**
@@ -445,31 +477,37 @@ public class Hotel implements HotelInterface {
      * @param checkIn
      * @param duration
      */
-    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration){
-
-        Reservation res = new Reservation(cus, rm, checkIn, duration);
+    public void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String cardInfo){
+        Reservation res = new Reservation(cus, rm, checkIn, duration, cardInfo);
         reservations.add(res);
-
+        saveReservationData();
     }
 
-    public Reservation removeReservation(CustomerInterface customer, int roomNumber) {
+    public Reservation removeReservation(Reservation reservation) {
         Iterator<Reservation> itr = this.reservations.iterator();
         while(itr.hasNext()){
             Reservation curr = itr.next();
-            if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
+            if(curr==reservation){
                 reservations.remove(curr);
+                saveReservationData();
                 return curr;
             }
         }
         return null;
     }
 
-    public Reservation getReservation(CustomerInterface customer, int roomNumber){
+    public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate){
         Iterator<Reservation> itr = this.reservations.iterator();
         while(itr.hasNext()){
             Reservation curr = itr.next();
             if(curr.getCustomer().getId()==customer.getId()&&roomNumber==curr.getRoom().getRoomNumber()){
-                return curr;
+                if(checkInDate.get(Calendar.YEAR)==curr.getCheckInDate().get(Calendar.YEAR)){
+                    if(checkInDate.get(Calendar.MONTH)==curr.getCheckInDate().get(Calendar.MONTH)){
+                        if(checkInDate.get(Calendar.DAY_OF_MONTH)==curr.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
+                            return curr;
+                        }
+                    }
+                }
             }
         }
         return null;
@@ -483,6 +521,234 @@ public class Hotel implements HotelInterface {
 
     public  List<Reservation> getReservations(){
         return reservations;
+    }
+
+    public List<Reservation> getCustomerReservations(CustomerInterface customer){
+        Iterator<Reservation> itr = this.reservations.iterator();
+        List<Reservation> myRes = new ArrayList<>();
+        while(itr.hasNext()){
+            Reservation curr = itr.next();
+            if(curr.getCustomer()==customer){
+                myRes.add(curr);
+            }
+        }
+        Comparator<Reservation> cmp = new CompareReservationByDate() {
+            @Override
+            public int compare(Reservation r1, Reservation r2) {
+                return super.compare(r1, r2);
+            }
+        };
+        myRes.sort(cmp);
+        return myRes;
+    }
+
+    /**
+     * Save Customer Data when exit program
+     */
+    @Override
+    public void saveCustList(){
+
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
+
+                for (int s = 0; s < customers.size(); s++) {
+                    CustomerInterface customer = customers.get(s);
+                    String line = customer.getFName() + "," + customer.getLName() + "," + customer.getId() + "," + customer.getRoom() +
+                            "," + customer.isCheckedIn() + "," + customer.getLoggedIn() + "," + customer.getReturningCustomer() + "," + customer.getPwd();
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    /**
+     * loads data stored in c.txt for storing customer list on Hotel instantiation
+     * @author - DMF
+     */
+    @Override
+    public void loadCustList(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/c.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(",");
+                CustomerInterface setCust = new Customer(sArr[0],sArr[1],Integer.parseInt(sArr[3]),
+                        Boolean.parseBoolean(sArr[4]),Boolean.parseBoolean(sArr[5]),Boolean.parseBoolean(sArr[6]),sArr[7]);
+
+                customers.add(setCust);
+            }
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
+    /**
+     * Save Customer Data when exit program
+     */
+    @Override
+    public void saveRooms(){
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/rooms.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
+
+                for (int s = 0; s < rooms.size(); s++) {
+                    RoomInterface room = rooms.get(s);
+                    String line = room.getIfAvailable() + ";" + room.getRoomNumber() + ";" + room.getRoomPrice() + ";" + room.getBedCount() +
+                            ";" + room.getBedType() + ";" + room.getAmenities() + ";" + room.getCheckedIn();
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    /**
+     * loads data stored in rooms.txt for storing room list on Hotel instantiation
+     * @author - DMF
+     */
+    @Override
+    public void loadRooms(){
+        System.out.println("Loading........");
+        doYouHearWhatIHear();
+
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/rooms.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(";");
+                RoomInterface setRoom = new Room(Boolean.parseBoolean(sArr[0]),Integer.parseInt(sArr[1]),Double.parseDouble(sArr[2]),
+                        Integer.parseInt(sArr[3]),sArr[4],sArr[5],Boolean.parseBoolean(sArr[6]));
+
+                rooms.add(setRoom);
+            }
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * prints list of all hotel employees and their data
+     * @author - DMF
+     */
+    @Override
+    public void printRoomList(){
+        int index = 0;
+        Iterator iterator = rooms.iterator();
+        while(iterator.hasNext() && index!=rooms.size()){
+            System.out.println(rooms.get(index).toString());
+            index++;
+        }
+    }
+
+    /**
+     * checks to verify valid customer takes in a string for cust ID
+     * @param rNum
+     * @return returns customer object to be passed to SelectReserveRoom
+     * @author - DMF
+     */
+    public RoomInterface checkValidRoom(int rNum){
+
+        for(Iterator<RoomInterface> roomIterator = rooms.iterator(); roomIterator.hasNext();){
+            RoomInterface currentRoom = roomIterator.next();
+            if(Objects.equals(currentRoom.getRoomNumber(),rNum)){
+
+                return currentRoom;
+            }
+        }
+        System.out.println("Invalid Room number");
+        return null;
+    }
+
+    @Override
+    public void saveReservationData(){
+        if(!forTEsts) {
+            try {
+                OutputStream file = new FileOutputStream("./src/main/resources/reservation_data.txt");
+                OutputStreamWriter write = new OutputStreamWriter(file);
+                BufferedWriter bw = new BufferedWriter(write);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+                for (int s = 0; s < reservations.size(); s++) {
+                    Reservation res = reservations.get(s);
+                    String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
+                            ";" + res.getCardPayment();
+                   // System.out.println(res.getCheckInDate());
+                    bw.write(line);
+                    bw.newLine();
+                    bw.flush();
+                }
+                bw.close();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    @Override
+    public void loadReservationData(){
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/reservation_data.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(";");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
+                Calendar resDate = Calendar.getInstance();
+                try{
+                    resDate.setTime(dateFormat.parse(sArr[3]));                    //resDate.setTime(date);
+                }catch(Exception e){
+
+                }
+                Reservation setRes = new Reservation(checkValidCust(sArr[0]),checkValidRoom(Integer.parseInt(sArr[1])),
+                        resDate,Integer.parseInt(sArr[2]),sArr[4]);
+
+                reservations.add(setRes);
+                setRes.getRoom().addReservation(setRes.getCheckInDate(),setRes.getNightDurration());
+            }
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
+
+    public void doYouHearWhatIHear(){
+
+        try
+        {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/hotel_greeting.wav")));
+            clip.start();
+            while (!clip.isRunning())
+                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
+            clip.close();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace(System.out);
+        }
+
     }
 
 }

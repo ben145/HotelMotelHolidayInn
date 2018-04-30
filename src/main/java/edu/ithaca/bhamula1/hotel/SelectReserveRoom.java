@@ -28,7 +28,7 @@ public class SelectReserveRoom implements SRRInterface{
         RoomInterface testRoom;
         CustomerInterface testGuest;
         testGuest = new Customer("BobFrog" , "stuft-Shirt");
-        testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS");
+        testRoom = new Room(true, 54, 60.00, 8, "FIRM", "STUFFS", false);
         room = testRoom;
         customer = testGuest;
     }
