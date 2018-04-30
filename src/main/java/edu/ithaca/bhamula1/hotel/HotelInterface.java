@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> rating
 package edu.ithaca.bhamula1.hotel;
 
 import java.util.ArrayList;
@@ -15,29 +18,28 @@ public interface HotelInterface {
 
     void addTestRoom(int roomNumber);
 
-    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites);
+    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn);
 
     void setNumberOfRooms(int numberOfRooms);
 
     ArrayList<RoomInterface> getRooms();
 
-    String viewOrderedRooms();
-    String viewOrderedAvailableRooms(Calendar checkin, int nightDuration);
+    String viewOrderedRooms(boolean returning);
+    String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning);
 
+    CustomerInterface logIn (String name, String id, String p);
 
-    void logIn (String name, String id);
-
-    CustomerInterface getCustomer(String first, String last);
+    CustomerInterface checkCustomer(String first, String id, String passW);
 
     CustomerInterface getCustomer(String ID);
 
-    void createAccount (String fname, String lastName);
+    String createAccount (String fname, String lastName);
 
     CustomerInterface checkValidCust(String c);
 
 //        void checkRooms(int rmNum, String cID, Calendar checkIn, int durration);
 
-    void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration);
+    void addReservation(CustomerInterface cus, RoomInterface rm, Calendar checkIn, int duration, String card);
 
     void setCustomer();
 
@@ -60,6 +62,7 @@ public interface HotelInterface {
     void testInventory();
     //this is where "void viewInventory();" would go if it wasn't static
 
+<<<<<<< HEAD
     public Reservation removeReservation(CustomerInterface customer, int roomNumber);
     public Reservation getReservation(CustomerInterface customer, int roomNumber);
 
@@ -125,6 +128,8 @@ public interface HotelInterface {
     void testInventory();
     //this is where "void viewInventory();" would go if it wasn't static
 
+=======
+>>>>>>> rating
     public Reservation removeReservation(Reservation reservation);
     public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate);
     public List<Reservation> getCustomerReservations(CustomerInterface customer);
@@ -136,6 +141,7 @@ public interface HotelInterface {
     void loadRooms();
     void printRoomList();
 
+<<<<<<< HEAD
 
     /**
      * Checks for valid room number - used for loading reservations from saved file
@@ -160,3 +166,6 @@ public interface HotelInterface {
 
     }
 >>>>>>> 20770d64c734cc0dd958a8304ba68d80081683f9
+=======
+}
+>>>>>>> rating

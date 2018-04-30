@@ -227,9 +227,9 @@ public class Hotel implements HotelInterface {
             }
         }
         return str;
-        }
+    }
 
-//HOtel
+    //HOtel
     public CustomerInterface logIn (String name, String id, String p){
         CustomerInterface customer = checkCustomer(name,id,p);
         if(customer==null){
@@ -440,9 +440,9 @@ public class Hotel implements HotelInterface {
     }
 
     /*
-      * reads in the stock stock file i pulled straight out of my ass
-      * populates hotel inventory
-    */
+     * reads in the stock stock file i pulled straight out of my ass
+     * populates hotel inventory
+     */
     public void testInventory(){
         try {
             InputStream file = this.getClass().getResourceAsStream("/stock.txt");
@@ -691,7 +691,7 @@ public class Hotel implements HotelInterface {
                     Reservation res = reservations.get(s);
                     String line = res.customer.getId() + ";" + res.room.getRoomNumber() + ";" + res.getNightDurration() + ";" + dateFormat.format(res.getCheckInDate().getTime()) +
                             ";" + res.getCardPayment();
-                   // System.out.println(res.getCheckInDate());
+                    // System.out.println(res.getCheckInDate());
                     bw.write(line);
                     bw.newLine();
                     bw.flush();
