@@ -14,7 +14,7 @@ public interface HotelInterface {
 
     void addTestRoom(int roomNumber);
 
-    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn);
+    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenities, boolean checkIn);
 
     void setNumberOfRooms(int numberOfRooms);
 
@@ -58,8 +58,6 @@ public interface HotelInterface {
     void testInventory();
     //this is where "void viewInventory();" would go if it wasn't static
 
-=======
->>>>>>> rating
     public Reservation removeReservation(Reservation reservation);
     public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate);
     public List<Reservation> getCustomerReservations(CustomerInterface customer);
@@ -71,7 +69,6 @@ public interface HotelInterface {
     void loadRooms();
     void printRoomList();
 
-<<<<<<< HEAD
 
     /**
      * Checks for valid room number - used for loading reservations from saved file
@@ -94,5 +91,4 @@ public interface HotelInterface {
 
     void doYouHearWhatIHear();
 
-    }
 }
