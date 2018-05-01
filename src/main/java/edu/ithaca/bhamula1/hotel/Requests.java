@@ -3,12 +3,12 @@ package edu.ithaca.bhamula1.hotel;
 import java.util.ArrayList;
 import java.util.Scanner;
 import edu.ithaca.bhamula1.hotel.Hotel;
-
+// 67 minutes
 class ActiveRequest{
-    String request;
-    int roomNumber;
-    String employeeId;
-    boolean active;
+    private String request;
+    private int roomNumber;
+    private String employeeId;
+    private boolean active;
 
     //constructor
     public ActiveRequest(String request, int roomNumber){
@@ -52,10 +52,10 @@ class ActiveRequest{
     }
 }
 class RoomService {
-    String request;
-    double associatedPrice;
-    int numRequirements;
-    ArrayList<String> requirements;
+    private String request;
+    private double associatedPrice;
+    private int numRequirements;
+    private ArrayList<String> requirements;
 
     //constructor without requirement list
     public RoomService(String request, double associatedPrice, int numRequirements){
@@ -274,33 +274,46 @@ public class Requests implements RequestsInterface{
                     num = Integer.parseInt(input);
                 }
         RoomService newReq = new RoomService(req,price,num);
+        requests.add(newReq);
         System.out.println("Request added to options list");
     }
 
     //allows authorized staff to remove a request to the system
     public void removeRequest(String employeeId){
     	//check authorization
-	
+        Scanner scanner = new Scanner(System.in);
+        boolean authorized = false;
+        while (!authorized) {
+            System.out.print("Enter your employee ID: ");
+            String idInput = scanner.nextLine();
+            // not sure if easy way to loop through all employees and check
+            // inputID against them for authorization, simple test for now - Ben
+            if (idInput.length() == 7)
+                authorized = true;
+        }
         //remove requests
         viewRequests();
         System.out.println("Enter request number to delete: ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        requests.remove(input);
+        int input = Integer.parseInt(scanner.nextLine());
+        requests.remove(requests.get(input-1));
 
         System.out.println("Request removed from options list");
     }
 
-    //allows a customer to make a request
+    /**
+     * allows a customer to make a request
+     * @param roomNumber
+     * @return
+     */
     public String makeRequest(int roomNumber){
         viewRequests();
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         try {
-            //compensating for 0
             int inputInt = (Integer.parseInt(input));
             if(inputInt>0&&inputInt<requests.size()) {
+                //compensating for 0
                 input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
