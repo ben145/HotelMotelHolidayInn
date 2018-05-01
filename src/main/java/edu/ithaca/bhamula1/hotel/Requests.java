@@ -51,7 +51,7 @@ class ActiveRequest{
         }
     }
 }
-class RoomService{
+class RoomService {
     String request;
     double associatedPrice;
     int numRequirements;
@@ -108,7 +108,7 @@ class RoomService{
         boolean found = false;
         for(Inventory item: Hotel.inventory) {
 
-            if(item.getItem() == newRequirement){
+            if(item.getItem().equals(newRequirement)){
                 found = true;
                 requirements.add(newRequirement);
                 numRequirements++;
@@ -128,12 +128,12 @@ class RoomService{
             }
         }
         else{
-            System.out.println("requirement not found");
+            System.out.println("Requirement not found");
         }
     }
 }
 public class Requests implements RequestsInterface{
-    public ArrayList<RoomService> requests = new ArrayList<RoomService>();
+    public ArrayList<RoomService> requests = new ArrayList<>();
 
     public Requests(){
         loadRecs();
@@ -146,31 +146,25 @@ public class Requests implements RequestsInterface{
             ArrayList<String> reqs = new ArrayList<>();
             int numReqs = 0;
             for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Scratchy Toilet Paper") {
+                if (item.getItem().equals("Scratchy Toilet Paper")) {
                     reqs.add("Scratchy Toilet Paper");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Sheet Set") {
+
+                if (item.getItem().equals("Sheet Set")) {
                     reqs.add("Sheet Set");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Small Shampoo") {
+
+                if (item.getItem().equals("Small Shampoo")) {
                     reqs.add("Small Shampoo");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Soap") {
+
+                if (item.getItem().equals("Soap")) {
                     reqs.add("Soap");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tiny Conditioner") {
+
+                if (item.getItem().equals("Tiny Conditioner")) {
                     reqs.add("Tiny Conditioner");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
+
+                if (item.getItem().equals("Towels")) {
                     reqs.add("Towels");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Washcloths") {
+
+                if (item.getItem().equals("Washcloths")) {
                     reqs.add("Washcloths");numReqs++; }
             }
             if(numReqs > 2) {
@@ -180,25 +174,21 @@ public class Requests implements RequestsInterface{
             reqs.clear();
         //second request
             for(Inventory item: Hotel.inventory) {
-                if(item.getItem() == "Pillow"){
+                if(item.getItem().equals("Pillow")){
                     reqs.add("Pillow");
                     req = new RoomService("Bring every pillow you have", 0, 1, reqs);
                     requests.add(req);
                     reqs.clear();
                 }
-            }
         //third
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
+                if (item.getItem().equals("Towels")) {
                     reqs.add("Towels");
                     req = new RoomService("Fresh Towels", 0, 1, reqs);
                     requests.add(req);
                     reqs.clear();
                 }
-            }
         //and so fo(u)rth
-            for(Inventory item : Hotel.inventory) {
-                if (item.getItem() == "Wrench") {
+                if (item.getItem().equals("Wrench")) {
                     reqs.add("Wrench");
                     req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
                     requests.add(req);
@@ -208,23 +198,19 @@ public class Requests implements RequestsInterface{
         //and this one
             numReqs = 0;
             for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Gin") {
+                if (item.getItem().equals("Gin")) {
                     reqs.add("Gin");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Rum") {
+
+                if (item.getItem().equals("Rum")) {
                     reqs.add("Rum");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tequila") {
+
+                if (item.getItem().equals("Tequila")) {
                     reqs.add("Tequila");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Vodka") {
+
+                if (item.getItem().equals("Vodka")) {
                     reqs.add("Vodka");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Whiskey") {
+
+                if (item.getItem().equals("Whiskey")) {
                     reqs.add("Whiskey");numReqs++; }
             }
             if(numReqs > 1) {
@@ -234,7 +220,7 @@ public class Requests implements RequestsInterface{
             reqs.clear();
 	    //can't forget that
             for(Inventory item : Hotel.inventory){
-                if(item.getItem() == "Don Felder") {
+                if(item.getItem().equals("Don Felder")) {
                     reqs.add("Don Felder");
                     reqs.add("Don Henley");
                     reqs.add("Glenn Frey");
@@ -254,22 +240,35 @@ public class Requests implements RequestsInterface{
         }
     }
 
-    //allows authorized staff to add a request to they system
+    /**
+     * Allows authorized staff to add a request to the system
+     * @param employeeId ID of authorized employee
+     */
     public void addRequest(String employeeId){
         //check authorization
+        Scanner scanner = new Scanner(System.in);
+        boolean authorized = false;
+        while (!authorized) {
+            System.out.print("Enter your employee ID: ");
+            String idInput = scanner.nextLine();
+            // not sure if easy way to loop through all employees and check
+            // inputID against them for authorization, simple test for now - Ben
+            if (idInput.length() == 7)
+                authorized = true;
+        }
         //request name
             System.out.println("Enter request to add: ");
-            Scanner scanner = new Scanner(System.in);
             String req = scanner.nextLine();
         //request price
             System.out.println("Enter additional charge associated with request: ");
             String input = scanner.nextLine();
             double price = Double.parseDouble(input);
-        //request requirements
+        //getting request requirements
             System.out.println("Does request require inventory items? (y/n)");
             input = scanner.nextLine();
             int num = 0;
-                if(input == "y"){
+            // allows any input starting with 'y' or 'Y'
+                if(input.substring(0,1).toLowerCase().equals("y")){
                     System.out.println("Enter number of Requirements: ");
                     input = scanner.nextLine();
                     num = Integer.parseInt(input);
