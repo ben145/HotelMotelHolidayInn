@@ -1,6 +1,5 @@
 package edu.ithaca.bhamula1.hotel;
 
-
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.*;
@@ -163,6 +162,7 @@ public class CustomerUI implements CustomerUIInterface {
 
     public int loggedIn(CustomerInterface c, HotelInterface hotel){
         int option =0;
+<<<<<<< HEAD
 
         System.out.println();
         System.out.println("=========================================================================================");
@@ -174,15 +174,18 @@ public class CustomerUI implements CustomerUIInterface {
             System.out.println();
             System.out.println("=========================================================================================");
             System.out.println();
+=======
+        System.out.println("Welcome " + c.getName());
+        while(option!=5) {
+>>>>>>> parent of d1ec8b5... Merge pull request #83 from ben145/UI_2.0
             System.out.println("Would you like to \n" +
                     "1) check in \n" +
                     "2) review rooms \n" +
                     "3) reserve room \n" +
                     "4) cancel room reservation \n" +
-                    "5) view reservations \n" +
-                    "6) quit\n");
+                    "5) quit\n");
             while(option == 0) {
-                option = checkChoiceInput(scan.nextLine(),1,6);
+                option = checkChoiceInput(scan.nextLine(),1,5);
             }
             //CHECK IN
             if(option == 1){
@@ -401,6 +404,7 @@ public class CustomerUI implements CustomerUIInterface {
             }
 
             else if(option == 5){
+<<<<<<< HEAD
                 //VIEW RESVERVATIONS
                 System.out.println();
                 System.out.println("=========================================================================================");
@@ -423,6 +427,8 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println();
                 System.out.println("=========================================================================================");
                 System.out.println();
+=======
+>>>>>>> parent of d1ec8b5... Merge pull request #83 from ben145/UI_2.0
                 return 4;
             }
             System.out.println();

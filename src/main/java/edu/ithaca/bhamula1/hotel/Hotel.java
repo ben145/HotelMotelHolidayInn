@@ -523,6 +523,7 @@ public class Hotel implements HotelInterface {
         return reservations;
     }
 
+<<<<<<< HEAD
     public List<Reservation> getCustomerReservations(CustomerInterface customer){
         Iterator<Reservation> itr = this.reservations.iterator();
         List<Reservation> myRes = new ArrayList<>();
@@ -568,6 +569,8 @@ public class Hotel implements HotelInterface {
             }
         }
     }
+=======
+>>>>>>> parent of d1ec8b5... Merge pull request #83 from ben145/UI_2.0
 
     /**
      * loads data stored in c.txt for storing customer list on Hotel instantiation
