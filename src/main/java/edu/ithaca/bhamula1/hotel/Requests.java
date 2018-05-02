@@ -179,71 +179,37 @@ public class Requests implements RequestsInterface{
             }
             reqs.clear();
         //second request
-            for(Inventory item: Hotel.inventory) {
-                if(item.getItem() == "Pillow"){
                     reqs.add("Pillow");
                     req = new RoomService("Bring every pillow you have", 0, 1, reqs);
                     requests.add(req);
                     reqs.clear();
-                }
-            }
         //third
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
                     reqs.add("Towels");
                     req = new RoomService("Fresh Towels", 0, 1, reqs);
                     requests.add(req);
                     reqs.clear();
-                }
-            }
         //and so fo(u)rth
-            for(Inventory item : Hotel.inventory) {
-                if (item.getItem() == "Wrench") {
                     reqs.add("Wrench");
                     req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
                     requests.add(req);
                     reqs.clear();
-                }
-            }
         //and this one
-            numReqs = 0;
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Gin") {
-                    reqs.add("Gin");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Rum") {
-                    reqs.add("Rum");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tequila") {
-                    reqs.add("Tequila");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Vodka") {
-                    reqs.add("Vodka");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Whiskey") {
-                    reqs.add("Whiskey");numReqs++; }
-            }
-            if(numReqs > 1) {
-                req = new RoomService("Refill minibar", 35.56, numReqs, reqs);
-                requests.add(req);
-            }
+            reqs.add("Gin");
+            reqs.add("Rum");
+            reqs.add("Tequila");
+            reqs.add("Vodka");
+            reqs.add("Whiskey");
+            req = new RoomService("Refill minibar", 35.56,5, reqs);
+            requests.add(req);
             reqs.clear();
 	    //can't forget that
-            for(Inventory item : Hotel.inventory){
-                if(item.getItem() == "Don Felder") {
-                    reqs.add("Don Felder");
-                    reqs.add("Don Henley");
-                    reqs.add("Glenn Frey");
-                    reqs.add("Joe Walsh");
-                    reqs.add("Randy Meisner");
-                    req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'", 6.66, 5, reqs);
-                    requests.add(req);
-                }
-            }
+            reqs.add("Don Felder");
+            reqs.add("Don Henley");
+            reqs.add("Glenn Frey");
+            reqs.add("Joe Walsh");
+            reqs.add("Randy Meisner");
+            req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'", 6.66, 5, reqs);
+            requests.add(req);
             reqs.clear();
     }
 
@@ -255,7 +221,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to add a request to they system
-    public void addRequest(String employeeId){
+    public void addRequest(){
         //check authorization
         //request name
             System.out.println("Enter request to add: ");
@@ -279,7 +245,7 @@ public class Requests implements RequestsInterface{
     }
 
     //allows authorized staff to remove a request to the system
-    public void removeRequest(String employeeId){
+    public void removeRequest(){
     	//check authorization
 	
         //remove requests
@@ -299,14 +265,23 @@ public class Requests implements RequestsInterface{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         try {
-            //compensating for 0
             int inputInt = (Integer.parseInt(input));
             if(inputInt>0&&inputInt<requests.size()) {
+                //compensating for 0
                 input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
 
                 System.out.println("Your request has been accepted and will be fulfilled as soon as possible");
+                if(requests.get(inputInt-1).getNumRequirements() > 0){
+                    for(int i=0;i<requests.get(inputInt-1).getNumRequirements(); i++){
+                        for(int j=0;j<Hotel.inventory.size();j++){
+                            if(Hotel.inventory.get(i).getItem() == requests.get(inputInt-1).getRequirements().get(i)){
+                                Hotel.inventory.get(i).setQuantity(Hotel.inventory.get(i).getQuantity() - 1);
+                            }
+                        }
+                    }
+                }
                 return input + "," + requests.get(inputInt-1).getAssociatedPrice();
             }
             else{
