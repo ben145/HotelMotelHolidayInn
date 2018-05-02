@@ -1,5 +1,6 @@
 A Phone Book Somehow,100
 Bedbug Spray,49
+Cucumber,400
 Don Felder,1
 Don Henley,1
 The Finest Frenched Fries,3300
