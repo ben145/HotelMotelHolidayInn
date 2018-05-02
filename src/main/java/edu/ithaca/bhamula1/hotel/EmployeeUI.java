@@ -58,7 +58,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
                 System.out.println("\n@>--->---- Employee Menu Page ----<---<@");
 
                 Scanner scan = new Scanner(System.in);
-                System.out.print("\nWhat would you like to do, "+employee.getE_FirstName()+"?\n\n\t> Please select a menu number 1-4 below <\n\n\t1) View Open Customer Requests\n" +
+                System.out.print("\nWhat would you like to do, "+employee.getE_FirstName()+"?\n\n\t> Please select a menu number 1-7 below <\n\n\t1) View Open Customer Requests\n" +
                         "\t2) Select Customer Request\n" +
                         "\t3) Complete Customer Request\n" +
                         "\t4) Add New Request to Hotel Repertoire\n" +
