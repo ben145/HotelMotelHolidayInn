@@ -18,7 +18,7 @@ public class Hotel implements HotelInterface {
     int numberOfRooms =0;
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
-    private List<EmployeeIMPL> employees;
+    public static List<EmployeeIMPL> employees;
     public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
