@@ -5,6 +5,7 @@ import java.util.*;
 
 public abstract class Main {
 
+    /*
     public static void main(String[] args) {
         HotelInterface hotel = createHotel();
         mainScreen(hotel);
@@ -84,7 +85,7 @@ public abstract class Main {
                     }
 
                     if(cardOrCash ==1){
-                        hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CARD);
+                        hotel.getReservation(customer, rmNum,).setPaymentType(Reservation.PaymentType.CARD);
                     }else{
                         hotel.getReservation(customer, rmNum).setPaymentType(Reservation.PaymentType.CASH);
                     }
@@ -181,7 +182,7 @@ public abstract class Main {
 
 
     }
-
+*/
 
 
 
@@ -191,21 +192,22 @@ public abstract class Main {
 
     public static HotelInterface createHotel(){
         HotelInterface hotel = new Hotel();
-        hotel.setNumberOfRooms(5);
+//        hotel.setNumberOfRooms(5);
+//
+//        hotel.addRoom(2, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(1, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(4, true, 100,2, "double", "mini bar");
+//        hotel.addRoom(3, false, 100,2, "double", "mini bar");
+        //hotel.addRoom(3, false, 100,2, "double", "mini bar");
 
-        hotel.addRoom(2, true, 100,2, "double", "mini bar");
-        hotel.addRoom(1, true, 100,2, "double", "mini bar");
-        hotel.addRoom(4, true, 100,2, "double", "mini bar");
-        hotel.addRoom(3, false, 100,2, "double", "mini bar");
-
-        hotel.createAccount("Brad","Keith");
+       // hotel.createAccount("Brad","Keith");
 //        System.out.println(hotel.getCustomer("Brad", "Keith").getId());
 
 
         return hotel;
     }
 
-
+/*
     public static void checkedIn(CustomerInterface customer, HotelInterface hotel){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome! We hope you enjoy your stay.");
@@ -324,7 +326,7 @@ public abstract class Main {
                  */
 
                 //onceLoggedIn(hotel.getCustomer("den", null), hotel);
-
+/*
             } else if (firstOption == 3) {
                 System.out.println("View Rooms ");
                 System.out.println(hotel.viewOrderedRooms(false));
@@ -340,7 +342,7 @@ public abstract class Main {
         }
 
     }
-
+*/
 
     /**
      *
