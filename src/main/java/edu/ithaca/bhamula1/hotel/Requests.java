@@ -144,55 +144,31 @@ public class Requests implements RequestsInterface{
         RoomService req;
         //first request
             ArrayList<String> reqs = new ArrayList<>();
-            int numReqs = 0;
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Scratchy Toilet Paper") {
-                    reqs.add("Scratchy Toilet Paper");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Sheet Set") {
-                    reqs.add("Sheet Set");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Small Shampoo") {
-                    reqs.add("Small Shampoo");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Soap") {
-                    reqs.add("Soap");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tiny Conditioner") {
-                    reqs.add("Tiny Conditioner");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
-                    reqs.add("Towels");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Washcloths") {
-                    reqs.add("Washcloths");numReqs++; }
-            }
-            if(numReqs > 2) {
-                req = new RoomService("Room service", 0, numReqs, reqs);
-                requests.add(req);
-            }
+            reqs.add("Scratchy Toilet Paper");
+            reqs.add("Sheet Set");
+            reqs.add("Small Shampoo");
+            reqs.add("Soap");
+            reqs.add("Tiny Conditioner");
+            reqs.add("Towels");
+            reqs.add("Washcloths");
+            req = new RoomService("Room service", 0, 7, reqs);
+            requests.add(req);
             reqs.clear();
         //second request
-                    reqs.add("Pillow");
-                    req = new RoomService("Bring every pillow you have", 0, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
+            reqs.add("Pillow");
+            req = new RoomService("Bring every pillow you have", 0, 1, reqs);
+            requests.add(req);
+            reqs.clear();
         //third
-                    reqs.add("Towels");
-                    req = new RoomService("Fresh Towels", 0, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
+            reqs.add("Towels");
+            req = new RoomService("Fresh Towels", 0, 1, reqs);
+            requests.add(req);
+            reqs.clear();
         //and so fo(u)rth
-                    reqs.add("Wrench");
-                    req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
+            reqs.add("Wrench");
+            req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
+            requests.add(req);
+            reqs.clear();
         //and this one
             reqs.add("Gin");
             reqs.add("Rum");
