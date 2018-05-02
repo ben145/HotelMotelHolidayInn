@@ -462,7 +462,7 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("Make a Request");
                 System.out.println("=========================================================================================");
                 System.out.println();
-                res.viewAvailableRequests();
+                //res.viewAvailableRequests();
 //                System.out.println("Do you wish to make a request?");
 //                char yOrN = 1;
 //                while(yOrN==1){
