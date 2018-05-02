@@ -3,7 +3,7 @@ package edu.ithaca.bhamula1.hotel;
 import java.util.*;
 
 /**
- *
+ * 
  */
 public interface RoomInterface {
 
@@ -55,4 +55,4 @@ public interface RoomInterface {
 
     String printDiscountedPrices();
 
-}
+    }

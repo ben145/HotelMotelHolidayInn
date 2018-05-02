@@ -14,7 +14,7 @@ public interface HotelInterface {
 
     void addTestRoom(int roomNumber);
 
-    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenities, boolean checkIn);
+    void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn);
 
     void setNumberOfRooms(int numberOfRooms);
 
@@ -80,13 +80,13 @@ public interface HotelInterface {
     /**
      * saves data to reservation_data.txt as updates occur so reservation data can be rebuilt when hotel is instantiated
      * @author - DMF
-    */
+     */
     void saveReservationData();
 
     /**
      * loads data stored in reservation_data.txt to restore reservation data when hotel is instantiated
      * @author - DMF
-    */
+     */
     void loadReservationData();
 
     void doYouHearWhatIHear();
