@@ -179,17 +179,17 @@ public class Requests implements RequestsInterface{
             }
             reqs.clear();
         //second request
-                    reqs.add("Pillow");
-                    req = new RoomService("Bring every pillow you have", 0, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
+            reqs.add("Pillow");
+            req = new RoomService("Bring every pillow you have", 0, 1, reqs);
+            requests.add(req);
+            reqs.clear();
         //third
                     reqs.add("Towels");
                     req = new RoomService("Fresh Towels", 0, 1, reqs);
                     requests.add(req);
                     reqs.clear();
         //and so fo(u)rth
-                    reqs.add("Wrench");
+            reqs.add("Wrench");
                     req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
                     requests.add(req);
                     reqs.clear();
