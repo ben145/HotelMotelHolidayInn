@@ -89,6 +89,10 @@ public interface HotelInterface {
     */
     void loadReservationData();
 
-    void doYouHearWhatIHear();
+    /**
+     * brings together the experience
+     * @param in
+     */
+    void doYouHearWhatIHear(String in);
 
     }

@@ -620,7 +620,7 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
-        doYouHearWhatIHear();
+        doYouHearWhatIHear("src/main/resources/hotel_greeting.wav");
 
         try {
             InputStream file = this.getClass().getResourceAsStream("/rooms.txt");
@@ -723,12 +723,12 @@ public class Hotel implements HotelInterface {
         }
     }
 
-    public void doYouHearWhatIHear(){
+    public void doYouHearWhatIHear(String in){
 
         try
         {
             Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/hotel_greeting.wav")));
+            clip.open(AudioSystem.getAudioInputStream(new File(in)));
             clip.start();
             while (!clip.isRunning())
                 Thread.sleep(10);
