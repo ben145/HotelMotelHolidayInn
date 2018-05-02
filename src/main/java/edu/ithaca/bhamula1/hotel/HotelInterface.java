@@ -62,13 +62,8 @@ public interface HotelInterface {
     public Reservation getReservation(CustomerInterface customer, int roomNumber, Calendar checkInDate);
     public List<Reservation> getCustomerReservations(CustomerInterface customer);
 
-<<<<<<< HEAD
     void saveCustList();
     void loadCustList();
-=======
-        public Reservation removeReservation(CustomerInterface customer, int roomNumber);
-        public Reservation getReservation(CustomerInterface customer, int roomNumber);
->>>>>>> parent of d1ec8b5... Merge pull request #83 from ben145/UI_2.0
 
     void saveRooms();
     void loadRooms();
