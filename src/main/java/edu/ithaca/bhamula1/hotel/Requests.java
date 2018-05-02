@@ -175,7 +175,7 @@ public class Requests implements RequestsInterface{
             reqs.add("Tequila");
             reqs.add("Vodka");
             reqs.add("Whiskey");
-            req = new RoomService("Refill minibar", 35.56,5, reqs);
+            req = new RoomService("Refill minibar", 35.56, 5, reqs);
             requests.add(req);
             reqs.clear();
 	    //can't forget that
@@ -241,9 +241,9 @@ public class Requests implements RequestsInterface{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         try {
+            //compensating for 0
             int inputInt = (Integer.parseInt(input));
             if(inputInt>0&&inputInt<requests.size()) {
-                //compensating for 0
                 input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);

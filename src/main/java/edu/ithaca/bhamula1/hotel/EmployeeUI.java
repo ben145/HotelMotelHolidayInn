@@ -61,10 +61,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
                 System.out.print("\nWhat would you like to do, "+employee.getE_FirstName()+"?\n\n\t> Please select a menu number 1-4 below <\n\n\t1) View Open Customer Requests\n" +
                         "\t2) Select Customer Request\n" +
                         "\t3) Complete Customer Request\n" +
-                        "\t4) Add New Request to Hotel Repertoire\n" +
-                        "\t5) Remove Request Hotel Repertoire\n" +
-                        "\t6) View Hotel Inventory\n" +
-                        "\t7) LogOut\n"+"\nEnter Number Here -> ");
+                        "\t4) LogOut\n"+"\nEnter Number Here -> ");
                 int option = scan.nextInt();
                 if(option == 1){
                     System.out.println("\nPlease see open Customer Requests below:");
@@ -76,16 +73,7 @@ public class EmployeeUI implements EmployeeUI_Interface{
 
                 }else if(option == 3){
                     System.out.println("\nMark customer request Complete in option 3");
-                }
-                else if(option == 4){
-                    requests.addRequest();
-                }
-                else if(option == 5) {
-                    requests.removeRequest();
-                }
-                else if(option == 6){
-                    Hotel.viewInventory();
-                }else if(option==7){
+                }else if(option==4){
                     closeUI();
                 }
 
@@ -188,6 +176,10 @@ public class EmployeeUI implements EmployeeUI_Interface{
     @Override
     public void completeRequest() {
 
+    }
+
+    public void viewHotelInventory(){
+        viewInventory();
     }
 
     /**

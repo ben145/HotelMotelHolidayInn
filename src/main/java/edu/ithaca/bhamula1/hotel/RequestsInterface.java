@@ -23,10 +23,10 @@ public interface RequestsInterface {
     void viewRequests();
 
     //employees can add possibly requests to the system
-    void addRequest();
+    void addRequest(String employeeId);
 
     //employees can remove a possible request from the system
-    void removeRequest();
+    void removeRequest(String employeeId);
 
     //a customer checked in to a room can make a request
     String makeRequest(int roomNumber);
