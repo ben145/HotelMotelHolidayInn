@@ -1,5 +1,9 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import edu.ithaca.bhamula1.hotel.Hotel;
@@ -141,76 +145,33 @@ public class Requests implements RequestsInterface{
 
     //some requests any guest can make
     public void loadRecs(){
-        RoomService req;
+        RoomService requestOption;
         //first request
-            ArrayList<String> reqs = new ArrayList<>();
-            int numReqs = 0;
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Scratchy Toilet Paper") {
-                    reqs.add("Scratchy Toilet Paper");numReqs++; }
+            ArrayList<String> requirements = new ArrayList<>();
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/demands.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(",");
+                int weSureUseThisNumberABunch = Integer.parseInt(sArr[2]);
+                if(weSureUseThisNumberABunch == 0){
+                    requestOption = new RoomService(sArr[0],Double.parseDouble(sArr[1]),weSureUseThisNumberABunch);
+                }
+                else{
+                    for(int i=0; i< weSureUseThisNumberABunch; i++){
+                        requirements.add(sArr[i+3]);
+                    }
+                    requestOption = new RoomService(sArr[0],Double.parseDouble(sArr[1]),weSureUseThisNumberABunch, requirements);
+                }
+
+                requests.add(requestOption);
             }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Sheet Set") {
-                    reqs.add("Sheet Set");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Small Shampoo") {
-                    reqs.add("Small Shampoo");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Soap") {
-                    reqs.add("Soap");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tiny Conditioner") {
-                    reqs.add("Tiny Conditioner");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
-                    reqs.add("Towels");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Washcloths") {
-                    reqs.add("Washcloths");numReqs++; }
-            }
-            if(numReqs > 2) {
-                req = new RoomService("Room service", 0, numReqs, reqs);
-                requests.add(req);
-            }
-            reqs.clear();
-        //second request
-            reqs.add("Pillow");
-            req = new RoomService("Bring every pillow you have", 0, 1, reqs);
-            requests.add(req);
-            reqs.clear();
-        //third
-                    reqs.add("Towels");
-                    req = new RoomService("Fresh Towels", 0, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
-        //and so fo(u)rth
-            reqs.add("Wrench");
-                    req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
-        //and this one
-            reqs.add("Gin");
-            reqs.add("Rum");
-            reqs.add("Tequila");
-            reqs.add("Vodka");
-            reqs.add("Whiskey");
-            req = new RoomService("Refill minibar", 35.56,5, reqs);
-            requests.add(req);
-            reqs.clear();
-	    //can't forget that
-            reqs.add("Don Felder");
-            reqs.add("Don Henley");
-            reqs.add("Glenn Frey");
-            reqs.add("Joe Walsh");
-            reqs.add("Randy Meisner");
-            req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'", 6.66, 5, reqs);
-            requests.add(req);
-            reqs.clear();
+        }catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     //view the requests a customer can make
