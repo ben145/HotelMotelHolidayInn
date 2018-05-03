@@ -89,6 +89,6 @@ public interface HotelInterface {
     */
     void loadReservationData();
 
-    void doYouHearWhatIHear();
+    void doYouHearWhatIHear(String wav);
 
     }

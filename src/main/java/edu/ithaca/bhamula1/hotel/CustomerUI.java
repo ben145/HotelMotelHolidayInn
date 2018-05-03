@@ -444,8 +444,9 @@ public class CustomerUI implements CustomerUIInterface {
             System.out.println("1) View Requests");
             System.out.println("2) Make a Request");
             System.out.println("3) Checkout");
+            System.out.println("\n4) -Staff Login-\n");
             while(choice==0){
-                choice = checkChoiceInput(scan.nextLine(),1,3);
+                choice = checkChoiceInput(scan.nextLine(),1,4);
             }
             if(choice==1){
                 System.out.println();
@@ -479,7 +480,10 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println();
                 System.out.println("=========================================================================================");
                 System.out.println();
-            }else {
+            }else if(choice==4){
+                employeeLogScreen(hotel);
+
+            } else{
                 //checkout
                 c.setReturningCustomer(true);
                 c.setCheckedIn(false);

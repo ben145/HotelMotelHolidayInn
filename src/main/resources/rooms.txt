@@ -15,27 +15,27 @@ true;13;125.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower, fan;false
 true;14;125.0;2;double;mini-bar, toaster, toilet, towels, shower, fan;false
 true;15;125.0;2;double;mini-bar, toaster, toilet, towels, shower, seaside view;false
 true;16;125.0;1;queen;mini-bar, mini-fridge, toilet, towels, bath, dance-floor;false
-true;17;125.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower;false
+true;17;125.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower;true
 true;18;125.0;2;double;mini-bar, mini-fridge, porta-potty, towels, shower;false
 true;19;125.0;2;double;mini-bar, mini-fridge, toilet, towels, wet-knaps, air-conditioner;false
 true;20;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, baby-wipes;false
 true;21;130.0;1;queen;mini-bar, toaster, toilet, towels, baby-wipes, air-conditioner;false
 true;22;130.0;2;cot;mini-bar, mini-fridge, outhouse, towels, baby-wipes, air-conditioner;false
-true;23;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower, fan;false
+true;23;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower, fan;true
 true;24;130.0;2;cot;mini-bar, toaster, toilet, towels, shower, fan;false
 true;25;130.0;2;cot;mini-bar, toaster, toilet, towels, shower, seaside view;false
 true;26;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, bath, dance-floor;false
-true;27;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower;false
+true;27;130.0;1;queen;mini-bar, mini-fridge, toilet, towels, shower;true
 true;28;130.0;2;cot;mini-bar, mini-fridge, toilet, towels, shower;false
 true;29;130.0;2;cot;mini-bar, mini-fridge, toilet, towels, wet-knaps, air-conditioner;false
 true;30;130.0;1;king;mini-bar, mini-fridge, toilet, towels, faucet, sea-side view;false
 true;31;130.0;1;king;mini-bar, waffle iron, toilet, towels, faucet, air-conditioner;false
 true;32;130.0;2;pull-out couch;mini-bar, mini-fridge, toilet, towels, faucet, air-conditioner;false
 true;33;130.0;1;king;mini-bar, mini-fridge, toilet, towels, shower,  heater, sea-side view;false
-true;34;130.0;2;pull-out couch;mini-bar, waffle iron, toilet, towels, shower, heater;false
+true;34;130.0;2;pull-out couch;mini-bar, waffle iron, toilet, towels, shower, heater;true
 true;35;130.0;2;pull-out couch;mini-bar, waffle iron, toilet, towels, shower, sea-side view;false
 true;36;130.0;1;king;mini-bar, mini-fridge, toilet, towels, bath, dance-floor;false
-true;37;130.0;1;king;mini-bar, mini-fridge, toilet, towels, shower;false
+true;37;130.0;1;king;mini-bar, mini-fridge, toilet, towels, shower;true
 true;38;130.0;2;pull-out couch;mini-bar, mini-fridge, toilet, towels, shower;false
 true;39;130.0;2;pull-out couch;mini-bar, mini-fridge, toilet, towels, wet-knaps, air-conditioner;false
 true;40;135.0;3;king;mini-bar, mini-fridge, toilet, towels, faucet, sea-side view;false
@@ -61,7 +61,7 @@ true;59;145.0;1;bean-bag;mini-bar, cooler, toilet, towels, wet-knaps, air-condit
 true;60;150.0;3;queen;mini-bar, cooler, toilet, towels, faucet, seaside view;false
 true;61;150.0;3;king;mini-bar, waffle iron, toilet, towels, faucet, air-conditioner, city view;false
 true;62;150.0;1;pull-out couch;mini-bar, cooler, toilet, towels, faucet, air-conditioner;false
-true;63;150.0;3;king;mini-bar, cooler, toilet, towels, shower,  heater, seaside view;false
+true;63;150.0;3;king;mini-bar, cooler, toilet, towels, shower,  heater, seaside view;true
 true;64;150.0;1;pull-out couch;mini-bar, waffle iron, toilet, towels, shower, heater;false
 true;65;150.0;1;bean-bag;mini-bar, waffle iron, toilet, towels, shower, seaside view, police tape;false
 true;66;150.0;3;queen;mini-bar, cooler, toilet, towels, bath, dance-floor;false

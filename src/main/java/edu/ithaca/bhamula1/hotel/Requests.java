@@ -266,7 +266,7 @@ public class Requests implements RequestsInterface{
         String input = scanner.nextLine();
         try {
             int inputInt = (Integer.parseInt(input));
-            if(inputInt>0&&inputInt<requests.size()) {
+            if(inputInt>0&&inputInt<=requests.size()) {
                 //compensating for 0
                 input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);

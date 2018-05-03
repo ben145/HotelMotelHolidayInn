@@ -320,16 +320,9 @@ public class Hotel implements HotelInterface {
             BufferedReader br = new BufferedReader(read);
             String line;
             while((line = br.readLine())!= null) {
-                EmployeeIMPL empl = new EmployeeIMPL();
                 String [] sArr = line.split(",");
-                empl.setE_TitleNum(Integer.parseInt(sArr[0]));
-                empl.setE_Title(sArr[1]);
-                empl.setE_LastName(sArr[2]);
-                empl.setE_FirstName(sArr[3]);
-                empl.setE_LogID(sArr[4]);
-                empl.setE_PWD(sArr[5]);
-                empl.setE_Available(Boolean.parseBoolean(sArr[6]));
-                empl.setPositionVacant(Boolean.parseBoolean(sArr[7]));
+                EmployeeIMPL empl = new EmployeeIMPL(Integer.parseInt(sArr[0]),sArr[1], sArr[2],sArr[3],sArr[4], sArr[5],
+                        Boolean.parseBoolean(sArr[6]),Boolean.parseBoolean(sArr[7]), Boolean.parseBoolean(sArr[8]) );
                 employees.add(empl);
             }
 
@@ -628,7 +621,7 @@ public class Hotel implements HotelInterface {
     @Override
     public void loadRooms(){
         System.out.println("Loading........");
-        doYouHearWhatIHear();
+        doYouHearWhatIHear("src/main/resources/hotel_greeting.wav");
 
         try {
             InputStream file = this.getClass().getResourceAsStream("/rooms.txt");
@@ -734,12 +727,12 @@ public class Hotel implements HotelInterface {
         }
     }
 
-    public void doYouHearWhatIHear(){
+    public void doYouHearWhatIHear(String wav){
 
         try
         {
             Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/hotel_greeting.wav")));
+            clip.open(AudioSystem.getAudioInputStream(new File(wav)));
             clip.start();
             while (!clip.isRunning())
                 Thread.sleep(10);
