@@ -1,12 +1,12 @@
 package edu.ithaca.bhamula1.hotel;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import edu.ithaca.bhamula1.hotel.Hotel;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 class ActiveRequest{
     String request;
@@ -174,6 +174,41 @@ public class Requests implements RequestsInterface{
         }
     }
 
+/*
+this is where saveReqs() would go if i had the patience
+or not; what's up
+ */
+    public void saveReqs(){
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/demands.txt");
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            for(int i=0; i<requests.size(); i++){
+                RoomService req = requests.get(i);
+                String line;
+                int onceAgainBoysAndGerms = req.getNumRequirements();
+                if(onceAgainBoysAndGerms == 0) {
+                    line = req.getRequestName() + "," + req.getAssociatedPrice() + "," + onceAgainBoysAndGerms;
+                }
+                else{
+
+                    line = req.getRequestName() + "," + req.getAssociatedPrice() + "," + onceAgainBoysAndGerms;
+                    ArrayList reqsArr = req.getRequirements();
+                    for(int j=0; j<onceAgainBoysAndGerms; j++){
+                        line += ",";
+                        line += reqsArr.get(j);
+                    }
+                }
+                bw.write(line);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
     //view the requests a customer can make
     public void viewRequests(){
         for(int i=0; i<requests.size();i++){
@@ -195,23 +230,46 @@ public class Requests implements RequestsInterface{
             String input = scanner.nextLine();
             double price = Double.parseDouble(input);
         //request requirements
-//            System.out.println("Does request require inventory items? (y/n)");
-//            input = scanner.nextLine();
-//            int num = 0;
-//                if(input == "y"){
-//                    System.out.println("Enter number of Requirements: ");
-//                    input = scanner.nextLine();
-//                    num = Integer.parseInt(input);
-//                }
-        reqs.add("because it's needed");
-        int num = requests.size()+1;
-        RoomService newReq = new RoomService(req,price,num,reqs);
-        System.out.println(" in adding requests ");
+            System.out.println("Does request require inventory items? (y/n)");
+            input = scanner.nextLine();
+            int num = 0;
+                if(input == "y") {
+                    System.out.println("Enter number of Requirements: ");
+                    input = scanner.nextLine();
+                    num = Integer.parseInt(input);
+                }
+        RoomService newReq = new RoomService(req,price,num);
+        //adds to current list
         requests.add(newReq);
-        System.out.println(" in adding requests "+requests.size());
 
+        //reqs.add("because it's needed");
+        //int num = requests.size()+1;
+        //
+        //System.out.println(" in adding requests ");
+        //
+        //System.out.println(" in adding requests "+requests.size());
 
-
+        //adds to textfile
+        try(FileWriter fw = new FileWriter("./src/main/resources/demands.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+        {
+            String line;
+            if(num == 0) {
+                line = req + "," + price + "," + num;
+            }
+            else{
+                line = req + "," + price + "," + num;
+                ArrayList reqsArr = newReq.getRequirements();
+                for(int i=0; i<num; i++){
+                    line += ",";
+                    line += reqsArr.get(i);
+                }
+            }
+            out.println(line);
+        }catch (IOException e){
+            System.err.println(e);
+        }
         System.out.println("Request added to options list");
     }
 
@@ -231,7 +289,7 @@ public class Requests implements RequestsInterface{
 
     //allows a customer to make a request
     public String makeRequest(int roomNumber){
-        viewRequests();
+        doYouHearWhatIHear("src/main/resources/four_rooms_RoomService.wav");
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -330,5 +388,24 @@ public class Requests implements RequestsInterface{
             }
         }
         return false;
+    }
+
+    //i said i would take this function, and i have
+    public void doYouHearWhatIHear(String wav){
+        try
+        {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File(wav)));
+            clip.start();
+            while (!clip.isRunning())
+                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
+            clip.close();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace(System.out);
+        }
     }
 }
