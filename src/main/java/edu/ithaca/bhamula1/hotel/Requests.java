@@ -222,6 +222,8 @@ public class Requests implements RequestsInterface{
 
     //allows authorized staff to add a request to they system
     public void addRequest(){
+        ArrayList<String> reqs = new ArrayList<>();
+
         //check authorization
         //request name
             System.out.println("Enter request to add: ");
@@ -232,15 +234,23 @@ public class Requests implements RequestsInterface{
             String input = scanner.nextLine();
             double price = Double.parseDouble(input);
         //request requirements
-            System.out.println("Does request require inventory items? (y/n)");
-            input = scanner.nextLine();
-            int num = 0;
-                if(input == "y"){
-                    System.out.println("Enter number of Requirements: ");
-                    input = scanner.nextLine();
-                    num = Integer.parseInt(input);
-                }
-        RoomService newReq = new RoomService(req,price,num);
+//            System.out.println("Does request require inventory items? (y/n)");
+//            input = scanner.nextLine();
+//            int num = 0;
+//                if(input == "y"){
+//                    System.out.println("Enter number of Requirements: ");
+//                    input = scanner.nextLine();
+//                    num = Integer.parseInt(input);
+//                }
+        reqs.add("because it's needed");
+        int num = requests.size()+1;
+        RoomService newReq = new RoomService(req,price,num,reqs);
+        System.out.println(" in adding requests ");
+        requests.add(newReq);
+        System.out.println(" in adding requests "+requests.size());
+
+
+
         System.out.println("Request added to options list");
     }
 

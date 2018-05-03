@@ -744,7 +744,6 @@ public class Hotel implements HotelInterface {
         {
             exc.printStackTrace(System.out);
         }
-
     }
 
 }
