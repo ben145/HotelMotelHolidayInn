@@ -71,11 +71,24 @@ public class EmployeeUI implements EmployeeUI_Interface{
                     viewOpenRequests();
                     System.out.println("\n");
                 }else if(option == 2){
-                    System.out.println("\nPlease enter customer request number to complete below:\n");
-                    viewOpenRequests();
+                    if(!employee.getE_Available()){
+                        System.out.println("You must complete the current request assigned to you before you can help another customer\n");
+                        System.out.println("Please continue to work on the following request:\n");
+                        checkEmpReq();
+
+                    }else {
+                        System.out.println("\nPlease enter customer request number to work on below:\n");
+                        viewOpenRequests();
+                        takeRequests(scan.nextInt());
+                    }
 
                 }else if(option == 3){
-                    System.out.println("\nMark customer request Complete in option 3");
+                    if(checkEmpReq()){
+                        System.out.println("\nPlease enter customer request number you wish to complete below:\n");
+                        completeRequest(scan.nextInt());
+                    }else{
+                        System.out.println("\nYou currently are not assigned to any customer requests\n");
+                    }
                 }
                 else if(option == 4){
                     requests.addRequest();
@@ -181,12 +194,42 @@ public class EmployeeUI implements EmployeeUI_Interface{
     }
 
     @Override
-    public void takeRequests() {
+    public void takeRequests(int req) {
 
+        for(int ar = 0; ar < activeRequests.size(); ar++){
+            if(ar+1 == req){
+                activeRequests.get(ar).employeeId = employee.getE_LogID();
+                employee.setE_Available(false);
+            }
+        }
     }
 
     @Override
-    public void completeRequest() {
+    public boolean checkEmpReq(){
+        for(int ar = 0; ar < activeRequests.size(); ar++){
+            if(employee.getE_LogID() == activeRequests.get(ar).employeeId){
+                System.out.format("%-15s %15s %n","Your Assigned Request: " + (ar+1) , "~ Room Number: " + activeRequests.get(ar).roomNumber + "\t request:  " + activeRequests.get(ar).request);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    @Override
+    public void completeRequest(int req) {
+        for(int ar = 0; ar < activeRequests.size(); ar++){
+            if(ar+1 == req && activeRequests.get(ar).employeeId == employee.getE_LogID()){
+                System.out.format("%-15s %15s %n","Request: " + (ar+1) , "~ Room Number: " + activeRequests.get(ar).roomNumber + "\t request:  " + activeRequests.get(ar).request);
+                employee.setE_Available(true);
+                activeRequests.remove(ar);
+                System.out.println("Has been fulfilled");
+            }else{
+                System.out.println("You have entered an invalid request number, try this again, please.\n");
+            }
+        }
 
     }
 

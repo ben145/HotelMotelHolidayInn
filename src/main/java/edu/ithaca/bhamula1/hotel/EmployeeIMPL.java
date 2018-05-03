@@ -29,8 +29,8 @@ public class EmployeeIMPL implements Employee{
         this.e_LogID = null;
         this.e_PWD = null;
         this.e_LoggedIn = false;
-        this.e_Available = false;
-        this.positionVacant = true;
+        this.e_Available = true;
+        this.positionVacant = false;
     }
 
     /**

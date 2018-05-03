@@ -1,8 +1,12 @@
 package edu.ithaca.bhamula1.hotel;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import edu.ithaca.bhamula1.hotel.Hotel;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 class ActiveRequest{
     String request;
@@ -141,78 +145,70 @@ public class Requests implements RequestsInterface{
 
     //some requests any guest can make
     public void loadRecs(){
-        RoomService req;
+        RoomService requestOption;
         //first request
-            ArrayList<String> reqs = new ArrayList<>();
-            int numReqs = 0;
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Scratchy Toilet Paper") {
-                    reqs.add("Scratchy Toilet Paper");numReqs++; }
+            ArrayList<String> requirements = new ArrayList<>();
+        try {
+            InputStream file = this.getClass().getResourceAsStream("/demands.txt");
+            InputStreamReader read = new InputStreamReader(file);
+            BufferedReader br = new BufferedReader(read);
+            String line;
+
+            while((line = br.readLine())!= null) {
+                String [] sArr = line.split(",");
+                int weSureUseThisNumberABunch = Integer.parseInt(sArr[2]);
+                if(weSureUseThisNumberABunch == 0){
+                    requestOption = new RoomService(sArr[0],Double.parseDouble(sArr[1]),weSureUseThisNumberABunch);
+                }
+                else{
+                    for(int i=0; i< weSureUseThisNumberABunch; i++){
+                        requirements.add(sArr[i+3]);
+                    }
+                    requestOption = new RoomService(sArr[0],Double.parseDouble(sArr[1]),weSureUseThisNumberABunch, requirements);
+                }
+
+                requests.add(requestOption);
             }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Sheet Set") {
-                    reqs.add("Sheet Set");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Small Shampoo") {
-                    reqs.add("Small Shampoo");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Soap") {
-                    reqs.add("Soap");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Tiny Conditioner") {
-                    reqs.add("Tiny Conditioner");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Towels") {
-                    reqs.add("Towels");numReqs++; }
-            }
-            for(Inventory item: Hotel.inventory) {
-                if (item.getItem() == "Washcloths") {
-                    reqs.add("Washcloths");numReqs++; }
-            }
-            if(numReqs > 2) {
-                req = new RoomService("Room service", 0, numReqs, reqs);
-                requests.add(req);
-            }
-            reqs.clear();
-        //second request
-            reqs.add("Pillow");
-            req = new RoomService("Bring every pillow you have", 0, 1, reqs);
-            requests.add(req);
-            reqs.clear();
-        //third
-                    reqs.add("Towels");
-                    req = new RoomService("Fresh Towels", 0, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
-        //and so fo(u)rth
-            reqs.add("Wrench");
-                    req = new RoomService("Room maintenance (I have broken something in this room)", 12.30, 1, reqs);
-                    requests.add(req);
-                    reqs.clear();
-        //and this one
-            reqs.add("Gin");
-            reqs.add("Rum");
-            reqs.add("Tequila");
-            reqs.add("Vodka");
-            reqs.add("Whiskey");
-            req = new RoomService("Refill minibar", 35.56,5, reqs);
-            requests.add(req);
-            reqs.clear();
-	    //can't forget that
-            reqs.add("Don Felder");
-            reqs.add("Don Henley");
-            reqs.add("Glenn Frey");
-            reqs.add("Joe Walsh");
-            reqs.add("Randy Meisner");
-            req = new RoomService("I would like to be serenaded with The Eagles' magnum opus 'Hotel California'", 6.66, 5, reqs);
-            requests.add(req);
-            reqs.clear();
+        }catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
+/*
+this is where saveReqs() would go if i had the patience
+or not; what's up
+ */
+    public void saveReqs(){
+        try {
+            OutputStream file = new FileOutputStream("./src/main/resources/demands.txt");
+            OutputStreamWriter write = new OutputStreamWriter(file);
+            BufferedWriter bw = new BufferedWriter(write);
+
+            for(int i=0; i<requests.size(); i++){
+                RoomService req = requests.get(i);
+                String line;
+                int onceAgainBoysAndGerms = req.getNumRequirements();
+                if(onceAgainBoysAndGerms == 0) {
+                    line = req.getRequestName() + "," + req.getAssociatedPrice() + "," + onceAgainBoysAndGerms;
+                }
+                else{
+
+                    line = req.getRequestName() + "," + req.getAssociatedPrice() + "," + onceAgainBoysAndGerms;
+                    ArrayList reqsArr = req.getRequirements();
+                    for(int j=0; j<onceAgainBoysAndGerms; j++){
+                        line += ",";
+                        line += reqsArr.get(j);
+                    }
+                }
+                bw.write(line);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        }catch (IOException e){
+            System.err.println(e);
+        }
+    }
     //view the requests a customer can make
     public void viewRequests(){
         for(int i=0; i<requests.size();i++){
@@ -222,6 +218,8 @@ public class Requests implements RequestsInterface{
 
     //allows authorized staff to add a request to they system
     public void addRequest(){
+        ArrayList<String> reqs = new ArrayList<>();
+
         //check authorization
         //request name
             System.out.println("Enter request to add: ");
@@ -235,12 +233,43 @@ public class Requests implements RequestsInterface{
             System.out.println("Does request require inventory items? (y/n)");
             input = scanner.nextLine();
             int num = 0;
-                if(input == "y"){
+                if(input == "y") {
                     System.out.println("Enter number of Requirements: ");
                     input = scanner.nextLine();
                     num = Integer.parseInt(input);
                 }
         RoomService newReq = new RoomService(req,price,num);
+        //adds to current list
+        requests.add(newReq);
+
+        //reqs.add("because it's needed");
+        //int num = requests.size()+1;
+        //
+        //System.out.println(" in adding requests ");
+        //
+        //System.out.println(" in adding requests "+requests.size());
+
+        //adds to textfile
+        try(FileWriter fw = new FileWriter("./src/main/resources/demands.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+        {
+            String line;
+            if(num == 0) {
+                line = req + "," + price + "," + num;
+            }
+            else{
+                line = req + "," + price + "," + num;
+                ArrayList reqsArr = newReq.getRequirements();
+                for(int i=0; i<num; i++){
+                    line += ",";
+                    line += reqsArr.get(i);
+                }
+            }
+            out.println(line);
+        }catch (IOException e){
+            System.err.println(e);
+        }
         System.out.println("Request added to options list");
     }
 
@@ -260,13 +289,13 @@ public class Requests implements RequestsInterface{
 
     //allows a customer to make a request
     public String makeRequest(int roomNumber){
-        viewRequests();
+        doYouHearWhatIHear("src/main/resources/four_rooms_RoomService.wav");
         System.out.println("Enter request number: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         try {
             int inputInt = (Integer.parseInt(input));
-            if(inputInt>0&&inputInt<requests.size()) {
+            if(inputInt>0&&inputInt<=requests.size()) {
                 //compensating for 0
                 input = requests.get(inputInt-1).getRequestName();
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
@@ -359,5 +388,24 @@ public class Requests implements RequestsInterface{
             }
         }
         return false;
+    }
+
+    //i said i would take this function, and i have
+    public void doYouHearWhatIHear(String wav){
+        try
+        {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File(wav)));
+            clip.start();
+            while (!clip.isRunning())
+                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
+            clip.close();
+        }
+        catch (Exception exc)
+        {
+            exc.printStackTrace(System.out);
+        }
     }
 }
