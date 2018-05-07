@@ -13,5 +13,5 @@
 7,Spa Attendant,Hamula,Benjamin,bhamula1,Password4321,false,true,false
 8,Reservations Agent,Stansfield,Sharon,sstansfield,Password4321,false,true,false
 8,Reservations Agent,Junker,Eric,ejunker,Password4321,false,true,false
-9,Tech Support,Keith,Bradley,bkeith,Password4321,false,true,false
+9,Tech Support,Keith,Bradley,bkeith,Password4321,true,true,false
 9,Tech Support,Kimmich Mitchell,Mia,ekimmichmitchell,Password4321,false,true,false
