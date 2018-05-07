@@ -11,15 +11,15 @@ import java.util.*;
 public class Room implements RoomInterface {
 
     //should maybe get rid of this?
-    boolean available;
-    int roomNumber;
-    double price;
-    int bedNum;
-    String bedType;
-    String amenities; // such as view?
-    boolean checkedIn;
+    private boolean available;
+    private int roomNumber;
+    private double price;
+    private int bedNum;
+    private String bedType;
+    private String amenities; // such as view?
+    private boolean checkedIn;
     String reservationName;
-    List<Calendar> notAvailTheseDays;
+    private List<Calendar> notAvailTheseDays;
 
     public Room(boolean test, boolean avail, int roomNum, double price, int bedNum, String bedType, String amenities, boolean checkedIn){
         this.available = avail;
@@ -229,7 +229,7 @@ public class Room implements RoomInterface {
 
     public String toString(){
         return " Room number: " + this.roomNumber + "\n\tType: "+ this.bedNum + " " + this.bedType+" bed(s)\n\tAmenities: " + this.amenities +
-                "\n\tPrice: $"+ this.price+"\n";
+                "\n\tPrice: $"+ this.price+"0\n";
     }
 
     public String printDiscountedPrices(){
@@ -268,10 +268,8 @@ public class Room implements RoomInterface {
     public void printNotAvailDates(){
         System.out.println("This room is reserved for the following dates: ");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
-        for(int na = 0; na < notAvailTheseDays.size(); na++){
-            System.out.println( dateFormat.format(notAvailTheseDays.get(na).getTime()));
-
-        }
+        for (int na = 0; na < notAvailTheseDays.size(); na++)
+            System.out.println(dateFormat.format(notAvailTheseDays.get(na).getTime()));
     }
 
 }
