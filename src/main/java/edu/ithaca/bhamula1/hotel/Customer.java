@@ -55,7 +55,7 @@ public class Customer implements CustomerInterface {
 
     /**
      * Alternate Customer constructor
-     * @param fname     Customer's first name
+     * @param fName     Customer's first name
      * @param lName     Customer's last name
      * @param room      Number of room customer is staying in
      * @param ckedIn    True or false, if customer is checked in or not
@@ -63,9 +63,9 @@ public class Customer implements CustomerInterface {
      * @param rCust     True or false, if customer has stayed at this hotel or not
      * @param p         Customer's password
      */
-    public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust, String p){
-        this.id = fname+lName;
-        this.fName = fname;
+    public Customer (String fName, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust, String p){
+        this.id = fName+lName;
+        this.fName = fName;
         this.lName = lName;
         this.room = room;
         this.checkedIn = ckedIn;
@@ -76,8 +76,8 @@ public class Customer implements CustomerInterface {
 
     public String makeName(String firstName, String lastName) {
 
-        fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length()-1);
-        lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length()-1);
+        fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length());
+        lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length());
         name = firstName + " " + lastName;
         return (fName +" "+ lName);
     }

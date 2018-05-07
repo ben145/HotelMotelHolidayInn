@@ -68,7 +68,7 @@ public class CustomerUI implements CustomerUIInterface {
     public int signIn(String firstName, String ID, String pass){
         System.out.println();
         if (hotel.getCustomer(ID) == null)
-            System.out.println("\nOops! Incorrect account information was entered for sign in\nPlese review the menu and try again =o)\n");
+            System.out.println("\nOops! Incorrect account information was entered for sign in\nPlease review the menu and try again =o)\n");
         else {
             CustomerInterface cIn = hotel.logIn(firstName,ID,pass);
             if(cIn != null) {
@@ -95,10 +95,10 @@ public class CustomerUI implements CustomerUIInterface {
             System.out.println("=========================================================================================");
             System.out.println();
             System.out.println("Would you like to:\n" +
-                    "1) sign in\n" +
-                    "2) sign up\n" +
-                    "3) view rooms\n" +
-                    "4) quit\n" +
+                    "1) Sign in\n" +
+                    "2) Sign up\n" +
+                    "3) View rooms\n" +
+                    "4) Quit\n" +
                     "5) -Staff Login-\n\n");
 
             // checkChoiceInput returns 0 if not within bounds (1 and 5) or if a non-numeric character
@@ -112,13 +112,13 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("Sign In");
                 System.out.println("=========================================================================================");
                 System.out.println();
-                System.out.println("Type Your First Name: ");
+                System.out.println("Type your First Name: ");
                 String firstName = scan.nextLine();
 
-                System.out.println("Type Your User ID: ");
+                System.out.println("Type your User ID: ");
                 String id = scan.nextLine();
 
-                System.out.println("Type Your User Password: ");
+                System.out.println("Type your User Password: ");
                 String p = scan.nextLine();
 
                 firstOption = signIn(firstName, id, p);
@@ -129,9 +129,9 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("\n=========================================================================================");
                 System.out.println("Sign Up");
                 System.out.println("=========================================================================================\n");
-                System.out.println("Type Your First Name: ");
+                System.out.println("Type your First Name: ");
                 String firstName = scan.nextLine();
-                System.out.println("Type Your Last Name: ");
+                System.out.println("Type your Last Name: ");
                 String lastName = scan.nextLine();
                 String id = hotel.createAccount(firstName, lastName);
 
@@ -411,7 +411,7 @@ public class CustomerUI implements CustomerUIInterface {
             if(choice==1){
                 System.out.println();
                 System.out.println("=========================================================================================");
-                System.out.println("Avaiable Requests");
+                System.out.println("Available Requests");
                 System.out.println("=========================================================================================");
                 System.out.println();
                 res.viewAvailableRequests();
