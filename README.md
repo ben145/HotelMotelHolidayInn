@@ -53,5 +53,9 @@ Sprint Three:
 
 <b>DevTeam Sprint goal #3</b>:
   <span title="look who briefly googled markup">Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)</span>
+  <b>Sprint 2 Review</b>:<br>
+    https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
+</blockquote>
+
 
 </blockquote>
