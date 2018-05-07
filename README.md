@@ -3,6 +3,8 @@ COMP-345 Project
 
 ![build status](https://circleci.com/gh/ben145/HotelMotelHolidayInn.png?circle-token=circle-token "Master Build Status")
 
+Quick Start Guide:<br>https://docs.google.com/document/d/1Lfv8hYzwkaLzMyGn8USICxh-vA7HTB_7AwXe3d3KeDA/edit?usp=sharing
+
 Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 
 Client Narratives and Scenarios:
