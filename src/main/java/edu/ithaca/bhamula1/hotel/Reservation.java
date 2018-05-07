@@ -12,17 +12,18 @@ public class Reservation {
     CustomerInterface customer;
     RoomInterface room;
     //how many nights they are going to stay
-    int nightDurration;
-    Calendar checkInDate;
-    String cardPayment;
-    PaymentType paymentType;
-    Map<String, Double> paymentTracker;
+    private int nightDuration;
+    private Calendar checkInDate;
+    private String cardPayment;
+    private PaymentType paymentType;
+    private Map<String, Double> paymentTracker;
 
+    public final static double PRICE_OFF = 0.1;
 
     public Reservation(){
         this.customer = new Customer();
         this.room = new Room();
-        this.nightDurration = -1;
+        this.nightDuration = -1;
         this.checkInDate = new GregorianCalendar(1,Calendar.JANUARY,1);
         this.cardPayment = "";
         this.paymentType = PaymentType.NODATA;
@@ -30,11 +31,11 @@ public class Reservation {
     }
 
 
-    public Reservation (CustomerInterface customer, RoomInterface room, Calendar checkInDate, int nightDurration, String cardPayment){
+    public Reservation (CustomerInterface customer, RoomInterface room, Calendar checkInDate, int nightDuration, String cardPayment){
         this();
         this.customer = customer;
         this.room = room;
-        this.nightDurration = nightDurration;
+        this.nightDuration = nightDuration;
         this.checkInDate = checkInDate;
         if(cardPayment.length()>16 || cardPayment.length()<14){
             this.cardPayment = "";
@@ -49,10 +50,10 @@ public class Reservation {
         }
 
         if(returning){
-            paymentTracker.put("Room Price (for "+ nightDurration + " nights)",  (room.getRoomPrice()- (room.getRoomPrice() * 0.1)) * nightDurration);
+            paymentTracker.put("Room Price (for "+ nightDuration + " nights)",  (room.getRoomPrice()- (room.getRoomPrice() * PRICE_OFF)) * nightDuration);
 
         }else{
-            paymentTracker.put("Room Price (for "+ nightDurration + " nights)", (room.getRoomPrice()*nightDurration));
+            paymentTracker.put("Room Price (for "+ nightDuration + " nights)", (room.getRoomPrice()*nightDuration));
 
         }
 
@@ -71,8 +72,8 @@ public class Reservation {
         return this.checkInDate;
     }
 
-    public int getNightDurration(){
-        return this.nightDurration;
+    public int getNightDuration(){
+        return this.nightDuration;
     }
 
     public String getCardPayment (){
@@ -107,7 +108,7 @@ public class Reservation {
     public String toString(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
 
-        return customer.getName() + " Room " + room.getRoomNumber() + " Check in: " + dateFormat.format(checkInDate.getTime()) + " Nights: " + nightDurration;
+        return customer.getName() + " Room " + room.getRoomNumber() + " Check in: " + dateFormat.format(checkInDate.getTime()) + " Nights: " + nightDuration;
     }
 
 

@@ -146,8 +146,7 @@ public class Requests implements RequestsInterface{
     //some requests any guest can make
     public void loadRecs(){
         RoomService requestOption;
-        //first request
-            ArrayList<String> requirements = new ArrayList<>();
+        ArrayList<String> requirements = new ArrayList<>();
         try {
             InputStream file = this.getClass().getResourceAsStream("/demands.txt");
             InputStreamReader read = new InputStreamReader(file);
@@ -222,22 +221,23 @@ or not; what's up
 
         //check authorization
         //request name
-            System.out.println("Enter request to add: ");
-            Scanner scanner = new Scanner(System.in);
-            String req = scanner.nextLine();
+        System.out.println("Enter request to add: ");
+        Scanner scanner = new Scanner(System.in);
+        String req = scanner.nextLine();
         //request price
-            System.out.println("Enter additional charge associated with request: ");
-            String input = scanner.nextLine();
-            double price = Double.parseDouble(input);
+        System.out.println("Enter additional charge associated with request: ");
+        String input = scanner.nextLine();
+        double price = Double.parseDouble(input);
         //request requirements
-            System.out.println("Does request require inventory items? (y/n)");
+        System.out.println("Does request require inventory items? (y/n)");
+        input = scanner.nextLine();
+        int num = 0;
+        if(input.equals("y")) {
+            System.out.println("Enter number of Requirements: ");
             input = scanner.nextLine();
-            int num = 0;
-                if(input == "y") {
-                    System.out.println("Enter number of Requirements: ");
-                    input = scanner.nextLine();
-                    num = Integer.parseInt(input);
-                }
+            num = Integer.parseInt(input);
+        }
+
         RoomService newReq = new RoomService(req,price,num);
         //adds to current list
         requests.add(newReq);
@@ -275,8 +275,8 @@ or not; what's up
 
     //allows authorized staff to remove a request to the system
     public void removeRequest(){
-    	//check authorization
-	
+        //check authorization
+
         //remove requests
         viewRequests();
         System.out.println("Enter request number to delete: ");

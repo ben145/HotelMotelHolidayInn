@@ -80,15 +80,15 @@ public interface HotelInterface {
     /**
      * saves data to reservation_data.txt as updates occur so reservation data can be rebuilt when hotel is instantiated
      * @author - DMF
-    */
+     */
     void saveReservationData();
 
     /**
      * loads data stored in reservation_data.txt to restore reservation data when hotel is instantiated
      * @author - DMF
-    */
+     */
     void loadReservationData();
 
     void doYouHearWhatIHear(String wav);
 
-    }
+}

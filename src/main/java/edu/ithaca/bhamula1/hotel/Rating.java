@@ -2,7 +2,7 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.io.*;
 import java.util.Scanner;
-// + 74 minutes
+// + 119 minutes
 
 public class Rating {
 
@@ -105,6 +105,11 @@ public class Rating {
         return evalInt;
     }
 
+    /**
+     * Gives customer option to provide verbal (written) feedback
+     *  that is then put in quotes to imply this is someone's words
+     * @return customer's feedback; if said abcd returns "abcd"
+     */
     public String createComments() {
         Scanner s = new Scanner(System.in);
         System.out.println("\nIf there is anything you would like to say about your experience with us, please do so now.");
