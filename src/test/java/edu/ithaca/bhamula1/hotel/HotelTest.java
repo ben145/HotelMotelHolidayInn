@@ -70,10 +70,10 @@ public class HotelTest {
         hotel.addRoom(4, true, 100,2, "double", "mini bar", false);
         hotel.addRoom(3, false, 100,2, "double", "mini bar", false);
 
-        String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
-                " Room number: 2\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
-                " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
-                " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n";
+        String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n\n"+
+                " Room number: 2\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n\n"+
+                " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n\n"+
+                " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n";
 
         Assert.assertEquals(test, hotel.viewOrderedRooms(false));
         String st = hotel.viewOrderedRooms(false);
@@ -101,9 +101,9 @@ public class HotelTest {
         hotel.addReservation(customer, hotel.getRoom(2), checkIN, 2, "" );
 
 //        System.out.println(hotel.getReservations());
-            String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
-            " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n\n"+
-            " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.0\n";
+            String test = " Room number: 1\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n\n"+
+            " Room number: 3\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n\n"+
+            " Room number: 4\n\tType: 2 double bed(s)\n\tAmenities: mini bar\n\tPrice: $100.00\n";
 
         //looking for a hotel starting on 1/1/1 for 3 nights
         Assert.assertEquals(hotel.viewOrderedAvailableRooms(checkDate, 3, false),test);
