@@ -10,7 +10,7 @@ Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 Client Narratives and Scenarios:
 https://docs.google.com/document/d/1ukBbPHb75XiOq4zC387g7idGG97uU2atw_DODzhi2ig/edit
 
-Integreation Testing: 
+Integreation Testing:<br> 
 https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/edit
 
 Sprint One:
