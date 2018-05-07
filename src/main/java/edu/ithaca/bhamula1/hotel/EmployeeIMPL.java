@@ -17,10 +17,7 @@ public class EmployeeIMPL implements Employee{
     private boolean e_Available;
     private boolean positionVacant;
 
-
-    /**
-     * Default Constructor
-     */
+    // Default constructor
     public EmployeeIMPL(){
         this.e_tNum = -1;
         this.e_Title = null;
@@ -34,13 +31,13 @@ public class EmployeeIMPL implements Employee{
     }
 
     /**
-     * Constructor
-     * @param tn
-     * @param t
-     * @param ln
-     * @param fn
-     * @param lID
-     * @param p
+     * Employee Constructor
+     * @param tn    Title number
+     * @param t     Title
+     * @param ln    Last name
+     * @param fn    First name
+     * @param lID   Login ID
+     * @param p     Password
      */
     public EmployeeIMPL(int tn, String t, String ln, String fn, String lID, String p, boolean in, boolean a, boolean pa){
         this.e_tNum = tn;
@@ -54,184 +51,70 @@ public class EmployeeIMPL implements Employee{
         this.positionVacant = pa;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
-    public int getE_TitleNum() {
-        return e_tNum;
-    }
-
-    /**
-     *
-     * @param num
-     */
-    @Override
-    public void setE_TitleNum(int num) {
-        this.e_tNum = num;
-
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getE_Title() {
-        return e_Title;
-    }
-
-    /**
-     *
-     * @param t
-     */
-    @Override
-    public void setE_Title(String t) {
-        this.e_Title = t;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getE_LastName() {
-        return e_LName;
-    }
-
-    /**
-     *
-     * @param ln
-     */
-    @Override
-    public void setE_LastName(String ln) {
-        this.e_LName = ln;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getE_FirstName() {
-        return e_FName;
-    }
-
-    /**
-     *
-     * @param fn
-     */
-    @Override
-    public void setE_FirstName(String fn) {
-        this.e_FName = fn;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getE_LogID() {
-        return e_LogID;
-    }
-
-    /**
-     *
-     * @param elID
-     */
-    @Override
-    public void setE_LogID(String elID) {
-        this.e_LogID = elID;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getE_PWD() {
-        return e_PWD;
-    }
-
-    /**
-     *
-     * @param pwd
-     */
-    @Override
-    public void setE_PWD(String pwd) {
-        this.e_PWD = pwd;
-    }
-
-    /**
-     *
-     * @param eLog
-     * @return
-     */
-    @Override
-    public boolean checkE_LoginID(String eLog) {
-        return eLog.equals(this.e_LogID);
-    }
-
-    /**
-     *
-     * @param ePWD
-     * @return
-     */
-    @Override
-    public boolean checkE_PWD(String ePWD) {
-        return ePWD.equals(this.e_PWD);
-    }
+    public int getE_TitleNum() {return e_tNum;}
 
     @Override
-    public boolean getE_LoggedIn(){
-        return this.e_LoggedIn;
-    }
+    public void setE_TitleNum(int num) {this.e_tNum = num;}
 
     @Override
-    public void setE_LoggedIn(boolean in){
-        this.e_LoggedIn = in;
-    }
+    public String getE_Title() {return e_Title;}
 
-    /**
-     *
-     * @return
-     */
     @Override
-    public boolean getE_Available() {
-        return e_Available;
-    }
+    public void setE_Title(String t) {this.e_Title = t;}
 
-    /**
-     *
-     * @return
-     */
     @Override
-    public void setE_Available(boolean a) {
-        this.e_Available = a;
-    }
+    public String getE_LastName() {return e_LName;}
 
-    /**
-     *
-     * @return
-     */
     @Override
-    public boolean getPositionVacant(){
-        return positionVacant;
-    }
+    public void setE_LastName(String ln) {this.e_LName = ln;}
 
-    /**
-     *
-     * @param v
-     */
     @Override
-    public void setPositionVacant(boolean v){
-        this.positionVacant = v;
-    }
+    public String getE_FirstName() {return e_FName;}
+
+    @Override
+    public void setE_FirstName(String fn) {this.e_FName = fn;}
+
+    @Override
+    public String getE_LogID() {return e_LogID;}
+
+    @Override
+    public void setE_LogID(String elID) {this.e_LogID = elID;}
+
+    @Override
+    public String getE_PWD() {return e_PWD;}
+
+    @Override
+    public void setE_PWD(String pwd) {this.e_PWD = pwd;}
+
+    @Override
+    public boolean checkE_LoginID(String eLog) {return eLog.equals(this.e_LogID);}
+
+    @Override
+    public boolean checkE_PWD(String ePWD) {return ePWD.equals(this.e_PWD);}
+
+    @Override
+    public boolean getE_LoggedIn() {return this.e_LoggedIn;}
+
+    @Override
+    public void setE_LoggedIn(boolean in) {this.e_LoggedIn = in;}
+
+    @Override
+    public boolean getE_Available() {return e_Available;}
+
+    @Override
+    public void setE_Available(boolean a) {this.e_Available = a;}
+
+    @Override
+    public boolean getPositionVacant() {return positionVacant;}
+
+    @Override
+    public void setPositionVacant(boolean v) {this.positionVacant = v;}
 
     @Override
     public String toString(){
         return String.format(this.e_tNum+" - "+this.e_Title+": \nEmployee Name: "+this.e_LName+", "+this.e_FName+"\nLogID: "+
                 e_LogID+"  Pwd: "+e_PWD+"\nIs Logged In: "+e_LoggedIn+"\nIs Available: "+e_Available+"\nIs position vacant: "+positionVacant+"\n");
     }
+
 }
