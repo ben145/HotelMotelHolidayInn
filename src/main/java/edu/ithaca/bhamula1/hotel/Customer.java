@@ -26,26 +26,43 @@ public class Customer implements CustomerInterface {
     }
 
 
-    Customer(){
-//        name = makeName();
-//        id = makeID();
-
+    // Default constructor
+    Customer() {
         name = "";
         id = "";
         loggedIn = false;
-        this.returningCustomer = false;
+        returningCustomer = false;
     }
 
-    public Customer (String fname, String lName, String id, int room, boolean checkedIn){
-        this.name = fname+ " "+ lName;
-        this.id = fname+lName;
-        this.fName = fname;
+    /**
+     * Customer constructor
+     * @param fName     Customer's first name
+     * @param lName     Customer's last name
+     * @param id        Customer's temporary ID for hotel stay
+     * @param room      Number of room customer is staying in
+     * @param checkedIn True or false, if customer is checked in or not
+     */
+    public Customer (String fName, String lName, String id, int room, boolean checkedIn){
+        this.name = fName+ " "+ lName;
+        this.id = fName+lName;
+        this.fName = fName;
         this.lName = lName;
         this.room = room;
         this.checkedIn = checkedIn;
         this.loggedIn = true;
         this.returningCustomer  = false;
     }
+
+    /**
+     * Alternate Customer constructor
+     * @param fname     Customer's first name
+     * @param lName     Customer's last name
+     * @param room      Number of room customer is staying in
+     * @param ckedIn    True or false, if customer is checked in or not
+     * @param logIn     True or false, if customer is logged in or not
+     * @param rCust     True or false, if customer has stayed at this hotel or not
+     * @param p         Customer's password
+     */
     public Customer (String fname, String lName, int room, boolean ckedIn, boolean logIn, boolean rCust, String p){
         this.id = fname+lName;
         this.fName = fname;
@@ -57,30 +74,10 @@ public class Customer implements CustomerInterface {
         this.pwd = p;
     }
 
-    //set name
     public String makeName(String firstName, String lastName) {
-//        String firstName, lastName;
-////        Scanner scan = new Scanner(System.in);
-////        // getting first name and storing in firstName
-////        System.out.println("Please enter your first name");
-////        firstName = scan.next();
-        // reformatting so firstName has capital first letter, lowercase otherwise
-
-
 
         fName = firstName.substring(0,1).toUpperCase() + firstName.substring(1,firstName.length()-1);
-
-
-//        // getting last name and storing in lastName
-//        System.out.println("Please enter your last name");
-//        lastName = scan.next();
-        // reformatting so lastName has capital first letter, otherwise lowercase
-
-
-
-
         lName = lastName.substring(0,1).toUpperCase() + lastName.substring(1,lastName.length()-1);
-
         name = firstName + " " + lastName;
         return (fName +" "+ lName);
     }
@@ -102,12 +99,9 @@ public class Customer implements CustomerInterface {
         id = yourId;
         System.out.println("Your login ID is " + yourId);
         return yourId;
-
     }
 
-    public String getName() {
-        return fName+" "+lName;
-    }
+    public String getName() {return fName+" "+lName;}
 
     public String getFName() {return fName;}
 
@@ -119,39 +113,20 @@ public class Customer implements CustomerInterface {
 
     public String getId() {return id;}
 
-    public void setId(String custid) { id=custid;}
+    public void setId(String custId) { id = custId;}
 
-
-    //CUstomer
-    //ONly one log in right now
     public void login(String idIn,String pwdIn) {
-//        Scanner k = new Scanner(System.in);
-//        String idIn;
-//        System.out.println("Please enter your ID");
-//        idIn = k.next();
-//        String custID = "abc123";
-        if (idIn.equals(this.id)&&pwdIn.equals(this.pwd)){
+        if (idIn.equals(this.id)&&pwdIn.equals(this.pwd))
             loggedIn = true;
-        }
-        else{
+        else
             System.out.println("Problem logging in");
-            //System.out.println("Incorrect Password.");
-        }
-
     }
 
-    public void logOut(){
-        loggedIn = false;
-    }
+    public void logOut(){loggedIn = false;}
 
-//    public static void main(String[] args) {
-//        Customer c = new Customer();
-//        c.login();
-//    }
+    public boolean isCheckedIn() {return checkedIn;}
 
-    public boolean isCheckedIn() {
-        return checkedIn;
-    }
+    public void setCheckedIn(Boolean ckIn){checkedIn=ckIn;}
 
     public boolean checkIn(int roomNumber) {
         this.room = roomNumber;
@@ -165,6 +140,8 @@ public class Customer implements CustomerInterface {
         return true;
     }
 
+    public int getRoom() {return room;}
+
     public void setRoom(int room) {
         this.room = room;
     }
@@ -173,46 +150,21 @@ public class Customer implements CustomerInterface {
         return this.loggedIn;
     }
 
-
-    /**
-     * Reservation data type and functions to store room reservatin ID in Customer's class
-     * @author - DMF
-     */
-    //adding reservation to cust class
-    private String reservation;
-
-    /**
-     * Used to get the reservation associated with the room and customer
-     * @return String
-     */
-    public String getReservation(){return reservation;}
-
-    /**
-     * sets the reservation associated with the room
-     * @param r String
-     */
-    public void setReservation(String r){ reservation = r;}
-
-    public int getRoom() {
-        return room;
-    }
-
-    public boolean getReturningCustomer(){
-        return this.returningCustomer;
-    }
-
-    public void setReturningCustomer(boolean returning){
-        this.returningCustomer = returning;
-    }
-
-    public void setCheckedIn(Boolean ckIn){checkedIn=ckIn;}
-
     public void setLoggedIn(boolean logIn){loggedIn = logIn;}
 
-    public boolean checkPwd(String p){
-        if(this.pwd.equals(p)){ return true;}else{return false;}
-    }
-    public String getPwd(){return pwd;}
+    // Reservation data type and functions to store room reservation ID in Customer's class
+    private String reservation;
 
+    public String getReservation(){return reservation;}
+
+    public void setReservation(String r){reservation = r;}
+
+    public boolean getReturningCustomer(){return this.returningCustomer;}
+
+    public void setReturningCustomer(boolean returning){this.returningCustomer = returning;}
+
+    public boolean checkPwd(String p){return (this.pwd.equals(p));}
+
+    public String getPwd(){return pwd;}
 
 }

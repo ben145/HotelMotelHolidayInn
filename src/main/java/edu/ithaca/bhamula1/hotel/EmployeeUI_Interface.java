@@ -8,8 +8,9 @@ public interface EmployeeUI_Interface {
     void checkEmployeeLogIn(String el, String epwd);
     void employeeLogScreenUI();
     void viewOpenRequests();
-    void takeRequests();
-    void completeRequest();
+    void takeRequests(int req);
+    boolean checkEmpReq();
+    void completeRequest(int req);
     void closeUI();
 
 
