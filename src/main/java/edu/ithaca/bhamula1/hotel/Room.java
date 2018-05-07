@@ -229,7 +229,7 @@ public class Room implements RoomInterface {
 
     public String toString(){
         return " Room number: " + this.roomNumber + "\n\tType: "+ this.bedNum + " " + this.bedType+" bed(s)\n\tAmenities: " + this.amenities +
-                "\n\tPrice: $"+ this.price+"\n";
+                "\n\tPrice: $"+ this.price+"0\n";
     }
 
     public String printDiscountedPrices(){
