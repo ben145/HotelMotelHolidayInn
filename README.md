@@ -13,6 +13,10 @@ https://docs.google.com/document/d/1ukBbPHb75XiOq4zC387g7idGG97uU2atw_DODzhi2ig/
 Integreation Testing:<br> 
 https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/edit
 
+ <b>Final Retrospective</b>:<br>
+    https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
+</blockquote>
+
 Sprint One:
 
 <blockquote><b>First Sprint goal</b>:
@@ -54,9 +58,7 @@ Sprint Three:
 <b>DevTeam Sprint goal #3</b>:
   <span title="look who briefly googled markup">Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)</span>
   <br>
-  <b>Sprint 2 Review</b>:<br>
-    https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
-</blockquote>
+ 
 
 
 </blockquote>
