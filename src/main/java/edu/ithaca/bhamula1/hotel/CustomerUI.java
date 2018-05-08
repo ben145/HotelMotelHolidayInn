@@ -89,6 +89,7 @@ public class CustomerUI implements CustomerUIInterface {
 
         // login or room view loop
         while (firstOption != 4) {
+            firstOption = 0;
             System.out.println("=========================================================================================");
             System.out.println("Welcome to {insert hotel name here}");
             System.out.println("=========================================================================================");
@@ -118,7 +119,7 @@ public class CustomerUI implements CustomerUIInterface {
                 System.out.println("Type your User Password: ");
                 String p = scan.nextLine();
 
-                firstOption = signIn(firstName, id, p);
+                signIn(firstName, id, p);
             }
 
             // SIGN UP
@@ -132,7 +133,7 @@ public class CustomerUI implements CustomerUIInterface {
                 String lastName = scan.nextLine();
                 String id = hotel.createAccount(firstName, lastName);
 
-                firstOption = loggedIn(hotel.getCustomer(id), hotel);
+                loggedIn(hotel.getCustomer(id), hotel);
             }
 
             // VIEW ROOMS
@@ -154,7 +155,6 @@ public class CustomerUI implements CustomerUIInterface {
             else if (firstOption == 5)
                 employeeLogScreen(hotel);
 
-            firstOption = 0;
         }
     }
 
