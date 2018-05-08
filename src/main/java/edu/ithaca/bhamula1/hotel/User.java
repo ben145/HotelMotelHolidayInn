@@ -9,25 +9,22 @@ public class User implements UserInterface {
         nameFirst = f_name;
         nameLast = l_name;
         userType = uT;
-
     }
 
-    public String getLastName(){
-        return this.nameLast;
-    }
+    public String getLastName(){return nameLast;}
 
     @Override
-    public void setLastName(String n) {
-
-    }
+    public void setLastName(String n) {nameLast = n;}
 
     @Override
-    public String getFirstName() {
-        return null;
-    }
+    public String getFirstName() {return nameFirst;}
 
     @Override
-    public void setFirstName(String n) {
+    public void setFirstName(String n) {nameFirst = n;}
 
-    }
+    @Override
+    public String getUserType() {return userType;}
+
+    @Override
+    public void setUserType(String u) {userType = u;}
 }

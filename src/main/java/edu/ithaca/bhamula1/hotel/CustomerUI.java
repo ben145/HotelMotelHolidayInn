@@ -484,10 +484,4 @@ public class CustomerUI implements CustomerUIInterface {
         }
     }
 
-    // runs the main program
-    public static void main(String[] args) {
-        CustomerUI ui = new CustomerUI();
-        ui.mainScreen();
-    }
-
 }
