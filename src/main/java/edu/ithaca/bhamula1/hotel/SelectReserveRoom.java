@@ -45,7 +45,7 @@ public class SelectReserveRoom implements SRRInterface{
     }
 
     public boolean checkRoomNum() {
-        return customer.getRoom() != 0;
+        return customer.getRoom() != -1;
     }
 
     public boolean checkRoomAvailable() {
