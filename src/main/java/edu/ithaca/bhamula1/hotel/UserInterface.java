@@ -13,18 +13,4 @@ public interface UserInterface {
 
     void setFirstName(String n);
 
-    /**
-    *
-    *- need reservations associated with users
-    *- need pmt methods
-    *- need login info??
-    *
-    ***/
-    /*
-    String getReservation();
-    void setReservation(String n);
-
-    */
-
-
 }
