@@ -19,7 +19,7 @@ https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/
 
 Final UML:
 <blockquote>
-Employee UI state: https://drive.google.com/open?id=1bqrqjlg1MQEC6j1zpE2oj-VsZ1fmBpeN 
+Employee UI state: https://drive.google.com/file/d/1bqrqjlg1MQEC6j1zpE2oj-VsZ1fmBpeN/view?usp=sharing 
 </blockquote>
 
 Sprint One:
