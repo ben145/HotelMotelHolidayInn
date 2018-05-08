@@ -21,4 +21,10 @@ public class User implements UserInterface {
 
     @Override
     public void setFirstName(String n) {nameFirst = n;}
+
+    @Override
+    public String getUserType() {return userType;}
+
+    @Override
+    public void setUserType(String u) {userType = u;}
 }

@@ -13,4 +13,7 @@ public interface UserInterface {
 
     void setFirstName(String n);
 
+    String getUserType();
+
+    void setUserType(String u);
 }
