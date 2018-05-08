@@ -17,6 +17,11 @@ https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/
     https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
 </blockquote>
 
+Final UML:
+<blockquote>
+Employee UI state: https://drive.google.com/open?id=1bqrqjlg1MQEC6j1zpE2oj-VsZ1fmBpeN 
+</blockquote>
+
 Sprint One:
 
 <blockquote><b>First Sprint goal</b>:
