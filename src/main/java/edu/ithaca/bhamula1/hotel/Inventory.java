@@ -6,8 +6,8 @@ import java.util.Scanner;
  *
  */
 public class Inventory implements InventoryInterface {
-    String item;
-    int quantity;
+    private String item;
+    private int quantity;
 
     //empty inventory item
     public Inventory(){

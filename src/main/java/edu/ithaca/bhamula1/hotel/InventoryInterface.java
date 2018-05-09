@@ -1,14 +1,16 @@
 package edu.ithaca.bhamula1.hotel;
 
 public interface InventoryInterface {
-    //getters
+
     String getItem();
+
+    void setItem(String itemName);
+
     int getQuantity();
 
-    //setters
-    void setItem(String itemName);
     void setQuantity(int quantity);
 
     public void addItemToInventory();
+
     public String toString_Inventory();
 }
