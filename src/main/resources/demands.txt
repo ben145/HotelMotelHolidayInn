@@ -1,3 +1,4 @@
+Ice,0,1,Ice
 Room Service,5,1,The Finest Frenched Fries
 Turndown Service,0,7,Scratchy Toilet Paper,Sheet Set,Small Shampoo,Soap,Tiny Conditioner,Towels,Washcloths
 Bring every pillow you have,0,1,Pillow
@@ -5,6 +6,9 @@ Fresh Towels,0,1,Towels
 Mr. Gorbachev; tear down this wall,300,0
 Room maintenance (I have broken something in this room),12.30,1,Wrench
 Refill minibar,35.56,5,Gin,Rum,Tequila,Vodka,Whiskey
+Brochures to some of the local attractions,0,1,Brochure
 An offering to the Bone Idol,0,1,Instant Coffee
-Apparantly we have a spa somewhere. Something with that? Maybe?,58.12,1,Cucumber
+Apparently we have a spa somewhere. Something with that? Maybe?,58.12,1,Cucumber
+The warm smell of colitas rising up through the air,5,2,Colitas,Hairdryer
+Bring a pair of clawed bear slippers to me in this time of great need,24.95,1,Bear Slippers
 I would like to be serenaded with The Eagles' magnum opus 'Hotel California',666,5,Don Felder,Don Henley, Glenn Frey,Joe Walsh,Randy Meisner

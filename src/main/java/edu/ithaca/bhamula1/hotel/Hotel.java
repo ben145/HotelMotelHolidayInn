@@ -103,11 +103,13 @@ public class Hotel implements HotelInterface {
      */
     public boolean checkOut(int roomNumber, CustomerInterface customer){
         RoomInterface current = getRoom(roomNumber);
+        Requests req = new Requests();
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
         saveCustList();
         saveRooms();
+        req.saveReqs();
         return c&r;
     }
 
