@@ -18,7 +18,7 @@ public class SelectReserveRoom implements SRRInterface{
      * Passing in pointers to customer object and room object so that room and Customer data
      * can be updated with reservation data
      * @param c customer object
-     * @param r room object -
+     * @param r room object
      */
     public SelectReserveRoom(CustomerInterface c, RoomInterface r){
         this.customer = c;
@@ -40,17 +40,11 @@ public class SelectReserveRoom implements SRRInterface{
         customer = testGuest;
     }
 
-    public boolean checkGuestID(){
-        return customer.getId() != null;
-    }
+    public boolean checkGuestID(){return customer.getId() != null;}
 
-    public boolean checkRoomNum() {
-        return customer.getRoom() != -1;
-    }
+    public boolean checkRoomNum() {return customer.getRoom() != -1;}
 
-    public boolean checkRoomAvailable() {
-        return room.getIfAvailable();
-    }
+    public boolean checkRoomAvailable() {return room.getIfAvailable();}
 
     public void cancelRoom() {
         customer.setRoom(0);
@@ -66,8 +60,7 @@ public class SelectReserveRoom implements SRRInterface{
     }
 
     public String createReservationID() {
-
-        String reservationID = customer.getId()+"-";
+        String reservationID = customer.getId() + "-";
         String randomGen = "ABCDEGH0123456789";
         SimpleDateFormat sd = new SimpleDateFormat("Mddyyyy");
         String date = sd.format(new Date());
@@ -81,6 +74,5 @@ public class SelectReserveRoom implements SRRInterface{
         System.out.println(reservationID);
         return reservationID;
     }
-
 
 }

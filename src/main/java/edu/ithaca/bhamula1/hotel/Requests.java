@@ -10,9 +10,9 @@ import javax.sound.sampled.Clip;
 
 class ActiveRequest {
 
-    private String request;
-    private int roomNumber;
-    private String employeeId;
+    protected String request;
+    protected int roomNumber;
+    protected String employeeId;
     private boolean active;
 
     /**
