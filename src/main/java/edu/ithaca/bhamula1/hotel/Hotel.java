@@ -11,89 +11,77 @@ import java.util.*;
  */
 public class Hotel implements HotelInterface {
 
-    //have to set this!
-    int numberOfRooms =0;
+
+    private int numberOfRooms = 69;
     private ArrayList<RoomInterface> rooms;
     private List<CustomerInterface> customers;
     public static List<EmployeeIMPL> employees;
     public static List<Inventory> inventory;
     public static List<ActiveRequest> activeRequests;
     private List<Reservation> reservations;
-    boolean forTEsts = false;
+    private boolean forTests = false;
 
 
-    public Hotel(boolean test){
-        forTEsts = test;
-        rooms = new ArrayList<RoomInterface>();
+    public Hotel(boolean test) {
+        forTests = test;
+        rooms = new ArrayList<>();
         customers = new ArrayList<>();
         employees = new ArrayList<>();
-        inventory = new ArrayList<Inventory>();
-        activeRequests = new LinkedList<ActiveRequest>();
+        inventory = new ArrayList<>();
+        activeRequests = new LinkedList<>();
         reservations = new ArrayList<>();
 
     }
 
-    public Hotel(){
-        //this was a hash map. Changed to a array list
-        //the index is the room number
-//        rooms = new HashMap<>();
-        rooms = new ArrayList<RoomInterface>();
-
-        if (rooms.isEmpty()) {
+    // Hotel constructor
+    public Hotel() {
+        rooms = new ArrayList<>();
+        if (rooms.isEmpty())
             loadRooms();
-        }
 
-        //should this is a linked list instead? better memory
         customers = new ArrayList<>();
-        if(customers.isEmpty()){
+        if (customers.isEmpty())
             loadCustList();
-        }
-
-
 
         // List of roles and employees in hotel
         employees = new ArrayList<>();
-        if(employees.isEmpty()) {
+        if (employees.isEmpty())
             setEmplList();
-        }
 
         reservations = new ArrayList<>();
         loadReservationData();
 
-        //hotel inventory w/ sample population
-        inventory = new ArrayList<Inventory>();
+        // Hotel inventory w/ sample population
+        inventory = new ArrayList<>();
         testInventory();
-
-        //linked list of active requests
-        activeRequests = new LinkedList<ActiveRequest>();
-
-        //printRoomList();
+        activeRequests = new LinkedList<>();
     }
 
-    //only for use in testing checkin and checkout before actual function is added
-    public RoomInterface getRoom(int roomNumber){
-        return rooms.get(roomNumber);
-    }
+    public RoomInterface getRoom(int roomNumber) {return rooms.get(roomNumber);}
 
+    /**
+     * Checks customer in if reservation date is today, comparing reservation
+     *  year, month, and day to current date
+     * @param roomNumber    Customer's room number they are checking into
+     * @param customer      Customer associated with reservation to be verified
+     * @return  True if reservation date is today, false if a different day or
+     *          reservation was not found in system
+     */
     public boolean checkIn(int roomNumber, CustomerInterface customer){
-        //find room
         Calendar today = new GregorianCalendar();
         today.set(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         Reservation res = getReservation(customer,roomNumber,today);
         RoomInterface current = getRoom(roomNumber);
-        if(res!=null){
-            if(customer.getId()==res.getCustomer().getId()){
-                if(roomNumber==res.getRoom().getRoomNumber()){
-                    if(Calendar.getInstance().get(Calendar.YEAR)==res.getCheckInDate().get(Calendar.YEAR)
-                            &&Calendar.getInstance().get(Calendar.MONTH)==res.getCheckInDate().get(Calendar.MONTH)
-                            &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH)==res.getCheckInDate().get(Calendar.DAY_OF_MONTH)){
+        if (res != null) {
+            if(customer.getId().equals(res.getCustomer().getId())) {
+                if(roomNumber == res.getRoom().getRoomNumber()) {
+                    if(Calendar.getInstance().get(Calendar.YEAR) == res.getCheckInDate().get(Calendar.YEAR)
+                            &&Calendar.getInstance().get(Calendar.MONTH) == res.getCheckInDate().get(Calendar.MONTH)
+                            &&Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == res.getCheckInDate().get(Calendar.DAY_OF_MONTH)) {
                         customer.checkIn(roomNumber);
-
                         saveCustList();
-
                         current.checkIn(customer);
                         saveRooms();
-
                         removeReservation(res);
                         return true;
                     }
@@ -106,8 +94,14 @@ public class Hotel implements HotelInterface {
         return false;
     }
 
+    /**
+     * Checks customer out of their room for their stay
+     * @param roomNumber    Customer's room number associated with reservation
+     * @param customer      Customer wanting to check out
+     * @return  True if customer is successfully checked out of their room,
+     *          false otherwise
+     */
     public boolean checkOut(int roomNumber, CustomerInterface customer){
-        //find room
         RoomInterface current = getRoom(roomNumber);
         /*
         if(current.getCheckedIn()){
@@ -137,73 +131,55 @@ public class Hotel implements HotelInterface {
         return c&r;
     }
 
+    // Test room with filled in details
     public void addTestRoom(int roomNumber){
         this.rooms.set(roomNumber,new Room(false,roomNumber,100.00,2,"Full","Mini bar",false));
     }
 
-
-    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenitites, boolean checkIn){
-        this.rooms.set(roomNumber,new Room(available,roomNumber,price, bedNum, bedType, amenitites, checkIn));
+    // Adds details for a room to Hotel
+    public void addRoom(int roomNumber, boolean available, double price, int bedNum, String bedType, String amenities, boolean checkIn){
+        this.rooms.set(roomNumber,new Room(available, roomNumber,price, bedNum, bedType, amenities, checkIn));
     }
 
-
     /**
-     * initializes  the array list so we can put the room in the proper index
-     * @param numberOfRooms
+     * Initializes the array list so rooms can be entered in the proper index
+     * @param numberOfRooms Number of rooms Hotel will have
      * @author Mia
      */
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
-
-        while(rooms.size() < numberOfRooms){
+        while (rooms.size() < numberOfRooms)
             rooms.add(new Room());
-        }
     }
 
-
-
-    public ArrayList<RoomInterface> getRooms(){
-        return rooms;
-    }
+    public ArrayList<RoomInterface> getRooms(){return rooms;}
 
     /**
-     * @Author Mia
-     * @return
+     * Displays rooms in order by their room number, with discounted prices if
+     *  customer has stayed at the Hotel previously
+     * @author Mia
+     * @return String of all rooms formatted as a vertical list
      */
-    public String viewOrderedRooms(boolean returning){
-
-        String str="";
+    public String viewOrderedRooms(boolean returning) {
+        String str = "";
         for (RoomInterface rm: rooms) {
-            if(rm.getRoomNumber()!=0 ) {
-
+            if (rm.getRoomNumber() != 0) {
                 if (str.equals("")) {
-
-
-                    if(returning){
-                        str+= rm.printDiscountedPrices();
-                    }else{
+                    if (returning)
+                        str += rm.printDiscountedPrices();
+                    else
                         str +=  rm.toString();
-                    }
-
-
-                } else {
-
-                    if(returning){
-                        str += "\n" + rm.printDiscountedPrices();
-                    }else{
-                        str += "\n" + rm.toString();
-
-                    }
-
-
                 }
-
+                else {
+                    if (returning)
+                        str += "\n" + rm.printDiscountedPrices();
+                    else
+                        str += "\n" + rm.toString();
+                }
             }
-
         }
         return str;
     }
-
 
     public String viewOrderedAvailableRooms(Calendar checkin, int nightDuration, boolean returning){
 
@@ -543,7 +519,7 @@ public class Hotel implements HotelInterface {
     @Override
     public void saveCustList(){
 
-        if(!forTEsts) {
+        if(!forTests) {
             try {
                 OutputStream file = new FileOutputStream("./src/main/resources/c.txt");
                 OutputStreamWriter write = new OutputStreamWriter(file);
@@ -592,7 +568,7 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void saveRooms(){
-        if(!forTEsts) {
+        if(!forTests) {
             try {
                 OutputStream file = new FileOutputStream("./src/main/resources/rooms.txt");
                 OutputStreamWriter write = new OutputStreamWriter(file);
@@ -675,7 +651,7 @@ public class Hotel implements HotelInterface {
 
     @Override
     public void saveReservationData(){
-        if(!forTEsts) {
+        if(!forTests) {
             try {
                 OutputStream file = new FileOutputStream("./src/main/resources/reservation_data.txt");
                 OutputStreamWriter write = new OutputStreamWriter(file);
@@ -745,7 +721,4 @@ public class Hotel implements HotelInterface {
             exc.printStackTrace(System.out);
         }
     }
-
 }
-
-
