@@ -1,20 +1,16 @@
 package edu.ithaca.bhamula1.hotel;
 
-/**
- * 
- */
 public interface RequestsInterface {
-    /*
-    //active request functions
-    String getActiveRequest();
-    int getRequestRoomNumber();
-    String getActiveRequestEmployeeId();
-    boolean requestActive();
-    void setActiveRequest(String newRequest);
-    void setRequestRoomNumber(int newRoomNumber);
-    void setActiveRequestEmployeeId(String newEmployeeId);
-    void activateRequest();
-    */
+
+    //String getActiveRequest();
+
+    //String getActiveRequestEmployeeId();
+    //boolean requestActive();
+    //void setActiveRequest(String newRequest);
+    //void setRequestRoomNumber(int newRoomNumber);
+    //void setActiveRequestEmployeeId(String newEmployeeId);
+    //void activateRequest();
+
 
     /*request functions*/
 

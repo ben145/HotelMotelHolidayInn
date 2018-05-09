@@ -2,7 +2,6 @@ package edu.ithaca.bhamula1.hotel;
 
 import java.io.*;
 import java.util.Scanner;
-// + 119 minutes
 
 public class Rating {
 
@@ -14,7 +13,8 @@ public class Rating {
     private String comments;
 
     private static final double NUM_QUESTIONS = 5.0;
-    //review/rate stay on checkout (star system) optional survey
+
+    // Rating constructor
     public Rating() {
         rating1 = -1;
         rating2 = -1;
@@ -27,49 +27,38 @@ public class Rating {
     public double getAvgRating() {
         return getRatingTotal() / NUM_QUESTIONS;
     }
-    public int getRating1() {
-        return rating1;
-    }
-    public int getRating2() {
-        return rating2;
-    }
-    public int getRating3() {
-        return rating3;
-    }
-    public int getRating4() {
-        return rating4;
-    }
-    public int getRating5() {
-        return rating5;
-    }
+
+    public int getRating1() {return rating1;}
+
+    public int getRating2() {return rating2;}
+
+    public int getRating3() {return rating3;}
+
+    public int getRating4() {return rating4;}
+
+    public int getRating5() {return rating5;}
+
     public int getRatingTotal() {
         return rating1 + rating2 + rating3 + rating4 + rating5;
     }
-    public void setRating1(int rating) {
-        rating1 = rating;
-    }
-    public void setRating2(int rating) {
-        rating2 = rating;
-    }
-    public void setRating3(int rating) {
-        rating3 = rating;
-    }
-    public void setRating4(int rating) {
-        rating4 = rating;
-    }
-    public void setRating5(int rating) {
-        rating5 = rating;
-    }
-    public String getComments() {
-        return comments;
-    }
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
+
+    public void setRating1(int r1) {rating1 = r1;}
+
+    public void setRating2(int r2) {rating2 = r2;}
+
+    public void setRating3(int r3) {rating3 = r3;}
+
+    public void setRating4(int r4) {rating4 = r4;}
+
+    public void setRating5(int r5) {rating5 = r5;}
+
+    public String getComments() {return comments;}
+
+    public void setComments(String comments) {this.comments = comments;}
 
     /**
      * Prompts user again for input if needed by convertRating based
-     *      on poor input
+     *  on invalid input
      */
     private void askAgain() {
         Scanner s = new Scanner(System.in);
@@ -84,7 +73,6 @@ public class Rating {
      * @return int value of number of *'s in rawRating
      */
     private int convertRating(String rawRating) {
-
         int evalInt = 0;
         if (rawRating.contains("*")) {
             for (int i = 0; i < rawRating.length(); i++) {
@@ -108,17 +96,19 @@ public class Rating {
     /**
      * Gives customer option to provide verbal (written) feedback
      *  that is then put in quotes to imply this is someone's words
-     * @return customer's feedback; if said abcd returns "abcd"
      */
-    public String createComments() {
+    public void createComments() {
         Scanner s = new Scanner(System.in);
         System.out.println("\nIf there is anything you would like to say about your experience with us, please do so now.");
         String comment = s.nextLine();
         comment = "\"" + comment + "\"";
         setComments(comment);
-        return comment;
     }
 
+    /**
+     * Prints instructions for taking survey then starts the ratingSuite of
+     *  questions to answer
+     */
     public void startRating() {
         System.out.println("Thank you for choosing to complete this optional survey.");
         System.out.println("We use our customer responses to improve future experiences.");
@@ -127,6 +117,10 @@ public class Rating {
         ratingSuite();
     }
 
+    /**
+     * Prints questions for customers choosing to take survey and records their
+     *  answers, then leads into the comment section
+     */
     public void ratingSuite() {
         Scanner s = new Scanner(System.in);
         System.out.print("\n1. Satisfaction with reserved room's amenities.\nYour answer -> ");
@@ -142,16 +136,24 @@ public class Rating {
         createComments();
     }
 
+    /**
+     * Constructs the survey results
+     * @param c Provides access to customer name
+     * @return  Customer's name, average of 5 questions' ratings, and comments
+     */
     public String toString(CustomerInterface c) {
         StringBuilder stars = new StringBuilder();
-        for (int i = 0; i < Math.round(getAvgRating()); i++) {
+        for (int i = 0; i < Math.round(getAvgRating()); i++)
             stars.append("*");
-        }
         String toReturn = "\nCustomer:\t"+c.getName()+"\nRating:\t\t"+stars;
         toReturn += " ("+Double.toString(getAvgRating())+"/"+NUM_QUESTIONS+")\nComments:\t"+getComments();
         return toReturn;
     }
 
+    /**
+     * Writes survey results to text file and saves that information
+     * @param c Provides access to customer name
+     */
     public void saveRating(CustomerInterface c) {
         try {
             OutputStream file = new FileOutputStream("./src/main/resources/r.txt",true);
@@ -170,10 +172,10 @@ public class Rating {
     }
 
     public static void main(String[] args) {
-        Rating r = new Rating();
-        r.startRating();
-        Customer c = new Customer("John","Smith","JS12345",4,false);
-        System.out.println(r.toString(c));
-        r.saveRating(c);
+//        Rating r = new Rating();
+//        r.startRating();
+//        Customer c = new Customer("John","Smith","JS12345",4,false);
+//        System.out.println(r.toString(c));
+//        r.saveRating(c);
     }
 }
