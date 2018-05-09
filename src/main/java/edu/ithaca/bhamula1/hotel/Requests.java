@@ -163,11 +163,6 @@ public class Requests implements RequestsInterface {
         }
     }
 
-    /*
-    this is where saveReqs() would go if i had the patience
-    or not; what's up
-     */
-
     public void saveReqs() {
         try {
             OutputStream file = new FileOutputStream("./src/main/resources/demands.txt");
@@ -204,15 +199,16 @@ public class Requests implements RequestsInterface {
      */
     public void viewRequests() {
         for (int i = 0; i < requests.size(); i++) {
-            System.out.println((i + 1) + ") " + requests.get(i).getRequestName());
+            System.out.println((i + 1) + ") " + requests.get(i).getRequestName() + "\t\t Price: $" + requests.get(i).getAssociatedPrice());
         }
     }
-
     /**
      * Allows authorized staff to add a request to they system
      */
     public void addRequest() {
         ArrayList<String> reqs = new ArrayList<>();
+
+        //request name
         System.out.println("Enter request to add: ");
         Scanner scanner = new Scanner(System.in);
         String req = scanner.nextLine();
@@ -232,13 +228,6 @@ public class Requests implements RequestsInterface {
 
         RoomService newReq = new RoomService(req, price, num);
         requests.add(newReq);
-
-        //reqs.add("because it's needed");
-        //int num = requests.size()+1;
-        //
-        //System.out.println(" in adding requests ");
-        //
-        //System.out.println(" in adding requests "+requests.size());
 
         //adds to textfile
         try (FileWriter fw = new FileWriter("./src/main/resources/demands.txt", true);
@@ -288,7 +277,13 @@ public class Requests implements RequestsInterface {
             int inputInt = (Integer.parseInt(input));
             if (inputInt > 0 && inputInt <= requests.size()) {
                 //compensating for 0
-                input = requests.get(inputInt - 1).getRequestName();
+                input = requests.get(inputInt-1).getRequestName();
+                if(input == "An offering to the Bone Idol"){
+                    doYouHearWhatIHear("src/main/resources/bone_idol.wav");
+                }
+                else if(input == "I would like to be serenaded with The Eagles' magnum opus 'Hotel California'"){
+                    doYouHearWhatIHear("src/main/resources/hotel_speed_racer.wav");
+                }
                 ActiveRequest newRequest = new ActiveRequest(input, roomNumber);
                 Hotel.activeRequests.add(newRequest);
 
@@ -388,8 +383,8 @@ public class Requests implements RequestsInterface {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new File(wav)));
             clip.start();
-            while (!clip.isRunning())
-                Thread.sleep(10);
+//            while (!clip.isRunning())
+//                Thread.sleep(10);
             while (clip.isRunning())
                 Thread.sleep(10);
             clip.close();

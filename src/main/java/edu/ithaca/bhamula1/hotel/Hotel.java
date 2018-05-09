@@ -103,11 +103,31 @@ public class Hotel implements HotelInterface {
      */
     public boolean checkOut(int roomNumber, CustomerInterface customer){
         RoomInterface current = getRoom(roomNumber);
+        /*
+        if(current.getCheckedIn()){
+            if(customer.getName().equals(current.getReservationName())){
+                boolean c = customer.checkOut(roomNumber);
+                boolean r = current.checkOut(customer);
+                System.out.println("Thank You For Visiting ");
+                return c&r;
+            }
+            else{
+                System.out.println("You are not checked into this room. You must be checked in to checkout.");
+                return false;
+            }
+        }
+        else {
+            System.out.println("This room is not checked into.");
+            return false;
+        }
+        */
+        Requests req = new Requests();
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
         saveCustList();
         saveRooms();
+        req.saveReqs();
         return c&r;
     }
 
@@ -575,7 +595,7 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
-        System.out.println("Loading........");
+
         doYouHearWhatIHear("src/main/resources/hotel_greeting.wav");
 
         try {
@@ -689,8 +709,9 @@ public class Hotel implements HotelInterface {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new File(wav)));
             clip.start();
-            while (!clip.isRunning())
-                Thread.sleep(10);
+            System.out.println("Loading........");
+//            while (!clip.isRunning())
+//                Thread.sleep(10);
             while (clip.isRunning())
                 Thread.sleep(10);
             clip.close();
@@ -700,5 +721,4 @@ public class Hotel implements HotelInterface {
             exc.printStackTrace(System.out);
         }
     }
-
 }
