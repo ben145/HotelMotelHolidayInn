@@ -127,11 +127,13 @@ public class Hotel implements HotelInterface {
             return false;
         }
         */
+        Requests req = new Requests();
         boolean c = customer.checkOut(roomNumber);
         boolean r = current.checkOut(customer);
         System.out.println("Thank You For Visiting ");
         saveCustList();
         saveRooms();
+        req.saveReqs();
         return c&r;
     }
 
@@ -617,7 +619,7 @@ public class Hotel implements HotelInterface {
      */
     @Override
     public void loadRooms(){
-        System.out.println("Loading........");
+
         doYouHearWhatIHear("src/main/resources/hotel_greeting.wav");
 
         try {
@@ -731,10 +733,11 @@ public class Hotel implements HotelInterface {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new File(wav)));
             clip.start();
-            while (!clip.isRunning())
-                Thread.sleep(10);
-//            while (clip.isRunning())
+            System.out.println("Loading........");
+//            while (!clip.isRunning())
 //                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
             clip.close();
         }
         catch (Exception exc)
