@@ -10,8 +10,10 @@ Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 Client Narratives and Scenarios:
 https://docs.google.com/document/d/1ukBbPHb75XiOq4zC387g7idGG97uU2atw_DODzhi2ig/edit
 
-Integreation Testing:<br> 
+Integration Testing:<br> 
 https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/edit
+
+Javadoc: https://ben145.github.io/HotelMotelHolidayInn/
 
  <b>Final Retrospective</b>:<br>
     https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
