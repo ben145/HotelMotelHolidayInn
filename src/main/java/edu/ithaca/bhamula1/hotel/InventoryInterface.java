@@ -1,6 +1,7 @@
 package edu.ithaca.bhamula1.hotel;
 
 public interface InventoryInterface {
+
     String getItem();
 
     void setItem(String itemName);

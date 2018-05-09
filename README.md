@@ -3,11 +3,24 @@ COMP-345 Project
 
 ![build status](https://circleci.com/gh/ben145/HotelMotelHolidayInn.png?circle-token=circle-token "Master Build Status")
 
+Quick Start Guide:<br>https://docs.google.com/document/d/1Lfv8hYzwkaLzMyGn8USICxh-vA7HTB_7AwXe3d3KeDA/edit?usp=sharing
+
 Developer Waffle:<br>https://waffle.io/ben145/HotelMotelHolidayInn
 
 Client Narratives and Scenarios:
 https://docs.google.com/document/d/1ukBbPHb75XiOq4zC387g7idGG97uU2atw_DODzhi2ig/edit
 
+Integreation Testing:<br> 
+https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/edit
+
+ <b>Final Retrospective</b>:<br>
+    https://docs.google.com/document/d/1qdpsqsd3iaNLpysla6xhnJ5TYMh6C0g6tgES7S0pTcE/edit?usp=sharing
+</blockquote>
+
+Final UML:
+<blockquote>
+ <b>Employee UI state</b>: https://drive.google.com/file/d/1_Xv8c_JHIyv1pLUqlU1mLhu57yBl1jQG/view?usp=sharing 
+</blockquote>
 
 Sprint One:
 
@@ -49,5 +62,8 @@ Sprint Three:
 
 <b>DevTeam Sprint goal #3</b>:
   <span title="look who briefly googled markup">Slide that double skeleton into some skin (expand current features with more nuanced functionality) and coiffe that hair (make interface more user friendly with print statements)</span>
+  <br>
+ 
+
 
 </blockquote>
