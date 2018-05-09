@@ -19,7 +19,8 @@ https://docs.google.com/document/d/1gFhRHgPRHiRpnhHU6FaQv5C6MrJKovUkyPGWYeNai58/
 
 Final UML:
 <blockquote>
- <b>Employee UI state</b>: https://drive.google.com/file/d/1_Xv8c_JHIyv1pLUqlU1mLhu57yBl1jQG/view?usp=sharing 
+ <b>Employee UI state</b>: https://drive.google.com/file/d/1_Xv8c_JHIyv1pLUqlU1mLhu57yBl1jQG/view?usp=sharing
+ 
  <b>Class Diagram</b>: https://raw.githubusercontent.com/ben145/HotelMotelHolidayInn/master/Class%20Diagram%20Final.png
 </blockquote>
 
