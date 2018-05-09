@@ -5,10 +5,7 @@ import java.util.*;
 
 public abstract class Main {
 
-    public static HotelInterface createHotel(){
-        HotelInterface hotel = new Hotel();
-        return hotel;
-    }
+    public static HotelInterface createHotel(){return new Hotel();}
 
     /**
      *
@@ -16,11 +13,8 @@ public abstract class Main {
      * @author - DMF
      */
     public static void employeeLogScreen(HotelInterface h){
-
         EmployeeUI eUI = new EmployeeUI();
         eUI.uiInteraction(h);
-
-       // h.printEmployeeList();
     }
 
     public static void main(String[] args) {
