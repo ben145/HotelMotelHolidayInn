@@ -5,22 +5,22 @@ import java.util.*;
 
 public class Reservation {
 
-    public enum PaymentType{
+    public enum PaymentType {
         CASH, CARD, NODATA
     }
 
-    CustomerInterface customer;
-    RoomInterface room;
-    //how many nights they are going to stay
+    protected CustomerInterface customer;
+    protected RoomInterface room;
     private int nightDuration;
     private Calendar checkInDate;
     private String cardPayment;
     private PaymentType paymentType;
     private Map<String, Double> paymentTracker;
 
-    public final static double PRICE_OFF = 0.1;
+    private final static double PRICE_OFF = 0.1;
 
-    public Reservation(){
+    // Reservation constructor
+    public Reservation() {
         this.customer = new Customer();
         this.room = new Room();
         this.nightDuration = -1;
@@ -37,82 +37,61 @@ public class Reservation {
         this.room = room;
         this.nightDuration = nightDuration;
         this.checkInDate = checkInDate;
-        if(cardPayment.length()>16 || cardPayment.length()<14){
+        if (cardPayment.length() > 16 || cardPayment.length() < 14)
             this.cardPayment = "";
-        }else{
+        else
             this.cardPayment = cardPayment;
-        }
+
         this.paymentType = PaymentType.NODATA;
-
         boolean returning = false;
-        if(customer.getReturningCustomer()){
+        if (customer.getReturningCustomer())
             returning = true;
-        }
 
-        if(returning){
+        if (returning)
             paymentTracker.put("Room Price (for "+ nightDuration + " nights)",  (room.getRoomPrice()- (room.getRoomPrice() * PRICE_OFF)) * nightDuration);
-
-        }else{
+        else
             paymentTracker.put("Room Price (for "+ nightDuration + " nights)", (room.getRoomPrice()*nightDuration));
-
-        }
-
-
     }
 
-    public CustomerInterface getCustomer(){
-        return this.customer;
-    }
+    public CustomerInterface getCustomer(){return this.customer;}
 
-    public RoomInterface getRoom(){
-        return this.room;
-    }
+    public RoomInterface getRoom() {return this.room;}
 
-    public Calendar getCheckInDate(){
-        return this.checkInDate;
-    }
+    public Calendar getCheckInDate() {return this.checkInDate;}
 
-    public int getNightDuration(){
-        return this.nightDuration;
-    }
+    public int getNightDuration() {return this.nightDuration;}
 
-    public String getCardPayment (){
-        return this.cardPayment;
-    }
+    public String getCardPayment() {return this.cardPayment;}
 
     public void setCardPayment(String card ){
-        if(card.length()<= 16 && card.length()>= 14){
+        if (card.length() <= 16 && card.length() >= 14)
             this.cardPayment = card;
-
-        }
     }
 
-    public void makeRequestFromReservation(){
+    public void makeRequestFromReservation() {
         Requests req = new Requests();
         String newReq = req.makeRequest(room.getRoomNumber());
-        if(newReq != ""){
+        if (newReq.equals("")) {
             String[] reqInstance= newReq.split(",");
             paymentTracker.put(reqInstance[0], Double.parseDouble(reqInstance[1]));
         }
     }
 
-    public void viewAvailableRequests(){
+    public void viewAvailableRequests() {
         Requests req = new Requests();
         req.viewRequests();
     }
 
-    public void setPaymentType(PaymentType paymentType){
+    public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
 
-    public String toString(){
+    public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
-
-        return customer.getName() + " Room " + room.getRoomNumber() + " Check in: " + dateFormat.format(checkInDate.getTime()) + " Nights: " + nightDuration;
+        return customer.getName() + " Room " + room.getRoomNumber() + " Check in: " +
+                dateFormat.format(checkInDate.getTime()) + " Nights: " + nightDuration;
     }
 
 
-    public Map<String, Double> getPaymentTracker(){
-        return this.paymentTracker;
-    }
+    public Map<String, Double> getPaymentTracker(){return this.paymentTracker;}
 }

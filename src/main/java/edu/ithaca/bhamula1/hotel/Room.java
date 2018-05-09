@@ -16,7 +16,7 @@ public class Room implements RoomInterface {
     private double price;
     private int bedNum;
     private String bedType;
-    private String amenities; // such as view?
+    private String amenities;
     private boolean checkedIn;
     String reservationName;
     private List<Calendar> notAvailTheseDays;
@@ -72,46 +72,38 @@ public class Room implements RoomInterface {
 
 
     /*
-    when a reservation is created for a room, then add the dates that are booked here
+    When a reservation is created for a room, then add the dates that are booked here
     shouldn't add the dates if some of the dates are already in the blocked out list
-    will return 1 if it works
-    will return -1 if it doesn't not work because there is reservation conflicts
+    Will return 1 if it works
+    Will return -1 if it doesn't not work because there is reservation conflicts
      */
-    public int addReservation(Calendar date, int nightDuration){
+    public int addReservation(Calendar date, int nightDuration) {
 
         Calendar dateClone = (Calendar) date.clone();
         boolean notAvailAlreadyContains = false;
-
-
-            List<Calendar> blockedOutDates = new ArrayList<>();
-
-            for(int i =0; i< nightDuration; i++ ) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.setTime(dateClone.getTime());
-                dateClone.add(Calendar.DAY_OF_MONTH, 1);
-                blockedOutDates.add(newDate);
-
-                if (notAvailTheseDays.contains(newDate)) {
-                      notAvailAlreadyContains = true;
-                      break;
-                }
+        List<Calendar> blockedOutDates = new ArrayList<>();
+        for (int i = 0; i < nightDuration; i++ ) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.setTime(dateClone.getTime());
+            dateClone.add(Calendar.DAY_OF_MONTH, 1);
+            blockedOutDates.add(newDate);
+            if (notAvailTheseDays.contains(newDate)) {
+                  notAvailAlreadyContains = true;
+                  break;
             }
-
-            if(!notAvailAlreadyContains){
-                this.notAvailTheseDays.addAll(blockedOutDates);
-                return 1;
-
-            }else{
-                return -1;
-            }
-
+        }
+        if (!notAvailAlreadyContains) {
+            this.notAvailTheseDays.addAll(blockedOutDates);
+            return 1;
+        }
+        else
+            return -1;
     }
 
     public void removeReservation(Calendar date, int nightDuration) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
         Calendar dateClone = (Calendar) date.clone();
         boolean notAvailAlreadyContains = false;
-
 
         List<Calendar> blockedOutDates = new ArrayList<>();
 
@@ -122,148 +114,94 @@ public class Room implements RoomInterface {
             blockedOutDates.add(newDate);
 
         }
-        for(int i =0; i< nightDuration; i++ ) {
+        for(int i = 0; i < nightDuration; i++ ) {
             Calendar newDate = Calendar.getInstance();
             newDate.setTime(dateClone.getTime());
             dateClone.add(Calendar.DAY_OF_MONTH, 1);
 
-            for(int x =0; x<notAvailTheseDays.size(); x++){
-
-                if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(blockedOutDates.get(i).getTime()))){
+            for (int x = 0; x < notAvailTheseDays.size(); x++) {
+                if (dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(blockedOutDates.get(i).getTime())))
                     notAvailTheseDays.remove(notAvailTheseDays.get(x));
-                }
             }
         }
-
     }
 
     public boolean canReserve(Calendar date, int nightDuration){
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyy");
         Calendar dateClone = (Calendar) date.clone();
 
-
         boolean notAvailAlreadyContains = false;
 
-        for(int i =0; i< nightDuration; i++ ) {
+        for (int i = 0; i < nightDuration; i++) {
             Calendar newDate = Calendar.getInstance();
             newDate.setTime(dateClone.getTime());
             dateClone.add(Calendar.DAY_OF_MONTH, 1);
 
-            for(int x =0; x<notAvailTheseDays.size(); x++){
-
-                if(dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(newDate.getTime()))){
+            for (int x = 0; x < notAvailTheseDays.size(); x++){
+                if (dateFormat.format(notAvailTheseDays.get(x).getTime()).equals(dateFormat.format(newDate.getTime())))
                     notAvailAlreadyContains = true;
-                }
             }
         }
-
-        if(!notAvailAlreadyContains){
-            return true;
-
-        }else{
-            return false;
-        }
+        return !notAvailAlreadyContains;
     }
 
-    public List<Calendar> getNotAvailTheseDays(){
-        return this.notAvailTheseDays;
-    }
+    public List<Calendar> getNotAvailTheseDays() {return this.notAvailTheseDays;}
 
+    public void setRoomNumber(int num) {this.roomNumber = num;}
 
+    public void setRoomPrice(double price) {this.price = price;}
 
-    public void setRoomNumber(int num){
-        this.roomNumber = num;
+    public int getBedCount(){return this.bedNum;}
 
-    }
+    public void setBedCount(int num){this.bedNum = num;}
 
-    public void setRoomPrice(double price){
-        this.price = price;
+    public String getBedType() {return this.bedType;}
 
-    }
+    public void setBedType(String type) {this.bedType = type;}
 
-    public void setBedCount(int num){
-        this.bedNum = num;
-    }
-
-    public void setBedType(String type){
-        this.bedType = type;
-    }
-
-    public void addAmenities(String amenities){
-
-        if(this.amenities.length()> 0){
+    public void addAmenities(String amenities) {
+        if (this.amenities.length() > 0)
             this.amenities = this.amenities + ", " + amenities;
-
-        }else{
+        else
             this.amenities = amenities;
-        }
     }
 
+    public boolean getIfAvailable() {return this.available;}
 
-    public boolean getIfAvailable(){
-        return this.available;
+    public int getRoomNumber() {return this.roomNumber;}
+
+    public double getRoomPrice() {return this.price;}
+
+    public String getAmenities(){return this.amenities;}
+
+    public String toString() {
+        return " Room number: " + this.roomNumber + "\n\tType: "+ this.bedNum + " " + this.bedType+" bed(s)\n\tAmenities: " +
+                this.amenities + "\n\tPrice: $"+ this.price+"0\n";
     }
 
-
-
-    public int getRoomNumber(){
-        return this.roomNumber;
-    }
-
-    public int getBedCount(){
-        return this.bedNum;
-    }
-
-    public double getRoomPrice(){
-        return this.price;
-    }
-
-    public String getBedType (){
-        return this.bedType;
-    }
-
-    public String getAmenities(){
-        return this.amenities;
-    }
-
-
-    public String toString(){
-        return " Room number: " + this.roomNumber + "\n\tType: "+ this.bedNum + " " + this.bedType+" bed(s)\n\tAmenities: " + this.amenities +
-                "\n\tPrice: $"+ this.price+"0\n";
-    }
-
-    public String printDiscountedPrices(){
-
+    public String printDiscountedPrices() {
         double discountPrice = this.price - (this.price* .10);
-
-
-        return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " + this.amenities +
-                " Price: $"+ discountPrice ;
+        return "Room: " + this.roomNumber + " Type: "+ this.bedNum + " " + this.bedType+" bed(s) Amenities: " +
+                this.amenities + " Price: $"+ discountPrice;
     }
 
-    public boolean checkIn(CustomerInterface customer){
-        this.checkedIn=true;
+    public boolean checkIn(CustomerInterface customer) {
+        this.checkedIn = true;
         return true;
     }
 
-    public boolean checkOut(CustomerInterface customer){
+    public boolean checkOut(CustomerInterface customer) {
         this.checkedIn=false;
         this.available = true;
         this.reservationName=null;
         return true;
     }
 
-    public void setReservationName(String name){
-        this.reservationName = name;
-    }
+    public String getReservationName() {return reservationName;}
 
-    public String getReservationName() {
-        return reservationName;
-    }
+    public void setReservationName(String name){this.reservationName = name;}
 
-    public boolean getCheckedIn(){
-        return this.checkedIn;
-    }
+    public boolean getCheckedIn(){return this.checkedIn;}
 
     public void printNotAvailDates(){
         System.out.println("This room is reserved for the following dates: ");
