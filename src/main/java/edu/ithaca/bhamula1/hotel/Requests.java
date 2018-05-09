@@ -204,7 +204,7 @@ public class Requests implements RequestsInterface {
      */
     public void viewRequests() {
         for (int i = 0; i < requests.size(); i++) {
-            System.out.println((i + 1) + ") " + requests.get(i).getRequestName()+ "\t\t Price: $" + requests.get(i).getAssociatedPrice()));
+            System.out.println((i + 1) + ") " + requests.get(i).getRequestName()+ "\t\t Price: $" + requests.get(i).getAssociatedPrice());
         }
     }
 
@@ -290,6 +290,7 @@ public class Requests implements RequestsInterface {
                 //compensating for 0
                 input = requests.get(inputInt - 1).getRequestName();
                 if(input == "An offering to the Bone Idol"){
+                    System.out.println("┬┴┬┴┤◉_◉├┬┴┬┴");
                     doYouHearWhatIHear("src/main/resources/bone_idol.wav");
                 }
                 else if(input == "I would like to be serenaded with The Eagles' magnum opus 'Hotel California'"){
