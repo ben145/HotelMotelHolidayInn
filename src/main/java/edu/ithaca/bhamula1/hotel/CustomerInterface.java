@@ -55,7 +55,7 @@ public interface CustomerInterface {
      * Sets properties of customer to express they are checked in
      * @param roomNumber    Number of customer's room
      * @return  True
-     * @post    Sets customer's room number as roomNumber and checkedIn status as true
+     * post:    Sets customer's room number as roomNumber and checkedIn status as true
      */
     boolean checkIn(int roomNumber);
 
@@ -63,7 +63,7 @@ public interface CustomerInterface {
      * Resets properties of customer to express they are checked out
      * @param roomNumber    Number of customer's room
      * @return  True
-     * @post    Sets customer's room to non-existent room number and checkedIn status as false
+     * post:    Sets customer's room to non-existent room number and checkedIn status as false
      */
     boolean checkOut(int roomNumber);
 
