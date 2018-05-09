@@ -426,7 +426,8 @@ public class CustomerUI implements CustomerUIInterface {
 //                }
 //                switch (yOrN){
 //                    case 'y':
-                        res.makeRequestFromReservation();
+                res.viewAvailableRequests();
+                res.makeRequestFromReservation();
 //                        break;
 //                    case 'n':
 //                        System.out.println("Let us know if we can help with anything.");

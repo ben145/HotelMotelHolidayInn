@@ -691,8 +691,8 @@ public class Hotel implements HotelInterface {
             clip.start();
             while (!clip.isRunning())
                 Thread.sleep(10);
-//            while (clip.isRunning())
-//                Thread.sleep(10);
+            while (clip.isRunning())
+                Thread.sleep(10);
             clip.close();
         }
         catch (Exception exc)
