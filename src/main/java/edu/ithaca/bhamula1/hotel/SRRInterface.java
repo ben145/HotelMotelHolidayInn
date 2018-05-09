@@ -21,13 +21,13 @@ public interface SRRInterface {
 
     /**
      * Removes reserved status from room
-     * @post customer's room number set to 0; name of reservation to null
+     * post: customer's room number set to 0; name of reservation to null
      */
      void cancelRoom();
 
     /**
      * Reserves a room for a customer while updating relevant details
-     * @post customer has room number and reservation; room has reservation
+     * post: customer has room number and reservation; room has reservation
      *  and made unavailable for duration of reservation
      */
      void reserveRoom();
