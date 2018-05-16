@@ -30,7 +30,7 @@ public class CustomerUI implements CustomerUIInterface {
      */
     public int checkChoiceInput(String input, int lowestChoice, int highestChoice){
         try{
-            int choice = Integer.parseInt(input);
+            int choice = Integer.parseInt(input.trim());
             if(choice >= lowestChoice&&choice <= highestChoice)
                 return choice;
             else {
@@ -51,6 +51,9 @@ public class CustomerUI implements CustomerUIInterface {
     public char checkYorN(String yOrN){
         yOrN = yOrN.toLowerCase();
         char choice = yOrN.charAt(0);
+        if(choice == ' '){
+            choice = yOrN.charAt(1);
+        }
         if (choice != 'y' && choice != 'n') {
             System.out.println("Invalid input. Please Enter 'yes' or 'no'.");
             return 1;
